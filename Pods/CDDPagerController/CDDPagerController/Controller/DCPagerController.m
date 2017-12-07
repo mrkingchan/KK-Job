@@ -57,8 +57,7 @@
 /* 是否开启渐变 */
 @property (nonatomic, assign) BOOL isOpenShade;
 
-/* 标题滚动视图 */
-@property (strong , nonatomic)UIScrollView *titleScrollView;
+
 /* 内容滚动视图 */
 @property (strong , nonatomic)UIScrollView *contentScrollView;
 /** 滚动条 */
@@ -271,6 +270,12 @@
         CGFloat frameWidth = buttonW - 2 * pace;
         CGFloat frameY = buttonH - (progressH + 1);
         CGRect frame = CGRectMake(framex,frameY, frameWidth, progressH);
+        
+#pragma mark 更改此处,更改此第三方操作
+        CGRect tmpRect = [vc.title boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:_titleFont,NSFontAttributeName, nil] context:nil];
+        CGFloat width = tmpRect.size.width;
+        frame = CGRectMake(buttonX+(buttonW - width)/2, frameY, width, progressH);
+        
         [self.pregressFrames addObject:[NSValue valueWithCGRect:frame]];
         
         [_titleScrollView addSubview:_titleButton];

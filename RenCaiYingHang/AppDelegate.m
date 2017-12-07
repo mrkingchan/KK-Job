@@ -49,6 +49,7 @@
     return YES;
 }
 
+/** 登陆 */
 - (void) clickEnter
 {
     /** 默认进入登录页面 **/

@@ -15,6 +15,10 @@
 @interface DCPagerController : UIViewController
 
 
+/* 标题滚动视图 */
+@property (strong , nonatomic)UIScrollView *titleScrollView;
+
+
 /**
  根据角标，跳转到对应的控制器（viewWillAppear方法里实现）
  */

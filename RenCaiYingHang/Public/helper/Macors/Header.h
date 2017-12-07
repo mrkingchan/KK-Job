@@ -24,8 +24,11 @@
 #import "MyRefreshHeader.h"
 
 /**  BaseClass  **/
+/** 个人 **/
 #import "RYTabBarController.h"
 #import "RYNavigationController.h"
+/** 企业 **/
+#import "RYBusinessTabBarController.h"
 
 #import "CommonH5Controller.h"
 #import "HandleH5ViewController.h"

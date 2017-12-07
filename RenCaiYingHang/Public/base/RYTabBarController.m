@@ -30,7 +30,7 @@
 
 - (void) addViewControllers
 {
-    [self addChildViewController:[[JobViewController alloc] init] navTitle:@"城市精英" tabbarTitle:@"推荐" tabbarImage:@"1"];
+    [self addChildViewController:[[JobViewController alloc] init] navTitle:@"公司" tabbarTitle:@"推荐" tabbarImage:@"1"];
     [self addChildViewController:[[CompanyViewController alloc] init] navTitle:@"企业" tabbarTitle:@"企业" tabbarImage:@"2"];
     [self addChildViewController:[[DropInBoxViewController alloc] init] navTitle:@"聊天" tabbarTitle:@"投递箱" tabbarImage:@"3"];
     [self addChildViewController:[[PersonCenterViewController alloc] init] navTitle:@"个人信息" tabbarTitle:@"我的" tabbarImage:@"4"];

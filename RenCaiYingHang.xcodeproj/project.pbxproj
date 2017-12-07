@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		33CC09F559DE800ADDC87564 /* libPods-RenCaiYingHang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32252410ABE142D4C96DFBE4 /* libPods-RenCaiYingHang.a */; };
 		8F1F66511FD9485C004BF8F1 /* RYWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66501FD9485C004BF8F1 /* RYWebViewController.m */; };
+		8F1F66541FD94DCD004BF8F1 /* JobH5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66531FD94DCD004BF8F1 /* JobH5ViewController.m */; };
+		8F1F66581FD94E1C004BF8F1 /* RadarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66571FD94E1C004BF8F1 /* RadarViewController.m */; };
+		8F1F665C1FD96168004BF8F1 /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F665B1FD96168004BF8F1 /* HomePageViewController.m */; };
+		8F1F665F1FD961A5004BF8F1 /* CompanyCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F665E1FD961A5004BF8F1 /* CompanyCenterViewController.m */; };
+		8F1F66621FD9626D004BF8F1 /* SetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66611FD9626D004BF8F1 /* SetupViewController.m */; };
+		8F1F66661FD963CD004BF8F1 /* PrivacyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66651FD963CD004BF8F1 /* PrivacyViewController.m */; };
+		8F1F66691FD9645B004BF8F1 /* AddPrivacyCompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66681FD9645B004BF8F1 /* AddPrivacyCompanyViewController.m */; };
+		8F1F666D1FD964E8004BF8F1 /* UploadResumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F666C1FD964E8004BF8F1 /* UploadResumeViewController.m */; };
 		8F85D8221FD922A400BC1A7D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8211FD922A400BC1A7D /* AppDelegate.m */; };
 		8F85D8251FD922A500BC1A7D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8241FD922A500BC1A7D /* ViewController.m */; };
 		8F85D8281FD922A500BC1A7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F85D8261FD922A500BC1A7D /* Main.storyboard */; };
@@ -86,6 +94,22 @@
 		32252410ABE142D4C96DFBE4 /* libPods-RenCaiYingHang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RenCaiYingHang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F1F664F1FD9485C004BF8F1 /* RYWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYWebViewController.h; sourceTree = "<group>"; };
 		8F1F66501FD9485C004BF8F1 /* RYWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYWebViewController.m; sourceTree = "<group>"; };
+		8F1F66521FD94DCD004BF8F1 /* JobH5ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobH5ViewController.h; sourceTree = "<group>"; };
+		8F1F66531FD94DCD004BF8F1 /* JobH5ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JobH5ViewController.m; sourceTree = "<group>"; };
+		8F1F66561FD94E1C004BF8F1 /* RadarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RadarViewController.h; sourceTree = "<group>"; };
+		8F1F66571FD94E1C004BF8F1 /* RadarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RadarViewController.m; sourceTree = "<group>"; };
+		8F1F665A1FD96168004BF8F1 /* HomePageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageViewController.h; sourceTree = "<group>"; };
+		8F1F665B1FD96168004BF8F1 /* HomePageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageViewController.m; sourceTree = "<group>"; };
+		8F1F665D1FD961A5004BF8F1 /* CompanyCenterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyCenterViewController.h; sourceTree = "<group>"; };
+		8F1F665E1FD961A5004BF8F1 /* CompanyCenterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyCenterViewController.m; sourceTree = "<group>"; };
+		8F1F66601FD9626D004BF8F1 /* SetupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetupViewController.h; sourceTree = "<group>"; };
+		8F1F66611FD9626D004BF8F1 /* SetupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetupViewController.m; sourceTree = "<group>"; };
+		8F1F66641FD963CD004BF8F1 /* PrivacyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivacyViewController.h; sourceTree = "<group>"; };
+		8F1F66651FD963CD004BF8F1 /* PrivacyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivacyViewController.m; sourceTree = "<group>"; };
+		8F1F66671FD9645B004BF8F1 /* AddPrivacyCompanyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddPrivacyCompanyViewController.h; sourceTree = "<group>"; };
+		8F1F66681FD9645B004BF8F1 /* AddPrivacyCompanyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddPrivacyCompanyViewController.m; sourceTree = "<group>"; };
+		8F1F666B1FD964E8004BF8F1 /* UploadResumeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadResumeViewController.h; sourceTree = "<group>"; };
+		8F1F666C1FD964E8004BF8F1 /* UploadResumeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadResumeViewController.m; sourceTree = "<group>"; };
 		8F85D81D1FD922A400BC1A7D /* RenCaiYingHang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RenCaiYingHang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F85D8201FD922A400BC1A7D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8F85D8211FD922A400BC1A7D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -231,6 +255,47 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8F1F66551FD94DDC004BF8F1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8F1F66591FD95EC0004BF8F1 /* Setup */,
+				8F1F66561FD94E1C004BF8F1 /* RadarViewController.h */,
+				8F1F66571FD94E1C004BF8F1 /* RadarViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		8F1F66591FD95EC0004BF8F1 /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				8F1F666A1FD964AB004BF8F1 /* UploadResume */,
+				8F1F66631FD963BC004BF8F1 /* Privacy(隐私) */,
+				8F1F66601FD9626D004BF8F1 /* SetupViewController.h */,
+				8F1F66611FD9626D004BF8F1 /* SetupViewController.m */,
+			);
+			path = Setup;
+			sourceTree = "<group>";
+		};
+		8F1F66631FD963BC004BF8F1 /* Privacy(隐私) */ = {
+			isa = PBXGroup;
+			children = (
+				8F1F66641FD963CD004BF8F1 /* PrivacyViewController.h */,
+				8F1F66651FD963CD004BF8F1 /* PrivacyViewController.m */,
+				8F1F66671FD9645B004BF8F1 /* AddPrivacyCompanyViewController.h */,
+				8F1F66681FD9645B004BF8F1 /* AddPrivacyCompanyViewController.m */,
+			);
+			path = "Privacy(隐私)";
+			sourceTree = "<group>";
+		};
+		8F1F666A1FD964AB004BF8F1 /* UploadResume */ = {
+			isa = PBXGroup;
+			children = (
+				8F1F666B1FD964E8004BF8F1 /* UploadResumeViewController.h */,
+				8F1F666C1FD964E8004BF8F1 /* UploadResumeViewController.m */,
+			);
+			path = UploadResume;
+			sourceTree = "<group>";
+		};
 		8F85D8141FD922A400BC1A7D = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +359,7 @@
 		8F85D8521FD922C600BC1A7D /* UserClient */ = {
 			isa = PBXGroup;
 			children = (
+				8F1F66551FD94DDC004BF8F1 /* ViewControllers */,
 				8F85D8D11FD9286200BC1A7D /* TabBarViewControllers */,
 				8F85D8D21FD9288A00BC1A7D /* H5 */,
 			);
@@ -573,6 +639,8 @@
 				8F85D8E51FD92A8300BC1A7D /* CommonH5Controller.m */,
 				8F85D8E71FD92A9300BC1A7D /* HandleH5ViewController.h */,
 				8F85D8E81FD92A9300BC1A7D /* HandleH5ViewController.m */,
+				8F1F66521FD94DCD004BF8F1 /* JobH5ViewController.h */,
+				8F1F66531FD94DCD004BF8F1 /* JobH5ViewController.m */,
 			);
 			path = H5;
 			sourceTree = "<group>";
@@ -580,6 +648,10 @@
 		8F85D8D31FD928B200BC1A7D /* TabBarViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8F1F665A1FD96168004BF8F1 /* HomePageViewController.h */,
+				8F1F665B1FD96168004BF8F1 /* HomePageViewController.m */,
+				8F1F665D1FD961A5004BF8F1 /* CompanyCenterViewController.h */,
+				8F1F665E1FD961A5004BF8F1 /* CompanyCenterViewController.m */,
 			);
 			path = TabBarViewControllers;
 			sourceTree = "<group>";
@@ -817,6 +889,8 @@
 			files = (
 				8F85D89F1FD9257400BC1A7D /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
 				8F85D8BF1FD927E600BC1A7D /* LoadingView.m in Sources */,
+				8F1F665C1FD96168004BF8F1 /* HomePageViewController.m in Sources */,
+				8F1F665F1FD961A5004BF8F1 /* CompanyCenterViewController.m in Sources */,
 				8F85D8BB1FD9261200BC1A7D /* CALayer+BorderColor.m in Sources */,
 				8F85D8A51FD9257400BC1A7D /* SGAlertView.m in Sources */,
 				8F85D8F51FD92B2A00BC1A7D /* ForgotPwViewController.m in Sources */,
@@ -826,8 +900,11 @@
 				8F85D8631FD9244800BC1A7D /* RYViewController.m in Sources */,
 				8F85D8251FD922A500BC1A7D /* ViewController.m in Sources */,
 				8F85D8DA1FD9297700BC1A7D /* JobViewController.m in Sources */,
+				8F1F66691FD9645B004BF8F1 /* AddPrivacyCompanyViewController.m in Sources */,
+				8F1F66581FD94E1C004BF8F1 /* RadarViewController.m in Sources */,
 				8F85D8BA1FD9261200BC1A7D /* UITextView+Placeholder.m in Sources */,
 				8F85D8301FD922A500BC1A7D /* main.m in Sources */,
+				8F1F66621FD9626D004BF8F1 /* SetupViewController.m in Sources */,
 				8F85D8CE1FD9282E00BC1A7D /* NetWorkHelper.m in Sources */,
 				8F85D8C21FD9280D00BC1A7D /* MyRefreshHeader.m in Sources */,
 				8F85D8731FD9250200BC1A7D /* VerifyHelper.m in Sources */,
@@ -852,8 +929,11 @@
 				8F85D8D71FD9290400BC1A7D /* RYBusinessTabBarController.m in Sources */,
 				8F85D8A41FD9257400BC1A7D /* SGScanningQRCodeVC.m in Sources */,
 				8F85D8221FD922A400BC1A7D /* AppDelegate.m in Sources */,
+				8F1F666D1FD964E8004BF8F1 /* UploadResumeViewController.m in Sources */,
 				8F85D8F91FD938C800BC1A7D /* OSGuideViewController.m in Sources */,
 				8F85D8721FD9250200BC1A7D /* UIFactory.m in Sources */,
+				8F1F66541FD94DCD004BF8F1 /* JobH5ViewController.m in Sources */,
+				8F1F66661FD963CD004BF8F1 /* PrivacyViewController.m in Sources */,
 				8F85D8A61FD9257400BC1A7D /* SGBottomView.m in Sources */,
 				8F85D8661FD9246400BC1A7D /* RYBaseModel.m in Sources */,
 				8F85D8A01FD9257400BC1A7D /* UIView+SDAutoLayout.m in Sources */,

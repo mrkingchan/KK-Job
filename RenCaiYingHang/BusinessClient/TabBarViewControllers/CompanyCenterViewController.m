@@ -1,38 +1,30 @@
 //
-//  LoginViewController.m
+//  CompanyCenterViewController.m
 //  RenCaiYingHang
 //
 //  Created by Macx on 2017/12/7.
 //  Copyright © 2017年 Macx. All rights reserved.
 //
 
-#import "LoginViewController.h"
+#import "CompanyCenterViewController.h"
 
-@interface LoginViewController ()
+@interface CompanyCenterViewController ()
 
 @end
 
-@implementation LoginViewController
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:true animated:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:false animated:animated];
-}
+@implementation CompanyCenterViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    UIButton * button = [UIFactory initButtonWithFrame:CGRectMake(100, 100, kScreenWidth-200, 40) title:@"切到个人版" textColor:[UIColor darkTextColor] font:systemOfFont(16) cornerRadius:20 tag:10 target:self action:@selector(senderClick:)];
+    [self.view addSubview:button];
 }
 
-/** 登陆账号 */
-- (IBAction)loginAccount:(UIButton *)sender {
+/** 切换到个人版 **/
+- (void) senderClick:(UIButton *)sender
+{
     /** 默认进入雷达页面 **/
     [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
     [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
