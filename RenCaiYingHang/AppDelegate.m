@@ -8,7 +8,11 @@
 
 #import "AppDelegate.h"
 
-@interface AppDelegate ()
+#import "OSGuideViewController.h"
+
+@interface AppDelegate ()<OSGuideSelectDelegate>
+
+@property (nonatomic,assign) BOOL isEnterBackground;
 
 @end
 
@@ -17,7 +21,69 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    /** 是否进入后台操作了 */
+    _isEnterBackground = false;
+    
+    /** 获取是否存在缓存 */
+    [self gainUserModel];
+    
+    /** 导航样式 **/
+    [self configAppearance];
+    
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    /** 新版本引导页出现 */
+    if ([OSGuideViewController isShow]) {
+        OSGuideViewController * guide = [[OSGuideViewController alloc] init];
+        self.window.rootViewController = guide;
+        guide.delegate = self;
+        [guide guidePageControllerWithImages:@[@"pager1",@"pager2"]];
+    }else{
+        [self clickEnter];
+    }
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
+}
+
+- (void) clickEnter
+{
+    /** 默认进入登录页面 **/
+    UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+    self.window.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
+    [self.window.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+}
+
+- (void) gainUserModel
+{
+//    NSData * data = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@UserModel",AppName]];
+//    if (data) {
+//        if ([data isKindOfClass:[NSString class]]) {
+//            if (data.length <= 0) {
+//                [OSUserInfoManage shareInstance].is_login = NO;
+//            }
+//        }else{
+//            //在这里解档
+//            id obj = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+//            if ([obj isKindOfClass:[NSDictionary class]])
+//            {
+//                [OSUserInfoManage shareInstance].userInfo = [[OSUserModel alloc] initWithDictionary:obj];
+//                [OSUserInfoManage shareInstance].is_login = YES;
+//            }
+//        }
+//
+//    }else{
+//        [OSUserInfoManage shareInstance].is_login = NO;
+//    }
+}
+
+- (void)configAppearance
+{
+    [[UINavigationBar appearance] setTintColor:[UIColor darkTextColor]];
+    [[UITabBar appearance] setTintColor:[UIColor darkGrayColor]];
 }
 
 
@@ -28,8 +94,12 @@
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    /**进入后台*/
+    _isEnterBackground = true;
+    NSDate *senddate = [NSDate date];
+    NSString *date2 = [NSString stringWithFormat:@"%ld", (long)[senddate timeIntervalSince1970]];
+    [[NSUserDefaults standardUserDefaults] setObject:date2 forKey:@"lastTime"];
+    NSLog(@"date2时间戳 = %@",date2);
 }
 
 
@@ -39,7 +109,16 @@
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    /**进入前台*/
+    if (_isEnterBackground) {
+        NSDate *senddate = [NSDate date];
+        NSString * current = [NSString stringWithFormat:@"%ld", (long)[senddate timeIntervalSince1970]];
+        NSString * last = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastTime"];
+        if ([current longLongValue] - [last longLongValue] >= 30) {
+            [self clickEnter];
+        }
+        _isEnterBackground = false;
+    }
 }
 
 
