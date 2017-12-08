@@ -59,4 +59,7 @@
  **/
 +(void)scanRQCode:(UIViewController<SGScanningQRCodeVCDelegate>*)vc;
 
+/** 获取当前时间 */
++ (NSString*)getCurrentTimes;
+
 @end

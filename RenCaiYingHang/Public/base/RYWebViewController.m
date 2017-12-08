@@ -70,7 +70,7 @@
     //监控进度
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     //标题
-    [self.webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
+    //[self.webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (void)viewDidLoad {
@@ -108,14 +108,14 @@
             [self changeProgressLength];
         }
     }
-    //网页title
-    else if ([keyPath isEqualToString:@"title"])
-    {
-        if (object == self.webView)
-        {
-            self.title = self.webView.title;
-        }
-    }
+//    //网页title
+//    else if ([keyPath isEqualToString:@"title"])
+//    {
+//        if (object == self.webView)
+//        {
+//            self.title = self.webView.title;
+//        }
+//    }
 }
 
 /**
@@ -196,7 +196,7 @@
 - (void)dealloc{
     [self.userController removeScriptMessageHandlerForName:self.jsMethodName];
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
-    [self.webView removeObserver:self forKeyPath:@"title"];
+   // [self.webView removeObserver:self forKeyPath:@"title"];
 }
 
 - (void)didReceiveMemoryWarning {

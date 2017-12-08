@@ -1,24 +1,28 @@
 //
-//  JobH5ViewController.m
+//  InterviewH5ViewController.m
 //  RenCaiYingHang
 //
 //  Created by Macx on 2017/12/7.
 //  Copyright © 2017年 Macx. All rights reserved.
 //
 
-#import "JobH5ViewController.h"
+#import "InterviewH5ViewController.h"
 
-@interface JobH5ViewController ()
+@interface InterviewH5ViewController ()
 
 @end
 
-@implementation JobH5ViewController
+@implementation InterviewH5ViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.webView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - KNavBarHeight - KToolHeight);
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.webView.frame = CGRectMake(0, KNavBarHeight, kScreenWidth, kScreenHeight - KNavBarHeight - KToolHeight);
-    
 }
 
 - (void)didReceiveMemoryWarning {

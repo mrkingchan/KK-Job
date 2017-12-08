@@ -14,4 +14,6 @@ pod 'TZImagePickerController'
 
 pod 'CDDPagerController'
 
+pod 'PGDatePicker'
+
 end

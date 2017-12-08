@@ -8,7 +8,8 @@
 
 #import "DropInBoxViewController.h"
 
-#import "JobH5ViewController.h"
+#import "DropInBoxH5Controller.h"
+#import "InterviewH5ViewController.h"
 
 @interface DropInBoxViewController ()
 
@@ -26,12 +27,18 @@
 /** 添加子视图 */
 - (void) setUpAllChildViewController
 {
-    JobH5ViewController * jobH5 = [[JobH5ViewController alloc] init];
+    DropInBoxH5Controller * jobH5 = [[DropInBoxH5Controller alloc] init];
     jobH5.title = @"投递箱";
+    jobH5.url = @"http://www.jianshu.com";
+    //jobH5.jsMethodName = @"bbbb";
+    jobH5.progressViewColor = [UIColor redColor];
     [self addChildViewController:jobH5];
     
-    JobH5ViewController * jobH52 = [[JobH5ViewController alloc] init];
+    InterviewH5ViewController * jobH52 = [[InterviewH5ViewController alloc] init];
     jobH52.title = @"已面试";
+    jobH52.url = @"https://github.com";
+    jobH52.jsMethodName = @"cccc";
+    jobH52.progressViewColor = [UIColor redColor];
     [self addChildViewController:jobH52];
 }
 

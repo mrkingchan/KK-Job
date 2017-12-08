@@ -57,6 +57,21 @@
     [self closeBeyBoard];
 }
 
+/** 提示框 */
+- (void) alertMessageWithViewController:(UIViewController *)viewCtl message:(NSString *)message
+{
+    [viewCtl showAlertWithTitle:message message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
+       alertMaker.addActionCancelTitle(@"确定");
+    } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
+        
+    }];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

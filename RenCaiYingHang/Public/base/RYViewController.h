@@ -10,4 +10,7 @@
 
 @interface RYViewController : UIViewController
 
+/** 提示框 */
+- (void) alertMessageWithViewController:(UIViewController *)viewCtl message:(NSString *)message;
+
 @end

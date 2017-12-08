@@ -45,11 +45,30 @@ static NSString * UITableViewCellID = @"Cell";
     // Do any additional setup after loading the view.
     self.title = @"不让以下公司看到我";
     [self configurationTableView];
+    [self regsiterNotcification];
 }
 
+/** 注册通知 */
+- (void) regsiterNotcification
+{
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI:) name:@"refreshTableView" object:nil];
+}
+
+/**  */
 - (void) configurationTableView
 {
     [self.view addSubview:self.tableView];
+}
+
+/** 通知刷新界面 */
+- (void) refreshUI:(NSNotification *)notification
+{
+   // NSDictionary * userInfo = [notification userInfo];
+    NSDictionary * objectInfo = [notification object];
+    //NSString * notificationName = [notification name];
+    NSString * companyName = objectInfo[@"companyName"];
+    [self.dataArray addObject:companyName];
+    [self.tableView reloadData];
 }
 
 #pragma mark UITableViewDataSource
@@ -64,6 +83,12 @@ static NSString * UITableViewCellID = @"Cell";
     if (indexPath.section == 0) {
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:UITableViewCellID];
         cell.textLabel.text = @"通过公司名添加";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }else{
+        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:UITableViewCellID];
+        cell.textLabel.text = self.dataArray[indexPath.section - 1];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;

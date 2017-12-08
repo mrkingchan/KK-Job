@@ -22,6 +22,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    /** 默认没有基本信息 **/
+    if ([VerifyHelper empty:[[NSUserDefaults standardUserDefaults] objectForKey:@"isNecessary"]]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@(false) forKey:@"isNecessary"];
+    }
+    
     /** 是否进入后台操作了 */
     _isEnterBackground = false;
     

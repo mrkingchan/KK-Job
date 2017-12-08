@@ -59,9 +59,13 @@
 
 /** 注册成功直接登陆 */
 - (IBAction)insertApp:(UIButton *)sender {
-    /** 默认进入雷达页面 **/
-    [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
-    [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isNecessary"] boolValue]) {
+        /** 默认进入雷达页面 **/
+        [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
+        [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+    }else{
+        [self.navigationController pushViewController:[[NecessaryInfoViewController alloc] init] animated:true];
+    }
 }
 
 /** 跳转到协议 */

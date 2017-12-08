@@ -43,11 +43,14 @@
 {
     JobH5ViewController * jobH5 = [[JobH5ViewController alloc] init];
     jobH5.title = @"推荐";
+    jobH5.url = @"https://www.baidu.com";
+    jobH5.jsMethodName = @"aaaa";
+    jobH5.progressViewColor = [UIColor redColor];
     [self addChildViewController:jobH5];
     
     RadarViewController * recentMap = [[RadarViewController alloc] init];
     recentMap.title = @"雷达";
-    recentMap.view.backgroundColor = [UIColor blueColor];
+    recentMap.view.backgroundColor = Color235;
     [self addChildViewController:recentMap];
 }
 

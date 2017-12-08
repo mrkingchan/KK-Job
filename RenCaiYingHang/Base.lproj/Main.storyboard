@@ -238,7 +238,7 @@
         <!--Forgot Pw View Controller-->
         <scene sceneID="aue-8I-IeS">
             <objects>
-                <viewController id="i2i-zD-V0a" customClass="ForgotPwViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="forgotPw" id="i2i-zD-V0a" customClass="ForgotPwViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="n0M-qX-HyH"/>
                         <viewControllerLayoutGuide type="bottom" id="2a9-5l-sYO"/>
