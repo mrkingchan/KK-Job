@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="RechagergeTypeViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZCa-QG-6xY">
+                        <rect key="frame" x="20" y="5" width="40" height="40"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="3d7-4B-BMu"/>
+                            <constraint firstAttribute="height" constant="40" id="BZU-k3-fdl"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3i-ZB-drl">
+                        <rect key="frame" x="70" y="10" width="39.5" height="29.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKy-cj-T8E">
+                        <rect key="frame" x="270" y="10" width="30" height="29.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="Zob-3f-whP"/>
+                        </constraints>
+                        <state key="normal" image="checkbox_nor"/>
+                        <state key="selected" image="checkbox_chosed"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Y3i-ZB-drl" secondAttribute="bottom" constant="10" id="G85-3T-chs"/>
+                    <constraint firstItem="SKy-cj-T8E" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="fE5-4w-hYC"/>
+                    <constraint firstItem="Y3i-ZB-drl" firstAttribute="leading" secondItem="ZCa-QG-6xY" secondAttribute="trailing" constant="10" id="jh9-hg-PfT"/>
+                    <constraint firstItem="Y3i-ZB-drl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="kKp-jH-2N4"/>
+                    <constraint firstItem="ZCa-QG-6xY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="liL-pj-hYK"/>
+                    <constraint firstAttribute="bottom" secondItem="ZCa-QG-6xY" secondAttribute="bottom" constant="5" id="rWz-zj-O7M"/>
+                    <constraint firstItem="ZCa-QG-6xY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="rvP-rc-xFO"/>
+                    <constraint firstAttribute="trailing" secondItem="SKy-cj-T8E" secondAttribute="trailing" constant="20" id="xci-hp-ri0"/>
+                    <constraint firstAttribute="bottom" secondItem="SKy-cj-T8E" secondAttribute="bottom" constant="10" id="zOr-yj-X14"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="icon" destination="ZCa-QG-6xY" id="6Cp-Dv-Vcz"/>
+                <outlet property="selectBtn" destination="SKy-cj-T8E" id="Q10-2d-gJW"/>
+                <outlet property="title" destination="Y3i-ZB-drl" id="gCh-n1-AcE"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="checkbox_chosed" width="20" height="20"/>
+        <image name="checkbox_nor" width="20" height="20"/>
+    </resources>
+</document>

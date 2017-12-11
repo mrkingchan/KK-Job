@@ -11,6 +11,7 @@
 #import "SetupViewController.h"
 #import "PrivacyViewController.h"
 #import "UploadResumeViewController.h"
+#import "AssetsManagementViewController.h"
 
 @interface PersonCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -35,7 +36,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.dataArray = @[@[@"设置",@"隐私设置",@"附近简历"],@[@"进入企业"]];
+    self.dataArray = @[@[@"设置",@"隐私设置",@"附近简历",@"资产管理"],@[@"进入企业"]];
     [self.tableView reloadData];
 }
 
@@ -112,6 +113,11 @@
                 case 2:{
                     UploadResumeViewController * upload = [[UploadResumeViewController alloc] init];
                     [self.navigationController pushViewController:upload animated:true];
+                }
+                    break;
+                case 3:{
+                    AssetsManagementViewController * assets = [[AssetsManagementViewController alloc] init];
+                    [self.navigationController pushViewController:assets animated:true];
                 }
                     break;
                 default:

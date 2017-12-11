@@ -9,7 +9,7 @@
 #import "FeebBackViewController.h"
 
 @interface FeebBackViewController ()
-<UITableViewDelegate,UITableViewDataSource>
+<UITableViewDelegate,UITableViewDataSource,UITextViewDelegate>
 
 @property (nonatomic,strong) UITableView * tableView;
 
@@ -78,6 +78,8 @@ static NSString * TextViewCellID = @"TextViewCell";
         cell.textView.layer.borderWidth = 0.5;
     }
     cell.textView.placeholder =  indexPath.section == 0 ? @"请输入你的建议" : @"客服会第一时间联系您";
+    cell.textView.delegate = self;
+    cell.textView.tag = indexPath.section;
     cell.textView.showsVerticalScrollIndicator = false;
     return cell;
 }
@@ -110,6 +112,18 @@ static NSString * TextViewCellID = @"TextViewCell";
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     return nil;
+}
+
+#pragma mark UITextViewDelegate
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    
+    return true;
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    
 }
 
 - (void)didReceiveMemoryWarning {

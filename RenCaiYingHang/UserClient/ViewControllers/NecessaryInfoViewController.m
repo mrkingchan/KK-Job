@@ -12,7 +12,9 @@
 
 #import "RYAlertSheet.h"
 
-@interface NecessaryInfoViewController ()<UITableViewDelegate,UITableViewDataSource,PGDatePickerDelegate>
+#import "JHUploadImage.h"
+
+@interface NecessaryInfoViewController ()<UITableViewDelegate,UITableViewDataSource,PGDatePickerDelegate,JHUploadImageDelegate>
 
 @property (nonatomic,strong) UITableView * tableView;
 
@@ -99,7 +101,7 @@ static NSString * UITableViewCellID = @"Cell";
     [self.tableView reloadData];
 }
 
-/** 取消返回按钮 */
+/** 设置跳过按钮 */
 - (void) configurationNavigation
 {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"跳过" style:UIBarButtonItemStylePlain target:self action:@selector(enterClick)];
@@ -116,7 +118,7 @@ static NSString * UITableViewCellID = @"Cell";
 /** 设置头像 */
 - (void) setupHeaderIcon:(UIButton *) sender
 {
-    
+    [JHUPLOAD_IMAGE showActionSheetInFatherViewController:self delegate:self];
 }
 
 /** 完成 **/
@@ -286,6 +288,20 @@ static NSString * UITableViewCellID = @"Cell";
     NSString * string = [NSString stringWithFormat:@"%zd年%zd月",[dateComponents year],[dateComponents month]];
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:4 inSection:0];    ;
     [self refreshTableViewWith:indexPath string:string];
+}
+
+#pragma mark - JHUploadImageDelegate
+- (void)uploadImageToServerWithImage:(UIImage *)image OriginImage:(UIImage *)originImage
+{
+    for (UIView * view in self.headerView.subviews) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton * button = (UIButton *)view;
+            button.layer.cornerRadius = 40;
+            button.clipsToBounds = true;
+            [button setBackgroundImage:image forState:UIControlStateNormal];
+        }
+    }
+    NSLog(@"%@\n%@",originImage,image);
 }
 
 - (void)didReceiveMemoryWarning {
