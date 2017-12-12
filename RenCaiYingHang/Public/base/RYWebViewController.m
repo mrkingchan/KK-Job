@@ -83,6 +83,11 @@
     else{
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
+    
+//     AFNetworkReachabilityManager *netManager = [AFNetworkReachabilityManager sharedManager];
+//    if (netManager.isReachable) {
+//        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]];
+//    }
 }
 
 - (void)setJsMethodName:(NSString *)jsMethodName

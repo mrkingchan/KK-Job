@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		33CC09F559DE800ADDC87564 /* libPods-RenCaiYingHang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32252410ABE142D4C96DFBE4 /* libPods-RenCaiYingHang.a */; };
+		8F151E561FDFA80D00F15CF7 /* RadarViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F151E541FDFA80D00F15CF7 /* RadarViewCell.m */; };
+		8F151E571FDFA80D00F15CF7 /* RadarViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F151E551FDFA80D00F15CF7 /* RadarViewCell.xib */; };
 		8F1F66511FD9485C004BF8F1 /* RYWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66501FD9485C004BF8F1 /* RYWebViewController.m */; };
 		8F1F66541FD94DCD004BF8F1 /* JobH5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66531FD94DCD004BF8F1 /* JobH5ViewController.m */; };
 		8F1F66581FD94E1C004BF8F1 /* RadarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66571FD94E1C004BF8F1 /* RadarViewController.m */; };
@@ -120,6 +122,9 @@
 /* Begin PBXFileReference section */
 		00CA050922DC8D7A0B6E866B /* Pods-RenCaiYingHang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RenCaiYingHang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RenCaiYingHang/Pods-RenCaiYingHang.debug.xcconfig"; sourceTree = "<group>"; };
 		32252410ABE142D4C96DFBE4 /* libPods-RenCaiYingHang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RenCaiYingHang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F151E531FDFA80D00F15CF7 /* RadarViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RadarViewCell.h; sourceTree = "<group>"; };
+		8F151E541FDFA80D00F15CF7 /* RadarViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RadarViewCell.m; sourceTree = "<group>"; };
+		8F151E551FDFA80D00F15CF7 /* RadarViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadarViewCell.xib; sourceTree = "<group>"; };
 		8F1F664F1FD9485C004BF8F1 /* RYWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYWebViewController.h; sourceTree = "<group>"; };
 		8F1F66501FD9485C004BF8F1 /* RYWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYWebViewController.m; sourceTree = "<group>"; };
 		8F1F66521FD94DCD004BF8F1 /* JobH5ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobH5ViewController.h; sourceTree = "<group>"; };
@@ -332,12 +337,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8F151E521FDFA7E100F15CF7 /* Rader(雷达) */ = {
+			isa = PBXGroup;
+			children = (
+				8F1F66561FD94E1C004BF8F1 /* RadarViewController.h */,
+				8F1F66571FD94E1C004BF8F1 /* RadarViewController.m */,
+				8F151E531FDFA80D00F15CF7 /* RadarViewCell.h */,
+				8F151E541FDFA80D00F15CF7 /* RadarViewCell.m */,
+				8F151E551FDFA80D00F15CF7 /* RadarViewCell.xib */,
+			);
+			path = "Rader(雷达)";
+			sourceTree = "<group>";
+		};
 		8F1F66551FD94DDC004BF8F1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				8F1F66591FD95EC0004BF8F1 /* Setup */,
-				8F1F66561FD94E1C004BF8F1 /* RadarViewController.h */,
-				8F1F66571FD94E1C004BF8F1 /* RadarViewController.m */,
 				8FF04D441FDA3A9300B14036 /* NecessaryInfoViewController.h */,
 				8FF04D451FDA3A9300B14036 /* NecessaryInfoViewController.m */,
 				8FF04D4A1FDA627200B14036 /* ReviseNecessaryViewController.h */,
@@ -349,6 +364,7 @@
 		8F1F66591FD95EC0004BF8F1 /* Setup */ = {
 			isa = PBXGroup;
 			children = (
+				8F151E521FDFA7E100F15CF7 /* Rader(雷达) */,
 				8F728C271FDE2F5500C6247B /* AssetsManagement */,
 				8FF04D501FDA7F8400B14036 /* SetupChildrens */,
 				8F1F666A1FD964AB004BF8F1 /* UploadResume */,
@@ -993,6 +1009,7 @@
 				8FF04D751FDA90B500B14036 /* LabelViewCell.xib in Resources */,
 				8FF04D6C1FDA898C00B14036 /* LabelTextFieldBuutonCell.xib in Resources */,
 				8F85D8281FD922A500BC1A7D /* Main.storyboard in Resources */,
+				8F151E571FDFA80D00F15CF7 /* RadarViewCell.xib in Resources */,
 				8F85D8A71FD9257400BC1A7D /* SGBottomView.xib in Resources */,
 				8FF04D641FDA82AD00B14036 /* LabelTextFieldCell.xib in Resources */,
 				8FF04D7A1FDA947900B14036 /* LabelSwitchCell.xib in Resources */,
@@ -1132,6 +1149,7 @@
 				8F85D8DD1FD9298C00BC1A7D /* CompanyViewController.m in Sources */,
 				8FF04D531FDA7FF000B14036 /* RemindViewController.m in Sources */,
 				8F85D8741FD9250200BC1A7D /* UtilityHelper.m in Sources */,
+				8F151E561FDFA80D00F15CF7 /* RadarViewCell.m in Sources */,
 				8F85D8AB1FD9257400BC1A7D /* DYQBannerScrollView.m in Sources */,
 				8F85D8A91FD9257400BC1A7D /* SGScanningQRCodeView.m in Sources */,
 				8F728C2D1FDE356200C6247B /* RechargeViewController.m in Sources */,
