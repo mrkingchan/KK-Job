@@ -16,6 +16,10 @@
 		8F0EF4C81FE36A7A00D179D5 /* PCCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4C01FE36A7900D179D5 /* PCCircle.m */; };
 		8F0EF4C91FE36A7A00D179D5 /* PCLockLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4C41FE36A7A00D179D5 /* PCLockLabel.m */; };
 		8F0EF4CD1FE36CEF00D179D5 /* GestureManageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4CC1FE36CEF00D179D5 /* GestureManageController.m */; };
+		8F0EF4D11FE39CBD00D179D5 /* RYUserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4D01FE39CBD00D179D5 /* RYUserRequest.m */; };
+		8F0EF4D51FE3B25000D179D5 /* AreaRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4D41FE3B25000D179D5 /* AreaRequest.m */; };
+		8F0EF4D91FE3D39500D179D5 /* RYAreaPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4D81FE3D39500D179D5 /* RYAreaPickView.m */; };
+		8F0EF4DC1FE3D6C800D179D5 /* AreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4DB1FE3D6C800D179D5 /* AreaModel.m */; };
 		8F151E561FDFA80D00F15CF7 /* RadarViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F151E541FDFA80D00F15CF7 /* RadarViewCell.m */; };
 		8F151E571FDFA80D00F15CF7 /* RadarViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F151E551FDFA80D00F15CF7 /* RadarViewCell.xib */; };
 		8F1F66511FD9485C004BF8F1 /* RYWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66501FD9485C004BF8F1 /* RYWebViewController.m */; };
@@ -146,6 +150,14 @@
 		8F0EF4C41FE36A7A00D179D5 /* PCLockLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCLockLabel.m; sourceTree = "<group>"; };
 		8F0EF4CB1FE36CEF00D179D5 /* GestureManageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GestureManageController.h; sourceTree = "<group>"; };
 		8F0EF4CC1FE36CEF00D179D5 /* GestureManageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GestureManageController.m; sourceTree = "<group>"; };
+		8F0EF4CF1FE39CBD00D179D5 /* RYUserRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYUserRequest.h; sourceTree = "<group>"; };
+		8F0EF4D01FE39CBD00D179D5 /* RYUserRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYUserRequest.m; sourceTree = "<group>"; };
+		8F0EF4D31FE3B25000D179D5 /* AreaRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AreaRequest.h; sourceTree = "<group>"; };
+		8F0EF4D41FE3B25000D179D5 /* AreaRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AreaRequest.m; sourceTree = "<group>"; };
+		8F0EF4D71FE3D39500D179D5 /* RYAreaPickView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYAreaPickView.h; sourceTree = "<group>"; };
+		8F0EF4D81FE3D39500D179D5 /* RYAreaPickView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYAreaPickView.m; sourceTree = "<group>"; };
+		8F0EF4DA1FE3D6C800D179D5 /* AreaModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AreaModel.h; sourceTree = "<group>"; };
+		8F0EF4DB1FE3D6C800D179D5 /* AreaModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AreaModel.m; sourceTree = "<group>"; };
 		8F151E531FDFA80D00F15CF7 /* RadarViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RadarViewCell.h; sourceTree = "<group>"; };
 		8F151E541FDFA80D00F15CF7 /* RadarViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RadarViewCell.m; sourceTree = "<group>"; };
 		8F151E551FDFA80D00F15CF7 /* RadarViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadarViewCell.xib; sourceTree = "<group>"; };
@@ -399,6 +411,37 @@
 			path = Gesture;
 			sourceTree = "<group>";
 		};
+		8F0EF4CE1FE3971500D179D5 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				8F0EF4CF1FE39CBD00D179D5 /* RYUserRequest.h */,
+				8F0EF4D01FE39CBD00D179D5 /* RYUserRequest.m */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		8F0EF4D21FE3B20000D179D5 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				8F0EF4D31FE3B25000D179D5 /* AreaRequest.h */,
+				8F0EF4D41FE3B25000D179D5 /* AreaRequest.m */,
+				8F0EF4DA1FE3D6C800D179D5 /* AreaModel.h */,
+				8F0EF4DB1FE3D6C800D179D5 /* AreaModel.m */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		8F0EF4D61FE3D33000D179D5 /* function-view */ = {
+			isa = PBXGroup;
+			children = (
+				8FF04D4D1FDA6FDE00B14036 /* RYAlertSheet.h */,
+				8FF04D4E1FDA6FDE00B14036 /* RYAlertSheet.m */,
+				8F0EF4D71FE3D39500D179D5 /* RYAreaPickView.h */,
+				8F0EF4D81FE3D39500D179D5 /* RYAreaPickView.m */,
+			);
+			path = "function-view";
+			sourceTree = "<group>";
+		};
 		8F151E521FDFA7E100F15CF7 /* Rader(雷达) */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,6 +457,7 @@
 		8F1F66551FD94DDC004BF8F1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8F0EF4D21FE3B20000D179D5 /* Request */,
 				8F1F66591FD95EC0004BF8F1 /* Setup */,
 				8FF04D441FDA3A9300B14036 /* NecessaryInfoViewController.h */,
 				8FF04D451FDA3A9300B14036 /* NecessaryInfoViewController.m */,
@@ -599,6 +643,7 @@
 		8F85D8551FD9236600BC1A7D /* other */ = {
 			isa = PBXGroup;
 			children = (
+				8F0EF4D61FE3D33000D179D5 /* function-view */,
 				8FF04D3B1FDA263600B14036 /* view(通用视图) */,
 				8F85D8F61FD9386600BC1A7D /* Guide */,
 				8F85D8C11FD9280D00BC1A7D /* MyRefreshHeader.h */,
@@ -876,6 +921,7 @@
 		8F85D8EC1FD92ABF00BC1A7D /* LoginResiter */ = {
 			isa = PBXGroup;
 			children = (
+				8F0EF4CE1FE3971500D179D5 /* Request */,
 				8F85D8ED1FD92AE800BC1A7D /* LoginViewController.h */,
 				8F85D8EE1FD92AE800BC1A7D /* LoginViewController.m */,
 				8F85D8F01FD92B1900BC1A7D /* ResiterViewController.h */,
@@ -901,8 +947,6 @@
 				8FF04D3F1FDA26AA00B14036 /* TextViewCell.h */,
 				8FF04D401FDA26AA00B14036 /* TextViewCell.m */,
 				8FF04D411FDA26AA00B14036 /* TextViewCell.xib */,
-				8FF04D4D1FDA6FDE00B14036 /* RYAlertSheet.h */,
-				8FF04D4E1FDA6FDE00B14036 /* RYAlertSheet.m */,
 				8FF04D601FDA82AD00B14036 /* LabelTextFieldCell.h */,
 				8FF04D611FDA82AD00B14036 /* LabelTextFieldCell.m */,
 				8FF04D621FDA82AD00B14036 /* LabelTextFieldCell.xib */,
@@ -1172,6 +1216,7 @@
 				8FF04D4F1FDA6FDE00B14036 /* RYAlertSheet.m in Sources */,
 				8F85D89D1FD9257400BC1A7D /* EJAlertViewController.m in Sources */,
 				8F85D8601FD9243900BC1A7D /* RYNavigationController.m in Sources */,
+				8F0EF4DC1FE3D6C800D179D5 /* AreaModel.m in Sources */,
 				8F85D8631FD9244800BC1A7D /* RYViewController.m in Sources */,
 				8F85D8251FD922A500BC1A7D /* ViewController.m in Sources */,
 				8F85D8DA1FD9297700BC1A7D /* JobViewController.m in Sources */,
@@ -1205,6 +1250,7 @@
 				8F85D8EF1FD92AE800BC1A7D /* LoginViewController.m in Sources */,
 				8F728C371FDE375D00C6247B /* RechagergeTypeViewCell.m in Sources */,
 				8F85D8B91FD9261200BC1A7D /* UIColor+HexString.m in Sources */,
+				8F0EF4D51FE3B25000D179D5 /* AreaRequest.m in Sources */,
 				8F85D8BC1FD9261200BC1A7D /* UIView+Rect.m in Sources */,
 				8F85D8E31FD929C300BC1A7D /* PersonCenterViewController.m in Sources */,
 				8FF04D741FDA90B500B14036 /* LabelViewCell.m in Sources */,
@@ -1213,6 +1259,7 @@
 				8F85D8E61FD92A8300BC1A7D /* CommonH5Controller.m in Sources */,
 				8F85D8CD1FD9282E00BC1A7D /* KApiConst.m in Sources */,
 				8F85D8B01FD925CA00BC1A7D /* GTMBase64.m in Sources */,
+				8F0EF4D11FE39CBD00D179D5 /* RYUserRequest.m in Sources */,
 				8F0EF4B81FE366D100D179D5 /* GestureSetController.m in Sources */,
 				8F85D8F21FD92B1900BC1A7D /* ResiterViewController.m in Sources */,
 				8F85D85D1FD9241800BC1A7D /* RYTabBarController.m in Sources */,
@@ -1221,6 +1268,7 @@
 				8F85D8741FD9250200BC1A7D /* UtilityHelper.m in Sources */,
 				8F151E561FDFA80D00F15CF7 /* RadarViewCell.m in Sources */,
 				8F85D8AB1FD9257400BC1A7D /* DYQBannerScrollView.m in Sources */,
+				8F0EF4D91FE3D39500D179D5 /* RYAreaPickView.m in Sources */,
 				8F85D8A91FD9257400BC1A7D /* SGScanningQRCodeView.m in Sources */,
 				8F728C2D1FDE356200C6247B /* RechargeViewController.m in Sources */,
 				8F85D8D71FD9290400BC1A7D /* RYBusinessTabBarController.m in Sources */,

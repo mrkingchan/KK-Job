@@ -14,8 +14,6 @@
 
 #import <CommonCrypto/CommonCryptor.h>
 
-#import <MapKit/MapKit.h>
-
 @implementation UtilityHelper
 
 /** 是否登录,return NO 就跳转到登录页面 */
@@ -125,53 +123,6 @@ const  Byte iv[] = {1,2,3,4,5,6,7,8};
                                                         options:NSJSONReadingMutableContainers
                                                           error:&err];
     return dic;//parseJason.mj_keyValues;
-}
-
-/**
- 地图导航
- */
-+ (void )loadGPSWithLat:(NSString *)latitude log:(NSString *)longitude
-{
-    //百度地图
-    if ([[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"baidumap://map/"]])
-    {
-        NSString *urlString = [[NSString stringWithFormat:@"baidumap://map/direction?origin={{我的位置}}&destination=latlng:%f,%f|name=目的地&mode=driving&coord_type=gcj02",[latitude floatValue],[longitude floatValue]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-    }
-    //高德地图
-    else if ([[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"iosamap://"]])
-    {
-        NSString *urlString = [[NSString stringWithFormat:@"iosamap://navi?sourceApplication=%@&backScheme=%@&lat=%f&lon=%f&dev=0&style=2",@"人才赢行",@"iosamap",[latitude floatValue],[longitude floatValue]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-    }
-    //谷歌地图
-    else if ([[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]])
-    {
-        NSString *urlString = [[NSString stringWithFormat:@"comgooglemaps://?x-source=%@&x-success=%@&saddr=&daddr=%f,%f&directionsmode=driving",@"人才赢行",@"comgooglemaps",[latitude floatValue],[longitude floatValue]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-    }
-    //苹果地图
-    else
-    {
-        //终点坐标
-        CLLocationCoordinate2D coords1 = CLLocationCoordinate2DMake([latitude floatValue],[longitude floatValue]);
-        //当前位置
-        MKMapItem * currentLocation = [MKMapItem mapItemForCurrentLocation];
-        //目的地的位置
-        MKMapItem * toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:coords1 addressDictionary:nil]];
-        toLocation.name = @"目的地";
-        
-        //        NSString *myname=[dataSource objectForKey:@"name"];
-        //
-        //        if (![XtomFunction xfunc_check_strEmpty:myname])
-        //
-        //        {
-        //            toLocation.name =myname;
-        //        }
-        [MKMapItem openMapsWithItems:@[currentLocation, toLocation]
-                       launchOptions:@{MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,
-                                       MKLaunchOptionsShowsTrafficKey: [NSNumber numberWithBool:YES]}];
-    }
 }
 
 /***

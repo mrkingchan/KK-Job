@@ -43,7 +43,7 @@
 {
     JobH5ViewController * jobH5 = [[JobH5ViewController alloc] init];
     jobH5.title = @"推荐";
-    jobH5.url = @"https://www.baidu.com";
+    jobH5.url = @"http://192.168.2.14:8022/UserLogin";
     jobH5.jsMethodName = @"aaaa";
     jobH5.progressViewColor = [UIColor redColor];
     [self addChildViewController:jobH5];

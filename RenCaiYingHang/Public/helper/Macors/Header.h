@@ -15,7 +15,8 @@
 #import "NecessaryInfoViewController.h"
 
 /** APIRequest **/
-
+#import "AreaRequest.h"
+#import "RYUserRequest.h"
 
 /**  HelpClass **/
 #import "UIFactory.h"

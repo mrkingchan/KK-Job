@@ -13,4 +13,6 @@
 /** 提示框 */
 - (void) alertMessageWithViewController:(UIViewController *)viewCtl message:(NSString *)message;
 
+- (void)closeBeyBoard;
+
 @end

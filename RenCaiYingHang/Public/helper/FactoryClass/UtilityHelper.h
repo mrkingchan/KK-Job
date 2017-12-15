@@ -49,10 +49,6 @@
  */
 + (NSDictionary *) localDataResourceWithName:(NSString *)name;
 
-/**
- 地图导航
- */
-+ (void )loadGPSWithLat:(NSString *)latitude log:(NSString *)longitude;
 
 /***
  扫一扫

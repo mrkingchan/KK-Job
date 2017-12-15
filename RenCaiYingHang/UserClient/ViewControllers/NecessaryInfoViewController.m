@@ -11,10 +11,14 @@
 #import "ReviseNecessaryViewController.h"
 
 #import "RYAlertSheet.h"
+#import "RYAreaPickView.h"
 
 #import "JHUploadImage.h"
 
 @interface NecessaryInfoViewController ()<UITableViewDelegate,UITableViewDataSource,PGDatePickerDelegate,JHUploadImageDelegate>
+{
+    RYAreaPickView * pickView;
+}
 
 @property (nonatomic,strong) UITableView * tableView;
 
@@ -214,6 +218,7 @@ static NSString * UITableViewCellID = @"Cell";
         case 7:
         {
             //选择城市
+            [self selectPrvoinceCityAreas:indexPath];
         }
             break;
         case 1:
@@ -302,6 +307,29 @@ static NSString * UITableViewCellID = @"Cell";
         }
     }
     NSLog(@"%@\n%@",originImage,image);
+}
+
+/** 选择城市 */
+- (void) selectPrvoinceCityAreas:(NSIndexPath *)indexPath
+{
+    [self closeBeyBoard];
+    __weak typeof(self) weakSelf = self;
+    [AreaRequest getProvinceInfoWithParamer:nil suceess:^(NSArray *dataArr) {
+       
+        pickView = nil;
+        [pickView removeFromSuperview];
+        
+        pickView = [[RYAreaPickView alloc] initWithFrame:CGRectZero];
+        pickView.provinceArr = dataArr;
+        [pickView show];
+        
+        pickView.selectProvinceCityAreaCall = ^(NSString *province, NSString *city) {
+            [weakSelf refreshTableViewWith:indexPath string:city];
+        };
+       
+    } failure:^(id errorCode) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
