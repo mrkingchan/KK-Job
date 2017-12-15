@@ -10,6 +10,8 @@
 
 #import "OSGuideViewController.h"
 
+#import "GestureSetController.h"
+
 @interface AppDelegate ()<OSGuideSelectDelegate>
 
 @property (nonatomic,assign) BOOL isEnterBackground;
@@ -26,6 +28,8 @@
     if ([VerifyHelper empty:[[NSUserDefaults standardUserDefaults] objectForKey:@"isNecessary"]]) {
         [[NSUserDefaults standardUserDefaults] setObject:@(false) forKey:@"isNecessary"];
     }
+
+    [self gestureAuth];
     
     /** 是否进入后台操作了 */
     _isEnterBackground = false;
@@ -54,13 +58,28 @@
     return YES;
 }
 
+/** 判断是否需要手势认证 */
+- (void) gestureAuth
+{
+    //在有手势密码的情况下默认每次进来都需要验证手势密码
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"setOn"] isEqualToString:@"open"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"NoGestureLogin" forKey:@"MineGesture"];
+    }
+}
+
 /** 登陆 */
 - (void) clickEnter
 {
-    /** 默认进入登录页面 **/
-    UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-    self.window.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
-    [self.window.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+    /** 默认进入登录页面 **/  /** 如果已经设置手势密码,那么可以先跳转到手势密码登陆界面,如不执行其后再跳转到登陆页面 */
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"MineGesture"] isEqualToString:@"NoGestureLogin"] && [[[NSUserDefaults standardUserDefaults] objectForKey:@"setOn"] isEqualToString:@"open"]) {
+        GestureSetController * vc = [GestureSetController new];
+        [vc setType:GestureViewControllerTypeLogin];
+        self.window.rootViewController = [[RYNavigationController alloc] initWithRootViewController:vc];
+    }else{
+        UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+        self.window.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
+        [self.window.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+    }
 }
 
 - (void) gainUserModel

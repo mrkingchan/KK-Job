@@ -11,6 +11,7 @@
 #import "RemindViewController.h"
 #import "SecurityCenterViewController.h"
 #import "FeebBackViewController.h"
+#import "GestureManageController.h"
 
 @interface SetupViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -50,7 +51,7 @@ static NSString * SetUPTableViewCellID = @"UITableViewCell";
 
 - (void) configurationTableView
 {
-    self.dataArray = @[@[@"提醒设置",@"安全中心"],@[@"关于我们",@"公司动态",@"行业新闻"],@[@"意见反馈"]];
+    self.dataArray = @[@[@"提醒设置",@"安全中心"],@[@"关于我们",@"公司动态",@"行业新闻"],@[@"意见反馈",@"手势密码"]];
     [self.view addSubview:self.tableView];
     self.tableView.tableFooterView = [self tableFooterView];
 }
@@ -139,9 +140,23 @@ static NSString * SetUPTableViewCellID = @"UITableViewCell";
             break;
         case 2:
         {
-            FeebBackViewController * feed = [[FeebBackViewController alloc] init];
-            feed.title = self.dataArray[indexPath.section][indexPath.row];
-            [self.navigationController pushViewController:feed animated:true];
+            switch (indexPath.row) {
+                case 0:
+                {
+                    FeebBackViewController * feed = [[FeebBackViewController alloc] init];
+                    feed.title = self.dataArray[indexPath.section][indexPath.row];
+                    [self.navigationController pushViewController:feed animated:true];
+                }
+                    break;
+                case 1:
+                {
+                    GestureManageController * gm = [[GestureManageController alloc] init];
+                    [self.navigationController showViewController:gm sender:self];
+                }
+                    break;
+                default:
+                    break;
+            }
         }
             break;
         default:

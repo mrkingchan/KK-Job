@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		33CC09F559DE800ADDC87564 /* libPods-RenCaiYingHang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32252410ABE142D4C96DFBE4 /* libPods-RenCaiYingHang.a */; };
+		8F0EF4B81FE366D100D179D5 /* GestureSetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4B41FE366D100D179D5 /* GestureSetController.m */; };
+		8F0EF4B91FE366D100D179D5 /* GestureVerifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4B61FE366D100D179D5 /* GestureVerifyViewController.m */; };
+		8F0EF4C51FE36A7A00D179D5 /* PCCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4BB1FE36A7800D179D5 /* PCCircleView.m */; };
+		8F0EF4C61FE36A7A00D179D5 /* PCCircleInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4BC1FE36A7800D179D5 /* PCCircleInfoView.m */; };
+		8F0EF4C71FE36A7A00D179D5 /* PCCircleViewConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4BD1FE36A7900D179D5 /* PCCircleViewConst.m */; };
+		8F0EF4C81FE36A7A00D179D5 /* PCCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4C01FE36A7900D179D5 /* PCCircle.m */; };
+		8F0EF4C91FE36A7A00D179D5 /* PCLockLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4C41FE36A7A00D179D5 /* PCLockLabel.m */; };
+		8F0EF4CD1FE36CEF00D179D5 /* GestureManageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4CC1FE36CEF00D179D5 /* GestureManageController.m */; };
 		8F151E561FDFA80D00F15CF7 /* RadarViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F151E541FDFA80D00F15CF7 /* RadarViewCell.m */; };
 		8F151E571FDFA80D00F15CF7 /* RadarViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F151E551FDFA80D00F15CF7 /* RadarViewCell.xib */; };
 		8F1F66511FD9485C004BF8F1 /* RYWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66501FD9485C004BF8F1 /* RYWebViewController.m */; };
@@ -122,6 +130,22 @@
 /* Begin PBXFileReference section */
 		00CA050922DC8D7A0B6E866B /* Pods-RenCaiYingHang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RenCaiYingHang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RenCaiYingHang/Pods-RenCaiYingHang.debug.xcconfig"; sourceTree = "<group>"; };
 		32252410ABE142D4C96DFBE4 /* libPods-RenCaiYingHang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RenCaiYingHang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F0EF4B31FE366D100D179D5 /* GestureSetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureSetController.h; sourceTree = "<group>"; };
+		8F0EF4B41FE366D100D179D5 /* GestureSetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureSetController.m; sourceTree = "<group>"; };
+		8F0EF4B51FE366D100D179D5 /* GestureVerifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureVerifyViewController.h; sourceTree = "<group>"; };
+		8F0EF4B61FE366D100D179D5 /* GestureVerifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureVerifyViewController.m; sourceTree = "<group>"; };
+		8F0EF4BB1FE36A7800D179D5 /* PCCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCircleView.m; sourceTree = "<group>"; };
+		8F0EF4BC1FE36A7800D179D5 /* PCCircleInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCircleInfoView.m; sourceTree = "<group>"; };
+		8F0EF4BD1FE36A7900D179D5 /* PCCircleViewConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCircleViewConst.m; sourceTree = "<group>"; };
+		8F0EF4BE1FE36A7900D179D5 /* PCCircleInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCircleInfoView.h; sourceTree = "<group>"; };
+		8F0EF4BF1FE36A7900D179D5 /* PCCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCircle.h; sourceTree = "<group>"; };
+		8F0EF4C01FE36A7900D179D5 /* PCCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCircle.m; sourceTree = "<group>"; };
+		8F0EF4C11FE36A7900D179D5 /* PCCircleViewConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCircleViewConst.h; sourceTree = "<group>"; };
+		8F0EF4C21FE36A7900D179D5 /* PCCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCircleView.h; sourceTree = "<group>"; };
+		8F0EF4C31FE36A7900D179D5 /* PCLockLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCLockLabel.h; sourceTree = "<group>"; };
+		8F0EF4C41FE36A7A00D179D5 /* PCLockLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCLockLabel.m; sourceTree = "<group>"; };
+		8F0EF4CB1FE36CEF00D179D5 /* GestureManageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GestureManageController.h; sourceTree = "<group>"; };
+		8F0EF4CC1FE36CEF00D179D5 /* GestureManageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GestureManageController.m; sourceTree = "<group>"; };
 		8F151E531FDFA80D00F15CF7 /* RadarViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RadarViewCell.h; sourceTree = "<group>"; };
 		8F151E541FDFA80D00F15CF7 /* RadarViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RadarViewCell.m; sourceTree = "<group>"; };
 		8F151E551FDFA80D00F15CF7 /* RadarViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadarViewCell.xib; sourceTree = "<group>"; };
@@ -337,6 +361,44 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8F0EF4B01FE366D100D179D5 /* GestureLock */ = {
+			isa = PBXGroup;
+			children = (
+				8F0EF4BA1FE36A5600D179D5 /* views */,
+				8F0EF4B31FE366D100D179D5 /* GestureSetController.h */,
+				8F0EF4B41FE366D100D179D5 /* GestureSetController.m */,
+				8F0EF4B51FE366D100D179D5 /* GestureVerifyViewController.h */,
+				8F0EF4B61FE366D100D179D5 /* GestureVerifyViewController.m */,
+			);
+			path = GestureLock;
+			sourceTree = "<group>";
+		};
+		8F0EF4BA1FE36A5600D179D5 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				8F0EF4BF1FE36A7900D179D5 /* PCCircle.h */,
+				8F0EF4C01FE36A7900D179D5 /* PCCircle.m */,
+				8F0EF4BE1FE36A7900D179D5 /* PCCircleInfoView.h */,
+				8F0EF4BC1FE36A7800D179D5 /* PCCircleInfoView.m */,
+				8F0EF4C21FE36A7900D179D5 /* PCCircleView.h */,
+				8F0EF4BB1FE36A7800D179D5 /* PCCircleView.m */,
+				8F0EF4C11FE36A7900D179D5 /* PCCircleViewConst.h */,
+				8F0EF4BD1FE36A7900D179D5 /* PCCircleViewConst.m */,
+				8F0EF4C31FE36A7900D179D5 /* PCLockLabel.h */,
+				8F0EF4C41FE36A7A00D179D5 /* PCLockLabel.m */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		8F0EF4CA1FE36CAC00D179D5 /* Gesture */ = {
+			isa = PBXGroup;
+			children = (
+				8F0EF4CB1FE36CEF00D179D5 /* GestureManageController.h */,
+				8F0EF4CC1FE36CEF00D179D5 /* GestureManageController.m */,
+			);
+			path = Gesture;
+			sourceTree = "<group>";
+		};
 		8F151E521FDFA7E100F15CF7 /* Rader(雷达) */ = {
 			isa = PBXGroup;
 			children = (
@@ -550,6 +612,7 @@
 		8F85D8561FD9236A00BC1A7D /* third */ = {
 			isa = PBXGroup;
 			children = (
+				8F0EF4B01FE366D100D179D5 /* GestureLock */,
 				8F728C231FDE1FC300C6247B /* JHUploadImage */,
 				8F85D8AC1FD925B300BC1A7D /* GTMBase64 */,
 				8F85D8771FD9257400BC1A7D /* AlertController */,
@@ -859,6 +922,7 @@
 		8FF04D501FDA7F8400B14036 /* SetupChildrens */ = {
 			isa = PBXGroup;
 			children = (
+				8F0EF4CA1FE36CAC00D179D5 /* Gesture */,
 				8FF04D701FDA907300B14036 /* SecurityCenter */,
 				8FF04D511FDA7FF000B14036 /* RemindViewController.h */,
 				8FF04D521FDA7FF000B14036 /* RemindViewController.m */,
@@ -1096,6 +1160,7 @@
 			files = (
 				8F85D89F1FD9257400BC1A7D /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
 				8FF04D5C1FDA81E800B14036 /* IdentificationViewController.m in Sources */,
+				8F0EF4C51FE36A7A00D179D5 /* PCCircleView.m in Sources */,
 				8F85D8BF1FD927E600BC1A7D /* LoadingView.m in Sources */,
 				8F1F665C1FD96168004BF8F1 /* HomePageViewController.m in Sources */,
 				8F1F665F1FD961A5004BF8F1 /* CompanyCenterViewController.m in Sources */,
@@ -1119,13 +1184,16 @@
 				8F1F66621FD9626D004BF8F1 /* SetupViewController.m in Sources */,
 				8FF04D591FDA801B00B14036 /* FeebBackViewController.m in Sources */,
 				8FF04D5F1FDA81FE00B14036 /* EMailViewController.m in Sources */,
+				8F0EF4CD1FE36CEF00D179D5 /* GestureManageController.m in Sources */,
 				8FF04D421FDA26AA00B14036 /* TextViewCell.m in Sources */,
 				8FF04D461FDA3A9300B14036 /* NecessaryInfoViewController.m in Sources */,
+				8F0EF4B91FE366D100D179D5 /* GestureVerifyViewController.m in Sources */,
 				8F85D8CE1FD9282E00BC1A7D /* NetWorkHelper.m in Sources */,
 				8F85D8C21FD9280D00BC1A7D /* MyRefreshHeader.m in Sources */,
 				8F728C261FDE1FC300C6247B /* JHUploadImage.m in Sources */,
 				8FF04D6F1FDA8D4300B14036 /* ChangePayPwViewController.m in Sources */,
 				8F85D8731FD9250200BC1A7D /* VerifyHelper.m in Sources */,
+				8F0EF4C81FE36A7A00D179D5 /* PCCircle.m in Sources */,
 				8F85D8E01FD929B400BC1A7D /* DropInBoxViewController.m in Sources */,
 				8F85D8AA1FD9257400BC1A7D /* DYQBannerCell.m in Sources */,
 				8FF04D791FDA947900B14036 /* LabelSwitchCell.m in Sources */,
@@ -1141,9 +1209,11 @@
 				8F85D8E31FD929C300BC1A7D /* PersonCenterViewController.m in Sources */,
 				8FF04D741FDA90B500B14036 /* LabelViewCell.m in Sources */,
 				8FF04D561FDA800A00B14036 /* SecurityCenterViewController.m in Sources */,
+				8F0EF4C71FE36A7A00D179D5 /* PCCircleViewConst.m in Sources */,
 				8F85D8E61FD92A8300BC1A7D /* CommonH5Controller.m in Sources */,
 				8F85D8CD1FD9282E00BC1A7D /* KApiConst.m in Sources */,
 				8F85D8B01FD925CA00BC1A7D /* GTMBase64.m in Sources */,
+				8F0EF4B81FE366D100D179D5 /* GestureSetController.m in Sources */,
 				8F85D8F21FD92B1900BC1A7D /* ResiterViewController.m in Sources */,
 				8F85D85D1FD9241800BC1A7D /* RYTabBarController.m in Sources */,
 				8F85D8DD1FD9298C00BC1A7D /* CompanyViewController.m in Sources */,
@@ -1154,7 +1224,9 @@
 				8F85D8A91FD9257400BC1A7D /* SGScanningQRCodeView.m in Sources */,
 				8F728C2D1FDE356200C6247B /* RechargeViewController.m in Sources */,
 				8F85D8D71FD9290400BC1A7D /* RYBusinessTabBarController.m in Sources */,
+				8F0EF4C61FE36A7A00D179D5 /* PCCircleInfoView.m in Sources */,
 				8F85D8A41FD9257400BC1A7D /* SGScanningQRCodeVC.m in Sources */,
+				8F0EF4C91FE36A7A00D179D5 /* PCLockLabel.m in Sources */,
 				8F1F66741FD969B0004BF8F1 /* InterviewH5ViewController.m in Sources */,
 				8F85D8221FD922A400BC1A7D /* AppDelegate.m in Sources */,
 				8F1F666D1FD964E8004BF8F1 /* UploadResumeViewController.m in Sources */,

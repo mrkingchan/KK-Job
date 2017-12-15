@@ -77,4 +77,9 @@ typedef NS_ENUM(NSInteger, TransitionCurve) {
  */
 - (CATransition *)transitionWithAnimType:(TransitionAnimType)animType subType:(TransitionSubType)subType curve:(TransitionCurve)curve duration:(CGFloat)duration;
 
+/*
+ *  摇动
+ */
+-(void)shake;
+
 @end

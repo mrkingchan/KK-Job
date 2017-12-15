@@ -7,9 +7,11 @@
 //
 
 #import "JHUploadImage.h"
+
 static JHUploadImage *_jhUploadImage = nil;
 
 @implementation JHUploadImage
+
 + (JHUploadImage *)shareUploadImage {
     
     static dispatch_once_t onceToken;
@@ -18,6 +20,7 @@ static JHUploadImage *_jhUploadImage = nil;
     });
     return _jhUploadImage;
 }
+
 - (void)showActionSheetInFatherViewController:(UIViewController *)fatherVC  delegate:(id<JHUploadImageDelegate>)aDelegate {
     _jhUploadImage.uploadImageDelegate = aDelegate;
     _fatherViewController = fatherVC;
@@ -29,6 +32,7 @@ static JHUploadImage *_jhUploadImage = nil;
                                               otherButtonTitles:@"从手机相册上传", @"相机拍照", nil];
     [sheet showInView:fatherVC.view];
 }
+
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
