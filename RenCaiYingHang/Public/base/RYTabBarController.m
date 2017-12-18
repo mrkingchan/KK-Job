@@ -49,8 +49,8 @@
     
     NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
     NSMutableDictionary *selectTextAttrs = [NSMutableDictionary dictionary];
-    textAttrs[NSForegroundColorAttributeName] = UIColorHex(999999);
-    selectTextAttrs[NSForegroundColorAttributeName] = [UIColor darkTextColor];
+    textAttrs[NSForegroundColorAttributeName] = UIColorHex(333333);
+    selectTextAttrs[NSForegroundColorAttributeName] = UIColorHex(EE5A48);
     [controller.tabBarItem setTitleTextAttributes:textAttrs forState:UIControlStateNormal];
     [controller.tabBarItem setTitleTextAttributes:selectTextAttrs forState:UIControlStateSelected];
     

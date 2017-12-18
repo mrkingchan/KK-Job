@@ -157,8 +157,9 @@
     
     self.title = @"验证手势";
     
-    UIBarButtonItem * backItem = [[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(navLeftBtnEvent)];
+    UIBarButtonItem * backItem = [[UIBarButtonItem alloc] initWithImage:UIIMAGE(@"close") style:UIBarButtonItemStylePlain target:self action:@selector(navLeftBtnEvent)];
     self.navigationItem.leftBarButtonItem = backItem;
+    
     
     // 头像
     UIImageView  *imageView = [[UIImageView alloc] init];

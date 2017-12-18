@@ -20,8 +20,14 @@
 		8F0EF4D51FE3B25000D179D5 /* AreaRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4D41FE3B25000D179D5 /* AreaRequest.m */; };
 		8F0EF4D91FE3D39500D179D5 /* RYAreaPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4D81FE3D39500D179D5 /* RYAreaPickView.m */; };
 		8F0EF4DC1FE3D6C800D179D5 /* AreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0EF4DB1FE3D6C800D179D5 /* AreaModel.m */; };
-		8F151E561FDFA80D00F15CF7 /* RadarViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F151E541FDFA80D00F15CF7 /* RadarViewCell.m */; };
-		8F151E571FDFA80D00F15CF7 /* RadarViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F151E551FDFA80D00F15CF7 /* RadarViewCell.xib */; };
+		8F1CA81F1FE764CB00BBD208 /* RyJobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CA81E1FE764CB00BBD208 /* RyJobModel.m */; };
+		8F1CA8221FE7657A00BBD208 /* RyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CA8211FE7657A00BBD208 /* RyAnnotation.m */; };
+		8F1CA8251FE7661900BBD208 /* RyCalloutAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CA8241FE7661900BBD208 /* RyCalloutAnimation.m */; };
+		8F1CA8281FE7668200BBD208 /* RyAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CA8271FE7668200BBD208 /* RyAnnotationView.m */; };
+		8F1CA82D1FE7688100BBD208 /* CLLocation+YCLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CA82A1FE7688000BBD208 /* CLLocation+YCLocation.m */; };
+		8F1CA82E1FE7688100BBD208 /* JXMapNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CA82C1FE7688000BBD208 /* JXMapNavigationView.m */; };
+		8F1CA8321FE7688D00BBD208 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CA82F1FE7688C00BBD208 /* CollectionViewCell.m */; };
+		8F1CA8331FE7688D00BBD208 /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1CA8301FE7688C00BBD208 /* CollectionViewCell.xib */; };
 		8F1F66511FD9485C004BF8F1 /* RYWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66501FD9485C004BF8F1 /* RYWebViewController.m */; };
 		8F1F66541FD94DCD004BF8F1 /* JobH5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66531FD94DCD004BF8F1 /* JobH5ViewController.m */; };
 		8F1F66581FD94E1C004BF8F1 /* RadarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66571FD94E1C004BF8F1 /* RadarViewController.m */; };
@@ -158,9 +164,21 @@
 		8F0EF4D81FE3D39500D179D5 /* RYAreaPickView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYAreaPickView.m; sourceTree = "<group>"; };
 		8F0EF4DA1FE3D6C800D179D5 /* AreaModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AreaModel.h; sourceTree = "<group>"; };
 		8F0EF4DB1FE3D6C800D179D5 /* AreaModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AreaModel.m; sourceTree = "<group>"; };
-		8F151E531FDFA80D00F15CF7 /* RadarViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RadarViewCell.h; sourceTree = "<group>"; };
-		8F151E541FDFA80D00F15CF7 /* RadarViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RadarViewCell.m; sourceTree = "<group>"; };
-		8F151E551FDFA80D00F15CF7 /* RadarViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadarViewCell.xib; sourceTree = "<group>"; };
+		8F1CA81D1FE764CB00BBD208 /* RyJobModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RyJobModel.h; sourceTree = "<group>"; };
+		8F1CA81E1FE764CB00BBD208 /* RyJobModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RyJobModel.m; sourceTree = "<group>"; };
+		8F1CA8201FE7657A00BBD208 /* RyAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RyAnnotation.h; sourceTree = "<group>"; };
+		8F1CA8211FE7657A00BBD208 /* RyAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RyAnnotation.m; sourceTree = "<group>"; };
+		8F1CA8231FE7661900BBD208 /* RyCalloutAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RyCalloutAnimation.h; sourceTree = "<group>"; };
+		8F1CA8241FE7661900BBD208 /* RyCalloutAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RyCalloutAnimation.m; sourceTree = "<group>"; };
+		8F1CA8261FE7668200BBD208 /* RyAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RyAnnotationView.h; sourceTree = "<group>"; };
+		8F1CA8271FE7668200BBD208 /* RyAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RyAnnotationView.m; sourceTree = "<group>"; };
+		8F1CA8291FE7688000BBD208 /* JXMapNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXMapNavigationView.h; sourceTree = "<group>"; };
+		8F1CA82A1FE7688000BBD208 /* CLLocation+YCLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+YCLocation.m"; sourceTree = "<group>"; };
+		8F1CA82B1FE7688000BBD208 /* CLLocation+YCLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+YCLocation.h"; sourceTree = "<group>"; };
+		8F1CA82C1FE7688000BBD208 /* JXMapNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXMapNavigationView.m; sourceTree = "<group>"; };
+		8F1CA82F1FE7688C00BBD208 /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
+		8F1CA8301FE7688C00BBD208 /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
+		8F1CA8311FE7688C00BBD208 /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
 		8F1F664F1FD9485C004BF8F1 /* RYWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYWebViewController.h; sourceTree = "<group>"; };
 		8F1F66501FD9485C004BF8F1 /* RYWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYWebViewController.m; sourceTree = "<group>"; };
 		8F1F66521FD94DCD004BF8F1 /* JobH5ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobH5ViewController.h; sourceTree = "<group>"; };
@@ -445,13 +463,33 @@
 		8F151E521FDFA7E100F15CF7 /* Rader(雷达) */ = {
 			isa = PBXGroup;
 			children = (
+				8F1CA81C1FE7648900BBD208 /* StifleHandle */,
 				8F1F66561FD94E1C004BF8F1 /* RadarViewController.h */,
 				8F1F66571FD94E1C004BF8F1 /* RadarViewController.m */,
-				8F151E531FDFA80D00F15CF7 /* RadarViewCell.h */,
-				8F151E541FDFA80D00F15CF7 /* RadarViewCell.m */,
-				8F151E551FDFA80D00F15CF7 /* RadarViewCell.xib */,
 			);
 			path = "Rader(雷达)";
+			sourceTree = "<group>";
+		};
+		8F1CA81C1FE7648900BBD208 /* StifleHandle */ = {
+			isa = PBXGroup;
+			children = (
+				8F1CA8311FE7688C00BBD208 /* CollectionViewCell.h */,
+				8F1CA82F1FE7688C00BBD208 /* CollectionViewCell.m */,
+				8F1CA8301FE7688C00BBD208 /* CollectionViewCell.xib */,
+				8F1CA82B1FE7688000BBD208 /* CLLocation+YCLocation.h */,
+				8F1CA82A1FE7688000BBD208 /* CLLocation+YCLocation.m */,
+				8F1CA8291FE7688000BBD208 /* JXMapNavigationView.h */,
+				8F1CA82C1FE7688000BBD208 /* JXMapNavigationView.m */,
+				8F1CA81D1FE764CB00BBD208 /* RyJobModel.h */,
+				8F1CA81E1FE764CB00BBD208 /* RyJobModel.m */,
+				8F1CA8201FE7657A00BBD208 /* RyAnnotation.h */,
+				8F1CA8211FE7657A00BBD208 /* RyAnnotation.m */,
+				8F1CA8231FE7661900BBD208 /* RyCalloutAnimation.h */,
+				8F1CA8241FE7661900BBD208 /* RyCalloutAnimation.m */,
+				8F1CA8261FE7668200BBD208 /* RyAnnotationView.h */,
+				8F1CA8271FE7668200BBD208 /* RyAnnotationView.m */,
+			);
+			path = StifleHandle;
 			sourceTree = "<group>";
 		};
 		8F1F66551FD94DDC004BF8F1 /* ViewControllers */ = {
@@ -1114,10 +1152,10 @@
 				8F85D82A1FD922A500BC1A7D /* Assets.xcassets in Resources */,
 				8F85D8A81FD9257400BC1A7D /* sound.caf in Resources */,
 				8F728C331FDE367200C6247B /* AssetsHandleCell.xib in Resources */,
+				8F1CA8331FE7688D00BBD208 /* CollectionViewCell.xib in Resources */,
 				8FF04D751FDA90B500B14036 /* LabelViewCell.xib in Resources */,
 				8FF04D6C1FDA898C00B14036 /* LabelTextFieldBuutonCell.xib in Resources */,
 				8F85D8281FD922A500BC1A7D /* Main.storyboard in Resources */,
-				8F151E571FDFA80D00F15CF7 /* RadarViewCell.xib in Resources */,
 				8F85D8A71FD9257400BC1A7D /* SGBottomView.xib in Resources */,
 				8FF04D641FDA82AD00B14036 /* LabelTextFieldCell.xib in Resources */,
 				8FF04D7A1FDA947900B14036 /* LabelSwitchCell.xib in Resources */,
@@ -1208,13 +1246,16 @@
 				8F85D8BF1FD927E600BC1A7D /* LoadingView.m in Sources */,
 				8F1F665C1FD96168004BF8F1 /* HomePageViewController.m in Sources */,
 				8F1F665F1FD961A5004BF8F1 /* CompanyCenterViewController.m in Sources */,
+				8F1CA8321FE7688D00BBD208 /* CollectionViewCell.m in Sources */,
 				8F85D8BB1FD9261200BC1A7D /* CALayer+BorderColor.m in Sources */,
 				8F85D8A51FD9257400BC1A7D /* SGAlertView.m in Sources */,
 				8F85D8F51FD92B2A00BC1A7D /* ForgotPwViewController.m in Sources */,
+				8F1CA8251FE7661900BBD208 /* RyCalloutAnimation.m in Sources */,
 				8F728C321FDE367200C6247B /* AssetsHandleCell.m in Sources */,
 				8F85D8A11FD9257400BC1A7D /* CIImage+SGExtension.m in Sources */,
 				8FF04D4F1FDA6FDE00B14036 /* RYAlertSheet.m in Sources */,
 				8F85D89D1FD9257400BC1A7D /* EJAlertViewController.m in Sources */,
+				8F1CA8281FE7668200BBD208 /* RyAnnotationView.m in Sources */,
 				8F85D8601FD9243900BC1A7D /* RYNavigationController.m in Sources */,
 				8F0EF4DC1FE3D6C800D179D5 /* AreaModel.m in Sources */,
 				8F85D8631FD9244800BC1A7D /* RYViewController.m in Sources */,
@@ -1227,6 +1268,7 @@
 				8F1F66711FD9699A004BF8F1 /* DropInBoxH5Controller.m in Sources */,
 				8F85D8301FD922A500BC1A7D /* main.m in Sources */,
 				8F1F66621FD9626D004BF8F1 /* SetupViewController.m in Sources */,
+				8F1CA8221FE7657A00BBD208 /* RyAnnotation.m in Sources */,
 				8FF04D591FDA801B00B14036 /* FeebBackViewController.m in Sources */,
 				8FF04D5F1FDA81FE00B14036 /* EMailViewController.m in Sources */,
 				8F0EF4CD1FE36CEF00D179D5 /* GestureManageController.m in Sources */,
@@ -1251,6 +1293,7 @@
 				8F728C371FDE375D00C6247B /* RechagergeTypeViewCell.m in Sources */,
 				8F85D8B91FD9261200BC1A7D /* UIColor+HexString.m in Sources */,
 				8F0EF4D51FE3B25000D179D5 /* AreaRequest.m in Sources */,
+				8F1CA82D1FE7688100BBD208 /* CLLocation+YCLocation.m in Sources */,
 				8F85D8BC1FD9261200BC1A7D /* UIView+Rect.m in Sources */,
 				8F85D8E31FD929C300BC1A7D /* PersonCenterViewController.m in Sources */,
 				8FF04D741FDA90B500B14036 /* LabelViewCell.m in Sources */,
@@ -1260,13 +1303,13 @@
 				8F85D8CD1FD9282E00BC1A7D /* KApiConst.m in Sources */,
 				8F85D8B01FD925CA00BC1A7D /* GTMBase64.m in Sources */,
 				8F0EF4D11FE39CBD00D179D5 /* RYUserRequest.m in Sources */,
+				8F1CA81F1FE764CB00BBD208 /* RyJobModel.m in Sources */,
 				8F0EF4B81FE366D100D179D5 /* GestureSetController.m in Sources */,
 				8F85D8F21FD92B1900BC1A7D /* ResiterViewController.m in Sources */,
 				8F85D85D1FD9241800BC1A7D /* RYTabBarController.m in Sources */,
 				8F85D8DD1FD9298C00BC1A7D /* CompanyViewController.m in Sources */,
 				8FF04D531FDA7FF000B14036 /* RemindViewController.m in Sources */,
 				8F85D8741FD9250200BC1A7D /* UtilityHelper.m in Sources */,
-				8F151E561FDFA80D00F15CF7 /* RadarViewCell.m in Sources */,
 				8F85D8AB1FD9257400BC1A7D /* DYQBannerScrollView.m in Sources */,
 				8F0EF4D91FE3D39500D179D5 /* RYAreaPickView.m in Sources */,
 				8F85D8A91FD9257400BC1A7D /* SGScanningQRCodeView.m in Sources */,
@@ -1277,6 +1320,7 @@
 				8F0EF4C91FE36A7A00D179D5 /* PCLockLabel.m in Sources */,
 				8F1F66741FD969B0004BF8F1 /* InterviewH5ViewController.m in Sources */,
 				8F85D8221FD922A400BC1A7D /* AppDelegate.m in Sources */,
+				8F1CA82E1FE7688100BBD208 /* JXMapNavigationView.m in Sources */,
 				8F1F666D1FD964E8004BF8F1 /* UploadResumeViewController.m in Sources */,
 				8F85D8F91FD938C800BC1A7D /* OSGuideViewController.m in Sources */,
 				8F85D8721FD9250200BC1A7D /* UIFactory.m in Sources */,
