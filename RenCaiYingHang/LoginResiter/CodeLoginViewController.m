@@ -1,16 +1,17 @@
 //
-//  ResiterViewController.m
+//  CodeLoginViewController.m
 //  RenCaiYingHang
 //
-//  Created by Macx on 2017/12/7.
+//  Created by Macx on 2017/12/18.
 //  Copyright © 2017年 Macx. All rights reserved.
 //
 
-#import "ResiterViewController.h"
+#import "CodeLoginViewController.h"
 
-@interface ResiterViewController ()
+@interface CodeLoginViewController ()
 
-@property (weak, nonatomic) IBOutlet UIButton *regsiterBtn;
+@property (weak, nonatomic) IBOutlet UITextField *phoneTf;
+@property (weak, nonatomic) IBOutlet UITextField *codetf;
 @property (weak, nonatomic) IBOutlet UIButton *codeBtn;
 
 @property (nonatomic, strong) NSTimer * timer;
@@ -18,7 +19,7 @@
 
 @end
 
-@implementation ResiterViewController
+@implementation CodeLoginViewController
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -36,19 +37,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+/** 进入 */
+- (IBAction)insertLogin:(UIButton *)sender {
     
-}
-
-/** 密码登陆 */
-- (IBAction)returnBack:(UIButton *)sender {
-    [self.navigationController popToRootViewControllerAnimated:true];
-}
-
-/** 是否遵守协议 **/
-- (IBAction)isAgreeProtocol:(UIButton *)sender {
-    sender.selected = !sender.selected;
-    _regsiterBtn.backgroundColor = sender.selected ? [UIColor redColor] : Color235;
-    _regsiterBtn.enabled = sender.selected;
 }
 
 /** 获取验证码 */
@@ -57,24 +50,9 @@
     [self countDown];
 }
 
-/** 注册成功直接登陆 */
-- (IBAction)insertApp:(UIButton *)sender {
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isNecessary"] boolValue]) {
-        /** 默认进入雷达页面 **/
-        [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
-        [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
-    }else{
-        [self.navigationController pushViewController:[[NecessaryInfoViewController alloc] init] animated:true];
-    }
-}
-
-/** 跳转到协议 */
-- (IBAction)pushToProtocolH5:(UIButton *)sender {
-    RYWebViewController * html = [[RYWebViewController alloc] init];
-    html.url = @"https://www.baidu.com";
-    html.jsMethodName = @"test";
-    html.progressViewColor = [UIColor redColor];
-    [self.navigationController pushViewController:html animated:YES];
+/** 返回密码登陆 **/
+- (IBAction)returnBack:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:true];
 }
 
 /** 开始读秒 */
@@ -92,9 +70,7 @@
 - (void)timeAction:(NSTimer *)timer
 {
     --_time ;
-    
     [self.codeBtn setTitle:[NSString stringWithFormat:@"%zd秒", _time] forState:UIControlStateNormal];
-    
     if (_time == 0) {
         [self stop];
     }

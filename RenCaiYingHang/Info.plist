@@ -39,6 +39,13 @@
 	<string>人才赢行需要使用此功能</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>iosamap</string>
+		<string>qqmap</string>
+		<string>comgooglemaps</string>
+		<string>baidumap</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

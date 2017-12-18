@@ -28,6 +28,7 @@
 		8F1CA82E1FE7688100BBD208 /* JXMapNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CA82C1FE7688000BBD208 /* JXMapNavigationView.m */; };
 		8F1CA8321FE7688D00BBD208 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CA82F1FE7688C00BBD208 /* CollectionViewCell.m */; };
 		8F1CA8331FE7688D00BBD208 /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1CA8301FE7688C00BBD208 /* CollectionViewCell.xib */; };
+		8F1CA83C1FE7AC0C00BBD208 /* CodeLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CA83B1FE7AC0C00BBD208 /* CodeLoginViewController.m */; };
 		8F1F66511FD9485C004BF8F1 /* RYWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66501FD9485C004BF8F1 /* RYWebViewController.m */; };
 		8F1F66541FD94DCD004BF8F1 /* JobH5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66531FD94DCD004BF8F1 /* JobH5ViewController.m */; };
 		8F1F66581FD94E1C004BF8F1 /* RadarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66571FD94E1C004BF8F1 /* RadarViewController.m */; };
@@ -179,6 +180,8 @@
 		8F1CA82F1FE7688C00BBD208 /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		8F1CA8301FE7688C00BBD208 /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
 		8F1CA8311FE7688C00BBD208 /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
+		8F1CA83A1FE7AC0C00BBD208 /* CodeLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeLoginViewController.h; sourceTree = "<group>"; };
+		8F1CA83B1FE7AC0C00BBD208 /* CodeLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CodeLoginViewController.m; sourceTree = "<group>"; };
 		8F1F664F1FD9485C004BF8F1 /* RYWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYWebViewController.h; sourceTree = "<group>"; };
 		8F1F66501FD9485C004BF8F1 /* RYWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYWebViewController.m; sourceTree = "<group>"; };
 		8F1F66521FD94DCD004BF8F1 /* JobH5ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobH5ViewController.h; sourceTree = "<group>"; };
@@ -966,6 +969,8 @@
 				8F85D8F11FD92B1900BC1A7D /* ResiterViewController.m */,
 				8F85D8F31FD92B2A00BC1A7D /* ForgotPwViewController.h */,
 				8F85D8F41FD92B2A00BC1A7D /* ForgotPwViewController.m */,
+				8F1CA83A1FE7AC0C00BBD208 /* CodeLoginViewController.h */,
+				8F1CA83B1FE7AC0C00BBD208 /* CodeLoginViewController.m */,
 			);
 			path = LoginResiter;
 			sourceTree = "<group>";
@@ -1247,6 +1252,7 @@
 				8F1F665C1FD96168004BF8F1 /* HomePageViewController.m in Sources */,
 				8F1F665F1FD961A5004BF8F1 /* CompanyCenterViewController.m in Sources */,
 				8F1CA8321FE7688D00BBD208 /* CollectionViewCell.m in Sources */,
+				8F1CA83C1FE7AC0C00BBD208 /* CodeLoginViewController.m in Sources */,
 				8F85D8BB1FD9261200BC1A7D /* CALayer+BorderColor.m in Sources */,
 				8F85D8A51FD9257400BC1A7D /* SGAlertView.m in Sources */,
 				8F85D8F51FD92B2A00BC1A7D /* ForgotPwViewController.m in Sources */,

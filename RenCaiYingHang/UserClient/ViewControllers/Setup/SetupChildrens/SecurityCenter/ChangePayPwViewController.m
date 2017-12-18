@@ -50,6 +50,7 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"交易密码";
+
     [self configurationTableView];
 }
 
@@ -83,13 +84,13 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
     }else{
         LabelTextFieldCell * cell = [tableView dequeueReusableCellWithIdentifier:LabelTextFieldCellID];
         cell.titleLabel.text = self.dataArray[indexPath.row];
+        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
         if (indexPath.row == 0) {
             cell.textField.text = @"18681446361";
             cell.textField.textColor = [UIColor lightGrayColor];
             cell.textField.enabled = false;
         }else{
             cell.textField.textAlignment = 0;
-            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             cell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",self.dataArray[indexPath.row]];
         }
         return cell;

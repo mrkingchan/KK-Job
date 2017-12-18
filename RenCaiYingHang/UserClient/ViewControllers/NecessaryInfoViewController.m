@@ -116,7 +116,6 @@ static NSString * UITableViewCellID = @"Cell";
 {
     /** 默认进入雷达页面 **/
     [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
-    [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:0.5f];
 }
 
 /** 设置头像 */

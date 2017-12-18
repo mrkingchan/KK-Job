@@ -155,7 +155,7 @@
 
 #pragma mark 加返回按钮 navLeftBtnEvent:
     
-    self.title = @"验证手势";
+    self.title = @"欢迎回来";
     
     UIBarButtonItem * backItem = [[UIBarButtonItem alloc] initWithImage:UIIMAGE(@"close") style:UIBarButtonItemStylePlain target:self action:@selector(navLeftBtnEvent)];
     self.navigationItem.leftBarButtonItem = backItem;
