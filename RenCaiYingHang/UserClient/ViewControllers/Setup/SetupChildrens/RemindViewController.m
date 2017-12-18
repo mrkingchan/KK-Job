@@ -106,6 +106,7 @@ static NSString * TableViewCellID = @"UITableViewCell";
     LabelViewCell * cell = [[NSBundle mainBundle] loadNibNamed:@"LabelViewCell" owner:nil options:nil].lastObject;
     cell.frame = CGRectMake(0, 0, kScreenWidth, 50);
     cell.textLabel.text = @[@"提醒设置",@"通知提醒",@"短信设置"][section];
+    cell.textLabel.font = systemOfFont(16);
     return cell;
 }
 

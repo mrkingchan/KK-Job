@@ -8,7 +8,18 @@
 
 #import "LoginViewController.h"
 
-@interface LoginViewController ()
+@interface LoginViewController ()<UITextFieldDelegate>
+{
+    CGRect origin_rect;
+    UITextField * _textField;
+}
+
+@property (weak, nonatomic) IBOutlet UIView *phoneView;
+@property (weak, nonatomic) IBOutlet UIView *pwView;
+@property (weak, nonatomic) IBOutlet UIButton *loginBtn;
+
+@property (weak, nonatomic) IBOutlet UITextField *phoneTf;
+@property (weak, nonatomic) IBOutlet UITextField *pwTf;
 
 @end
 
@@ -26,9 +37,19 @@
     [self.navigationController setNavigationBarHidden:false animated:animated];
 }
 
+/** storyboard坑爹的地方 */
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    _phoneView.layer.cornerRadius = _pwView.layer.cornerRadius = _loginBtn.layer.cornerRadius =  _phoneView.height/2;
+    _phoneTf.delegate = _pwTf.delegate = self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self addNotification];
 }
 
 /** 登陆账号 */
@@ -40,6 +61,40 @@
     }else{
         [self.navigationController pushViewController:[[NecessaryInfoViewController alloc] init] animated:true];
     }
+}
+
+#pragma mark  -键盘
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    _textField = textField;
+    return true;
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    //获取键盘的高度
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    int height = keyboardRect.size.height;
+    
+    origin_rect = CGRectMake(0, 0, kScreenWidth , kScreenHeight);
+    
+    CGFloat h = kScreenHeight - _textField.superview.bottom - height  ;
+    
+    if (h < 0) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.view.frame = CGRectMake(0, h, kScreenWidth, kScreenHeight);
+        }];
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.frame = origin_rect;
+        origin_rect = CGRectZero;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -15,4 +15,6 @@
 
 - (void)closeBeyBoard;
 
+- (void) addNotification;
+
 @end

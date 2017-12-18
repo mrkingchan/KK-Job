@@ -157,6 +157,7 @@ static NSString * UITableViewCellID = @"Cell";
     if (![self.postArr[indexPath.row] isEqualToString:@"1"]) {
         cell.detailTextLabel.text = self.postArr[indexPath.row];
     }
+    cell.textLabel.font = cell.detailTextLabel.font = systemOfFont(16);
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

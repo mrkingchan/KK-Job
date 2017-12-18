@@ -23,7 +23,7 @@ static NSString * CurrentTableViewCellID = @"LabelTextFieldCell";
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [UIFactory initTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - KNavBarHeight) style:UITableViewStyleGrouped delegate:self];
+        _tableView = [UIFactory initTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped delegate:self];
         [_tableView registerNib:[UINib nibWithNibName:CurrentTableViewCellID bundle:nil] forCellReuseIdentifier:CurrentTableViewCellID];
         [self.view addSubview:_tableView];
     }

@@ -147,7 +147,7 @@ static NSString * identifier = @"CollectionViewCell";
     }
     
     //用户位置追踪(用户位置追踪用于标记用户当前位置，此时会调用定位服务)
-    _mapView.userTrackingMode= MKUserTrackingModeFollowWithHeading;//MKUserTrackingModeFollow;
+    _mapView.userTrackingMode = MKUserTrackingModeFollow;//MKUserTrackingModeFollowWithHeading;
     
     //设置地图类型
     _mapView.mapType = MKMapTypeStandard;

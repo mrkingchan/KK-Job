@@ -66,5 +66,7 @@
 #import "UIView+Rect.h"
 #import "UITextView+Placeholder.h"
 #import "CALayer+BorderColor.h"
+#import "UIButton+SystemFont.h"
+#import "UILabel+SystemFont.h"
 
 #endif /* Header_h */

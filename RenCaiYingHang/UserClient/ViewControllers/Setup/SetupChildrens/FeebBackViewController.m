@@ -77,6 +77,7 @@ static NSString * TextViewCellID = @"TextViewCell";
         cell.textView.layer.borderColor = [UIColor lightGrayColor].CGColor;
         cell.textView.layer.borderWidth = 0.5;
     }
+    cell.textView.font = systemOfFont(16);
     cell.textView.placeholder =  indexPath.section == 0 ? @"请输入你的建议" : @"客服会第一时间联系您";
     cell.textView.delegate = self;
     cell.textView.tag = indexPath.section;
@@ -106,6 +107,7 @@ static NSString * TextViewCellID = @"TextViewCell";
     LabelViewCell * cell = [[NSBundle mainBundle] loadNibNamed:@"LabelViewCell" owner:nil options:nil].lastObject;
     cell.frame = CGRectMake(0, 0, kScreenWidth, 50);
     cell.textLabel.text = self.dataArray[section];
+    cell.textLabel.font = systemOfFont(16);
     return cell;
 }
 
@@ -117,7 +119,6 @@ static NSString * TextViewCellID = @"TextViewCell";
 #pragma mark UITextViewDelegate
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
-    
     return true;
 }
 

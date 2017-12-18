@@ -67,10 +67,30 @@
     }];
 }
 
+/** 键盘通知 **/
+- (void) addNotification
+{
+    NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
+    [notification addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [notification addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

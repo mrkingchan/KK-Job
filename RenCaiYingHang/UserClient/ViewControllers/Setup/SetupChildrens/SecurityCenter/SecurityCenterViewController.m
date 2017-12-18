@@ -30,7 +30,7 @@ static NSString * SecurityCenterTableViewCellID = @"UITableViewCell";
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [UIFactory initTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kStatusBarHeight) style:UITableViewStyleGrouped delegate:self];
+        _tableView = [UIFactory initTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped delegate:self];
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:SecurityCenterTableViewCellID];
         [self.view addSubview:_tableView];
     }
@@ -62,6 +62,7 @@ static NSString * SecurityCenterTableViewCellID = @"UITableViewCell";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
+    cell.textLabel.font = systemOfFont(16);
     return cell;
 }
 

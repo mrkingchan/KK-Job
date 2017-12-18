@@ -8,7 +8,19 @@
 
 #import "ResiterViewController.h"
 
-@interface ResiterViewController ()
+@interface ResiterViewController ()<UITextFieldDelegate>
+{
+    CGRect origin_rect;
+    UITextField * _textField;
+}
+
+@property (weak, nonatomic) IBOutlet UIView *phoneView;
+@property (weak, nonatomic) IBOutlet UIView *tuijianView;
+@property (weak, nonatomic) IBOutlet UIView *codeView;
+
+@property (weak, nonatomic) IBOutlet UITextField *phoneTf;
+@property (weak, nonatomic) IBOutlet UITextField *inviteTf;
+@property (weak, nonatomic) IBOutlet UITextField *codeTf;
 
 @property (weak, nonatomic) IBOutlet UIButton *regsiterBtn;
 @property (weak, nonatomic) IBOutlet UIButton *codeBtn;
@@ -33,10 +45,18 @@
     [self.navigationController setNavigationBarHidden:false animated:animated];
 }
 
+/** storyboard坑爹的地方 */
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    _phoneView.layer.cornerRadius = _codeView.layer.cornerRadius = _tuijianView.layer.cornerRadius = _regsiterBtn.layer.cornerRadius = _phoneView.height/2;
+    _phoneTf.delegate = _codeTf.delegate = _inviteTf.delegate = self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    [self addNotification];
 }
 
 /** 密码登陆 */
@@ -100,9 +120,7 @@
     }
 }
 
-/**
- 关掉定时器
- */
+/** 关掉定时器 */
 - (void)stop
 {
     if (_timer) {
@@ -111,6 +129,40 @@
     }
     self.codeBtn.enabled = true;
     [self.codeBtn setTitle:@"验证码" forState:UIControlStateNormal];
+}
+
+#pragma mark  -键盘
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    _textField = textField;
+    return true;
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    //获取键盘的高度
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    int height = keyboardRect.size.height;
+    
+    origin_rect = CGRectMake(0, 0, kScreenWidth , kScreenHeight);
+    
+    CGFloat h = kScreenHeight - _textField.superview.bottom - height  ;
+    
+    if (h < 0) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.view.frame = CGRectMake(0, h, kScreenWidth, kScreenHeight);
+        }];
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.frame = origin_rect;
+        origin_rect = CGRectZero;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

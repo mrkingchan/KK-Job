@@ -29,6 +29,8 @@
 		8F1CA8321FE7688D00BBD208 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CA82F1FE7688C00BBD208 /* CollectionViewCell.m */; };
 		8F1CA8331FE7688D00BBD208 /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1CA8301FE7688C00BBD208 /* CollectionViewCell.xib */; };
 		8F1CA83C1FE7AC0C00BBD208 /* CodeLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CA83B1FE7AC0C00BBD208 /* CodeLoginViewController.m */; };
+		8F1CA83F1FE7C4CA00BBD208 /* UILabel+SystemFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CA83E1FE7C4CA00BBD208 /* UILabel+SystemFont.m */; };
+		8F1CA8421FE7C62200BBD208 /* UIButton+SystemFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1CA8411FE7C62200BBD208 /* UIButton+SystemFont.m */; };
 		8F1F66511FD9485C004BF8F1 /* RYWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66501FD9485C004BF8F1 /* RYWebViewController.m */; };
 		8F1F66541FD94DCD004BF8F1 /* JobH5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66531FD94DCD004BF8F1 /* JobH5ViewController.m */; };
 		8F1F66581FD94E1C004BF8F1 /* RadarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66571FD94E1C004BF8F1 /* RadarViewController.m */; };
@@ -182,6 +184,10 @@
 		8F1CA8311FE7688C00BBD208 /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
 		8F1CA83A1FE7AC0C00BBD208 /* CodeLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeLoginViewController.h; sourceTree = "<group>"; };
 		8F1CA83B1FE7AC0C00BBD208 /* CodeLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CodeLoginViewController.m; sourceTree = "<group>"; };
+		8F1CA83D1FE7C4CA00BBD208 /* UILabel+SystemFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+SystemFont.h"; sourceTree = "<group>"; };
+		8F1CA83E1FE7C4CA00BBD208 /* UILabel+SystemFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+SystemFont.m"; sourceTree = "<group>"; };
+		8F1CA8401FE7C62200BBD208 /* UIButton+SystemFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+SystemFont.h"; sourceTree = "<group>"; };
+		8F1CA8411FE7C62200BBD208 /* UIButton+SystemFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+SystemFont.m"; sourceTree = "<group>"; };
 		8F1F664F1FD9485C004BF8F1 /* RYWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYWebViewController.h; sourceTree = "<group>"; };
 		8F1F66501FD9485C004BF8F1 /* RYWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYWebViewController.m; sourceTree = "<group>"; };
 		8F1F66521FD94DCD004BF8F1 /* JobH5ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobH5ViewController.h; sourceTree = "<group>"; };
@@ -729,6 +735,10 @@
 				8F85D8B61FD9261200BC1A7D /* UITextView+Placeholder.m */,
 				8F85D8B21FD9261100BC1A7D /* UIView+Rect.h */,
 				8F85D8B81FD9261200BC1A7D /* UIView+Rect.m */,
+				8F1CA83D1FE7C4CA00BBD208 /* UILabel+SystemFont.h */,
+				8F1CA83E1FE7C4CA00BBD208 /* UILabel+SystemFont.m */,
+				8F1CA8401FE7C62200BBD208 /* UIButton+SystemFont.h */,
+				8F1CA8411FE7C62200BBD208 /* UIButton+SystemFont.m */,
 			);
 			path = category;
 			sourceTree = "<group>";
@@ -1246,6 +1256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F85D89F1FD9257400BC1A7D /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
+				8F1CA8421FE7C62200BBD208 /* UIButton+SystemFont.m in Sources */,
 				8FF04D5C1FDA81E800B14036 /* IdentificationViewController.m in Sources */,
 				8F0EF4C51FE36A7A00D179D5 /* PCCircleView.m in Sources */,
 				8F85D8BF1FD927E600BC1A7D /* LoadingView.m in Sources */,
@@ -1285,6 +1296,7 @@
 				8F85D8C21FD9280D00BC1A7D /* MyRefreshHeader.m in Sources */,
 				8F728C261FDE1FC300C6247B /* JHUploadImage.m in Sources */,
 				8FF04D6F1FDA8D4300B14036 /* ChangePayPwViewController.m in Sources */,
+				8F1CA83F1FE7C4CA00BBD208 /* UILabel+SystemFont.m in Sources */,
 				8F85D8731FD9250200BC1A7D /* VerifyHelper.m in Sources */,
 				8F0EF4C81FE36A7A00D179D5 /* PCCircle.m in Sources */,
 				8F85D8E01FD929B400BC1A7D /* DropInBoxViewController.m in Sources */,

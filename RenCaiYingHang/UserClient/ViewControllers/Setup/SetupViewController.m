@@ -69,6 +69,7 @@ static NSString * SetUPTableViewCellID = @"UITableViewCell";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
+    cell.textLabel.font = systemOfFont(16);
     return cell;
 }
 

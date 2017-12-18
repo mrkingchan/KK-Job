@@ -16,7 +16,10 @@
 
 #define kIOS11Later [[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0
 
-#define systemOfFont(size) [UIFont systemFontOfSize:size]
+#define AdaptiveRate [UIScreen mainScreen].bounds.size.height / 736
+
+#define fontScale kScreenWidth/375
+#define systemOfFont(size) [UIFont systemFontOfSize:size*fontScale]
 
 #define kNavBarTintColor UIColorHex(F8F8F8)
 
