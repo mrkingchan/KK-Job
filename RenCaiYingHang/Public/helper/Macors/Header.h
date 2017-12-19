@@ -68,5 +68,6 @@
 #import "CALayer+BorderColor.h"
 #import "UIButton+SystemFont.h"
 #import "UILabel+SystemFont.h"
+#import "UITextField+SystemFont.h"
 
 #endif /* Header_h */

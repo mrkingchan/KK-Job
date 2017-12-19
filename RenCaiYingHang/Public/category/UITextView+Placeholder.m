@@ -20,6 +20,23 @@
     // is this the best solution?
     method_exchangeImplementations(class_getInstanceMethod(self.class, NSSelectorFromString(@"dealloc")),
                                    class_getInstanceMethod(self.class, @selector(swizzledDealloc)));
+    Method imp = class_getInstanceMethod([self class], @selector(initWithCoder:));
+    Method myImp = class_getInstanceMethod([self class], @selector(myInitWithCoder:));
+    method_exchangeImplementations(imp, myImp);  //交换方法
+}
+
+- (id)myInitWithCoder:(NSCoder*)aDecode{
+    [self myInitWithCoder:aDecode];
+    if (self) {
+        //部分不像改变字体的 把tag值设置成2016跳过
+        //        if (IS_IPHONE_6P) {
+        //            if(self.tag != 2016) {
+        CGFloat fontSize = self.font.pointSize;
+        self.font = systemOfFont(fontSize);
+        //            }
+        //        }
+    }
+    return self;
 }
 
 - (void)swizzledDealloc {

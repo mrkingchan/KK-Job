@@ -102,6 +102,7 @@
 		8F85D8F21FD92B1900BC1A7D /* ResiterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8F11FD92B1900BC1A7D /* ResiterViewController.m */; };
 		8F85D8F51FD92B2A00BC1A7D /* ForgotPwViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8F41FD92B2A00BC1A7D /* ForgotPwViewController.m */; };
 		8F85D8F91FD938C800BC1A7D /* OSGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8F71FD938C800BC1A7D /* OSGuideViewController.m */; };
+		8FE02C2B1FE8B56B009286E3 /* UITextField+SystemFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE02C2A1FE8B56B009286E3 /* UITextField+SystemFont.m */; };
 		8FF04D421FDA26AA00B14036 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF04D401FDA26AA00B14036 /* TextViewCell.m */; };
 		8FF04D431FDA26AA00B14036 /* TextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF04D411FDA26AA00B14036 /* TextViewCell.xib */; };
 		8FF04D461FDA3A9300B14036 /* NecessaryInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF04D451FDA3A9300B14036 /* NecessaryInfoViewController.m */; };
@@ -330,6 +331,8 @@
 		8F85D8F41FD92B2A00BC1A7D /* ForgotPwViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForgotPwViewController.m; sourceTree = "<group>"; };
 		8F85D8F71FD938C800BC1A7D /* OSGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSGuideViewController.m; sourceTree = "<group>"; };
 		8F85D8F81FD938C800BC1A7D /* OSGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSGuideViewController.h; sourceTree = "<group>"; };
+		8FE02C291FE8B56B009286E3 /* UITextField+SystemFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+SystemFont.h"; sourceTree = "<group>"; };
+		8FE02C2A1FE8B56B009286E3 /* UITextField+SystemFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+SystemFont.m"; sourceTree = "<group>"; };
 		8FF04D3F1FDA26AA00B14036 /* TextViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextViewCell.h; sourceTree = "<group>"; };
 		8FF04D401FDA26AA00B14036 /* TextViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextViewCell.m; sourceTree = "<group>"; };
 		8FF04D411FDA26AA00B14036 /* TextViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewCell.xib; sourceTree = "<group>"; };
@@ -739,6 +742,8 @@
 				8F1CA83E1FE7C4CA00BBD208 /* UILabel+SystemFont.m */,
 				8F1CA8401FE7C62200BBD208 /* UIButton+SystemFont.h */,
 				8F1CA8411FE7C62200BBD208 /* UIButton+SystemFont.m */,
+				8FE02C291FE8B56B009286E3 /* UITextField+SystemFont.h */,
+				8FE02C2A1FE8B56B009286E3 /* UITextField+SystemFont.m */,
 			);
 			path = category;
 			sourceTree = "<group>";
@@ -1288,6 +1293,7 @@
 				8F1CA8221FE7657A00BBD208 /* RyAnnotation.m in Sources */,
 				8FF04D591FDA801B00B14036 /* FeebBackViewController.m in Sources */,
 				8FF04D5F1FDA81FE00B14036 /* EMailViewController.m in Sources */,
+				8FE02C2B1FE8B56B009286E3 /* UITextField+SystemFont.m in Sources */,
 				8F0EF4CD1FE36CEF00D179D5 /* GestureManageController.m in Sources */,
 				8FF04D421FDA26AA00B14036 /* TextViewCell.m in Sources */,
 				8FF04D461FDA3A9300B14036 /* NecessaryInfoViewController.m in Sources */,

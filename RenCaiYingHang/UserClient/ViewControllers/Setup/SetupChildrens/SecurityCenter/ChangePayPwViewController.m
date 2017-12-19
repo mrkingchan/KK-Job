@@ -57,7 +57,7 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
 - (void) configurationTableView
 {
     self.tableView.tableFooterView = [self tableFooterView];
-    self.dataArray = @[@"手机号",@"",@"输入密码",@"确认密码"];
+    self.dataArray = @[@"手  机  号",@"",@"输入密码",@"确认密码"];
     [self.tableView reloadData];
 }
 
