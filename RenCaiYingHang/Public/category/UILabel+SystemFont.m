@@ -17,10 +17,21 @@
     Method imp = class_getInstanceMethod([self class], @selector(initWithCoder:));
     Method myImp = class_getInstanceMethod([self class], @selector(myInitWithCoder:));
     method_exchangeImplementations(imp, myImp);  //交换方法
+    
+    method_exchangeImplementations(class_getClassMethod([self class], @selector(initWithFrame:)), class_getInstanceMethod([self class], @selector(myInitWithFrame:)));
 }
 
 - (id)myInitWithCoder:(NSCoder*)aDecode{
     [self myInitWithCoder:aDecode];
+    if (self) {
+        CGFloat fontSize = self.font.pointSize;
+        self.font = systemOfFont(fontSize);
+    }
+    return self;
+}
+
+- (id)myInitWithFrame:(CGRect) frame{
+    [self myInitWithFrame:frame];
     if (self) {
         CGFloat fontSize = self.font.pointSize;
         self.font = systemOfFont(fontSize);

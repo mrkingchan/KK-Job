@@ -17,10 +17,12 @@
 @property (weak, nonatomic) IBOutlet UIView *phoneView;
 @property (weak, nonatomic) IBOutlet UIView *tuijianView;
 @property (weak, nonatomic) IBOutlet UIView *codeView;
+@property (weak, nonatomic) IBOutlet UIView *pwView;
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTf;
 @property (weak, nonatomic) IBOutlet UITextField *inviteTf;
 @property (weak, nonatomic) IBOutlet UITextField *codeTf;
+@property (weak, nonatomic) IBOutlet UITextField *pwTf;
 
 @property (weak, nonatomic) IBOutlet UIButton *regsiterBtn;
 @property (weak, nonatomic) IBOutlet UIButton *codeBtn;
@@ -49,8 +51,8 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    _phoneView.layer.cornerRadius = _codeView.layer.cornerRadius = _tuijianView.layer.cornerRadius = _regsiterBtn.layer.cornerRadius = _phoneView.height/2;
-    _phoneTf.delegate = _codeTf.delegate = _inviteTf.delegate = self;
+    _phoneView.layer.cornerRadius = _codeView.layer.cornerRadius = _tuijianView.layer.cornerRadius = _pwView.layer.cornerRadius = _regsiterBtn.layer.cornerRadius = _phoneView.height/2;
+    _phoneTf.delegate = _codeTf.delegate =  _pwTf.delegate =_inviteTf.delegate = self;
 }
 
 - (void)viewDidLoad {
@@ -73,19 +75,39 @@
 
 /** 获取验证码 */
 - (IBAction)gainAuthCode:(UIButton *)sender {
-    _time = KAuthCodeSecond;
-    [self countDown];
+    if (![VerifyHelper checkMobileTel:_phoneTf.text]) {
+        [self alertMessageWithViewController:self message:@"手机号码不正确"];
+        return;
+    }
+    [RYUserRequest gainAuthCodeWithParamer:@{@"phone":_phoneTf.text} suceess:^(BOOL isSendSuccess) {
+        if (isSendSuccess) {
+            _time = KAuthCodeSecond;
+            [self countDown];
+        }
+    } failure:^(id errorCode) {
+        
+    }];
 }
 
 /** 注册成功直接登陆 */
 - (IBAction)insertApp:(UIButton *)sender {
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isNecessary"] boolValue]) {
-        /** 默认进入雷达页面 **/
-        [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
-        [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
-    }else{
-        [self.navigationController pushViewController:[[NecessaryInfoViewController alloc] init] animated:true];
+    if (![VerifyHelper checkMobileTel:_phoneTf.text]) {
+       [self alertMessageWithViewController:self message:@"手机号码不正确"];
+        return;
     }
+    if ([VerifyHelper empty:_codeTf.text]) {
+        [self alertMessageWithViewController:self message:@"验证码不能为空"];
+        return;
+    }
+    if ([VerifyHelper empty:_pwTf.text] || [_pwTf.text length] < 8) {
+        [self alertMessageWithViewController:self message:@"密码不能为空"];
+        return;
+    }
+    [RYUserRequest userRegisterWithParamer:@{@"phone":_phoneTf.text,@"fromWay":@"7",@"dxCode":_codeTf.text,@"tiPhone":_inviteTf.text,@"password":_pwTf.text} suceess:^(NSDictionary *userInfo) {
+        [UtilityHelper insertApp:self];
+    } failure:^(id errorCode) {
+        
+    }];
 }
 
 /** 跳转到协议 */

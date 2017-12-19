@@ -14,10 +14,8 @@
 
 @interface UtilityHelper : NSObject
 
-/**
- 是否登录,return NO 就跳转到登录页面
- */
-+ (BOOL) isLogin:(UIViewController *) vc;
+/** 进入app **/
++ (void) insertApp:(UIViewController *) ctl;
 
 /**
  自适应高度

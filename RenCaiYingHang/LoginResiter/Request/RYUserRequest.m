@@ -32,7 +32,7 @@
     NSString * encode = [UtilityHelper encryptParmar:jsonStr];
     NSDictionary * dic = @{KDatas:encode};
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
-        
+        sucess(true);
     } failure:^(NSError *error) {
         
     }];
@@ -58,7 +58,7 @@
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,BasicInfo];
     NSString * jsonStr = [paramer mj_JSONString];
     NSString * encode = [UtilityHelper encryptParmar:jsonStr];
-    NSDictionary * dic = @{KDatas:encode};
+    NSDictionary * dic = @{KDatas:encode,@"token":@""};
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         
     } failure:^(NSError *error) {

@@ -16,16 +16,16 @@
 
 @implementation UtilityHelper
 
-/** 是否登录,return NO 就跳转到登录页面 */
-+ (BOOL) isLogin:(UIViewController *) vc
+/** 进入app **/
++ (void) insertApp:(UIViewController *) ctl
 {
-    if ([UserInfoManage shareInstance].is_login == NO)
-    {
-        LoginViewController *advanceCtl=[[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-        [vc.navigationController pushViewController:advanceCtl animated:YES];
-        return NO;
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isNecessary"] boolValue]) {
+        /** 默认进入雷达页面 **/
+        [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
+        [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+    }else{
+        [ctl.navigationController pushViewController:[[NecessaryInfoViewController alloc] init] animated:true];
     }
-    return YES;
 }
 
 /** 自适应高度 **/

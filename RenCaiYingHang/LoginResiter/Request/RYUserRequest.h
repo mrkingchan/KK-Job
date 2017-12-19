@@ -16,7 +16,6 @@
 /** 获取短信验证码 **/
 + (void) gainAuthCodeWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure;
 
-
 /** 注册 */
 + (void) userRegisterWithParamer:(NSDictionary *)paramer suceess:(void(^)(NSDictionary * userInfo))sucess failure:(void(^)(id errorCode))failure;
 

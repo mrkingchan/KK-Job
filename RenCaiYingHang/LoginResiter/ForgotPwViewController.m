@@ -8,9 +8,11 @@
 
 #import "ForgotPwViewController.h"
 
-@interface ForgotPwViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ForgotPwViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     UIButton * currentBtn;
+    CGRect origin_rect;
+    UITextField * _textField;
 }
 
 @property (nonatomic,strong) UITableView * tableView;
@@ -41,7 +43,7 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
 - (UIView *) tableFooterView
 {
     UIView * footer = [UIFactory initViewWithFrame:CGRectMake(0, 0, kScreenWidth, 80) color:nil];
-    UIButton * loginOutBtn = [UIFactory initBorderButtonWithFrame:CGRectMake(50, 30, kScreenWidth - 100, 45 * AdaptiveRate) title:@"提交" textColor:[UIColor darkTextColor] font:systemOfFont(15) cornerRadius:10 bgColor:kWhiteColor borderColor:[UIColor lightGrayColor] borderWidth:0.5 tag:10 target:self action:@selector(buttonClick:)];
+    UIButton * loginOutBtn = [UIFactory initBorderButtonWithFrame:CGRectMake(50, 30, kScreenWidth - 100, 50) title:@"提交" textColor:[UIColor darkTextColor] font:systemOfFont(15) cornerRadius:5 bgColor:kWhiteColor borderColor:[UIColor lightGrayColor] borderWidth:0.5 tag:10 target:self action:@selector(buttonClick:)];
     [footer addSubview:loginOutBtn];
     return footer;
 }
@@ -50,7 +52,7 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"登陆密码";
-    
+    [self addNotification];
     [self configurationTableView];
 }
 
@@ -81,6 +83,7 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
         [cell.codeBtn addTarget:self action:@selector(gainAuthCode) forControlEvents:UIControlEventTouchUpInside];
         currentBtn = cell.codeBtn;
         cell.textField.tag = indexPath.row;
+        cell.textField.delegate = self;
         [cell.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         return cell;
     }else{
@@ -95,6 +98,7 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
             cell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",self.dataArray[indexPath.row]];
         }
         cell.textField.tag = indexPath.row;
+        cell.textField.delegate = self;
         [cell.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         return cell;
     }
@@ -167,10 +171,44 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
     [currentBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
 }
 
+#pragma mark  -键盘
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    _textField = textField;
+    return true;
+}
+
 /** textField的值 **/
 - (void) textFieldDidChange:(UITextField *) textField
 {
     
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    //获取键盘的高度
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    int height = keyboardRect.size.height;
+    
+    origin_rect = CGRectMake(0, 0, kScreenWidth , kScreenHeight);
+    
+    CGFloat h = kScreenHeight - (_textField.tag+1) * 50 - height - KNavBarHeight ;
+    
+    if (h < 0) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.view.frame = CGRectMake(0, h, kScreenWidth, kScreenHeight);
+        }];
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.frame = origin_rect;
+        origin_rect = CGRectZero;
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "AreaModel.h"
+
 @interface AreaRequest : NSObject
 
 /**

@@ -17,7 +17,6 @@
 #define kIOS11Later [[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0
 
 #define AdaptiveRate [UIScreen mainScreen].bounds.size.height / 736
-
 #define fontScale kScreenWidth/375
 #define systemOfFont(size) [UIFont systemFontOfSize:size*fontScale]
 
@@ -27,6 +26,8 @@
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
+
+#define Rect(x,y,w,h) CGRectMake(x*fontScale, y*AdaptiveRate, w*fontScale, h*AdaptiveRate)
 
 #define kWhiteColor [UIColor whiteColor]
 

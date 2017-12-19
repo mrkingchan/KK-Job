@@ -34,12 +34,17 @@
 + (UIButton *) initBorderButtonWithFrame:(CGRect)frame title:(NSString *)title textColor:(UIColor *)textColor font :(UIFont *) font cornerRadius:(CGFloat)cornerRadius bgColor:(UIColor *)bgColor borderColor:(UIColor *)borderColor borderWidth:(CGFloat) borderWidth tag:(NSInteger)tag  target:(id)target action:(SEL)action
 {
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setFrame:frame];
+    /** 适配 **/
+    CGFloat height = frame.size.height * AdaptiveRate;
+    if (height > 50) {
+        height = 50;
+    }
+    [button setFrame:CGRectMake(frame.origin.x, frame.origin.y * AdaptiveRate, frame.size.width, height)];
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleColor:textColor forState:UIControlStateNormal];
     //处理掉高亮下灰色
     [button setAdjustsImageWhenHighlighted:NO];
-    button.titleLabel.font = font;
+    button.titleLabel.font = font;//可以传数值,然后再这边设置 systemOfFont(size)
     button.layer.cornerRadius = cornerRadius;
     button.layer.borderWidth = borderWidth;
     button.layer.borderColor = borderColor.CGColor;

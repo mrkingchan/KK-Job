@@ -21,6 +21,13 @@
     NSDictionary * dic = @{KDatas:encode};
     [NetWorkHelper getWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         
+        NSMutableArray * arr = [NSMutableArray array];
+        NSArray * rel = data[@"rel"];
+        for (NSDictionary * d in rel) {
+            AreaModel * model = [[AreaModel alloc] initWithDictionary:d];
+            [arr addObject:model];
+        }
+        sucess(arr);
     } failure:^(NSError *error) {
         
     }];
@@ -36,7 +43,13 @@
     NSString * encode = [UtilityHelper encryptParmar:jsonStr];
     NSDictionary * dic = @{KDatas:encode};
     [NetWorkHelper getWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
-        
+        NSMutableArray * arr = [NSMutableArray array];
+        NSArray * rel = data[@"rel"];
+        for (NSDictionary * d in rel) {
+            AreaModel * model = [[AreaModel alloc] initWithDictionary:d];
+            [arr addObject:model];
+        }
+        sucess(arr);
     } failure:^(NSError *error) {
         
     }];

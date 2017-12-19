@@ -236,7 +236,6 @@ NS_ENUM(NSInteger,PickState) {
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     _selectLine.hidden = NO;
-    
     if(PickState == ProvinceState) {
         AreaModel * model = _provinceArr[indexPath.row];
         //当tableview所处为省份选择状态时，点击cell 进入城市选择状态
@@ -279,7 +278,7 @@ NS_ENUM(NSInteger,PickState) {
         if (_selectProvinceCityAreaCall) {
             _selectProvinceCityAreaCall(selectedProvince,selectedCity);
         }
-        
+        [self removeFromSuperview];
         //获取刷新地区的数据
         //[self refreshTableView:self.districtArr paramter:parameters];
         

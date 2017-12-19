@@ -84,6 +84,13 @@ static NSString * identifier = @"CollectionViewCell";
     return _mapNavigationView;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //设置代理
+    _mapView.delegate = self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -133,14 +140,12 @@ static NSString * identifier = @"CollectionViewCell";
     CGRect rect=[UIScreen mainScreen].bounds;
     _mapView=[[MKMapView alloc]initWithFrame:rect];
     [self.view addSubview:_mapView];
-    //设置代理
-    _mapView.delegate=self;
     
-    //    CLLocationManager *locationManager = [[CLLocationManager alloc]init];
-    //    locationManager.delegate = self;
     //请求定位服务
     _locationManager = [[CLLocationManager alloc]init];
     _locationManager.delegate = self;
+    
+    
     if(![CLLocationManager locationServicesEnabled]||[CLLocationManager authorizationStatus]!=kCLAuthorizationStatusAuthorizedWhenInUse){
         [_locationManager requestWhenInUseAuthorization];
         //[_locationManager startUpdatingLocation];
@@ -181,18 +186,7 @@ static NSString * identifier = @"CollectionViewCell";
 //定位失败则执行此代理方法
 //定位失败弹出提示框,点击"打开定位"按钮,会打开系统的设置,提示打开定位服务
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"允许\"定位\"提示" message:@"请在设置中打开定位" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction * ok = [UIAlertAction actionWithTitle:@"打开定位" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //打开定位设置
-        NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-        [[UIApplication sharedApplication] openURL:settingsURL];
-    }];
-    UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    [alertVC addAction:cancel];
-    [alertVC addAction:ok];
-    [self presentViewController:alertVC animated:YES completion:nil];
+    [self gotoSetLocation];
 }
 
 //定位成功
@@ -209,7 +203,8 @@ static NSString * identifier = @"CollectionViewCell";
             if (!currentCity) {
                 currentCity = @"无法定位当前城市";
             }
-            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:currentCity style:UIBarButtonItemStylePlain target:self action:@selector(selectCityName:)];
+            [self alertMessageWithViewController:self message:currentCity];
+//            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:currentCity style:UIBarButtonItemStylePlain target:self action:@selector(selectCityName:)];
             NSLog(@"%@",currentCity); //这就是当前的城市
             NSLog(@"%@",placeMark.name);//具体地址:  xx市xx区xx街道
             
@@ -509,6 +504,20 @@ static NSString * identifier = @"CollectionViewCell";
 -(void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     
+}
+
+/** 去设置定位 **/
+- (void) gotoSetLocation
+{
+    [self showAlertWithTitle:@"允许\"定位\"提示" message:@"请在设置中打开定位" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
+        alertMaker.addActionCancelTitle(@"取消").addActionDefaultTitle(@"设置");
+    } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
+        if (buttonIndex == 1) {
+            //打开定位设置
+            NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [[UIApplication sharedApplication] openURL:settingsURL];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

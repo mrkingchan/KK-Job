@@ -54,13 +54,19 @@
 
 /** 登陆账号 */
 - (IBAction)loginAccount:(UIButton *)sender {
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isNecessary"] boolValue]) {
-        /** 默认进入雷达页面 **/
-        [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
-        [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
-    }else{
-        [self.navigationController pushViewController:[[NecessaryInfoViewController alloc] init] animated:true];
+    if (![VerifyHelper checkMobileTel:_phoneTf.text]) {
+        [self alertMessageWithViewController:self message:@"手机号不正确"];
+        return;
     }
+    if ([VerifyHelper empty:_pwTf.text] &&[_pwTf.text length] <8) {
+        [self alertMessageWithViewController:self message:@"密码不正确"];
+        return;
+    }
+    [RYUserRequest userLoginWithParamer:@{@"loginType":@"1",@"phone":_phoneTf.text,@"password":_pwTf.text} suceess:^(NSDictionary *userInfo) {
+        [UtilityHelper insertApp:self];
+    } failure:^(id errorCode) {
+        
+    }];
 }
 
 #pragma mark  -键盘

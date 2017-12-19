@@ -24,7 +24,7 @@
 
 @property (nonatomic,copy) NSArray * dataArray;
 
-@property (nonatomic,retain) UIView * headerView;
+//@property (nonatomic,retain) UIView * headerView;
 
 @property (nonatomic,retain) UIView * footerView;
 
@@ -56,23 +56,23 @@ static NSString * UITableViewCellID = @"Cell";
     return _tableView;
 }
 
-- (UIView *)headerView
-{
-    if (!_headerView) {
-        _headerView = [UIFactory initViewWithFrame:CGRectMake(0, 0, kScreenWidth, 140) color:kWhiteColor];
-        UIButton * button = [UIFactory initButtonWithFrame:CGRectMake(0, 0, 80, 80) image:UIIMAGE(@"xxxx") cornerRadius:40 tag:10 target:self action:@selector(setupHeaderIcon:)];
-        button.backgroundColor = [UIColor lightGrayColor];
-        button.center = _headerView.center;
-        [_headerView addSubview:button];
-    }
-    return _headerView;
-}
+//- (UIView *)headerView
+//{
+//    if (!_headerView) {
+//        _headerView = [UIFactory initViewWithFrame:CGRectMake(0, 0, kScreenWidth, 140) color:kWhiteColor];
+//        UIButton * button = [UIFactory initButtonWithFrame:CGRectMake(0, 0, 80, 80) image:UIIMAGE(@"xxxx") cornerRadius:40 tag:10 target:self action:@selector(setupHeaderIcon:)];
+//        button.backgroundColor = [UIColor lightGrayColor];
+//        button.center = _headerView.center;
+//        [_headerView addSubview:button];
+//    }
+//    return _headerView;
+//}
 
 - (UIView *)footerView
 {
     if (!_footerView) {
         _footerView = [UIFactory initViewWithFrame:CGRectMake(0, 0, kScreenWidth, 70) color:nil];
-        UIButton * button = [UIFactory initBorderButtonWithFrame:CGRectMake(40, 30, kScreenWidth - 80, 40) title:@"完成" textColor:[UIColor darkTextColor] font:systemOfFont(16) cornerRadius:5 bgColor:kWhiteColor borderColor:[UIColor lightGrayColor] borderWidth:0.5 tag:11 target:self action:@selector(finishClick)];
+        UIButton * button = [UIFactory initBorderButtonWithFrame:CGRectMake(40, 30, kScreenWidth - 80, 50) title:@"完成" textColor:[UIColor darkTextColor] font:systemOfFont(16) cornerRadius:5 bgColor:kWhiteColor borderColor:[UIColor lightGrayColor] borderWidth:0.5 tag:11 target:self action:@selector(finishClick)];
         [_footerView addSubview:button];
     }
     return _footerView;
@@ -98,7 +98,7 @@ static NSString * UITableViewCellID = @"Cell";
 /** 设置UI **/
 - (void) configurationUI
 {
-    self.tableView.tableHeaderView = self.headerView;
+    //self.tableView.tableHeaderView = self.headerView;
     self.tableView.tableFooterView = self.footerView;
     
     self.dataArray = @[@"姓名",@"性别",@"最高学历",@"工作经验",@"出生年月",@"期望职位",@"期望薪资",@"期望城市"];
@@ -118,15 +118,23 @@ static NSString * UITableViewCellID = @"Cell";
     [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
 }
 
-/** 设置头像 */
-- (void) setupHeaderIcon:(UIButton *) sender
-{
-    [JHUPLOAD_IMAGE showActionSheetInFatherViewController:self delegate:self];
-}
+///** 设置头像 */
+//- (void) setupHeaderIcon:(UIButton *) sender
+//{
+//    [JHUPLOAD_IMAGE showActionSheetInFatherViewController:self delegate:self];
+//}
 
 /** 完成 **/
 - (void) finishClick
 {
+    NSDictionary * dic = @{@"name":self.postArr[0],@"gender":self.postArr[1],@"diploma":self.postArr[2],@"birthday":self.postArr[3],@"workyearX":self.postArr[4],@"expectjob":self.postArr[5],@"salrange":self.postArr[6],@"city":self.postArr[7]};
+    [RYUserRequest uploadBaseInfoWithParamer:dic suceess:^(BOOL isSendSuccess) {
+        
+    } failure:^(id errorCode) {
+        
+    }];
+    
+    
     LoadingView * loading = [[LoadingView alloc] initWithFrame:CGRectZero];
     [loading show];
     
@@ -295,19 +303,19 @@ static NSString * UITableViewCellID = @"Cell";
     [self refreshTableViewWith:indexPath string:string];
 }
 
-#pragma mark - JHUploadImageDelegate
-- (void)uploadImageToServerWithImage:(UIImage *)image OriginImage:(UIImage *)originImage
-{
-    for (UIView * view in self.headerView.subviews) {
-        if ([view isKindOfClass:[UIButton class]]) {
-            UIButton * button = (UIButton *)view;
-            button.layer.cornerRadius = 40;
-            button.clipsToBounds = true;
-            [button setBackgroundImage:image forState:UIControlStateNormal];
-        }
-    }
-    NSLog(@"%@\n%@",originImage,image);
-}
+//#pragma mark - JHUploadImageDelegate
+//- (void)uploadImageToServerWithImage:(UIImage *)image OriginImage:(UIImage *)originImage
+//{
+//    for (UIView * view in self.headerView.subviews) {
+//        if ([view isKindOfClass:[UIButton class]]) {
+//            UIButton * button = (UIButton *)view;
+//            button.layer.cornerRadius = 40;
+//            button.clipsToBounds = true;
+//            [button setBackgroundImage:image forState:UIControlStateNormal];
+//        }
+//    }
+//    NSLog(@"%@\n%@",originImage,image);
+//}
 
 /** 选择城市 */
 - (void) selectPrvoinceCityAreas:(NSIndexPath *)indexPath
