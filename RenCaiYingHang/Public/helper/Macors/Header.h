@@ -11,6 +11,9 @@
 
 #import <UIKit/UIKit.h>
 
+/** model **/
+#import "AuthenticationModel.h"
+
 /** ViewControllers */
 #import "NecessaryInfoViewController.h"
 

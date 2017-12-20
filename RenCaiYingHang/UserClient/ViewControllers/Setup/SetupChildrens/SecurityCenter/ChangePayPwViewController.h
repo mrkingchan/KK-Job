@@ -10,7 +10,6 @@
 
 @interface ChangePayPwViewController : RYViewController
 
-/** 交易密码和登录密码可做成同一个页面 */
-//@property (nonatomic,assign) NSInteger pwType;
+@property (nonatomic,strong) AuthenticationModel * authModel;
 
 @end

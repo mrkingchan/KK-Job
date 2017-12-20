@@ -15,8 +15,7 @@
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,CheckPhone];
     NSString * jsonStr = [paramer mj_JSONString];
-    NSString * encode = [UtilityHelper encryptParmar:jsonStr];
-    NSDictionary * dic = @{KDatas:encode};
+    NSDictionary * dic = [UtilityHelper encryptParmar:jsonStr];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         
     } failure:^(NSError *error) {
@@ -29,8 +28,7 @@
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,GetAuthCode];
     NSString * jsonStr = [paramer mj_JSONString];
-    NSString * encode = [UtilityHelper encryptParmar:jsonStr];
-    NSDictionary * dic = @{KDatas:encode};
+    NSDictionary * dic = [UtilityHelper encryptParmar:jsonStr];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         sucess(true);
     } failure:^(NSError *error) {
@@ -39,14 +37,16 @@
 }
 
 /** 注册 */
-+ (void) userRegisterWithParamer:(NSDictionary *)paramer suceess:(void(^)(NSDictionary * userInfo))sucess failure:(void(^)(id errorCode))failure
++ (void) userRegisterWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,RegisterPort];
     NSString * jsonStr = [paramer mj_JSONString];
-    NSString * encode = [UtilityHelper encryptParmar:jsonStr];
-    NSDictionary * dic = @{KDatas:encode};
+    NSDictionary * dic = [UtilityHelper encryptParmar:jsonStr];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
-        //UserModel
+        
+        [UtilityHelper saveUserInfoWith:data];
+        sucess(true);
+        
     } failure:^(NSError *error) {
         
     }];
@@ -57,24 +57,25 @@
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,BasicInfo];
     NSString * jsonStr = [paramer mj_JSONString];
-    NSString * encode = [UtilityHelper encryptParmar:jsonStr];
-    NSDictionary * dic = @{KDatas:encode,@"token":@""};
+    NSDictionary * dic = [UtilityHelper encryptPkeyParmar:jsonStr];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
-        
+        sucess(true);
     } failure:^(NSError *error) {
         
     }];
 }
 
 /** 登陆 */
-+ (void) userLoginWithParamer:(NSDictionary *)paramer suceess:(void(^)(NSDictionary * userInfo))sucess failure:(void(^)(id errorCode))failure
++ (void) userLoginWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,LoginPort];
     NSString * jsonStr = [paramer mj_JSONString];
-    NSString * encode = [UtilityHelper encryptParmar:jsonStr];
-    NSDictionary * dic = @{KDatas:encode};
+    NSDictionary * dic = [UtilityHelper encryptParmar:jsonStr];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
-        //UserModel
+        
+        [UtilityHelper saveUserInfoWith:data];
+        sucess(true);
+        
     } failure:^(NSError *error) {
         
     }];
@@ -85,10 +86,9 @@
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,IdcardAuthentication];
     NSString * jsonStr = [paramer mj_JSONString];
-    NSString * encode = [UtilityHelper encryptParmar:jsonStr];
-    NSDictionary * dic = @{KDatas:encode};
+    NSDictionary * dic = [UtilityHelper encryptPkeyParmar:jsonStr];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
-        
+        sucess(true);
     } failure:^(NSError *error) {
         
     }];
@@ -99,10 +99,9 @@
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,BindingEmail];
     NSString * jsonStr = [paramer mj_JSONString];
-    NSString * encode = [UtilityHelper encryptParmar:jsonStr];
-    NSDictionary * dic = @{KDatas:encode};
+    NSDictionary * dic = [UtilityHelper encryptPkeyParmar:jsonStr];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
-        
+        sucess(true);
     } failure:^(NSError *error) {
         
     }];
@@ -113,10 +112,9 @@
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,AuthEmail];
     NSString * jsonStr = [paramer mj_JSONString];
-    NSString * encode = [UtilityHelper encryptParmar:jsonStr];
-    NSDictionary * dic = @{KDatas:encode};
+    NSDictionary * dic = [UtilityHelper encryptPkeyParmar:jsonStr];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
-        
+        sucess(true);
     } failure:^(NSError *error) {
         
     }];
@@ -127,10 +125,9 @@
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,ChgPassword];
     NSString * jsonStr = [paramer mj_JSONString];
-    NSString * encode = [UtilityHelper encryptParmar:jsonStr];
-    NSDictionary * dic = @{KDatas:encode};
+    NSDictionary * dic = [UtilityHelper encryptPkeyParmar:jsonStr];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
-        
+        sucess(true);
     } failure:^(NSError *error) {
         
     }];
@@ -141,10 +138,9 @@
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,ChgLoginPwdByPhone];
     NSString * jsonStr = [paramer mj_JSONString];
-    NSString * encode = [UtilityHelper encryptParmar:jsonStr];
-    NSDictionary * dic = @{KDatas:encode};
+    NSDictionary * dic = [UtilityHelper encryptParmar:jsonStr];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
-        
+        sucess(true);
     } failure:^(NSError *error) {
         
     }];
@@ -155,10 +151,9 @@
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,ChgTradePwdByPhone];
     NSString * jsonStr = [paramer mj_JSONString];
-    NSString * encode = [UtilityHelper encryptParmar:jsonStr];
-    NSDictionary * dic = @{KDatas:encode};
+    NSDictionary * dic = [UtilityHelper encryptPkeyParmar:jsonStr];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
-        
+        sucess(true);
     } failure:^(NSError *error) {
         
     }];

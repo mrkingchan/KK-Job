@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="NecessarySexCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" tag="11" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RO1-Vo-2bI">
+                        <rect key="frame" x="260" y="10" width="50" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="BF0-WK-iee"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <state key="normal" title="男" image="1">
+                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected" image="1s"/>
+                        <connections>
+                            <action selector="buttonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jLs-bz-c20"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d3D-Q2-bPK">
+                        <rect key="frame" x="200" y="10" width="50" height="29.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="FQy-aE-qUF"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <state key="normal" title="女" image="1">
+                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected" image="1s"/>
+                        <connections>
+                            <action selector="buttonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8i5-ww-IVB"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="RO1-Vo-2bI" secondAttribute="bottom" constant="10" id="4No-xE-F9G"/>
+                    <constraint firstItem="RO1-Vo-2bI" firstAttribute="leading" secondItem="d3D-Q2-bPK" secondAttribute="trailing" constant="10" id="EOL-z1-L6w"/>
+                    <constraint firstAttribute="trailing" secondItem="RO1-Vo-2bI" secondAttribute="trailing" constant="10" id="X7U-5f-jsB"/>
+                    <constraint firstAttribute="bottom" secondItem="d3D-Q2-bPK" secondAttribute="bottom" constant="10" id="Y2n-tO-wIr"/>
+                    <constraint firstItem="RO1-Vo-2bI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="i40-q9-yq2"/>
+                    <constraint firstItem="d3D-Q2-bPK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="yY3-WH-aX7"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="manBtn" destination="RO1-Vo-2bI" id="iSC-un-fSM"/>
+                <outlet property="womanBtn" destination="d3D-Q2-bPK" id="twU-pT-wPG"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="1" width="25" height="25"/>
+        <image name="1s" width="25" height="25"/>
+    </resources>
+</document>

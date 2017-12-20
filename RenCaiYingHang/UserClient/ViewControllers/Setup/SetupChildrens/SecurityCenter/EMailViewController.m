@@ -8,7 +8,7 @@
 
 #import "EMailViewController.h"
 
-@interface EMailViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface EMailViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     UIButton * currentBtn;
 }
@@ -46,6 +46,14 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
     return footer;
 }
 
+- (AuthenticationModel *)authModel
+{
+    if (!_authModel) {
+        _authModel = [[AuthenticationModel alloc] init];
+    }
+    return _authModel;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -56,14 +64,28 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
 - (void) configurationTableView
 {
     self.tableView.tableFooterView = [self tableFooterView];
-    self.dataArray = @[@"姓名",@"身份证"];
+    self.dataArray = @[@"邮箱",@"验证码"];
     [self.tableView reloadData];
 }
 
 /** 立即认证 **/
 - (void) buttonClick:(UIButton *) sender
 {
-    
+    if (![VerifyHelper validateEmail:self.authModel.email]) {
+        [self alertMessageWithViewController:self message:@"邮箱格式不正确"];
+        return;
+    }
+    if ([VerifyHelper empty:self.authModel.codeString]) {
+        [self emptyPhoneCode];
+        return;
+    }
+    NSDictionary * dic = @{@"username":self.authModel.email,@"validCode":self.authModel.codeString};
+    [RYUserRequest authEmailWithParamer:dic suceess:^(BOOL isSuccess) {
+        [self alertMessageWithViewController:self message:@"邮箱绑定成功"];
+        [self.navigationController popViewControllerAnimated:true];
+    } failure:^(id errorCode) {
+        
+    }];
 }
 
 #pragma mark UITableViewDataSource
@@ -79,11 +101,17 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
         LabelTextFieldCell * cell = [tableView dequeueReusableCellWithIdentifier:LabelTextFieldCellID];
         cell.titleLabel.text = self.dataArray[indexPath.row];
         cell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",self.dataArray[indexPath.row]];
+        cell.textField.tag = indexPath.row;
+        cell.textField.delegate = self;
+        [cell.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         return cell;
     }else{
         LabelTextFieldBuutonCell * cell = [tableView dequeueReusableCellWithIdentifier:LabelTextFieldBuutonCellID];
         [cell.codeBtn addTarget:self action:@selector(gainAuthCode) forControlEvents:UIControlEventTouchUpInside];
         currentBtn = cell.codeBtn;
+        cell.textField.tag = indexPath.row;
+        cell.textField.delegate = self;
+        [cell.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         return cell;
     }
 }
@@ -117,6 +145,16 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
 
 - (void) gainAuthCode
 {
+    if (![VerifyHelper validateEmail:self.authModel.email]) {
+        [self alertMessageWithViewController:self message:@"邮箱格式不正确"];
+        return;
+    }
+    NSDictionary * dic = @{@"username":UserInfo.userInfo.tel,@"email":self.authModel.email};
+    [RYUserRequest bindingEmailWithParamer:dic suceess:^(BOOL isSuccess) {
+        [self.navigationController popViewControllerAnimated:true];
+    } failure:^(id errorCode) {
+        
+    }];
     _time = KAuthCodeSecond;
     [self countDown];
 }
@@ -144,9 +182,7 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
     }
 }
 
-/**
- 关掉定时器
- */
+/**关掉定时器*/
 - (void)stop
 {
     if (_timer) {
@@ -161,6 +197,21 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
 {
     [super viewWillDisappear:animated];
     [self stop];
+}
+
+/** textField的值 **/
+- (void) textFieldDidChange:(UITextField *) textField
+{
+    switch (textField.tag) {
+        case 0:
+            self.authModel.email = textField.text;
+            break;
+        case 1:
+            self.authModel.codeString = textField.text;
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,11 +8,13 @@
 
 #import "IdentificationViewController.h"
 
-@interface IdentificationViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface IdentificationViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
 @property (nonatomic,strong) UITableView * tableView;
 
 @property (nonatomic,copy) NSArray * dataArray;
+
+@property (nonatomic,strong) AuthenticationModel * authModel;
 
 @end
 
@@ -38,6 +40,14 @@ static NSString * CurrentTableViewCellID = @"LabelTextFieldCell";
     return footer;
 }
 
+- (AuthenticationModel *)authModel
+{
+    if (!_authModel) {
+        _authModel = [[AuthenticationModel alloc] init];
+    }
+    return _authModel;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -55,7 +65,20 @@ static NSString * CurrentTableViewCellID = @"LabelTextFieldCell";
 /** 立即认证 **/
 - (void) buttonClick:(UIButton *) sender
 {
-    
+    if ([VerifyHelper empty:self.authModel.realName]) {
+        [self alertMessageWithViewController:self message:@"用户名不能为空"];
+        return;
+    }
+    if ([VerifyHelper validateIDCardNumber:self.authModel.idcardNum]) {
+        [self alertMessageWithViewController:self message:@"身份证不正确"];
+        return;
+    }
+    NSDictionary * dic = @{@"realName":self.authModel.realName,@"idcardNum":self.authModel.idcardNum};
+    [RYUserRequest idcardAuthenticationWithParamer:dic suceess:^(BOOL isSuccess) {
+        [self.navigationController popViewControllerAnimated:true];
+    } failure:^(id errorCode) {
+        
+    }];
 }
 
 #pragma mark UITableViewDataSource
@@ -70,6 +93,9 @@ static NSString * CurrentTableViewCellID = @"LabelTextFieldCell";
     LabelTextFieldCell * cell = [tableView dequeueReusableCellWithIdentifier:CurrentTableViewCellID];
     cell.titleLabel.text = self.dataArray[indexPath.row];
     cell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",self.dataArray[indexPath.row]];
+    cell.textField.tag = indexPath.row;
+    cell.textField.delegate = self;
+    [cell.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     return cell;
 }
 
@@ -98,6 +124,21 @@ static NSString * CurrentTableViewCellID = @"LabelTextFieldCell";
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     return nil;
+}
+
+/** textField的值 **/
+- (void) textFieldDidChange:(UITextField *) textField
+{
+    switch (textField.tag) {
+        case 0:
+            self.authModel.realName = textField.text;
+            break;
+        case 1:
+            self.authModel.idcardNum = textField.text;
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

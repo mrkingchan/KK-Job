@@ -10,4 +10,6 @@
 
 @interface EMailViewController : RYViewController
 
+@property (nonatomic,strong) AuthenticationModel * authModel;
+
 @end

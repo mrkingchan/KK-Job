@@ -10,11 +10,21 @@
 
 @interface RYWebViewController ()<WKNavigationDelegate,WKScriptMessageHandler,WKUIDelegate>
 
+@property (nonatomic,strong) LoadingView * loading;
+
 @property (nonatomic,strong) UIProgressView * progressView;
 
 @end
 
 @implementation RYWebViewController
+
+- (LoadingView *)loading
+{
+    if (!_loading) {
+        _loading = [[LoadingView alloc] initWithFrame:CGRectZero];
+    }
+    return _loading;
+}
 
 - (WKUserContentController *)userController
 {
@@ -50,7 +60,7 @@
 {
     if (!_progressView) {
         _progressView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
-        _progressView.tintColor = [UIColor greenColor];
+        _progressView.tintColor = nil;
         _progressView.trackTintColor = [UIColor clearColor];
         _progressView.frame = CGRectMake(0, 2, self.view.bounds.size.width, 3.0);
         [self.webView addSubview:_progressView];
@@ -68,7 +78,7 @@
 {
     [super viewWillAppear:animated];
     //监控进度
-    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
+   // [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     //标题
     //[self.webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
 }
@@ -106,13 +116,13 @@
 #pragma mark --进度条
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     //加载进度值
-    if ([keyPath isEqualToString:@"estimatedProgress"])
-    {
-        if (object == self.webView)
-        {
-            [self changeProgressLength];
-        }
-    }
+//    if ([keyPath isEqualToString:@"estimatedProgress"])
+//    {
+//        if (object == self.webView)
+//        {
+//            [self changeProgressLength];
+//        }
+//    }
 //    //网页title
 //    else if ([keyPath isEqualToString:@"title"])
 //    {
@@ -157,10 +167,25 @@
     decisionHandler(WKNavigationResponsePolicyAllow);
 }
 
+#pragma mark - WKNavigationDelegate
+// 页面开始加载时调用
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
+    [self.loading show];
+}
 
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation
-{
+// 当内容开始返回时调用
+- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
+    [self.loading dismiss];
+}
+
+// 页面加载完成之后调用
+- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
     
+}
+
+// 页面加载失败时调用
+- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
+    [self.loading dismiss];
 }
 
 - (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(null_unspecified WKNavigation *)navigation
@@ -169,21 +194,6 @@
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
-{
-    
-}
-
-- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation
-{
-    
-}
-
-- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation
-{
-    
-}
-
-- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
 {
     
 }

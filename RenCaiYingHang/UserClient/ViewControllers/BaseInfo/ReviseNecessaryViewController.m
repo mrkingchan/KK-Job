@@ -69,18 +69,10 @@
         [self alertMessageWithViewController:self message:@"内容为空无法提交"];
         return;
     }
-    
-    LoadingView * loading = [[LoadingView alloc] initWithFrame:CGRectZero];
-    [loading show];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [loading dismiss];
-        
-        if (_reviseNecessaryCall) {
-            _reviseNecessaryCall(self.cell.textView.text);
-        }
-        
-        [self.navigationController popViewControllerAnimated:true];
-    });
+    if (_reviseNecessaryCall) {
+        _reviseNecessaryCall(self.cell.textView.text);
+    }
+    [self.navigationController popViewControllerAnimated:true];
 }
 
 /** 限制字数 */
@@ -88,7 +80,7 @@
     
     //    对占位符的显示和隐藏做判断
     if (self.cell.textView.text.length == 0) {
-        self.cell.textView.placeholder = @"请输入公司名称";
+        self.cell.textView.placeholder = [NSString stringWithFormat:@"请输入%@",self.title];
     }else {
         self.cell.textView.placeholder = @"";
     }

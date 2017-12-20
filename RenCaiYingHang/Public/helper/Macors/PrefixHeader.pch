@@ -14,6 +14,8 @@
 #define AppVersion  [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
 #define AppName  [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"]
 
+#define RYDefaults [NSUserDefaults standardUserDefaults]
+
 #define kIOS11Later [[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0
 
 #define AdaptiveRate [UIScreen mainScreen].bounds.size.height / 736

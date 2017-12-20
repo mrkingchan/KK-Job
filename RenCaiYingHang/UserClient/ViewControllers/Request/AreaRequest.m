@@ -17,8 +17,7 @@
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,GetProvinceInfo];
     NSString * jsonStr = [paramer mj_JSONString];
-    NSString * encode = [UtilityHelper encryptParmar:jsonStr];
-    NSDictionary * dic = @{KDatas:encode};
+    NSDictionary * dic = [UtilityHelper encryptParmar:jsonStr];
     [NetWorkHelper getWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         
         NSMutableArray * arr = [NSMutableArray array];
@@ -40,8 +39,7 @@
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,GetCityInfo];
     NSString * jsonStr = [paramer mj_JSONString];
-    NSString * encode = [UtilityHelper encryptParmar:jsonStr];
-    NSDictionary * dic = @{KDatas:encode};
+    NSDictionary * dic = [UtilityHelper encryptParmar:jsonStr];
     [NetWorkHelper getWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         NSMutableArray * arr = [NSMutableArray array];
         NSArray * rel = data[@"rel"];

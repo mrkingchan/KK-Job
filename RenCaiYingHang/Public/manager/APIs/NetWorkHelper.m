@@ -76,6 +76,7 @@
 {
     AFHTTPSessionManager *manager = [self sharedAFHTTPManager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+   // manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer.timeoutInterval = 30;
     
     LoadingView * loading = [[LoadingView alloc] initWithFrame:CGRectZero];
@@ -84,7 +85,7 @@
     [manager POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [loading dismiss];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:NULL];
-        if (![dic[@"reCode"] isEqualToString:@"X0000"] && [VerifyHelper isNull:dic key:@"reCode"]) {
+        if (![dic[@"reCode"] isEqualToString:@"X0000"] && ![VerifyHelper isNull:dic key:@"reCode"] && ![dic[@"reCode"] isEqualToString:@"X2222"]) {
             [NetWorkHelper showMessage:dic[@"reMsg"]];
              return;
         }

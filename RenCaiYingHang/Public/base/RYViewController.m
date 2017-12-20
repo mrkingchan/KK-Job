@@ -85,12 +85,22 @@
     
 }
 
+
+/** 提示信息类 **/
+- (void) emptyPhoneCode
+{
+    [self alertMessageWithViewController:self message:@"验证码不能为空"];
+}
+
+- (void) errorPassword
+{
+    [self alertMessageWithViewController:self message:@"密码不正确"];
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

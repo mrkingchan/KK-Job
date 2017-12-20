@@ -25,8 +25,8 @@
     // Override point for customization after application launch.
     
     /** 默认没有基本信息 **/
-    if ([VerifyHelper empty:[[NSUserDefaults standardUserDefaults] objectForKey:@"isNecessary"]]) {
-        [[NSUserDefaults standardUserDefaults] setObject:@(false) forKey:@"isNecessary"];
+    if ([VerifyHelper empty:[RYDefaults objectForKey:@"isNecessary"]]) {
+        [RYDefaults setObject:@(false) forKey:@"isNecessary"];
     }
 
     [self gestureAuth];
@@ -62,8 +62,8 @@
 - (void) gestureAuth
 {
     //在有手势密码的情况下默认每次进来都需要验证手势密码
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"setOn"] isEqualToString:@"open"]) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"NoGestureLogin" forKey:@"MineGesture"];
+    if ([[RYDefaults objectForKey:@"setOn"] isEqualToString:@"open"]) {
+        [RYDefaults setObject:@"NoGestureLogin" forKey:@"MineGesture"];
     }
 }
 
@@ -71,7 +71,7 @@
 - (void) clickEnter
 {
     /** 默认进入登录页面 **/  /** 如果已经设置手势密码,那么可以先跳转到手势密码登陆界面,如不执行其后再跳转到登陆页面 */
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"MineGesture"] isEqualToString:@"NoGestureLogin"] && [[[NSUserDefaults standardUserDefaults] objectForKey:@"setOn"] isEqualToString:@"open"]) {
+    if ([[RYDefaults objectForKey:@"MineGesture"] isEqualToString:@"NoGestureLogin"] && [[RYDefaults objectForKey:@"setOn"] isEqualToString:@"open"]) {
         GestureSetController * vc = [GestureSetController new];
         [vc setType:GestureViewControllerTypeLogin];
         self.window.rootViewController = [[RYNavigationController alloc] initWithRootViewController:vc];
@@ -82,27 +82,28 @@
     }
 }
 
+/** 用户缓存 **/
 - (void) gainUserModel
 {
-//    NSData * data = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@UserModel",AppName]];
-//    if (data) {
-//        if ([data isKindOfClass:[NSString class]]) {
-//            if (data.length <= 0) {
-//                [OSUserInfoManage shareInstance].is_login = NO;
-//            }
-//        }else{
-//            //在这里解档
-//            id obj = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-//            if ([obj isKindOfClass:[NSDictionary class]])
-//            {
-//                [OSUserInfoManage shareInstance].userInfo = [[OSUserModel alloc] initWithDictionary:obj];
-//                [OSUserInfoManage shareInstance].is_login = YES;
-//            }
-//        }
-//
-//    }else{
-//        [OSUserInfoManage shareInstance].is_login = NO;
-//    }
+    NSData * data = [RYDefaults objectForKey:[NSString stringWithFormat:@"RYUserInfo"]];
+    if (data) {
+        if ([data isKindOfClass:[NSString class]]) {
+            if (data.length <= 0) {
+                UserInfo.is_login = NO;
+            }
+        }else{
+            //在这里解档
+            id obj = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            if ([obj isKindOfClass:[NSDictionary class]])
+            {
+                UserInfo.userInfo = [[UserModel alloc] initWithDictionary:obj];
+                UserInfo.is_login = YES;
+            }
+        }
+
+    }else{
+        UserInfo.is_login = NO;
+    }
 }
 
 - (void)configAppearance

@@ -54,15 +54,15 @@
 
 /** 登陆账号 */
 - (IBAction)loginAccount:(UIButton *)sender {
-    if (![VerifyHelper checkMobileTel:_phoneTf.text]) {
-        [self alertMessageWithViewController:self message:@"手机号不正确"];
+    if (![VerifyHelper checkMobileTel:_phoneTf.text ctl:self]) {
         return;
     }
     if ([VerifyHelper empty:_pwTf.text] &&[_pwTf.text length] <8) {
-        [self alertMessageWithViewController:self message:@"密码不正确"];
+        [self errorPassword];
         return;
     }
-    [RYUserRequest userLoginWithParamer:@{@"loginType":@"1",@"phone":_phoneTf.text,@"password":_pwTf.text} suceess:^(NSDictionary *userInfo) {
+    
+    [RYUserRequest userLoginWithParamer:@{@"loginType":@"1",@"phone":_phoneTf.text,@"password":_pwTf.text} suceess:^(BOOL isSendSuccess) {
         [UtilityHelper insertApp:self];
     } failure:^(id errorCode) {
         

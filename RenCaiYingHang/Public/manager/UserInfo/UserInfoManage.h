@@ -10,6 +10,8 @@
 
 #import "UserModel.h"
 
+#define UserInfo [UserInfoManage shareInstance]
+
 @interface UserInfoManage : NSObject
 
 /** 用户信息 **/

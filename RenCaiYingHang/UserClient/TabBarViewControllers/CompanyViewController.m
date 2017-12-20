@@ -23,7 +23,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.weibo.com"]]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KBaseURL,CompanyList]]]];
+    
+    self.jsMethodName = @"companyDetail";
+}
+
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
+{
+    if ([message.name isEqualToString:self.jsMethodName]) {
+        //code...
+    }
 }
 
 - (void)didReceiveMemoryWarning {

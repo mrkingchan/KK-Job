@@ -17,13 +17,13 @@
 + (void) gainAuthCodeWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure;
 
 /** 注册 */
-+ (void) userRegisterWithParamer:(NSDictionary *)paramer suceess:(void(^)(NSDictionary * userInfo))sucess failure:(void(^)(id errorCode))failure;
++ (void) userRegisterWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure;
 
 /** 基本信息 */
 + (void) uploadBaseInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure;
 
 /** 登陆 */
-+ (void) userLoginWithParamer:(NSDictionary *)paramer suceess:(void(^)(NSDictionary * userInfo))sucess failure:(void(^)(id errorCode))failure;
++ (void) userLoginWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure;
 
 /** 实名认证 */
 + (void) idcardAuthenticationWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSuccess))sucess failure:(void(^)(id errorCode))failure;

@@ -75,8 +75,7 @@
 
 /** 获取验证码 */
 - (IBAction)gainAuthCode:(UIButton *)sender {
-    if (![VerifyHelper checkMobileTel:_phoneTf.text]) {
-        [self alertMessageWithViewController:self message:@"手机号码不正确"];
+    if (![VerifyHelper checkMobileTel:_phoneTf.text ctl:self]) {
         return;
     }
     [RYUserRequest gainAuthCodeWithParamer:@{@"phone":_phoneTf.text} suceess:^(BOOL isSendSuccess) {
@@ -91,19 +90,18 @@
 
 /** 注册成功直接登陆 */
 - (IBAction)insertApp:(UIButton *)sender {
-    if (![VerifyHelper checkMobileTel:_phoneTf.text]) {
-       [self alertMessageWithViewController:self message:@"手机号码不正确"];
+    if (![VerifyHelper checkMobileTel:_phoneTf.text ctl:self]) {
         return;
     }
     if ([VerifyHelper empty:_codeTf.text]) {
-        [self alertMessageWithViewController:self message:@"验证码不能为空"];
+        [self emptyPhoneCode];
         return;
     }
     if ([VerifyHelper empty:_pwTf.text] || [_pwTf.text length] < 8) {
-        [self alertMessageWithViewController:self message:@"密码不能为空"];
+        [self errorPassword];
         return;
     }
-    [RYUserRequest userRegisterWithParamer:@{@"phone":_phoneTf.text,@"fromWay":@"7",@"dxCode":_codeTf.text,@"tiPhone":_inviteTf.text,@"password":_pwTf.text} suceess:^(NSDictionary *userInfo) {
+    [RYUserRequest userRegisterWithParamer:@{@"phone":_phoneTf.text,@"fromWay":@"7",@"dxCode":_codeTf.text,@"tiPhone":_inviteTf.text,@"password":_pwTf.text} suceess:^(BOOL isSendSuccess) {
         [UtilityHelper insertApp:self];
     } failure:^(id errorCode) {
         

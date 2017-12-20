@@ -28,6 +28,15 @@
     }
 }
 
+/** 缓存数据 */
++ (void) saveUserInfoWith:(NSDictionary *)data
+{
+    NSDictionary * rel = data[@"rel"];
+    [UserInfoManage shareInstance].userInfo =  [[UserModel alloc] initWithDictionary:rel];
+    NSData * dataUser  = [NSKeyedArchiver archivedDataWithRootObject:rel];
+    [RYDefaults setObject:dataUser forKey:[NSString stringWithFormat:@"RYUserInfo"]];
+}
+
 /** 自适应高度 **/
 +  (CGFloat) fitHeightWithLabel:(NSString *)currentString size:(CGSize)size font:(UIFont*)font
 {
@@ -46,9 +55,15 @@
 /**
  DES加密
  */
-+ (NSString *) encryptParmar:(NSString *)paramer
++ (NSDictionary *) encryptParmar:(NSString *)paramer
 {
-    return [UtilityHelper encryptUseDES2:paramer key:DESKEY];
+    return @{KDatas:[UtilityHelper encryptUseDES2:paramer key:DESKEY]};
+}
+
+/** 私钥加密 */
++ (NSDictionary *) encryptPkeyParmar:(NSString *)paramer
+{
+    return @{KDatas:[UtilityHelper encryptUseDES2:paramer key:UserInfo.userInfo.pkey],@"token":UserInfo.userInfo.token};
 }
 
 /*
@@ -107,22 +122,6 @@ const  Byte iv[] = {1,2,3,4,5,6,7,8};
         plaintext = [[NSString alloc]initWithData:plaindata encoding:NSUTF8StringEncoding];
     }
     return plaintext;
-}
-
-/**
- 获取本地数据
- */
-+ (NSDictionary *) localDataResourceWithName:(NSString *)name
-{
-    //@"Directions"
-    NSString *strPath = [[NSBundle mainBundle] pathForResource:name ofType:@"geojson"];
-    NSString *parseJason = [[NSString alloc] initWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
-    NSData *jsonData = [parseJason dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *err;
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                        options:NSJSONReadingMutableContainers
-                                                          error:&err];
-    return dic;//parseJason.mj_keyValues;
 }
 
 /***

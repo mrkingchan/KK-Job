@@ -12,7 +12,7 @@
 {
     UIButton * currentBtn;
     CGRect origin_rect;
-    UITextField * _textField;
+    UITextField * _textField;    
 }
 
 @property (nonatomic,strong) UITableView * tableView;
@@ -48,6 +48,14 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
     return footer;
 }
 
+- (AuthenticationModel *)authModel
+{
+    if (!_authModel) {
+        _authModel = [[AuthenticationModel alloc] init];
+    }
+    return _authModel;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -66,7 +74,23 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
 /** 立即认证 **/
 - (void) buttonClick:(UIButton *) sender
 {
-    
+    if (![VerifyHelper checkMobileTel:self.authModel.phone ctl:self]) {
+        return;
+    }
+    if ([VerifyHelper empty:self.authModel.codeString]) {
+        [self emptyPhoneCode];
+        return;
+    }
+    if ([VerifyHelper empty:self.authModel.newsPassWord] || self.authModel.newsPassWord.length < 8 || [VerifyHelper empty:self.authModel.confirmPassWord] || self.authModel.confirmPassWord.length < 8) {
+        [self errorPassword];
+        return;
+    }
+    [RYUserRequest chgTradePwdByPhoneWithParamer:@{} suceess:^(BOOL isSuccess) {
+        [self alertMessageWithViewController:self message:@"交易密码设置成功"];
+        [self.navigationController popViewControllerAnimated:true];
+    } failure:^(id errorCode) {
+        
+    }];
 }
 
 #pragma mark UITableViewDataSource
@@ -91,7 +115,7 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
         cell.titleLabel.text = self.dataArray[indexPath.row];
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
         if (indexPath.row == 0) {
-            cell.textField.text = @"18681446361";
+            cell.textField.text = UserInfo.userInfo.tel;
             cell.textField.textColor = [UIColor lightGrayColor];
             cell.textField.enabled = false;
         }else{
@@ -134,8 +158,15 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
 
 - (void) gainAuthCode
 {
-    _time = KAuthCodeSecond;
-    [self countDown];
+    if (![VerifyHelper checkMobileTel:UserInfo.userInfo.tel ctl:self]) {
+        return;
+    }
+    [RYUserRequest gainAuthCodeWithParamer:@{@"phone":UserInfo.userInfo.tel} suceess:^(BOOL isSendSuccess) {
+        _time = KAuthCodeSecond;
+        [self countDown];
+    } failure:^(id errorCode) {
+        
+    }];
 }
 
 /** 开始读秒 */
@@ -182,7 +213,22 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
 /** textField的值 **/
 - (void) textFieldDidChange:(UITextField *) textField
 {
-    
+    switch (textField.tag) {
+        case 0:
+            self.authModel.phone = textField.text;
+            break;
+        case 1:
+            self.authModel.codeString = textField.text;
+            break;
+        case 2:
+            self.authModel.newsPassWord = textField.text;
+            break;
+        case 3:
+            self.authModel.confirmPassWord = textField.text;
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification

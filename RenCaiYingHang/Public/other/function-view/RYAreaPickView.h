@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^selectProvinceCityAreaCallBack)(NSString * province, NSString * city);//NSString * area,NSInteger aId
+typedef void(^selectProvinceCityAreaCallBack)(NSString * province, NSString * city,NSInteger cId);//NSString * area,NSInteger aId
 
 @interface RYAreaPickView : UIView
 

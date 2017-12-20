@@ -10,6 +10,9 @@
 
 #import "ReviseNecessaryViewController.h"
 
+#import "NecessarySexCell.h"
+
+#import "RYAlertAction.h"
 #import "RYAlertSheet.h"
 #import "RYAreaPickView.h"
 
@@ -18,6 +21,7 @@
 @interface NecessaryInfoViewController ()<UITableViewDelegate,UITableViewDataSource,PGDatePickerDelegate,JHUploadImageDelegate>
 {
     RYAreaPickView * pickView;
+    NSInteger cityId;
 }
 
 @property (nonatomic,strong) UITableView * tableView;
@@ -30,9 +34,15 @@
 
 @property (nonatomic,strong) NSMutableArray * postArr;
 
+//学历
+@property (nonatomic,copy) NSArray * educationArr;
+//经验
+@property (nonatomic,copy) NSArray * experienceArr;
+
 @end
 
 static NSString * UITableViewCellID = @"Cell";
+static NSString * NecessarySexCellID = @"NecessarySexCell";
 
 @implementation NecessaryInfoViewController
 
@@ -51,6 +61,7 @@ static NSString * UITableViewCellID = @"Cell";
 {
     if (!_tableView) {
          _tableView = [UIFactory initTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped delegate:self];
+        [_tableView registerNib:[UINib nibWithNibName:NecessarySexCellID bundle:nil] forCellReuseIdentifier:NecessarySexCellID];
         [self.view addSubview:_tableView];
     }
     return _tableView;
@@ -81,7 +92,13 @@ static NSString * UITableViewCellID = @"Cell";
 - (NSMutableArray *)postArr
 {
     if (!_postArr) {
-        _postArr = [NSMutableArray arrayWithArray:@[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"]];
+        _postArr = [NSMutableArray array];
+        for (int i = 0;  i < 8; i++) {
+            if (i == 1)
+                [_postArr addObject:@(1)];
+            else
+                [_postArr addObject:@"2"];
+        }
     }
     return _postArr;
 }
@@ -102,6 +119,8 @@ static NSString * UITableViewCellID = @"Cell";
     self.tableView.tableFooterView = self.footerView;
     
     self.dataArray = @[@"姓名",@"性别",@"最高学历",@"工作经验",@"出生年月",@"期望职位",@"期望薪资",@"期望城市"];
+    self.educationArr = @[@"博士以上",@"博士",@"硕士",@"本科",@"大专",@"大专以下",@"其他"];
+    self.experienceArr = @[@"10年以上",@"10年",@"9年",@"8年",@"7年",@"6年",@"5年",@"4年",@"3年",@"2年",@"1年",@"应届毕业生"];
     [self.tableView reloadData];
 }
 
@@ -127,25 +146,33 @@ static NSString * UITableViewCellID = @"Cell";
 /** 完成 **/
 - (void) finishClick
 {
-    NSDictionary * dic = @{@"name":self.postArr[0],@"gender":self.postArr[1],@"diploma":self.postArr[2],@"birthday":self.postArr[3],@"workyearX":self.postArr[4],@"expectjob":self.postArr[5],@"salrange":self.postArr[6],@"city":self.postArr[7]};
+    if ([self.postArr containsObject:@"2"]) {
+        [self alertMessageWithViewController:self message:@"基本信息不全"];
+        return;
+    }
+    [self replaceArr:self.educationArr index:2];
+    [self replaceArr:self.experienceArr index:3];
+    NSDictionary * dic = @{@"name":self.postArr[0],@"gender":self.postArr[1],@"diploma":self.postArr[2],@"workyearX":self.postArr[3],@"birthday":self.postArr[4],@"expectjob":self.postArr[5],@"salrange":self.postArr[6],@"city":@(cityId)};
     [RYUserRequest uploadBaseInfoWithParamer:dic suceess:^(BOOL isSendSuccess) {
-        
-    } failure:^(id errorCode) {
-        
-    }];
-    
-    
-    LoadingView * loading = [[LoadingView alloc] initWithFrame:CGRectZero];
-    [loading show];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [loading dismiss];
-        
-        [[NSUserDefaults standardUserDefaults] setObject:@(true) forKey:@"isNecessary"];
+        [RYDefaults setObject:@(true) forKey:@"isNecessary"];
         /** 默认进入雷达页面 **/
         [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
         [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
-    });
+    } failure:^(id errorCode) {
+        
+    }];
+}
+
+/** 传id 不是字符串 **/
+- (void) replaceArr:(NSArray *) dataArr index:(NSInteger) index
+{
+    NSString * string = self.postArr[index];
+    for (int i = 0; i < dataArr.count; i++) {
+        NSString * education = dataArr[i];
+        if ([string isEqualToString:education]) {
+            [self.postArr replaceObjectAtIndex:index withObject:[NSString stringWithFormat:@"%zd",dataArr.count - 1 - i]];
+        }
+    }
 }
 
 #pragma mark UITableViewDataSource
@@ -157,12 +184,21 @@ static NSString * UITableViewCellID = @"Cell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == 1) {
+        NecessarySexCell * cell = [tableView dequeueReusableCellWithIdentifier:NecessarySexCellID];
+        cell.textLabel.text = self.dataArray[indexPath.row];
+        cell.textLabel.font = systemOfFont(16);
+        cell.NecessarySexSelectCall = ^(NSInteger index) {
+            [self.postArr replaceObjectAtIndex:indexPath.row withObject:@(index)];
+        };
+        return cell;
+    }
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:UITableViewCellID];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:UITableViewCellID];
     }
     cell.textLabel.text = self.dataArray[indexPath.row];
-    if (![self.postArr[indexPath.row] isEqualToString:@"1"]) {
+    if (![self.postArr[indexPath.row] isEqualToString:@"2"]) {
         cell.detailTextLabel.text = self.postArr[indexPath.row];
     }
     cell.textLabel.font = cell.detailTextLabel.font = systemOfFont(16);
@@ -216,11 +252,11 @@ static NSString * UITableViewCellID = @"Cell";
         }
             break;
         case 2:{
-            [self alertShowWithArr:@[@"博士",@"硕士",@"本科",@"专科",@"其他"] indexPath:indexPath];
+            [self alertShowWithArr:self.educationArr indexPath:indexPath];
         }
             break;
         case 3:{
-            [self alertShowWithArr:@[@"10年以上",@"7-10年",@"5-7年",@"3-5年",@"1-3年",@"无经验"] indexPath:indexPath];
+            [self alertShowWithArr:self.experienceArr indexPath:indexPath];
         }
             break;
         case 7:
@@ -252,12 +288,12 @@ static NSString * UITableViewCellID = @"Cell";
     datePicker.delegate = self;
     [datePicker showWithShadeBackgroud];
     datePicker.datePickerType = PGPickerViewType3;
-    datePicker.datePickerMode = PGDatePickerModeYearAndMonth;
+    datePicker.datePickerMode = PGDatePickerModeDate;
     
     NSArray * dateArr =  [[UtilityHelper getCurrentTimes] componentsSeparatedByString:@"-"];
     
-    datePicker.minimumDate = [NSDate setYear:1970 month:1];
-    datePicker.maximumDate = [NSDate setYear:[dateArr[0] integerValue] month:[dateArr[1] integerValue]];
+    datePicker.minimumDate = [NSDate setYear:1970 month:1 day:1];
+    datePicker.maximumDate = [NSDate setYear:[dateArr[0] integerValue] month:[dateArr[1] integerValue] day:[dateArr[2] integerValue]];
     
     datePicker.titleLabel.text = @"出生年月";
     //设置线条的颜色
@@ -280,12 +316,19 @@ static NSString * UITableViewCellID = @"Cell";
 /** 学历,经验,期望城市 **/
 - (void) alertShowWithArr:(NSArray *) array indexPath:(NSIndexPath *)indexPath
 {
-    RYAlertSheet * sheet = [[RYAlertSheet alloc] initWithButtons:array];
-    [sheet show];
+    RYAlertAction * action = [[RYAlertAction alloc] initWithFrame:CGRectZero dataArr:array];
+    [action show];
     
-    sheet.ryAlertSheetCall = ^(NSInteger index) {
-        [self refreshTableViewWith:indexPath string:array[index]];
+    action.ryAlertActionCall = ^(NSInteger index) {
+       [self refreshTableViewWith:indexPath string:array[index]];
     };
+    
+//    RYAlertSheet * sheet = [[RYAlertSheet alloc] initWithButtons:array];
+//    [sheet show];
+//    
+//    sheet.ryAlertSheetCall = ^(NSInteger index) {
+//        [self refreshTableViewWith:indexPath string:array[index]];
+//    };
 }
 
 /** 刷新数据 */
@@ -298,7 +341,7 @@ static NSString * UITableViewCellID = @"Cell";
 #pragma PGDatePickerDelegate
 - (void)datePicker:(PGDatePicker *)datePicker didSelectDate:(NSDateComponents *)dateComponents {
     NSLog(@"dateComponents = %@", dateComponents);
-    NSString * string = [NSString stringWithFormat:@"%zd年%zd月",[dateComponents year],[dateComponents month]];
+    NSString * string = [NSString stringWithFormat:@"%zd-%zd-%zd",[dateComponents year],[dateComponents month],[dateComponents day]];
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:4 inSection:0];    ;
     [self refreshTableViewWith:indexPath string:string];
 }
@@ -331,7 +374,8 @@ static NSString * UITableViewCellID = @"Cell";
         pickView.provinceArr = dataArr;
         [pickView show];
         
-        pickView.selectProvinceCityAreaCall = ^(NSString *province, NSString *city) {
+        pickView.selectProvinceCityAreaCall = ^(NSString *province, NSString *city,NSInteger cId) {
+            cityId = cId;
             [weakSelf refreshTableViewWith:indexPath string:city];
         };
        

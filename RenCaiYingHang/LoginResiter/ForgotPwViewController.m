@@ -89,7 +89,7 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
     }else{
         LabelTextFieldCell * cell = [tableView dequeueReusableCellWithIdentifier:LabelTextFieldCellID];
         cell.titleLabel.text = self.dataArray[indexPath.row];
-        if (indexPath.row == 0) {
+        if (indexPath.row == 0 && UserInfo.is_login) {
             cell.textField.text = @"18681446361";
             cell.textField.textColor = [UIColor lightGrayColor];
             cell.textField.enabled = false;

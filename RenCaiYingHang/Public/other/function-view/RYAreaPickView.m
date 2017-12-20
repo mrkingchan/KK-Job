@@ -275,8 +275,8 @@ NS_ENUM(NSInteger,PickState) {
             
         }];
         
-        if (_selectProvinceCityAreaCall) {
-            _selectProvinceCityAreaCall(selectedProvince,selectedCity);
+        if (_selectProvinceCityAreaCall){
+            _selectProvinceCityAreaCall(selectedProvince,selectedCity,model.cityId);
         }
         [self removeFromSuperview];
         //获取刷新地区的数据

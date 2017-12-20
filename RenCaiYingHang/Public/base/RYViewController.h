@@ -13,8 +13,15 @@
 /** 提示框 */
 - (void) alertMessageWithViewController:(UIViewController *)viewCtl message:(NSString *)message;
 
+/** 键盘关闭 */
 - (void)closeBeyBoard;
 
+/** 键盘通知 */
 - (void) addNotification;
+
+/** 提示信息类 **/
+- (void) emptyPhoneCode;
+
+- (void) errorPassword;
 
 @end

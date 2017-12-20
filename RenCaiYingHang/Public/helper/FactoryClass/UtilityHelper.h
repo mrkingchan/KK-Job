@@ -17,6 +17,9 @@
 /** 进入app **/
 + (void) insertApp:(UIViewController *) ctl;
 
+/** 缓存数据 */
++ (void) saveUserInfoWith:(NSDictionary *)data;
+
 /**
  自适应高度
  **/
@@ -27,10 +30,11 @@
  **/
 +  (CGFloat) fitWidthWithLabel:(NSString *)currentString font:(UIFont*)font;
 
-/**
- DES加密
- **/
-+ (NSString *) encryptParmar:(NSString *)paramer;
+/** DES加密 **/
++ (NSDictionary *) encryptParmar:(NSString *)paramer;
+
+/** 私钥加密 */
++ (NSDictionary *) encryptPkeyParmar:(NSString *)paramer;
 
 /**
  DES加密方式
@@ -42,12 +46,6 @@
  **/
 + (NSString *)decryptUseDES2:(NSString *)cipherText key:(NSString *)key;
 
-/**
- 获取本地数据
- */
-+ (NSDictionary *) localDataResourceWithName:(NSString *)name;
-
-
 /***
  扫一扫
  **/
@@ -55,5 +53,7 @@
 
 /** 获取当前时间 */
 + (NSString*)getCurrentTimes;
+
+
 
 @end

@@ -31,7 +31,6 @@ static NSString * SecurityCenterTableViewCellID = @"UITableViewCell";
 {
     if (!_tableView) {
         _tableView = [UIFactory initTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped delegate:self];
-        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:SecurityCenterTableViewCellID];
         [self.view addSubview:_tableView];
     }
     return _tableView;
@@ -59,10 +58,16 @@ static NSString * SecurityCenterTableViewCellID = @"UITableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:SecurityCenterTableViewCellID];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SecurityCenterTableViewCellID];
+    }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
-    cell.textLabel.font = systemOfFont(16);
+    if (indexPath.section == 0 && indexPath.row == 1) {
+        cell.detailTextLabel.text = UserInfo.userInfo.tel;
+    }
+    cell.textLabel.font =  cell.detailTextLabel.font = systemOfFont(16);
     return cell;
 }
 

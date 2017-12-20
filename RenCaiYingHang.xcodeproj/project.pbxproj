@@ -42,6 +42,10 @@
 		8F1F666D1FD964E8004BF8F1 /* UploadResumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F666C1FD964E8004BF8F1 /* UploadResumeViewController.m */; };
 		8F1F66711FD9699A004BF8F1 /* DropInBoxH5Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66701FD9699A004BF8F1 /* DropInBoxH5Controller.m */; };
 		8F1F66741FD969B0004BF8F1 /* InterviewH5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66731FD969B0004BF8F1 /* InterviewH5ViewController.m */; };
+		8F2A2B6B1FEA0240003E5507 /* NecessarySexCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2A2B691FEA0240003E5507 /* NecessarySexCell.m */; };
+		8F2A2B6C1FEA0240003E5507 /* NecessarySexCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F2A2B6A1FEA0240003E5507 /* NecessarySexCell.xib */; };
+		8F5087FC1FEA5C1500743B9C /* AuthenticationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5087FB1FEA5C1500743B9C /* AuthenticationModel.m */; };
+		8F5088031FEA7B8000743B9C /* RYAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5088021FEA7B8000743B9C /* RYAlertAction.m */; };
 		8F728C261FDE1FC300C6247B /* JHUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F728C251FDE1FC300C6247B /* JHUploadImage.m */; };
 		8F728C2A1FDE2F9F00C6247B /* AssetsManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F728C291FDE2F9F00C6247B /* AssetsManagementViewController.m */; };
 		8F728C2D1FDE356200C6247B /* RechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F728C2C1FDE356200C6247B /* RechargeViewController.m */; };
@@ -211,6 +215,13 @@
 		8F1F66701FD9699A004BF8F1 /* DropInBoxH5Controller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DropInBoxH5Controller.m; sourceTree = "<group>"; };
 		8F1F66721FD969B0004BF8F1 /* InterviewH5ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterviewH5ViewController.h; sourceTree = "<group>"; };
 		8F1F66731FD969B0004BF8F1 /* InterviewH5ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterviewH5ViewController.m; sourceTree = "<group>"; };
+		8F2A2B681FEA0240003E5507 /* NecessarySexCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NecessarySexCell.h; sourceTree = "<group>"; };
+		8F2A2B691FEA0240003E5507 /* NecessarySexCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NecessarySexCell.m; sourceTree = "<group>"; };
+		8F2A2B6A1FEA0240003E5507 /* NecessarySexCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NecessarySexCell.xib; sourceTree = "<group>"; };
+		8F5087FA1FEA5C1500743B9C /* AuthenticationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationModel.h; sourceTree = "<group>"; };
+		8F5087FB1FEA5C1500743B9C /* AuthenticationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationModel.m; sourceTree = "<group>"; };
+		8F5088011FEA7B8000743B9C /* RYAlertAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYAlertAction.h; sourceTree = "<group>"; };
+		8F5088021FEA7B8000743B9C /* RYAlertAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYAlertAction.m; sourceTree = "<group>"; };
 		8F728C241FDE1FC300C6247B /* JHUploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHUploadImage.h; sourceTree = "<group>"; };
 		8F728C251FDE1FC300C6247B /* JHUploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHUploadImage.m; sourceTree = "<group>"; };
 		8F728C281FDE2F9F00C6247B /* AssetsManagementViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetsManagementViewController.h; sourceTree = "<group>"; };
@@ -468,6 +479,8 @@
 				8FF04D4E1FDA6FDE00B14036 /* RYAlertSheet.m */,
 				8F0EF4D71FE3D39500D179D5 /* RYAreaPickView.h */,
 				8F0EF4D81FE3D39500D179D5 /* RYAreaPickView.m */,
+				8F5088011FEA7B8000743B9C /* RYAlertAction.h */,
+				8F5088021FEA7B8000743B9C /* RYAlertAction.m */,
 			);
 			path = "function-view";
 			sourceTree = "<group>";
@@ -508,11 +521,8 @@
 			isa = PBXGroup;
 			children = (
 				8F0EF4D21FE3B20000D179D5 /* Request */,
+				8F2A2B671FEA020C003E5507 /* BaseInfo */,
 				8F1F66591FD95EC0004BF8F1 /* Setup */,
-				8FF04D441FDA3A9300B14036 /* NecessaryInfoViewController.h */,
-				8FF04D451FDA3A9300B14036 /* NecessaryInfoViewController.m */,
-				8FF04D4A1FDA627200B14036 /* ReviseNecessaryViewController.h */,
-				8FF04D4B1FDA627200B14036 /* ReviseNecessaryViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -562,6 +572,29 @@
 				8F1F66731FD969B0004BF8F1 /* InterviewH5ViewController.m */,
 			);
 			path = TabBarH5;
+			sourceTree = "<group>";
+		};
+		8F2A2B671FEA020C003E5507 /* BaseInfo */ = {
+			isa = PBXGroup;
+			children = (
+				8F2A2B681FEA0240003E5507 /* NecessarySexCell.h */,
+				8F2A2B691FEA0240003E5507 /* NecessarySexCell.m */,
+				8F2A2B6A1FEA0240003E5507 /* NecessarySexCell.xib */,
+				8FF04D441FDA3A9300B14036 /* NecessaryInfoViewController.h */,
+				8FF04D451FDA3A9300B14036 /* NecessaryInfoViewController.m */,
+				8FF04D4A1FDA627200B14036 /* ReviseNecessaryViewController.h */,
+				8FF04D4B1FDA627200B14036 /* ReviseNecessaryViewController.m */,
+			);
+			path = BaseInfo;
+			sourceTree = "<group>";
+		};
+		8F5087FD1FEA5C2A00743B9C /* model */ = {
+			isa = PBXGroup;
+			children = (
+				8F5087FA1FEA5C1500743B9C /* AuthenticationModel.h */,
+				8F5087FB1FEA5C1500743B9C /* AuthenticationModel.m */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		8F728C231FDE1FC300C6247B /* JHUploadImage */ = {
@@ -1037,6 +1070,7 @@
 		8FF04D701FDA907300B14036 /* SecurityCenter */ = {
 			isa = PBXGroup;
 			children = (
+				8F5087FD1FEA5C2A00743B9C /* model */,
 				8FF04D541FDA800A00B14036 /* SecurityCenterViewController.h */,
 				8FF04D551FDA800A00B14036 /* SecurityCenterViewController.m */,
 				8FF04D5A1FDA81E800B14036 /* IdentificationViewController.h */,
@@ -1175,6 +1209,7 @@
 				8F1CA8331FE7688D00BBD208 /* CollectionViewCell.xib in Resources */,
 				8FF04D751FDA90B500B14036 /* LabelViewCell.xib in Resources */,
 				8FF04D6C1FDA898C00B14036 /* LabelTextFieldBuutonCell.xib in Resources */,
+				8F2A2B6C1FEA0240003E5507 /* NecessarySexCell.xib in Resources */,
 				8F85D8281FD922A500BC1A7D /* Main.storyboard in Resources */,
 				8F85D8A71FD9257400BC1A7D /* SGBottomView.xib in Resources */,
 				8FF04D641FDA82AD00B14036 /* LabelTextFieldCell.xib in Resources */,
@@ -1290,11 +1325,13 @@
 				8F1F66711FD9699A004BF8F1 /* DropInBoxH5Controller.m in Sources */,
 				8F85D8301FD922A500BC1A7D /* main.m in Sources */,
 				8F1F66621FD9626D004BF8F1 /* SetupViewController.m in Sources */,
+				8F2A2B6B1FEA0240003E5507 /* NecessarySexCell.m in Sources */,
 				8F1CA8221FE7657A00BBD208 /* RyAnnotation.m in Sources */,
 				8FF04D591FDA801B00B14036 /* FeebBackViewController.m in Sources */,
 				8FF04D5F1FDA81FE00B14036 /* EMailViewController.m in Sources */,
 				8FE02C2B1FE8B56B009286E3 /* UITextField+SystemFont.m in Sources */,
 				8F0EF4CD1FE36CEF00D179D5 /* GestureManageController.m in Sources */,
+				8F5087FC1FEA5C1500743B9C /* AuthenticationModel.m in Sources */,
 				8FF04D421FDA26AA00B14036 /* TextViewCell.m in Sources */,
 				8FF04D461FDA3A9300B14036 /* NecessaryInfoViewController.m in Sources */,
 				8F0EF4B91FE366D100D179D5 /* GestureVerifyViewController.m in Sources */,
@@ -1343,6 +1380,7 @@
 				8F85D8A41FD9257400BC1A7D /* SGScanningQRCodeVC.m in Sources */,
 				8F0EF4C91FE36A7A00D179D5 /* PCLockLabel.m in Sources */,
 				8F1F66741FD969B0004BF8F1 /* InterviewH5ViewController.m in Sources */,
+				8F5088031FEA7B8000743B9C /* RYAlertAction.m in Sources */,
 				8F85D8221FD922A400BC1A7D /* AppDelegate.m in Sources */,
 				8F1CA82E1FE7688100BBD208 /* JXMapNavigationView.m in Sources */,
 				8F1F666D1FD964E8004BF8F1 /* UploadResumeViewController.m in Sources */,

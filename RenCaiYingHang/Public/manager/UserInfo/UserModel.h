@@ -10,20 +10,12 @@
 
 @interface UserModel : RYBaseModel
 
-@property (nonatomic,copy) NSString * userName;
-
-@property (nonatomic,copy) NSString * sex;
-
-@property (nonatomic,copy) NSString * education;
-
-@property (nonatomic,copy) NSString * experience;
-
-@property (nonatomic,copy) NSString * birthday;
-
-@property (nonatomic,copy) NSString * job;
-
-@property (nonatomic,copy) NSString * salary;
-
-@property (nonatomic,copy) NSString * city;
+/** token */
+@property (nonatomic,copy) NSString * token;
+/** 私钥 **/
+@property (nonatomic,copy) NSString * pkey;
+/** 手机号 **/
+@property (nonatomic,copy) NSString * tel;
+/** id区分个人还是企业 **/
 
 @end
