@@ -154,7 +154,6 @@ static NSString * NecessarySexCellID = @"NecessarySexCell";
     [self replaceArr:self.experienceArr index:3];
     NSDictionary * dic = @{@"name":self.postArr[0],@"gender":self.postArr[1],@"diploma":self.postArr[2],@"workyearX":self.postArr[3],@"birthday":self.postArr[4],@"expectjob":self.postArr[5],@"salrange":self.postArr[6],@"city":@(cityId)};
     [RYUserRequest uploadBaseInfoWithParamer:dic suceess:^(BOOL isSendSuccess) {
-        [RYDefaults setObject:@(true) forKey:@"isNecessary"];
         /** 默认进入雷达页面 **/
         [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
         [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];

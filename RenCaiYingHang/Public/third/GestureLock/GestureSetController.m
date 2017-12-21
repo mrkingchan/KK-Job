@@ -311,13 +311,7 @@
         if (equal) {
             NSLog(@"登陆成功！");
             /** 求职者版本 */
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isNecessary"] boolValue]) {
-                /** 默认进入雷达页面 **/
-                [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
-                [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
-            }else{
-                [self.navigationController pushViewController:[[NecessaryInfoViewController alloc] init] animated:true];
-            }
+            [UtilityHelper insertApp:self];
         } else {
             NSLog(@"密码错误！");
             

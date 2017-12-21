@@ -52,6 +52,21 @@
     }];
 }
 
+/** 是否完善基本信息 **/
++ (void) whetherBaseInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure
+{
+    NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,WhetherBasicInfo];
+    [NetWorkHelper postWithURLString:urlString parameters:paramer success:^(NSDictionary *data) {
+        if ([data[@"reCode"] isEqualToString:@"X0000"]) {
+           sucess(true);
+        }else{
+           sucess(false);
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 /** 基本信息 */
 + (void) uploadBaseInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure
 {
@@ -75,6 +90,24 @@
         
         [UtilityHelper saveUserInfoWith:data];
         sucess(true);
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+/** 获取求职者邮箱，身份证(用以判断是否认证绑定) **/
++ (void) getEmailAndIdcardWithParamer:(NSDictionary *)paramer suceess:(void(^)(AuthenticationModel * model))sucess failure:(void(^)(id errorCode))failure
+{
+    
+    NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,GetEmailAndIdcard];
+    [NetWorkHelper postWithURLString:urlString parameters:paramer success:^(NSDictionary *data) {
+        
+        if ([data[@"reCode"] isEqualToString:@"X0000"] && ![VerifyHelper isNull:data key:@"rel"]) {
+            NSDictionary * rel =  data[@"rel"];
+            AuthenticationModel * model = [[AuthenticationModel alloc] initWithDictionary:rel];
+            sucess(model);
+        }
         
     } failure:^(NSError *error) {
         
@@ -154,6 +187,19 @@
     NSDictionary * dic = [UtilityHelper encryptPkeyParmar:jsonStr];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         sucess(true);
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+/** 扫码领面试奖 */
++ (void) scanCodeInterviewAwardWithWithParamer:(NSDictionary *)paramer suceess:(void(^)(NSString * urlString))sucess failure:(void(^)(id errorCode))failure
+{
+    NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,ScanCodeInterviewAward];
+    NSString * jsonStr = [paramer mj_JSONString];
+    NSDictionary * dic = @{KDatas:jsonStr,@"token":UserInfo.userInfo.token};
+    [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
+        //返回的应该是跳转链接
     } failure:^(NSError *error) {
         
     }];

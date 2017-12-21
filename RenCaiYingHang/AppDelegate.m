@@ -23,11 +23,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-    /** 默认没有基本信息 **/
-    if ([VerifyHelper empty:[RYDefaults objectForKey:@"isNecessary"]]) {
-        [RYDefaults setObject:@(false) forKey:@"isNecessary"];
-    }
 
     [self gestureAuth];
     

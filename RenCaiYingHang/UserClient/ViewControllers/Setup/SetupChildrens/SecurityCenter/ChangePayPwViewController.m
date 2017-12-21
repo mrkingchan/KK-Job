@@ -74,7 +74,7 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
 /** 立即认证 **/
 - (void) buttonClick:(UIButton *) sender
 {
-    if (![VerifyHelper checkMobileTel:self.authModel.phone ctl:self]) {
+    if (![VerifyHelper checkMobileTel:UserInfo.userInfo.tel ctl:self]) {
         return;
     }
     if ([VerifyHelper empty:self.authModel.codeString]) {
@@ -85,7 +85,8 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
         [self errorPassword];
         return;
     }
-    [RYUserRequest chgTradePwdByPhoneWithParamer:@{} suceess:^(BOOL isSuccess) {
+    NSDictionary * dic = @{@"phone":UserInfo.userInfo.tel,@"phoneCode":self.authModel.codeString,@"newPassword":self.authModel.newsPassWord,@"confirmPassword":self.authModel.confirmPassWord};
+    [RYUserRequest chgTradePwdByPhoneWithParamer:dic suceess:^(BOOL isSuccess) {
         [self alertMessageWithViewController:self message:@"交易密码设置成功"];
         [self.navigationController popViewControllerAnimated:true];
     } failure:^(id errorCode) {

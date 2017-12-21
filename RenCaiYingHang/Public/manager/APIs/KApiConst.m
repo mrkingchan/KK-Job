@@ -43,6 +43,9 @@ NSString * const GetProvinceInfo = @"identity/getProvinceInfo";
 /** 省份id获取城市接口 */
 NSString * const GetCityInfo = @"identity/getCityInfoByFather";
 
+/** 验证是否完善了基本资料 */
+NSString * const WhetherBasicInfo = @"securityCenter/whetherBaseInfo";
+
 /** 基本资料 */
 NSString * const BasicInfo = @"identity/regist/basicInfo";
 
@@ -51,6 +54,9 @@ NSString * const LoginPort = @"identity/login";
 
 /** 扫码领面试奖接口 */
 NSString * const ScanCodeInterviewAward = @"identity/scanCodeInterviewAward";
+
+/** 是否实名认证和邮箱认证 */
+NSString * const GetEmailAndIdcard = @"securityCenter/getEmailAndIdcard";
 
 /** 实名认证 */
 NSString * const IdcardAuthentication = @"securityCenter/idcardAuthentication";

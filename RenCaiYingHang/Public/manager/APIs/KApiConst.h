@@ -44,6 +44,9 @@ extern NSString * const GetProvinceInfo;
 /** 省份id获取城市接口 */
 extern NSString * const GetCityInfo;
 
+/** 验证是否完善了基本资料 */
+extern NSString * const WhetherBasicInfo;
+
 /** 基本资料 */
 extern NSString * const BasicInfo;
 
@@ -52,6 +55,9 @@ extern NSString * const LoginPort;
 
 /** 扫码领面试奖接口 */
 extern NSString * const ScanCodeInterviewAward;
+
+/** 是否实名认证和邮箱认证 */
+extern NSString * const GetEmailAndIdcard;
 
 /** 实名认证 */
 extern NSString * const IdcardAuthentication;

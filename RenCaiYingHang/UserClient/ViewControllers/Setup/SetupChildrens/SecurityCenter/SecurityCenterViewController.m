@@ -21,6 +21,8 @@
 
 @property (nonatomic,copy) NSArray * dataArray;
 
+@property (nonatomic,strong) AuthenticationModel * authModel;
+
 @end
 
 @implementation SecurityCenterViewController
@@ -36,10 +38,29 @@ static NSString * SecurityCenterTableViewCellID = @"UITableViewCell";
     return _tableView;
 }
 
+- (AuthenticationModel *)authModel
+{
+    if (!_authModel) {
+        _authModel = [[AuthenticationModel alloc] init];
+    }
+    return _authModel;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [RYUserRequest getEmailAndIdcardWithParamer:@{@"token":UserInfo.userInfo.token} suceess:^(AuthenticationModel * model) {
+        self.authModel = model;
+        [self configurationTableView];
+    } failure:^(id errorCode) {
+        
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self configurationTableView];
+    //[self configurationTableView];
 }
 
 - (void) configurationTableView
@@ -64,8 +85,27 @@ static NSString * SecurityCenterTableViewCellID = @"UITableViewCell";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
-    if (indexPath.section == 0 && indexPath.row == 1) {
-        cell.detailTextLabel.text = UserInfo.userInfo.tel;
+    if (indexPath.section == 0) {
+        switch (indexPath.row) {
+            case 0:{
+                if (![VerifyHelper empty:self.authModel.idcardNum]) {
+                    cell.detailTextLabel.text = @"已认证";
+                }
+            }
+                break;
+            case 1:{
+                cell.detailTextLabel.text = UserInfo.userInfo.tel;
+            }
+                break;
+            case 2 :{
+                if (![VerifyHelper empty:self.authModel.email]) {
+                    cell.detailTextLabel.text = self.authModel.email;
+                }
+            }
+                break;
+            default:
+                break;
+        }
     }
     cell.textLabel.font =  cell.detailTextLabel.font = systemOfFont(16);
     return cell;
@@ -110,8 +150,10 @@ static NSString * SecurityCenterTableViewCellID = @"UITableViewCell";
         {
             switch (indexPath.row) {
                 case 0:{
-                    IdentificationViewController * certificationCtl = [[IdentificationViewController alloc] init];
-                    [self.navigationController pushViewController:certificationCtl animated:true];
+                    if ([VerifyHelper empty:self.authModel.idcardNum]) {
+                        IdentificationViewController * certificationCtl = [[IdentificationViewController alloc] init];
+                        [self.navigationController pushViewController:certificationCtl animated:true];
+                    }
                 }
                     break;
                 case 1:{

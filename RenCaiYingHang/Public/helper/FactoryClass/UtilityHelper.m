@@ -19,13 +19,17 @@
 /** 进入app **/
 + (void) insertApp:(UIViewController *) ctl
 {
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isNecessary"] boolValue]) {
-        /** 默认进入雷达页面 **/
-        [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
-        [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
-    }else{
-        [ctl.navigationController pushViewController:[[NecessaryInfoViewController alloc] init] animated:true];
-    }
+    [RYUserRequest whetherBaseInfoWithParamer:@{@"token":UserInfo.userInfo.token} suceess:^(BOOL isSendSuccess) {
+        if (isSendSuccess) {
+            /** 默认进入雷达页面 **/
+            [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
+            [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+        }else{
+            [ctl.navigationController pushViewController:[[NecessaryInfoViewController alloc] init] animated:true];
+        }
+    } failure:^(id errorCode) {
+        
+    }];
 }
 
 /** 缓存数据 */
