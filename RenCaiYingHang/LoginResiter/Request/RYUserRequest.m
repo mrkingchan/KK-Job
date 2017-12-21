@@ -193,11 +193,10 @@
 }
 
 /** 扫码领面试奖 */
-+ (void) scanCodeInterviewAwardWithWithParamer:(NSDictionary *)paramer suceess:(void(^)(NSString * urlString))sucess failure:(void(^)(id errorCode))failure
++ (void) scanCodeInterviewAwardWithWithParamer:(NSString *)paramer suceess:(void(^)(NSString * urlString))sucess failure:(void(^)(id errorCode))failure
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,ScanCodeInterviewAward];
-    NSString * jsonStr = [paramer mj_JSONString];
-    NSDictionary * dic = @{KDatas:jsonStr,@"token":UserInfo.userInfo.token};
+    NSDictionary * dic = @{KDatas:paramer,@"token":UserInfo.userInfo.token};
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         //返回的应该是跳转链接
     } failure:^(NSError *error) {

@@ -39,7 +39,8 @@
     self.webView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight - KToolHeight - kStatusBarHeight);
     
     //测试
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KBaseURL,PersonCenter]]]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@?token=%@",KBaseURL,PersonCenter,UserInfo.userInfo.token]]]];
+    NSLog(@">>>>%@",[NSString stringWithFormat:@"%@%@?token=%@",KBaseURL,PersonCenter,UserInfo.userInfo.token]);
 }
 
 - (void)viewWillDisappear:(BOOL)animated

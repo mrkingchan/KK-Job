@@ -8,7 +8,7 @@
 
 #import "RYNavigationController.h"
 
-@interface RYNavigationController ()
+@interface RYNavigationController ()<SGScanningQRCodeVCDelegate>
 
 @end
 
@@ -58,6 +58,20 @@
     } else{
         [self popViewControllerAnimated:YES];
     }
+}
+
+/** 扫码回掉 */
+-(void)scanSuccessBarcodeJump:(NSString*)str
+{
+    if ([str rangeOfString:KDatas].location !=NSNotFound) {
+        str =  [str componentsSeparatedByString:@"datas="][1];
+    }
+    
+    [RYUserRequest scanCodeInterviewAwardWithWithParamer:str suceess:^(NSString *urlString) {
+        
+    } failure:^(id errorCode) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

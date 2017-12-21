@@ -17,7 +17,7 @@
 @implementation UtilityHelper
 
 /** 进入app **/
-+ (void) insertApp:(UIViewController *) ctl
++ (void) insertApp
 {
     [RYUserRequest whetherBaseInfoWithParamer:@{@"token":UserInfo.userInfo.token} suceess:^(BOOL isSendSuccess) {
         if (isSendSuccess) {
@@ -25,7 +25,7 @@
             [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
             [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
         }else{
-            [ctl.navigationController pushViewController:[[NecessaryInfoViewController alloc] init] animated:true];
+            [UIApplication sharedApplication].keyWindow.rootViewController = [[NecessaryInfoViewController alloc] init];
         }
     } failure:^(id errorCode) {
         

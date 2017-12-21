@@ -226,7 +226,8 @@
 //            jumpVC.jump_URL = obj.stringValue;
 //            NSLog(@"2stringValue = = %@", obj.stringValue);
 //            [self.navigationController pushViewController:jumpVC animated:YES];
-              [_delegate scanSuccessBarcodeJump:obj.stringValue];
+            [self.navigationController popToViewController:self.navigationController.viewControllers[0] animated:true];
+            [_delegate scanSuccessBarcodeJump:obj.stringValue];
             
         } else { // 扫描结果为条形码
         
@@ -234,10 +235,8 @@
 //            jumpVC.jump_bar_code = obj.stringValue;
 //            NSLog(@"1stringValue = = %@", obj.stringValue);
 //            [self.navigationController pushViewController:jumpVC animated:YES];
-            
+            [self.navigationController popViewControllerAnimated:true];
             [_delegate scanSuccessBarcodeJump:obj.stringValue];
-            
-            
             
         }
     }

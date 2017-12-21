@@ -15,7 +15,7 @@
 @interface UtilityHelper : NSObject
 
 /** 进入app **/
-+ (void) insertApp:(UIViewController *) ctl;
++ (void) insertApp;
 
 /** 缓存数据 */
 + (void) saveUserInfoWith:(NSDictionary *)data;

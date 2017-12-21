@@ -311,7 +311,7 @@
         if (equal) {
             NSLog(@"登陆成功！");
             /** 求职者版本 */
-            [UtilityHelper insertApp:self];
+            [UtilityHelper insertApp];
         } else {
             NSLog(@"密码错误！");
             

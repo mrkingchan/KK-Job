@@ -27,7 +27,7 @@
     [self gestureAuth];
     
     /** 是否进入后台操作了 */
-    _isEnterBackground = false;
+    //_isEnterBackground = false;
     
     /** 获取是否存在缓存 */
     [self gainUserModel];
@@ -37,6 +37,8 @@
     
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
+    /** crash Application windows are expected to have a root **/
+    self.window.rootViewController = [[UIViewController alloc] init];
     
     /** 新版本引导页出现 */
     if ([OSGuideViewController isShow]) {
@@ -71,9 +73,13 @@
         [vc setType:GestureViewControllerTypeLogin];
         self.window.rootViewController = [[RYNavigationController alloc] initWithRootViewController:vc];
     }else{
-        UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-        self.window.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
-        [self.window.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+        if ([VerifyHelper empty:UserInfo.userInfo.token]) {
+            UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+            self.window.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
+            [self.window.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+        }else{
+            [UtilityHelper insertApp];
+        }
     }
 }
 
@@ -116,11 +122,11 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     /**进入后台*/
-    _isEnterBackground = true;
-    NSDate *senddate = [NSDate date];
-    NSString *date2 = [NSString stringWithFormat:@"%ld", (long)[senddate timeIntervalSince1970]];
-    [[NSUserDefaults standardUserDefaults] setObject:date2 forKey:@"lastTime"];
-    NSLog(@"date2时间戳 = %@",date2);
+//    _isEnterBackground = true;
+//    NSDate *senddate = [NSDate date];
+//    NSString *date2 = [NSString stringWithFormat:@"%ld", (long)[senddate timeIntervalSince1970]];
+//    [[NSUserDefaults standardUserDefaults] setObject:date2 forKey:@"lastTime"];
+//    NSLog(@"date2时间戳 = %@",date2);
 }
 
 
@@ -131,15 +137,15 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     /**进入前台*/
-    if (_isEnterBackground) {
-        NSDate *senddate = [NSDate date];
-        NSString * current = [NSString stringWithFormat:@"%ld", (long)[senddate timeIntervalSince1970]];
-        NSString * last = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastTime"];
-        if ([current longLongValue] - [last longLongValue] >= 30) {
-            [self clickEnter];
-        }
-        _isEnterBackground = false;
-    }
+//    if (_isEnterBackground) {
+//        NSDate *senddate = [NSDate date];
+//        NSString * current = [NSString stringWithFormat:@"%ld", (long)[senddate timeIntervalSince1970]];
+//        NSString * last = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastTime"];
+//        if ([current longLongValue] - [last longLongValue] >= 30) {
+//            [self clickEnter];
+//        }
+//        _isEnterBackground = false;
+//    }
 }
 
 

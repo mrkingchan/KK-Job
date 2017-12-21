@@ -63,7 +63,7 @@
     }
     
     [RYUserRequest userLoginWithParamer:@{@"loginType":@"1",@"phone":_phoneTf.text,@"password":_pwTf.text} suceess:^(BOOL isSendSuccess) {
-        [UtilityHelper insertApp:self];
+        [UtilityHelper insertApp];
     } failure:^(id errorCode) {
         
     }];

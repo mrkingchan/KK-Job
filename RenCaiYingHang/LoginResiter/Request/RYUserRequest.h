@@ -50,6 +50,6 @@
 + (void) chgTradePwdByPhoneWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSuccess))sucess failure:(void(^)(id errorCode))failure;
 
 /** 扫码领面试奖 */
-+ (void) scanCodeInterviewAwardWithWithParamer:(NSDictionary *)paramer suceess:(void(^)(NSString * urlString))sucess failure:(void(^)(id errorCode))failure;
++ (void) scanCodeInterviewAwardWithWithParamer:(NSString *)paramer suceess:(void(^)(NSString * urlString))sucess failure:(void(^)(id errorCode))failure;
 
 @end
