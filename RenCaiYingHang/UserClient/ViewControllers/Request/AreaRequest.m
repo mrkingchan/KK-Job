@@ -16,8 +16,7 @@
 + (void) getProvinceInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(NSArray * dataArr))sucess failure:(void(^)(id errorCode))failure
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,GetProvinceInfo];
-    NSString * jsonStr = [paramer mj_JSONString];
-    NSDictionary * dic = [UtilityHelper encryptParmar:jsonStr];
+    NSDictionary * dic = [UtilityHelper encryptParmar:paramer];
     [NetWorkHelper getWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         
         NSMutableArray * arr = [NSMutableArray array];
@@ -38,8 +37,7 @@
 + (void) getCityInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(NSArray * dataArr))sucess failure:(void(^)(id errorCode))failure
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,GetCityInfo];
-    NSString * jsonStr = [paramer mj_JSONString];
-    NSDictionary * dic = [UtilityHelper encryptParmar:jsonStr];
+    NSDictionary * dic = [UtilityHelper encryptParmar:paramer];
     [NetWorkHelper getWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         NSMutableArray * arr = [NSMutableArray array];
         NSArray * rel = data[@"rel"];

@@ -8,161 +8,181 @@
 
 #import "PersonCenterViewController.h"
 
+#import "MineCollectionViewCell.h"
+#import "MineHeaderView.h"
+#import "MineFooterView.h"
+
 //#import "SetupViewController.h"
 //#import "PrivacyViewController.h"
 //#import "UploadResumeViewController.h"
 //#import "AssetsManagementViewController.h"
 
-@interface PersonCenterViewController ()
+@interface PersonCenterViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
-//@property (nonatomic,strong) UITableView * tableView;
-//
-//@property (nonatomic,copy) NSArray * dataArray;
+@property (nonatomic,retain) UICollectionViewFlowLayout * layout;
+
+@property (nonatomic,strong) UICollectionView * collectionView;
+
+@property (nonatomic,copy) NSArray * dataArray;
+
+@property (nonatomic,copy) NSArray * tabDataArr;
 
 @end
 
+static NSString * cellId = @"MineCollectionViewCell";
+static NSString * headerId = @"MineHeaderView";
+static NSString * footerId = @"MineFooterView";
+
 @implementation PersonCenterViewController
 
-//- (UITableView *)tableView
-//{
-//    if (!_tableView) {
-//        _tableView = [UIFactory initTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped delegate:self];
-//        [self.view addSubview:_tableView];
-//    }
-//    return _tableView;
-//}
-
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:true animated:animated];
-    self.webView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight - KToolHeight - kStatusBarHeight);
-    
-    //测试
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@?token=%@",KBaseURL,PersonCenter,UserInfo.userInfo.token]]]];
-    NSLog(@">>>>%@",[NSString stringWithFormat:@"%@%@?token=%@",KBaseURL,PersonCenter,UserInfo.userInfo.token]);
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:false animated:animated];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    //[self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KBaseURL,PersonCenter]]]];
-    
-    self.jsMethodName = @"personDetail";
-//    self.dataArray = @[@[@"设置",@"隐私设置",@"附近简历",@"资产管理"],@[@"进入企业"]];
-//    [self.tableView reloadData];
-}
-
-- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
+- (UICollectionViewFlowLayout *)layout
 {
-    if ([message.name isEqualToString:self.jsMethodName]) {
-        //code...
+    if (!_layout) {
+        _layout = [[UICollectionViewFlowLayout alloc] init];
     }
+    return _layout;
 }
 
-//#pragma mark UITableViewDataSource
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    return [self.dataArray[section] count];
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString * CellID = @"RYCellID";
-//    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellID];
-//    if (!cell) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellID];
-//    }
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//    cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
-//    return cell;
-//}
-//
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    return self.dataArray.count;
-//}
-//
-//#pragma mark UITableViewDelegate
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return 50;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    return 10.0;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-//{
-//    if (section ==  self.dataArray.count - 1) {
-//        return 10.0;
-//    }
-//    return 0.01;
-//}
-//
-//- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    return nil;
-//}
-//
-//- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-//{
-//    return nil;
-//}
-//
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    switch (indexPath.section) {
-//        case 0:{
-//            switch (indexPath.row) {
-//                case 0:{
-//                    SetupViewController * setup = [[SetupViewController alloc] init];
-//                    [self.navigationController pushViewController:setup animated:true];
-//                }
-//                    break;
-//                case 1:{
-//                    PrivacyViewController * privacy = [[PrivacyViewController alloc] init];
-//                    [self.navigationController pushViewController:privacy animated:true];
-//                }
-//                    break;
-//                case 2:{
-//                    UploadResumeViewController * upload = [[UploadResumeViewController alloc] init];
-//                    [self.navigationController pushViewController:upload animated:true];
-//                }
-//                    break;
-//                case 3:{
-//                    AssetsManagementViewController * assets = [[AssetsManagementViewController alloc] init];
-//                    [self.navigationController pushViewController:assets animated:true];
-//                }
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-//            break;
-//        case 1:{
-//            /** 如果没有绑定企业了那么就去绑定企业界面 **/
-//            /** 默认进入企业端页面 **/
-//            [UIApplication sharedApplication].keyWindow.rootViewController = [[RYBusinessTabBarController alloc] init];
-//            [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
-//        }
-//            break;
-//        default:
-//            break;
-//    }
-//}
+- (UICollectionView *)collectionView
+{
+    if (!_collectionView) {
+       // 自定义的布局对象
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight - kStatusBarHeight - KToolHeight) collectionViewLayout:self.layout];
+        _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        _collectionView.dataSource = self;
+        _collectionView.delegate = self;
+        _collectionView.showsVerticalScrollIndicator = false;
+        _collectionView.alwaysBounceVertical = true;
+        [self.view addSubview:_collectionView];
+        
+        // 注册cell、sectionHeader、sectionFooter
+        [_collectionView registerNib:[UINib nibWithNibName:cellId bundle:nil] forCellWithReuseIdentifier:cellId];
+        [_collectionView registerNib:[UINib nibWithNibName:headerId bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerId];
+        [_collectionView registerNib:[UINib nibWithNibName:footerId bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerId];
+        
+    }
+    return _collectionView;
+}
+
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    
+    self.dataArray = @[@[@"1",@"在线简历"],@[@"2",@"附件简历"],@[@"1",@"隐人才钱包"],@[@"2",@"银行卡"],@[@"1",@"收藏夹"],@[@"2",@"邀请函"],@[@"1",@"人才经纪人"],@[@"2",@"进入企业"]];
+    self.tabDataArr = @[@[@"通知哦哦哦哦哦哦 哦哦哦哦哦 哦哦哦",@"通知啊啊啊啊啊啊啊啊啊啊"],@[@[@"1",@"隐私设置"],@[@"2",@"通知"]]];
+    [self.collectionView reloadData];
+}
+
+#pragma mark ---- UICollectionViewDataSource
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.dataArray.count;
+}
+
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    MineCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
+    cell.img.image = UIIMAGE(self.dataArray[indexPath.row][0]);
+    cell.lab.text = self.dataArray[indexPath.row][1];
+    return cell;
+}
+
+// 和UITableView类似，UICollectionView也可设置段头段尾
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+
+    if([kind isEqualToString:UICollectionElementKindSectionHeader])
+    {
+        MineHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerId forIndexPath:indexPath];
+        headerView.dataArr = @[];
+        headerView.user = @{};
+        headerView.mineHeaderClickCallBack = ^(NSInteger index) {
+            
+        };
+        headerView.mineHeaderButtonCallBack = ^(NSInteger index) {
+          //10设置 11头像
+        };
+        return headerView;
+    }
+    else if([kind isEqualToString:UICollectionElementKindSectionFooter])
+    {
+        MineFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:footerId forIndexPath:indexPath];
+        footerView.dataArr = self.tabDataArr;
+        footerView.mineFooterClickCallBack = ^(NSInteger index) {
+            [self clickFooterPushWithIndex:index];
+        };
+        return footerView;
+    }
+
+    return nil;
+}
+
+#pragma mark ---- UICollectionViewDelegateFlowLayout
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return (CGSize){kScreenWidth/4 - 1,kScreenWidth/4 - 1};
+}
+
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0, 0.25, 0.25, 0);
+}
+
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0.01f;
+}
+
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0.01f;
+}
+
+/** 头部高度 **/
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    return (CGSize){kScreenWidth,kScreenHeight/3};
+}
+
+/** 底部高度 **/
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    return (CGSize){kScreenWidth,(self.tabDataArr.count+1)*45+20};
+}
+
+#pragma mark ---- UICollectionViewDelegate
+// 选中某item
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+/** 表格视图push */
+- (void) clickFooterPushWithIndex:(NSInteger)index
+{
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

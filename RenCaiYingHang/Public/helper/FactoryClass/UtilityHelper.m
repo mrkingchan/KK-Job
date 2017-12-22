@@ -28,8 +28,12 @@
             [UIApplication sharedApplication].keyWindow.rootViewController = [[NecessaryInfoViewController alloc] init];
         }
     } failure:^(id errorCode) {
-        
+
     }];
+    //            /** 如果没有绑定企业了那么就去绑定企业界面 **/
+    //            /** 默认进入企业端页面 **/
+    //            [UIApplication sharedApplication].keyWindow.rootViewController = [[RYBusinessTabBarController alloc] init];
+    //            [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
 }
 
 /** 缓存数据 */
@@ -59,15 +63,18 @@
 /**
  DES加密
  */
-+ (NSDictionary *) encryptParmar:(NSString *)paramer
++ (NSDictionary *) encryptParmar:(NSDictionary *)paramer
 {
-    return @{KDatas:[UtilityHelper encryptUseDES2:paramer key:DESKEY]};
+    NSString * jsonStr = [paramer mj_JSONString];
+    return @{KDatas:[UtilityHelper encryptUseDES2:jsonStr key:DESKEY]};
 }
 
 /** 私钥加密 */
-+ (NSDictionary *) encryptPkeyParmar:(NSString *)paramer
++ (NSDictionary *) encryptPkeyParmar:(NSDictionary *)paramer
 {
-    return @{KDatas:[UtilityHelper encryptUseDES2:paramer key:UserInfo.userInfo.pkey],@"token":UserInfo.userInfo.token};
+    NSString * paramerStr = [paramer mj_JSONString];
+    NSString * encry = [UtilityHelper encryptUseDES2:paramerStr key:UserInfo.userInfo.pkey];
+    return @{KDatas:encry,@"token":UserInfo.userInfo.token};
 }
 
 /*
@@ -172,6 +179,14 @@ const  Byte iv[] = {1,2,3,4,5,6,7,8};
     
     return currentTimeString;
     
+}
+
+/** >>>>> 传 token 和 pKey<<<<< **/
++ (NSString *) addUrlToken:(NSString *)urlParamer
+{
+    NSString * jsonstr =   [@{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey} mj_JSONString];
+    ;
+   return  [NSString stringWithFormat:@"%@%@?token=%@",KBaseURL,urlParamer,[UtilityHelper encryptUseDES2:jsonstr key:DESKEY]];
 }
 
 @end

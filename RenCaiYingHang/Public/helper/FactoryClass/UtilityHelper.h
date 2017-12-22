@@ -31,10 +31,10 @@
 +  (CGFloat) fitWidthWithLabel:(NSString *)currentString font:(UIFont*)font;
 
 /** DES加密 **/
-+ (NSDictionary *) encryptParmar:(NSString *)paramer;
++ (NSDictionary *) encryptParmar:(NSDictionary *)paramer;
 
 /** 私钥加密 */
-+ (NSDictionary *) encryptPkeyParmar:(NSString *)paramer;
++ (NSDictionary *) encryptPkeyParmar:(NSDictionary *)paramer;
 
 /**
  DES加密方式
@@ -54,6 +54,7 @@
 /** 获取当前时间 */
 + (NSString*)getCurrentTimes;
 
-
+/** >>>>> 传 token 和 pKey<<<<< **/
++ (NSString *) addUrlToken:(NSString *)urlParamer;
 
 @end

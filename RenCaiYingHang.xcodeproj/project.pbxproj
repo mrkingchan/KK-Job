@@ -44,6 +44,14 @@
 		8F1F66741FD969B0004BF8F1 /* InterviewH5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66731FD969B0004BF8F1 /* InterviewH5ViewController.m */; };
 		8F2A2B6B1FEA0240003E5507 /* NecessarySexCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2A2B691FEA0240003E5507 /* NecessarySexCell.m */; };
 		8F2A2B6C1FEA0240003E5507 /* NecessarySexCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F2A2B6A1FEA0240003E5507 /* NecessarySexCell.xib */; };
+		8F3BDA5B1FED007500C4B472 /* MineCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3BDA591FED007500C4B472 /* MineCollectionViewCell.m */; };
+		8F3BDA5C1FED007500C4B472 /* MineCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F3BDA5A1FED007500C4B472 /* MineCollectionViewCell.xib */; };
+		8F3BDA601FED093300C4B472 /* MineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3BDA5E1FED093300C4B472 /* MineHeaderView.m */; };
+		8F3BDA611FED093300C4B472 /* MineHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F3BDA5F1FED093300C4B472 /* MineHeaderView.xib */; };
+		8F3BDA651FED094800C4B472 /* MineFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3BDA631FED094800C4B472 /* MineFooterView.m */; };
+		8F3BDA661FED094800C4B472 /* MineFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F3BDA641FED094800C4B472 /* MineFooterView.xib */; };
+		8F3BDA711FED25C000C4B472 /* MsgViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3BDA6F1FED25C000C4B472 /* MsgViewCell.m */; };
+		8F3BDA721FED25C000C4B472 /* MsgViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F3BDA701FED25C000C4B472 /* MsgViewCell.xib */; };
 		8F5087FC1FEA5C1500743B9C /* AuthenticationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5087FB1FEA5C1500743B9C /* AuthenticationModel.m */; };
 		8F5088031FEA7B8000743B9C /* RYAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5088021FEA7B8000743B9C /* RYAlertAction.m */; };
 		8F728C261FDE1FC300C6247B /* JHUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F728C251FDE1FC300C6247B /* JHUploadImage.m */; };
@@ -218,6 +226,18 @@
 		8F2A2B681FEA0240003E5507 /* NecessarySexCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NecessarySexCell.h; sourceTree = "<group>"; };
 		8F2A2B691FEA0240003E5507 /* NecessarySexCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NecessarySexCell.m; sourceTree = "<group>"; };
 		8F2A2B6A1FEA0240003E5507 /* NecessarySexCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NecessarySexCell.xib; sourceTree = "<group>"; };
+		8F3BDA581FED007500C4B472 /* MineCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineCollectionViewCell.h; sourceTree = "<group>"; };
+		8F3BDA591FED007500C4B472 /* MineCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineCollectionViewCell.m; sourceTree = "<group>"; };
+		8F3BDA5A1FED007500C4B472 /* MineCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MineCollectionViewCell.xib; sourceTree = "<group>"; };
+		8F3BDA5D1FED093300C4B472 /* MineHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineHeaderView.h; sourceTree = "<group>"; };
+		8F3BDA5E1FED093300C4B472 /* MineHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineHeaderView.m; sourceTree = "<group>"; };
+		8F3BDA5F1FED093300C4B472 /* MineHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MineHeaderView.xib; sourceTree = "<group>"; };
+		8F3BDA621FED094800C4B472 /* MineFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineFooterView.h; sourceTree = "<group>"; };
+		8F3BDA631FED094800C4B472 /* MineFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineFooterView.m; sourceTree = "<group>"; };
+		8F3BDA641FED094800C4B472 /* MineFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MineFooterView.xib; sourceTree = "<group>"; };
+		8F3BDA6E1FED25C000C4B472 /* MsgViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MsgViewCell.h; sourceTree = "<group>"; };
+		8F3BDA6F1FED25C000C4B472 /* MsgViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MsgViewCell.m; sourceTree = "<group>"; };
+		8F3BDA701FED25C000C4B472 /* MsgViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MsgViewCell.xib; sourceTree = "<group>"; };
 		8F5087FA1FEA5C1500743B9C /* AuthenticationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationModel.h; sourceTree = "<group>"; };
 		8F5087FB1FEA5C1500743B9C /* AuthenticationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationModel.m; sourceTree = "<group>"; };
 		8F5088011FEA7B8000743B9C /* RYAlertAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYAlertAction.h; sourceTree = "<group>"; };
@@ -586,6 +606,25 @@
 				8FF04D4B1FDA627200B14036 /* ReviseNecessaryViewController.m */,
 			);
 			path = BaseInfo;
+			sourceTree = "<group>";
+		};
+		8F3BDA571FED005A00C4B472 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8F3BDA581FED007500C4B472 /* MineCollectionViewCell.h */,
+				8F3BDA591FED007500C4B472 /* MineCollectionViewCell.m */,
+				8F3BDA5A1FED007500C4B472 /* MineCollectionViewCell.xib */,
+				8F3BDA5D1FED093300C4B472 /* MineHeaderView.h */,
+				8F3BDA5E1FED093300C4B472 /* MineHeaderView.m */,
+				8F3BDA5F1FED093300C4B472 /* MineHeaderView.xib */,
+				8F3BDA621FED094800C4B472 /* MineFooterView.h */,
+				8F3BDA631FED094800C4B472 /* MineFooterView.m */,
+				8F3BDA641FED094800C4B472 /* MineFooterView.xib */,
+				8F3BDA6E1FED25C000C4B472 /* MsgViewCell.h */,
+				8F3BDA6F1FED25C000C4B472 /* MsgViewCell.m */,
+				8F3BDA701FED25C000C4B472 /* MsgViewCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		8F5087FD1FEA5C2A00743B9C /* model */ = {
@@ -965,6 +1004,7 @@
 		8F85D8D11FD9286200BC1A7D /* TabBarViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8F3BDA571FED005A00C4B472 /* View */,
 				8F85D8D81FD9297700BC1A7D /* JobViewController.h */,
 				8F85D8D91FD9297700BC1A7D /* JobViewController.m */,
 				8F85D8DB1FD9298C00BC1A7D /* CompanyViewController.h */,
@@ -1201,9 +1241,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F3BDA611FED093300C4B472 /* MineHeaderView.xib in Resources */,
 				8F85D82D1FD922A500BC1A7D /* LaunchScreen.storyboard in Resources */,
 				8F728C381FDE375D00C6247B /* RechagergeTypeViewCell.xib in Resources */,
+				8F3BDA5C1FED007500C4B472 /* MineCollectionViewCell.xib in Resources */,
 				8F85D82A1FD922A500BC1A7D /* Assets.xcassets in Resources */,
+				8F3BDA661FED094800C4B472 /* MineFooterView.xib in Resources */,
 				8F85D8A81FD9257400BC1A7D /* sound.caf in Resources */,
 				8F728C331FDE367200C6247B /* AssetsHandleCell.xib in Resources */,
 				8F1CA8331FE7688D00BBD208 /* CollectionViewCell.xib in Resources */,
@@ -1212,6 +1255,7 @@
 				8F2A2B6C1FEA0240003E5507 /* NecessarySexCell.xib in Resources */,
 				8F85D8281FD922A500BC1A7D /* Main.storyboard in Resources */,
 				8F85D8A71FD9257400BC1A7D /* SGBottomView.xib in Resources */,
+				8F3BDA721FED25C000C4B472 /* MsgViewCell.xib in Resources */,
 				8FF04D641FDA82AD00B14036 /* LabelTextFieldCell.xib in Resources */,
 				8FF04D7A1FDA947900B14036 /* LabelSwitchCell.xib in Resources */,
 				8FF04D431FDA26AA00B14036 /* TextViewCell.xib in Resources */,
@@ -1327,6 +1371,7 @@
 				8F1F66621FD9626D004BF8F1 /* SetupViewController.m in Sources */,
 				8F2A2B6B1FEA0240003E5507 /* NecessarySexCell.m in Sources */,
 				8F1CA8221FE7657A00BBD208 /* RyAnnotation.m in Sources */,
+				8F3BDA601FED093300C4B472 /* MineHeaderView.m in Sources */,
 				8FF04D591FDA801B00B14036 /* FeebBackViewController.m in Sources */,
 				8FF04D5F1FDA81FE00B14036 /* EMailViewController.m in Sources */,
 				8FE02C2B1FE8B56B009286E3 /* UITextField+SystemFont.m in Sources */,
@@ -1338,6 +1383,7 @@
 				8F85D8CE1FD9282E00BC1A7D /* NetWorkHelper.m in Sources */,
 				8F85D8C21FD9280D00BC1A7D /* MyRefreshHeader.m in Sources */,
 				8F728C261FDE1FC300C6247B /* JHUploadImage.m in Sources */,
+				8F3BDA711FED25C000C4B472 /* MsgViewCell.m in Sources */,
 				8FF04D6F1FDA8D4300B14036 /* ChangePayPwViewController.m in Sources */,
 				8F1CA83F1FE7C4CA00BBD208 /* UILabel+SystemFont.m in Sources */,
 				8F85D8731FD9250200BC1A7D /* VerifyHelper.m in Sources */,
@@ -1374,6 +1420,7 @@
 				8F85D8AB1FD9257400BC1A7D /* DYQBannerScrollView.m in Sources */,
 				8F0EF4D91FE3D39500D179D5 /* RYAreaPickView.m in Sources */,
 				8F85D8A91FD9257400BC1A7D /* SGScanningQRCodeView.m in Sources */,
+				8F3BDA651FED094800C4B472 /* MineFooterView.m in Sources */,
 				8F728C2D1FDE356200C6247B /* RechargeViewController.m in Sources */,
 				8F85D8D71FD9290400BC1A7D /* RYBusinessTabBarController.m in Sources */,
 				8F0EF4C61FE36A7A00D179D5 /* PCCircleInfoView.m in Sources */,
@@ -1394,6 +1441,7 @@
 				8F85D8CF1FD9282E00BC1A7D /* UserInfoManage.m in Sources */,
 				8F728C2A1FDE2F9F00C6247B /* AssetsManagementViewController.m in Sources */,
 				8F85D8A21FD9257400BC1A7D /* ScanSuccessJumpVC.m in Sources */,
+				8F3BDA5B1FED007500C4B472 /* MineCollectionViewCell.m in Sources */,
 				8F85D8A31FD9257400BC1A7D /* SGGenerateQRCodeVC.m in Sources */,
 				8F85D8E91FD92A9300BC1A7D /* HandleH5ViewController.m in Sources */,
 				8F1F66511FD9485C004BF8F1 /* RYWebViewController.m in Sources */,

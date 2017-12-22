@@ -124,7 +124,7 @@
 //        }
 //    }
 //    //网页title
-//    else if ([keyPath isEqualToString:@"title"])
+//    if ([keyPath isEqualToString:@"title"])
 //    {
 //        if (object == self.webView)
 //        {
@@ -210,7 +210,7 @@
 
 - (void)dealloc{
     [self.userController removeScriptMessageHandlerForName:self.jsMethodName];
-    [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
+   // [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
    // [self.webView removeObserver:self forKeyPath:@"title"];
 }
 

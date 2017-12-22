@@ -17,6 +17,8 @@ CGFloat KAuthCodeSecond = 120;
 NSString * const KDatas = @"datas";
 
 /** 端口 */
+//@"http://192.168.2.8:8085/app_rcyh/"
+//@"http://192.168.2.101:8083/app_rcyh/";
 NSString * const KBaseURL = @"http://192.168.2.8:8085/app_rcyh/";
 
 /** 图片拼接地址 */
