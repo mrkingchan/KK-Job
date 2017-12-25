@@ -38,7 +38,10 @@ static NSString * msgLabCellID = @"MsgViewCell";
 - (void)setDataArr:(NSArray *)dataArr
 {
     _dataArr = dataArr;
-    self.msgArr = [NSMutableArray arrayWithArray:self.dataArr[0]];
+    for (CenterMessageModel * model in self.dataArr[0]) {
+        [self.msgArr addObject:model.title];
+    }
+    self.tableView.frame = CGRectMake(0, 0, kScreenWidth, [self.dataArr[1] count] * 45 + 45 + 20 );
     [self.tableView reloadData];
     [self addTimer];
 }
@@ -86,6 +89,7 @@ static NSString * msgLabCellID = @"MsgViewCell";
     if (section == 0) {
         return  1;
     }
+    NSLog(@"%zd",[self.dataArr[section] count]);
     return  [self.dataArr[section] count];
 }
 
@@ -105,12 +109,13 @@ static NSString * msgLabCellID = @"MsgViewCell";
         return cell;
     }
     MsgViewCell * cell = [tableView dequeueReusableCellWithIdentifier:msgLabCellID];
-    cell.msgLab.text = self.msgArr[0];
+    cell.msgLab.text = self.msgArr.count == 0 ? @"":self.msgArr[0];
     return cell;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    NSLog(@"%zd",self.dataArr.count);
     return self.dataArr.count;
 }
 

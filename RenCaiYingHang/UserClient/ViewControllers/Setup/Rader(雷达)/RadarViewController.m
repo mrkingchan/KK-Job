@@ -89,6 +89,7 @@ static NSString * identifier = @"CollectionViewCell";
     [super viewWillAppear:animated];
     //设置代理
     _mapView.delegate = self;
+    //[self loadData];
 }
 
 - (void)viewDidLoad {
@@ -313,14 +314,17 @@ static NSString * identifier = @"CollectionViewCell";
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-    NSLog(@"userLocation:longitude:%f---latitude:%f",userLocation.location.coordinate.longitude,userLocation.location.coordinate.latitude);
+//    NSLog(@"userLocation:longitude:%f---latitude:%f",userLocation.location.coordinate.longitude,userLocation.location.coordinate.latitude);
+//    MKCoordinateSpan span = {0.3,0.1};
+//    //显示区域
+//    MKCoordinateRegion region = {userLocation.location.coordinate,span};
+//    [_mapView setRegion:region animated:YES];
     if (!haveGetUserLocation) {
         if (_mapView.userLocationVisible) {
             haveGetUserLocation = YES;
             [self getAddressByLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
             [self addCenterLocationViewWithCenterPoint:_mapView.center];
         }
-        
     }
 }
 
@@ -518,6 +522,12 @@ static NSString * identifier = @"CollectionViewCell";
             [[UIApplication sharedApplication] openURL:settingsURL];
         }
     }];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    _mapView.delegate = nil;
 }
 
 - (void)didReceiveMemoryWarning {

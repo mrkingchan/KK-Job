@@ -147,7 +147,7 @@
 - (UIColor *)outCircleColor
 {
     UIColor *color;
-    switch (self.stated) {
+    switch (self.stateds) {
         case CircleStateNormal:
             color = CircleStateNormalOutsideColor;
             break;
@@ -176,7 +176,7 @@
 - (UIColor *)inCircleColor
 {
     UIColor *color;
-    switch (self.stated) {
+    switch (self.stateds) {
         case CircleStateNormal:
             color = CircleStateNormalInsideColor;
             break;
@@ -205,7 +205,7 @@
 - (UIColor *)trangleColor
 {
     UIColor *color;
-    switch (self.stated) {
+    switch (self.stateds) {
         case CircleStateNormal:
             color = CircleStateNormalTrangleColor;
             break;
@@ -241,9 +241,9 @@
 /**
  *  重写state Setter
  */
-- (void)setStated:(CircleState)stated:(CircleState)state
+- (void)setstateds:(CircleState)stateds :(CircleState)state
 {
-    _stated = stated;
+    _stateds = stateds;
     
     [self setNeedsDisplay];
 }

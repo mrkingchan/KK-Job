@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "CenterMessageModel.h"
+
 @interface RYUserRequest : NSObject
 
 /** 验证手机号码是否存在 */
@@ -18,6 +20,9 @@
 
 /** 注册 */
 + (void) userRegisterWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure;
+
+/** 登陆认证 **/
++ (void) loginAuthWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure;
 
 /** 是否完善基本信息 **/
 + (void) whetherBaseInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure;
@@ -51,5 +56,11 @@
 
 /** 扫码领面试奖 */
 + (void) scanCodeInterviewAwardWithWithParamer:(NSString *)paramer suceess:(void(^)(NSString * urlString))sucess failure:(void(^)(id errorCode))failure;
+
+/** 个人中心获取简历基本信息 **/
++ (void) appUsGetBaseInfoSuceess:(void(^)(NSDictionary * baseInfo))sucess failure:(void(^)(id errorCode))failure;
+
+/** 个人中心获取消息 */
++ (void) centerMessageSucess:(void(^)(NSArray * dataArr))sucess failure:(void(^)(id errorCode))failure;
 
 @end

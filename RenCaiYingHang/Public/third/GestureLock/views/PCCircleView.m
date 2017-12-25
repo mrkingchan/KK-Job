@@ -139,7 +139,7 @@
     
     [self.subviews enumerateObjectsUsingBlock:^(PCCircle *circle, NSUInteger idx, BOOL *stop) {
         if (CGRectContainsPoint(circle.frame, point)) {
-            [circle setStated:CircleStateSelected];
+            [circle setStateds:CircleStateSelected];
             [self.circleSet addObject:circle];
         }
     }];
@@ -176,11 +176,11 @@
     
     [self.circleSet enumerateObjectsUsingBlock:^(PCCircle *circle, NSUInteger idx, BOOL *stop) {
 
-        [circle setStated:CircleStateSelected];
+        [circle setStateds:CircleStateSelected];
 
         // 如果是登录或者验证原手势密码，就改为对应的状态
         if (self.type != CircleViewTypeSetting) {
-            [circle setStated:CircleStateLastOneSelected];
+            [circle setStateds:CircleStateLastOneSelected];
         }
     }];
 
@@ -268,7 +268,7 @@
 #pragma mark - 获取当前选中圆的状态
 - (CircleState)getCircleState
 {
-    return [(PCCircle *)[self.circleSet firstObject] stated];
+    return [(PCCircle *)[self.circleSet firstObject] stateds];
 }
 
 #pragma mark - 清空所有子控件的方向
@@ -282,7 +282,7 @@
 #pragma mark - 对数组中最后一个对象的处理
 - (void)circleSetLastObjectWithState:(CircleState)state
 {
-    [[self.circleSet lastObject] setStated:state];
+    [[self.circleSet lastObject] setStateds:state];
 }
 
 #pragma mark - 解锁类型：设置 手势路径的处理
@@ -385,12 +385,12 @@
 {
     [self.circleSet enumerateObjectsUsingBlock:^(PCCircle *circle, NSUInteger idx, BOOL *stop) {
 
-        [circle setStated:state];
+        [circle setStateds:state];
 
         // 如果是错误状态，那就将最后一个按钮特殊处理
         if (state == CircleStateError) {
             if (idx == self.circleSet.count - 1) {
-                [circle setStated:CircleStateLastOneError];
+                [circle setStateds:CircleStateLastOneError];
             }
         }
 

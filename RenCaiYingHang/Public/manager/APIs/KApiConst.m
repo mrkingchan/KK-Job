@@ -39,6 +39,9 @@ NSString * const GetAuthCode =  @"identity/sendsms";
 /** 注册 */
 NSString * const RegisterPort = @"identity/regist";
 
+/** 登陆认证 **/
+NSString * const IsLoginOut = @"securityCenter/loginAuth";
+
 /** 获取所有省份接口 */
 NSString * const GetProvinceInfo = @"identity/getProvinceInfo";
 
@@ -83,5 +86,11 @@ NSString * const CompanyList = @"public/company/companyList";
 
 /** 个人中心 */
 NSString * const PersonCenter = @"identity/userIndex";
+
+/** 个人中心获取简历基本信息 */
+NSString * const AppUsGetBaseInfo = @"securityCenter/appUsGetBaseInfo";
+
+/** 个人中心消息 */
+NSString * const CenterMessage = @"apply/message/messageTag";
 
 @end

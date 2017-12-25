@@ -57,4 +57,7 @@
 /** >>>>> 传 token 和 pKey<<<<< **/
 + (NSString *) addUrlToken:(NSString *)urlParamer;
 
+/** >>>>> 传 token 和 pKey<<<<< **/
++ (NSString *) addTokenForUrlSting:(NSString *)urlString;
+
 @end

@@ -38,6 +38,9 @@ extern NSString * const GetAuthCode;
 /** 注册 */
 extern NSString * const RegisterPort;
 
+/** 登陆认证 **/
+extern NSString * const IsLoginOut;
+
 /** 获取所有省份接口 */
 extern NSString * const GetProvinceInfo;
 
@@ -82,5 +85,11 @@ extern NSString * const CompanyList;
 
 /** 个人中心 */
 extern NSString * const PersonCenter;
+
+/** 个人中心获取简历基本信息 */
+extern NSString * const AppUsGetBaseInfo;
+
+/** 个人中心消息 */
+extern NSString * const CenterMessage;
 
 @end

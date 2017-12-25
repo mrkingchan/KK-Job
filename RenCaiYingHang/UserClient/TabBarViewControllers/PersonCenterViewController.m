@@ -12,7 +12,8 @@
 #import "MineHeaderView.h"
 #import "MineFooterView.h"
 
-//#import "SetupViewController.h"
+#import "WalletViewController.h"
+#import "SetupViewController.h"
 //#import "PrivacyViewController.h"
 //#import "UploadResumeViewController.h"
 //#import "AssetsManagementViewController.h"
@@ -23,8 +24,11 @@
 
 @property (nonatomic,strong) UICollectionView * collectionView;
 
+/** 中间按钮 **/
 @property (nonatomic,copy) NSArray * dataArray;
-
+/** 上面的个人信息 */
+@property (nonatomic,strong) NSMutableArray * topArr;
+/** 下面的消息信息 */
 @property (nonatomic,copy) NSArray * tabDataArr;
 
 @end
@@ -74,12 +78,41 @@ static NSString * footerId = @"MineFooterView";
     return _collectionView;
 }
 
+- (NSMutableArray *)topArr
+{
+    if (!_topArr) {
+        _topArr = [NSMutableArray array];
+    }
+    return _topArr;
+}
+
 
 - (void)viewDidLoad{
     [super viewDidLoad];
     
-    self.dataArray = @[@[@"1",@"在线简历"],@[@"2",@"附件简历"],@[@"1",@"隐人才钱包"],@[@"2",@"银行卡"],@[@"1",@"收藏夹"],@[@"2",@"邀请函"],@[@"1",@"人才经纪人"],@[@"2",@"进入企业"]];
-    self.tabDataArr = @[@[@"通知哦哦哦哦哦哦 哦哦哦哦哦 哦哦哦",@"通知啊啊啊啊啊啊啊啊啊啊"],@[@[@"1",@"隐私设置"],@[@"2",@"通知"]]];
+    [self requestData];
+}
+
+- (void) requestData
+{
+    [RYUserRequest appUsGetBaseInfoSuceess:^(NSDictionary *baseInfo) {
+        [self.topArr addObject:baseInfo];
+        [self loadData];
+    } failure:^(id errorCode) {
+        
+    }];
+    
+    [RYUserRequest centerMessageSucess:^(NSArray *dataArr) {
+        self.tabDataArr = @[dataArr,@[@[@"private",@"隐私设置"],@[@"notifi",@"通知"]]];
+        [self loadData];
+    } failure:^(id errorCode) {
+        
+    }];
+}
+
+- (void) loadData
+{
+    self.dataArray = @[@[@"online_resume",@"在线简历"],@[@"near_resume",@"附近简历"],@[@"wallet",@"人才钱包"],@[@"bankcard",@"银行卡"],@[@"collect",@"收藏夹"],@[@"heart",@"邀请函"],@[@"agent",@"人才经纪人"],@[@"entry_company",@"进入企业"]];
     [self.collectionView reloadData];
 }
 
@@ -111,13 +144,16 @@ static NSString * footerId = @"MineFooterView";
     if([kind isEqualToString:UICollectionElementKindSectionHeader])
     {
         MineHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerId forIndexPath:indexPath];
-        headerView.dataArr = @[];
-        headerView.user = @{};
+        headerView.dataArr = [NSArray arrayWithObjects:@"http://a.cphotos.bdimg.com/timg?image&quality=100&size=b4000_4000&sec=1479712043&di=5c01c9250aaa411825d6802cf8c9c57e&src=http://pic.baike.soso.com/p/20111015/bki-20111015183540-1861675088.jpg",@"http://img4.duitang.com/uploads/item/201511/22/20151122231316_E5A8F.thumb.700_0.jpeg",@"http://img5.duitang.com/uploads/item/201502/24/20150224142121_axcUN.jpeg",@"http://a.cphotos.bdimg.com/timg?image&quality=100&size=b4000_4000&sec=1479712043&di=1ff2077e9749540187c1b1daae8b370b&src=http://img103.mypsd.com.cn/20130502/1/Mypsd_13585_201305020822350023B.jpg",nil];
+        for (NSDictionary * d in self.topArr) {
+            headerView.user = d;
+        }
         headerView.mineHeaderClickCallBack = ^(NSInteger index) {
-            
+            [self imageClickPushWithIndex:index];
         };
         headerView.mineHeaderButtonCallBack = ^(NSInteger index) {
           //10设置 11头像
+            [self doSomeHandleWithTag:index];
         };
         return headerView;
     }
@@ -168,18 +204,67 @@ static NSString * footerId = @"MineFooterView";
 /** 底部高度 **/
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
-    return (CGSize){kScreenWidth,(self.tabDataArr.count+1)*45+20};
+    return (CGSize){kScreenWidth,([self.tabDataArr[1] count]+1)*45+20};
 }
 
 #pragma mark ---- UICollectionViewDelegate
 // 选中某item
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    switch (indexPath.row) {
+        case 1:
+        {
+            
+        }
+            break;
+        case 7:
+        {
+            //进入企业
+            [UIApplication sharedApplication].keyWindow.rootViewController = [[RYBusinessTabBarController alloc] init];
+            [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+        }
+            break;
+        case 2:
+        {
+            WalletViewController * h5 = [[WalletViewController alloc] init];
+            h5.url = [UtilityHelper addUrlToken:@"apply/trans"];
+            [self.navigationController pushViewController:h5 animated:true];
+        }
+            break;
+        case 0:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        {
+            CommonH5Controller * h5 = [[CommonH5Controller alloc] init];
+            NSArray * infoArr = @[@"apply/resume/modifyRes",@"",@"",@"apply/bankcard",@"",@"apply/invitation",@"",@""];
+            h5.url = [UtilityHelper addUrlToken:infoArr[indexPath.row]];
+            [self.navigationController pushViewController:h5 animated:true];
+        }
+        default:
+            break;
+    }
+}
+
+/** 底部表格视图push */
+- (void) clickFooterPushWithIndex:(NSInteger)index
+{
     
 }
 
-/** 表格视图push */
-- (void) clickFooterPushWithIndex:(NSInteger)index
+/** 头部按钮push */
+- (void) doSomeHandleWithTag:(NSInteger) tag
+{
+    if (tag == 10) {
+        [self.navigationController pushViewController:[[SetupViewController alloc] init] animated:true];
+    }else{
+        
+    }
+}
+
+/** 头部图片点击push **/
+- (void) imageClickPushWithIndex:(NSInteger) index
 {
     
 }

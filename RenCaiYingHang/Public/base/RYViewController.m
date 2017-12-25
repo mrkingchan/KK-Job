@@ -8,16 +8,46 @@
 
 #import "RYViewController.h"
 
+#import "LoginViewController.h"
+#import "ResiterViewController.h"
+#import "ForgotPwViewController.h"
+#import "CodeLoginViewController.h"
+
 @interface RYViewController ()
 
 @end
 
 @implementation RYViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    /** 非登陆注册需要进行登陆认证 */
+    if ([self isKindOfClass:[LoginViewController class]] || [self isKindOfClass:[ResiterViewController class]] || ([self isKindOfClass:[ForgotPwViewController class]] && self.navigationController.viewControllers.count==2) || [self isKindOfClass:[CodeLoginViewController class]]) {
+        return;
+    }
+   // [self loginAuth];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kWhiteColor;
+}
+
+- (void) loginAuth
+{
+    NSDictionary * a = @{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey};
+    [RYUserRequest loginAuthWithParamer:a suceess:^(BOOL isSendSuccess) {
+        if (!isSendSuccess) {
+            UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+            [UIApplication sharedApplication].keyWindow.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
+        }else{
+            [self alertMessageWithViewController:self message:[NSString stringWithFormat:@"token传值成功-%@",UserInfo.userInfo.token]];
+        }
+    } failure:^(id errorCode) {
+        
+    }];
 }
 
 #pragma mark 键盘

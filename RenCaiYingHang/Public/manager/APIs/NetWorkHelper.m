@@ -149,12 +149,18 @@
 /** 接口回掉 **/
 + (BOOL) isSuceessCallBackWithUrlString:(NSString * )urlString response:(NSDictionary *) dic
 {
-    if (([urlString rangeOfString:WhetherBasicInfo].location !=NSNotFound) || ([urlString rangeOfString:GetEmailAndIdcard].location !=NSNotFound)) {
+    if (([urlString rangeOfString:WhetherBasicInfo].location !=NSNotFound) || ([urlString rangeOfString:GetEmailAndIdcard].location !=NSNotFound) || ([urlString rangeOfString:IsLoginOut].location !=NSNotFound)) {
         return true;
     }
     
     if ([urlString rangeOfString:LoginPort].location !=NSNotFound && [dic[@"reCode"] isEqualToString:@"X2222"]) {
         return true;
+    }
+    
+    if ([dic[@"reCode"] isEqualToString:@"X9043"]) {
+        UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+        [UIApplication sharedApplication].keyWindow.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
+        return false;
     }
     
     if (![dic[@"reCode"] isEqualToString:@"X0000"] && ![VerifyHelper isNull:dic key:@"reCode"] ) {

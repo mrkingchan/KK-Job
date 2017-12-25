@@ -26,7 +26,7 @@ typedef enum
 /**
  *  所处的状态
  */
-@property (nonatomic, assign) CircleState stated;
+@property (nonatomic, assign) CircleState stateds;
 
 /**
  *  类型

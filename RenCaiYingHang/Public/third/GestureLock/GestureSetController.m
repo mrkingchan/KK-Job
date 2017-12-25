@@ -346,11 +346,11 @@
 {
     for (PCCircle *circle in circleView.subviews) {
         
-        if (circle.stated == CircleStateSelected || circle.stated == CircleStateLastOneSelected) {
+        if (circle.stateds == CircleStateSelected || circle.stateds == CircleStateLastOneSelected) {
             
             for (PCCircle *infoCircle in self.infoView.subviews) {
                 if (infoCircle.tag == circle.tag) {
-                    [infoCircle setStated:CircleStateSelected];
+                    [infoCircle setStateds:CircleStateSelected];
                 }
             }
         }
@@ -361,7 +361,7 @@
 - (void)infoViewDeselectedSubviews
 {
     [self.infoView.subviews enumerateObjectsUsingBlock:^(PCCircle *obj, NSUInteger idx, BOOL *stop) {
-        [obj setStated:CircleStateNormal];
+        [obj setStateds:CircleStateNormal];
     }];
 }
 

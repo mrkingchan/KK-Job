@@ -25,7 +25,8 @@
             [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
             [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
         }else{
-            [UIApplication sharedApplication].keyWindow.rootViewController = [[NecessaryInfoViewController alloc] init];
+            RYNavigationController * root = [[RYNavigationController alloc] initWithRootViewController:[[NecessaryInfoViewController alloc] init]];
+            [UIApplication sharedApplication].keyWindow.rootViewController = root;
         }
     } failure:^(id errorCode) {
 
@@ -187,6 +188,14 @@ const  Byte iv[] = {1,2,3,4,5,6,7,8};
     NSString * jsonstr =   [@{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey} mj_JSONString];
     ;
    return  [NSString stringWithFormat:@"%@%@?token=%@",KBaseURL,urlParamer,[UtilityHelper encryptUseDES2:jsonstr key:DESKEY]];
+}
+
+/** >>>>> 传 token 和 pKey<<<<< **/
++ (NSString *) addTokenForUrlSting:(NSString *)urlString
+{
+    NSString * jsonstr =   [@{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey} mj_JSONString];
+    ;
+    return  [NSString stringWithFormat:@"%@?token=%@",urlString,[UtilityHelper encryptUseDES2:jsonstr key:DESKEY]];
 }
 
 @end

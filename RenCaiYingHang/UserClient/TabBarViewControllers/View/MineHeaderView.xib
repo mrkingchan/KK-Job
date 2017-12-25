@@ -23,8 +23,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EYy-RW-gr7">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="胡斌" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyn-27-fAC">
-                                    <rect key="frame" x="20" y="33" width="41" height="25"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyn-27-fAC">
+                                    <rect key="frame" x="20" y="33" width="39" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="IAW-Hz-dag"/>
                                     </constraints>
@@ -32,8 +32,8 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在职-考虑机会" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBS-xK-8W8">
-                                    <rect key="frame" x="20" y="58" width="99" height="25"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="aa-bbbb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBS-xK-8W8">
+                                    <rect key="frame" x="20" y="58" width="59" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="Gua-BL-Bmy"/>
                                     </constraints>
@@ -48,7 +48,7 @@
                                         <constraint firstAttribute="width" constant="20" id="pdi-IR-QtV"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <state key="normal" image="1s"/>
+                                    <state key="normal" image="set"/>
                                     <connections>
                                         <action selector="buttonClick:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="d7h-b2-4cS"/>
                                     </connections>
@@ -59,7 +59,6 @@
                                         <constraint firstAttribute="width" secondItem="mKS-Z8-Ukk" secondAttribute="height" multiplier="1:1" id="Lvi-s2-thM"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                    <state key="normal" backgroundImage="checkbox_nor"/>
                                     <connections>
                                         <action selector="buttonClick:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="gBC-ZW-ubN"/>
                                     </connections>
@@ -111,7 +110,6 @@
         </collectionReusableView>
     </objects>
     <resources>
-        <image name="1s" width="25" height="25"/>
-        <image name="checkbox_nor" width="20" height="20"/>
+        <image name="set" width="25" height="25"/>
     </resources>
 </document>

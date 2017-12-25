@@ -49,6 +49,24 @@
     }];
 }
 
+/** 登陆认证 **/
++ (void) loginAuthWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure
+{
+    NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,IsLoginOut];
+    NSDictionary * dic = [UtilityHelper encryptParmar:paramer];
+    [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
+        
+        if ([data[@"reCode"] isEqualToString:@"X0000"]) {
+            sucess(true);
+        }else{
+            sucess(false);
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 /** 是否完善基本信息 **/
 + (void) whetherBaseInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure
 {
@@ -188,6 +206,38 @@
     NSDictionary * dic = @{KDatas:paramer,@"token":UserInfo.userInfo.token};
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         //返回的应该是跳转链接
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+/** 个人中心获取简历基本信息 **/
++ (void) appUsGetBaseInfoSuceess:(void(^)(NSDictionary * baseInfo))sucess failure:(void(^)(id errorCode))failure
+{
+    NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,AppUsGetBaseInfo];
+    NSDictionary * dic = @{@"token":UserInfo.userInfo.token};
+    [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
+        NSDictionary * info = data[@"rel"];
+        sucess(info);
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+/** 个人中心获取消息 */
++ (void) centerMessageSucess:(void(^)(NSArray * dataArr))sucess failure:(void(^)(id errorCode))failure
+{
+    NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,CenterMessage];
+    NSDictionary * dic = @{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey};
+    [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
+        
+        NSArray * info = data[@"rel"];
+        NSMutableArray * dataArr = [NSMutableArray array];
+        for (NSDictionary * d in info) {
+            CenterMessageModel * model = [[CenterMessageModel alloc] initWithDictionary:d];
+            [dataArr addObject:model];
+        }
+        sucess(dataArr.copy);
     } failure:^(NSError *error) {
         
     }];

@@ -14,6 +14,11 @@
 
 @property (nonatomic,strong) UIProgressView * progressView;
 
+//返回按钮
+@property (nonatomic, strong) UIBarButtonItem *backItem;
+//关闭按钮
+@property (nonatomic, strong) UIBarButtonItem *closeItem;
+
 @end
 
 @implementation RYWebViewController
@@ -51,6 +56,7 @@
         _webView.navigationDelegate = self;
         _webView.scrollView.bounces = false;
         _webView.scrollView.showsVerticalScrollIndicator = false;
+        [_webView setAllowsBackForwardNavigationGestures:true];
         [self.view addSubview:self.webView];
     }
     return _webView;
@@ -79,8 +85,6 @@
     [super viewWillAppear:animated];
     //监控进度
    // [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
-    //标题
-    //[self.webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (void)viewDidLoad {
@@ -99,6 +103,59 @@
 //        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]];
 //    }
 }
+
+- (void)addLeftButton
+{
+    //判断是否有上一层H5页面
+    if ([self.webView canGoBack]) {
+        //同时设置返回按钮和关闭按钮为导航栏左边的按钮
+        self.navigationItem.leftBarButtonItem = self.backItem;
+//        self.navigationItem.leftBarButtonItems = @[self.backItem, self.closeItem];
+    }
+//    else{
+//        //同时设置返回按钮和关闭按钮为导航栏左边的按钮
+//        self.navigationItem.leftBarButtonItem = self.backItem;
+//    }
+}
+
+//点击返回的方法
+- (void)backNative
+{
+    NSString * url = [NSString stringWithFormat:@"%@",self.webView.URL];
+    if (![self.url isEqualToString:url]) {
+        [self closeNative];
+    }else{
+        //判断是否有上一层H5页面
+        if ([self.webView canGoBack]) {
+            //如果有则返回
+            [self.webView goBack];
+        }
+    }
+}
+
+//关闭H5页面，直接回到原生页面
+- (void)closeNative
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - init
+- (UIBarButtonItem *)backItem
+{
+    if (!_backItem) {
+        _backItem = [[UIBarButtonItem alloc] initWithImage:UIIMAGE(@"nav_back") style:UIBarButtonItemStylePlain target:self action:@selector(backNative)];
+    }
+    return _backItem;
+}
+
+//- (UIBarButtonItem *)closeItem
+//{
+//    if (!_closeItem) {
+//        _closeItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeNative)];
+//        _closeItem.tintColor = [UIColor blackColor];
+//    }
+//    return _closeItem;
+//}
 
 - (void)setJsMethodName:(NSString *)jsMethodName
 {
@@ -156,9 +213,6 @@
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
-    if (navigationAction.targetFrame == nil) {
-        [self.webView loadRequest:navigationAction.request];
-    }
     decisionHandler(WKNavigationActionPolicyAllow);
 }
 
@@ -180,11 +234,12 @@
 
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
-    
+    [self addLeftButton];
 }
 
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
+    [self addLeftButton];
     [self.loading dismiss];
 }
 
@@ -211,7 +266,6 @@
 - (void)dealloc{
     [self.userController removeScriptMessageHandlerForName:self.jsMethodName];
    // [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
-   // [self.webView removeObserver:self forKeyPath:@"title"];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -1,20 +1,20 @@
 //
-//  CommonH5Controller.m
+//  WalletViewController.m
 //  RenCaiYingHang
 //
-//  Created by Macx on 2017/12/7.
+//  Created by Macx on 2017/12/25.
 //  Copyright © 2017年 Macx. All rights reserved.
 //
 
-#import "CommonH5Controller.h"
+#import "WalletViewController.h"
 
-@interface CommonH5Controller ()
+@interface WalletViewController ()
 
 @property (nonatomic,copy) NSString * oldUrlString;
 
 @end
 
-@implementation CommonH5Controller
+@implementation WalletViewController
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -27,7 +27,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     _oldUrlString = self.url;
+   // [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
@@ -44,16 +46,22 @@
 #pragma mark 跳转的操作
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
-    if (![url isEqualToString:_oldUrlString]) {
-//        CommonH5Controller * h5 = [[CommonH5Controller alloc] init];
-//        h5.url = [UtilityHelper addTokenForUrlSting:url];
-//        [self.navigationController pushViewController:h5 animated:true];
-//        decisionHandler(WKNavigationActionPolicyCancel);
+    if (![url isEqualToString:self.oldUrlString]) {
         _oldUrlString = url;
         [self.webView  loadRequest:[NSURLRequest requestWithURL:navigationAction.request.URL]];
         decisionHandler(WKNavigationActionPolicyAllow);
     }else{
         decisionHandler(WKNavigationActionPolicyAllow);
+    }
+}
+
+/**
+ 与后台协商方法调用
+ */
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
+{
+    if ([message.name isEqualToString:self.jsMethodName]) {
+        //code...
     }
 }
 
