@@ -24,7 +24,6 @@
     
     CLLocationManager *_locationManager;
     MKMapView *_mapView;
-    //    CLLocationCoordinate2D currentLocation;
     RyAnnotation *currentAnnotation;
     BOOL haveGetUserLocation;//是否获取到用户位置
     CLGeocoder *geocoder;
@@ -115,25 +114,30 @@ static NSString * identifier = @"CollectionViewCell";
             
         }
     }
-    [self loadData];
+    [self initGUI];
 }
 
-- (void) loadData
+/** 加载大头针 **/
+- (void) loadData:(NSDictionary *)paramer
 {
-    for (int i = 0; i<10; i++) {
-        RyJobModel *model = [[RyJobModel alloc]init];
-        model.title = [NSString stringWithFormat:@"目的地地址%d",i];
-        model.latitudef = 22.25;
-        model.longitudef = 115.15-0.1*i;
-        model.iconName = @"address";
-        model.picName = @"address";
-        model.detailStr = [NSString stringWithFormat:@"职位测试%d",i];
-        model.distance = @"50m";
-        model.index = i;
-        [self.dataArray addObject:model];
-    }
-    [self initGUI];
-    [self nearbyPointWithArr:self.dataArray];
+    [AreaRequest getJobInfoWithParamer:paramer suceess:^(NSArray *dataArr) {
+        [self.dataArray addObjectsFromArray:dataArr];
+        [self initGUI];
+        [self nearbyPointWithArr:self.dataArray];
+    } failure:^(id errorCode) {
+        
+    }];
+//    for (int i = 0; i<10; i++) {
+//        RyJobModel *model = [[RyJobModel alloc]init];
+//        model.comshortname = [NSString stringWithFormat:@"目的地地址%d",i];
+//        model.latitude = 22.25;
+//        model.longitude = 115.15-0.1*i;
+//        model.iconName = @"address";
+//        model.picName = @"address";
+//        model.jobname = [NSString stringWithFormat:@"职位测试%d",i];
+//        model.distance = @"50m";
+//        [self.dataArray addObject:model];
+//    }
 }
 
 #pragma mark 添加地图控件
@@ -169,15 +173,15 @@ static NSString * identifier = @"CollectionViewCell";
     if (arr.count>0) {
         for (int i = 0; i<arr.count; i++) {
             RyJobModel *model = arr[i];
-            CLLocationCoordinate2D location1=CLLocationCoordinate2DMake(model.latitudef, model.longitudef);
+            CLLocationCoordinate2D location1=CLLocationCoordinate2DMake(model.latitude, model.longitude);
             RyAnnotation *annotation1 = [[RyAnnotation alloc]init];
-            annotation1.title = model.title;
-            annotation1.coordinate=location1;
-            annotation1.image = [UIImage imageNamed:model.picName];
-            annotation1.icon = [UIImage imageNamed:model.iconName];
-            annotation1.detail = model.detailStr;
+            annotation1.title = model.comname;
+            annotation1.coordinate= location1;
+            annotation1.image = UIIMAGE(@"address");
+            annotation1.icon = UIIMAGE(@"address");
+            annotation1.detail = model.jobname;
             annotation1.distance = model.distance;
-            annotation1.tag = model.index;
+            annotation1.tag = i;
             [_mapView addAnnotation:annotation1];
         }
     }
@@ -314,6 +318,7 @@ static NSString * identifier = @"CollectionViewCell";
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
+    [self loadData:@{@"lat":@(userLocation.location.coordinate.latitude),@"lon":@(userLocation.location.coordinate.longitude)}];
 //    NSLog(@"userLocation:longitude:%f---latitude:%f",userLocation.location.coordinate.longitude,userLocation.location.coordinate.latitude);
 //    MKCoordinateSpan span = {0.3,0.1};
 //    //显示区域
@@ -376,6 +381,7 @@ static NSString * identifier = @"CollectionViewCell";
 #pragma mark 根据坐标取得地名
 -(void)getAddressByLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude{
 #pragma mark 根据需求操作 --此处操作将经纬度上传给后台刷新数据
+    [self loadData:@{@"lat":@(latitude),@"lon":@(longitude)}];
     //反地理编码
     CLLocation *location=[[CLLocation alloc]initWithLatitude:latitude longitude:longitude];
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
@@ -399,7 +405,7 @@ static NSString * identifier = @"CollectionViewCell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 10;
+    return self.dataArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

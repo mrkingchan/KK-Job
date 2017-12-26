@@ -19,7 +19,7 @@ NSString * const KDatas = @"datas";
 /** 端口 */
 //@"http://192.168.2.8:8085/app_rcyh/"
 //@"http://192.168.2.101:8083/app_rcyh/";
-NSString * const KBaseURL = @"http://192.168.2.8:8085/app_rcyh/";
+NSString * const KBaseURL = @"http://192.168.2.101:8083/app_rcyh/";
 
 /** 图片拼接地址 */
 NSString * const KIMGURL = @"http://pf.rcyhj.com/";
@@ -93,4 +93,11 @@ NSString * const AppUsGetBaseInfo = @"securityCenter/appUsGetBaseInfo";
 /** 个人中心消息 */
 NSString * const CenterMessage = @"apply/message/messageTag";
 
+/** 支付接口 **/
+NSString * const AppPay = @"appWxPay/recharge";
+
+/** 职位搜索 **/
+NSString * const NearJobSearch = @"public/job/searchAjax";
+
 @end
+

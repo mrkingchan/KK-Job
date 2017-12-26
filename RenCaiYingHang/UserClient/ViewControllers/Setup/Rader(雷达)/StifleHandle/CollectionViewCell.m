@@ -29,6 +29,13 @@
     __weak IBOutlet UILabel *extraAward;
 }
 
+- (void)setModel:(RyJobModel *)model
+{
+    _model = model;
+    jobName.text = model.jobname;
+    //interviewNumber.text = [NSString stringWithFormat:@"10"];
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

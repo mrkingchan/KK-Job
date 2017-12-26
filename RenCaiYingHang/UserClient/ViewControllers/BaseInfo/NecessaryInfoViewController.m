@@ -16,9 +16,7 @@
 #import "RYAlertSheet.h"
 #import "RYAreaPickView.h"
 
-#import "JHUploadImage.h"
-
-@interface NecessaryInfoViewController ()<UITableViewDelegate,UITableViewDataSource,PGDatePickerDelegate,JHUploadImageDelegate>
+@interface NecessaryInfoViewController ()<UITableViewDelegate,UITableViewDataSource,PGDatePickerDelegate>
 {
     RYAreaPickView * pickView;
     NSInteger cityId;

@@ -6,8 +6,8 @@
 //  Copyright © 2017年 Macx. All rights reserved.
 //
 
-#import<CDDPagerController/DCPagerController.h>
+#import"RYWebViewController.h"
 
-@interface DropInBoxViewController : DCPagerController
+@interface DropInBoxViewController : RYWebViewController
 
 @end

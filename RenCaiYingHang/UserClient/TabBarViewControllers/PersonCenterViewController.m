@@ -14,11 +14,15 @@
 
 #import "WalletViewController.h"
 #import "SetupViewController.h"
+#import "UploadResumeViewController.h"
+
 //#import "PrivacyViewController.h"
-//#import "UploadResumeViewController.h"
+
 //#import "AssetsManagementViewController.h"
 
-@interface PersonCenterViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+#import "JHUploadImage.h"
+
+@interface PersonCenterViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,JHUploadImageDelegate>
 
 @property (nonatomic,retain) UICollectionViewFlowLayout * layout;
 
@@ -214,7 +218,8 @@ static NSString * footerId = @"MineFooterView";
     switch (indexPath.row) {
         case 1:
         {
-            
+            UploadResumeViewController * upload = [[UploadResumeViewController alloc] init];
+            [self.navigationController pushViewController:upload animated:true];
         }
             break;
         case 7:
@@ -250,7 +255,22 @@ static NSString * footerId = @"MineFooterView";
 /** 底部表格视图push */
 - (void) clickFooterPushWithIndex:(NSInteger)index
 {
-    
+    CommonH5Controller * h5 = [[CommonH5Controller alloc] init];
+    switch (index) {
+        case 0:
+        {
+            NSString * jsonstr =   [@{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey} mj_JSONString];
+            ;
+            h5.url = [NSString stringWithFormat:@"%@identity/comHideList?resumeId=%@&token=%@",KBaseURL,UserInfo.userInfo.resumeId,[UtilityHelper encryptUseDES2:jsonstr key:DESKEY]];
+        }
+            break;
+        case 1:
+            h5.url = [UtilityHelper addUrlToken:@"public/message"];
+            break;
+        default:
+            break;
+    }
+    [self.navigationController pushViewController:h5 animated:true];
 }
 
 /** 头部按钮push */
@@ -259,7 +279,7 @@ static NSString * footerId = @"MineFooterView";
     if (tag == 10) {
         [self.navigationController pushViewController:[[SetupViewController alloc] init] animated:true];
     }else{
-        
+        [JHUPLOAD_IMAGE showActionSheetInFatherViewController:self delegate:self];
     }
 }
 
@@ -267,6 +287,20 @@ static NSString * footerId = @"MineFooterView";
 - (void) imageClickPushWithIndex:(NSInteger) index
 {
     
+}
+
+#pragma mark - JHUploadImageDelegate
+- (void)uploadImageToServerWithImage:(UIImage *)image OriginImage:(UIImage *)originImage
+{
+    NSData * imageData = UIImageJPEGRepresentation(image, 0.7);
+    //@"file":imageData,
+    [NetWorkHelper uploadFileRequest:imageData param:@{@"token":UserInfo.userInfo.token} method:@"securityCenter/uploadPic" completeBlock:^(NSDictionary *data) {
+        NSDictionary * dic = data[@"rel"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshHeaderIcon" object:dic];
+    } errorBlock:^(NSError *error) {
+        
+    }];
+    NSLog(@"%@\n%@",originImage,image);
 }
 
 - (void)didReceiveMemoryWarning {

@@ -18,4 +18,8 @@
 @property (nonatomic,copy) NSString * tel;
 /** id区分个人还是企业 **/
 
+
+/** resumeId **/
+@property (nonatomic,copy) NSString * resumeId;
+
 @end

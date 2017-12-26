@@ -67,8 +67,17 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
     self.iconBtn.layer.cornerRadius = self.iconBtn.height/2;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHeaderIcon:) name:@"refreshHeaderIcon" object:nil];
     // Initialization code
+}
+
+- (void) reloadHeaderIcon:(NSNotification *) info
+{
+    NSDictionary * dic =  info.object;
+    [_iconBtn sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KIMGURL,dic[@"image"]]] forState:UIControlStateNormal];
 }
 
 @end

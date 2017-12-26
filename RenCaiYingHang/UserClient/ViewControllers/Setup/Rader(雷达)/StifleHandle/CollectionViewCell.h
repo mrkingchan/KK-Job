@@ -12,4 +12,6 @@
 
 @property (nonatomic,copy) void(^collectionViewCellCallBack)(NSInteger index);
 
+@property (nonatomic,copy) RyJobModel * model;
+
 @end

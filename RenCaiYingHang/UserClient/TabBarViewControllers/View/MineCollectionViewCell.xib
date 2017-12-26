@@ -21,7 +21,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VDT-rM-Zii">
-                        <rect key="frame" x="27" y="9" width="36" height="36"/>
+                        <rect key="frame" x="31.5" y="13.5" width="27" height="27"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="VDT-rM-Zii" secondAttribute="height" multiplier="1:1" id="9U7-GS-JJW"/>
                         </constraints>
@@ -39,7 +39,7 @@
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="VDT-rM-Zii" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.4" id="Pkv-wn-d8v"/>
+                <constraint firstItem="VDT-rM-Zii" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.3" id="Pkv-wn-d8v"/>
                 <constraint firstItem="HjL-RZ-1Lh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="TNd-ZT-ecS"/>
                 <constraint firstAttribute="trailing" secondItem="HjL-RZ-1Lh" secondAttribute="trailing" constant="10" id="Yhv-Z3-mxA"/>
                 <constraint firstItem="VDT-rM-Zii" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="0.6" id="fuZ-qY-FQy"/>

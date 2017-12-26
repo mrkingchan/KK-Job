@@ -45,4 +45,11 @@ typedef void (^FailureBlock)(NSError *error);
                   success:(SuccessBlock)successBlock
                   failure:(FailureBlock)failureBlock;
 
+/** 上传头像 */
++ (void)uploadFileRequest:(NSData *)imageData
+                    param:(NSDictionary *)param
+                   method:(NSString *)method
+            completeBlock:(SuccessBlock)completeBlock
+               errorBlock:(FailureBlock)errorBlock;
+
 @end

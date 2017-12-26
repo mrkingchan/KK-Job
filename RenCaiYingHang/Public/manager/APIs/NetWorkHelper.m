@@ -42,7 +42,7 @@
     /**
      *  请求超时的时间
      */
-    manager.requestSerializer.timeoutInterval = 30;
+    manager.requestSerializer.timeoutInterval = 15;
     
     //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/javascript",@"text/html", nil];
     
@@ -77,7 +77,7 @@
     AFHTTPSessionManager *manager = [self sharedAFHTTPManager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
    // manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.requestSerializer.timeoutInterval = 30;
+    manager.requestSerializer.timeoutInterval = 15;
     
     [self showLoading];
     
@@ -98,6 +98,41 @@
             NSLog(@"网络异常 - T_T%@", error);
             [NetWorkHelper showMessage:@"网络异常"];
         }
+    }];
+}
+
++ (void)uploadFileRequest:(NSData *)imageData
+                    param:(NSDictionary *)param
+                   method:(NSString *)method
+            completeBlock:(SuccessBlock)completeBlock
+               errorBlock:(FailureBlock)errorBlock
+{
+    NSString *requestUrl = [NSString stringWithFormat:@"%@%@",KBaseURL,method];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    manager.requestSerializer.timeoutInterval = 15;
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"multipart/form-data",@"application/json",@"text/html",@"image/jpeg",@"image/png",@"application/octet-stream",@"text/json",nil];
+    
+    [manager POST:requestUrl parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        NSString *fileName = [NSString stringWithFormat:@"%@.jpg", [UtilityHelper getCurrentTimes]];
+        
+        [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/jpeg/png"];
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+        //上传进度
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            NSLog(@"progress is %@",uploadProgress);
+        });
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        completeBlock(responseObject);
+        NSLog(@"上传成功 = %@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self showMessage:@"上传失败"];
+        NSLog(@"上传失败 = %@",error);
     }];
 }
 

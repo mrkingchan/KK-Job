@@ -92,4 +92,10 @@ extern NSString * const AppUsGetBaseInfo;
 /** 个人中心消息 */
 extern NSString * const CenterMessage;
 
+/** 支付接口 **/
+extern NSString * const AppPay;
+
+/** 职位搜索 **/
+extern NSString * const NearJobSearch;
+
 @end

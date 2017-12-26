@@ -44,8 +44,6 @@
 		8F1F66661FD963CD004BF8F1 /* PrivacyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66651FD963CD004BF8F1 /* PrivacyViewController.m */; };
 		8F1F66691FD9645B004BF8F1 /* AddPrivacyCompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66681FD9645B004BF8F1 /* AddPrivacyCompanyViewController.m */; };
 		8F1F666D1FD964E8004BF8F1 /* UploadResumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F666C1FD964E8004BF8F1 /* UploadResumeViewController.m */; };
-		8F1F66711FD9699A004BF8F1 /* DropInBoxH5Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66701FD9699A004BF8F1 /* DropInBoxH5Controller.m */; };
-		8F1F66741FD969B0004BF8F1 /* InterviewH5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66731FD969B0004BF8F1 /* InterviewH5ViewController.m */; };
 		8F2A2B6B1FEA0240003E5507 /* NecessarySexCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2A2B691FEA0240003E5507 /* NecessarySexCell.m */; };
 		8F2A2B6C1FEA0240003E5507 /* NecessarySexCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F2A2B6A1FEA0240003E5507 /* NecessarySexCell.xib */; };
 		8F3BDA5B1FED007500C4B472 /* MineCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3BDA591FED007500C4B472 /* MineCollectionViewCell.m */; };
@@ -116,6 +114,7 @@
 		8F85D8F21FD92B1900BC1A7D /* ResiterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8F11FD92B1900BC1A7D /* ResiterViewController.m */; };
 		8F85D8F51FD92B2A00BC1A7D /* ForgotPwViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8F41FD92B2A00BC1A7D /* ForgotPwViewController.m */; };
 		8F85D8F91FD938C800BC1A7D /* OSGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8F71FD938C800BC1A7D /* OSGuideViewController.m */; };
+		8FDAAA261FF1DD8A00BDF5E5 /* AppPayRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDAAA251FF1DD8A00BDF5E5 /* AppPayRequest.m */; };
 		8FE02C2B1FE8B56B009286E3 /* UITextField+SystemFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE02C2A1FE8B56B009286E3 /* UITextField+SystemFont.m */; };
 		8FF04D421FDA26AA00B14036 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF04D401FDA26AA00B14036 /* TextViewCell.m */; };
 		8FF04D431FDA26AA00B14036 /* TextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF04D411FDA26AA00B14036 /* TextViewCell.xib */; };
@@ -229,10 +228,6 @@
 		8F1F66681FD9645B004BF8F1 /* AddPrivacyCompanyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddPrivacyCompanyViewController.m; sourceTree = "<group>"; };
 		8F1F666B1FD964E8004BF8F1 /* UploadResumeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadResumeViewController.h; sourceTree = "<group>"; };
 		8F1F666C1FD964E8004BF8F1 /* UploadResumeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadResumeViewController.m; sourceTree = "<group>"; };
-		8F1F666F1FD9699A004BF8F1 /* DropInBoxH5Controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropInBoxH5Controller.h; sourceTree = "<group>"; };
-		8F1F66701FD9699A004BF8F1 /* DropInBoxH5Controller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DropInBoxH5Controller.m; sourceTree = "<group>"; };
-		8F1F66721FD969B0004BF8F1 /* InterviewH5ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterviewH5ViewController.h; sourceTree = "<group>"; };
-		8F1F66731FD969B0004BF8F1 /* InterviewH5ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterviewH5ViewController.m; sourceTree = "<group>"; };
 		8F2A2B681FEA0240003E5507 /* NecessarySexCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NecessarySexCell.h; sourceTree = "<group>"; };
 		8F2A2B691FEA0240003E5507 /* NecessarySexCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NecessarySexCell.m; sourceTree = "<group>"; };
 		8F2A2B6A1FEA0240003E5507 /* NecessarySexCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NecessarySexCell.xib; sourceTree = "<group>"; };
@@ -368,6 +363,8 @@
 		8F85D8F41FD92B2A00BC1A7D /* ForgotPwViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForgotPwViewController.m; sourceTree = "<group>"; };
 		8F85D8F71FD938C800BC1A7D /* OSGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSGuideViewController.m; sourceTree = "<group>"; };
 		8F85D8F81FD938C800BC1A7D /* OSGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSGuideViewController.h; sourceTree = "<group>"; };
+		8FDAAA241FF1DD8A00BDF5E5 /* AppPayRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppPayRequest.h; sourceTree = "<group>"; };
+		8FDAAA251FF1DD8A00BDF5E5 /* AppPayRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppPayRequest.m; sourceTree = "<group>"; };
 		8FE02C291FE8B56B009286E3 /* UITextField+SystemFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+SystemFont.h"; sourceTree = "<group>"; };
 		8FE02C2A1FE8B56B009286E3 /* UITextField+SystemFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+SystemFont.m"; sourceTree = "<group>"; };
 		8FF04D3F1FDA26AA00B14036 /* TextViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextViewCell.h; sourceTree = "<group>"; };
@@ -496,6 +493,8 @@
 				8F0EF4D41FE3B25000D179D5 /* AreaRequest.m */,
 				8F0EF4DA1FE3D6C800D179D5 /* AreaModel.h */,
 				8F0EF4DB1FE3D6C800D179D5 /* AreaModel.m */,
+				8FDAAA241FF1DD8A00BDF5E5 /* AppPayRequest.h */,
+				8FDAAA251FF1DD8A00BDF5E5 /* AppPayRequest.m */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -605,10 +604,6 @@
 			children = (
 				8F1F66521FD94DCD004BF8F1 /* JobH5ViewController.h */,
 				8F1F66531FD94DCD004BF8F1 /* JobH5ViewController.m */,
-				8F1F666F1FD9699A004BF8F1 /* DropInBoxH5Controller.h */,
-				8F1F66701FD9699A004BF8F1 /* DropInBoxH5Controller.m */,
-				8F1F66721FD969B0004BF8F1 /* InterviewH5ViewController.h */,
-				8F1F66731FD969B0004BF8F1 /* InterviewH5ViewController.m */,
 			);
 			path = TabBarH5;
 			sourceTree = "<group>";
@@ -1298,6 +1293,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-RenCaiYingHang/Pods-RenCaiYingHang-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/PGDatePicker/PGDatePicker/PGDatePicker.bundle",
+				"${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle",
 				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -1377,13 +1373,13 @@
 				8F1F66581FD94E1C004BF8F1 /* RadarViewController.m in Sources */,
 				8F85D8BA1FD9261200BC1A7D /* UITextView+Placeholder.m in Sources */,
 				8FF04D4C1FDA627200B14036 /* ReviseNecessaryViewController.m in Sources */,
-				8F1F66711FD9699A004BF8F1 /* DropInBoxH5Controller.m in Sources */,
 				8F85D8301FD922A500BC1A7D /* main.m in Sources */,
 				8F1F66621FD9626D004BF8F1 /* SetupViewController.m in Sources */,
 				8F2A2B6B1FEA0240003E5507 /* NecessarySexCell.m in Sources */,
 				8F1CA8221FE7657A00BBD208 /* RyAnnotation.m in Sources */,
 				8F3BDA601FED093300C4B472 /* MineHeaderView.m in Sources */,
 				8FF04D591FDA801B00B14036 /* FeebBackViewController.m in Sources */,
+				8FDAAA261FF1DD8A00BDF5E5 /* AppPayRequest.m in Sources */,
 				8FF04D5F1FDA81FE00B14036 /* EMailViewController.m in Sources */,
 				8FE02C2B1FE8B56B009286E3 /* UITextField+SystemFont.m in Sources */,
 				8F0EF4CD1FE36CEF00D179D5 /* GestureManageController.m in Sources */,
@@ -1436,7 +1432,6 @@
 				8F0EF4C61FE36A7A00D179D5 /* PCCircleInfoView.m in Sources */,
 				8F85D8A41FD9257400BC1A7D /* SGScanningQRCodeVC.m in Sources */,
 				8F0EF4C91FE36A7A00D179D5 /* PCLockLabel.m in Sources */,
-				8F1F66741FD969B0004BF8F1 /* InterviewH5ViewController.m in Sources */,
 				8F1F0BDF1FF0C86C00CE2FB5 /* JKBannerCollectionViewCell.m in Sources */,
 				8F5088031FEA7B8000743B9C /* RYAlertAction.m in Sources */,
 				8F85D8221FD922A400BC1A7D /* AppDelegate.m in Sources */,

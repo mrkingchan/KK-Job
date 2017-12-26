@@ -122,7 +122,8 @@
 - (void)backNative
 {
     NSString * url = [NSString stringWithFormat:@"%@",self.webView.URL];
-    if (![self.url isEqualToString:url]) {
+    NSString * origalUrl = [url componentsSeparatedByString:@"?"][0];
+    if ([self.url rangeOfString:origalUrl].location !=NSNotFound) {
         [self closeNative];
     }else{
         //判断是否有上一层H5页面
@@ -224,12 +225,12 @@
 #pragma mark - WKNavigationDelegate
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
-    [self.loading show];
+    //[self.loading show];
 }
 
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
-    [self.loading dismiss];
+   // [self.loading dismiss];
 }
 
 // 页面加载完成之后调用
@@ -240,7 +241,7 @@
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
     [self addLeftButton];
-    [self.loading dismiss];
+   // [self.loading dismiss];
 }
 
 - (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(null_unspecified WKNavigation *)navigation

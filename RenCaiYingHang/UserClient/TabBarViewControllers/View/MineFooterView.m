@@ -149,8 +149,10 @@ static NSString * msgLabCellID = @"MsgViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //回掉
-    if (_mineFooterClickCallBack) {
-        _mineFooterClickCallBack(indexPath.row);
+    if (indexPath.section == 1) {
+        if (_mineFooterClickCallBack) {
+            _mineFooterClickCallBack(indexPath.row);
+        }
     }
 }
 

@@ -51,4 +51,22 @@
     }];
 }
 
+/** 附近职位 */
++ (void) getJobInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(NSArray * dataArr))sucess failure:(void(^)(id errorCode))failure
+{
+    NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,NearJobSearch];
+    NSDictionary * dic = [UtilityHelper encryptParmar:paramer];
+    [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
+        NSMutableArray * arr = [NSMutableArray array];
+        NSArray * rel = data[@"rel"];
+        for (NSDictionary * d in rel) {
+            RyJobModel * model = [[RyJobModel alloc] initWithDictionary:d];
+            [arr addObject:model];
+        }
+        sucess(arr);
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 @end

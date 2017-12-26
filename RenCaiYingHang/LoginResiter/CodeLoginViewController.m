@@ -34,6 +34,10 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:true animated:animated];
+    // 去掉返回手势
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = false;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -41,6 +45,7 @@
     [super viewWillDisappear:animated];
     [self stop];
     [self.navigationController setNavigationBarHidden:false animated:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = true;
 }
 
 /** storyboard坑爹的地方 */
@@ -54,6 +59,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:UIIMAGE(@"bg")]];
     [self addNotification];
 }
 

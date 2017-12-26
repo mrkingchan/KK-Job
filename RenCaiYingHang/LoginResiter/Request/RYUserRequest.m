@@ -218,6 +218,11 @@
     NSDictionary * dic = @{@"token":UserInfo.userInfo.token};
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         NSDictionary * info = data[@"rel"];
+        /** 存id */
+        UserInfo.userInfo.resumeId = info[@"id"];
+//        NSDictionary * dic = UserInfo.userInfo.mj_keyValues;
+//        NSData * dataUser  = [NSKeyedArchiver archivedDataWithRootObject:dic];
+//        [[NSUserDefaults standardUserDefaults] setObject:dataUser forKey:@"RYUserInfo"];
         sucess(info);
     } failure:^(NSError *error) {
         

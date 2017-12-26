@@ -12,6 +12,8 @@ pod 'SDWebImage'
 
 pod 'TZImagePickerController'
 
+pod 'RSKImageCropper'
+
 pod 'CDDPagerController'
 
 pod 'PGDatePicker'

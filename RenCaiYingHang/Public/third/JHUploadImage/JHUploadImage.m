@@ -77,7 +77,7 @@ static JHUploadImage *_jhUploadImage = nil;
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    [picker dismissViewControllerAnimated:true completion:nil];
      // 原始图片
     UIImage * OriginalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
       //裁剪后图片
