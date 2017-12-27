@@ -12,12 +12,12 @@
 #import "MineHeaderView.h"
 #import "MineFooterView.h"
 
+#import "BankCardViewController.h"
 #import "WalletViewController.h"
 #import "SetupViewController.h"
 #import "UploadResumeViewController.h"
 
 //#import "PrivacyViewController.h"
-
 //#import "AssetsManagementViewController.h"
 
 #import "JHUploadImage.h"
@@ -116,7 +116,7 @@ static NSString * footerId = @"MineFooterView";
 
 - (void) loadData
 {
-    self.dataArray = @[@[@"online_resume",@"在线简历"],@[@"near_resume",@"附近简历"],@[@"wallet",@"人才钱包"],@[@"bankcard",@"银行卡"],@[@"collect",@"收藏夹"],@[@"heart",@"邀请函"],@[@"agent",@"人才经纪人"],@[@"entry_company",@"进入企业"]];
+    self.dataArray = @[@[@"online_resume",@"在线简历"],@[@"near_resume",@"附件简历"],@[@"wallet",@"人才钱包"],@[@"bankcard",@"银行卡"],@[@"collect",@"收藏夹"],@[@"heart",@"邀请函"],@[@"agent",@"人才经纪人"],@[@"entry_company",@"进入企业"]];
     [self.collectionView reloadData];
 }
 
@@ -232,18 +232,32 @@ static NSString * footerId = @"MineFooterView";
         case 2:
         {
             WalletViewController * h5 = [[WalletViewController alloc] init];
-            h5.url = [UtilityHelper addUrlToken:@"apply/trans"];
+            h5.url = [UtilityHelper addUrlToken:@"apply/userWallet"];
             [self.navigationController pushViewController:h5 animated:true];
         }
             break;
-        case 0:
         case 3:
+        {
+            BankCardViewController * h5 = [[BankCardViewController alloc] init];
+            h5.url = [UtilityHelper addUrlToken:@"apply/bankcard"];
+            h5.jsMethodName = @"unAuthIDCard";
+            [self.navigationController pushViewController:h5 animated:true];
+        }
+            break;
         case 4:
+        {
+            CommonH5Controller * h5 = [[CommonH5Controller alloc] init];
+            h5.url = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@apply/collection",KBaseURL]];
+            [self.navigationController pushViewController:h5 animated:true];
+            
+        }
+            break;
+        case 0:
         case 5:
         case 6:
         {
             CommonH5Controller * h5 = [[CommonH5Controller alloc] init];
-            NSArray * infoArr = @[@"apply/resume/modifyRes",@"",@"",@"apply/bankcard",@"",@"apply/invitation",@"",@""];
+            NSArray * infoArr = @[@"apply/resume/modifyRes",@"",@"",@"",@"",@"apply/invitation",@"apply/recommended",@""];
             h5.url = [UtilityHelper addUrlToken:infoArr[indexPath.row]];
             [self.navigationController pushViewController:h5 animated:true];
         }
@@ -279,7 +293,7 @@ static NSString * footerId = @"MineFooterView";
     if (tag == 10) {
         [self.navigationController pushViewController:[[SetupViewController alloc] init] animated:true];
     }else{
-        [JHUPLOAD_IMAGE showActionSheetInFatherViewController:self delegate:self];
+        [JHUPLOAD_IMAGE showActionSheetInFatherViewController:self delegate:self canEdit:true];
     }
 }
 
@@ -294,12 +308,20 @@ static NSString * footerId = @"MineFooterView";
 {
     NSData * imageData = UIImageJPEGRepresentation(image, 0.7);
     //@"file":imageData,
-    [NetWorkHelper uploadFileRequest:imageData param:@{@"token":UserInfo.userInfo.token} method:@"securityCenter/uploadPic" completeBlock:^(NSDictionary *data) {
+    NSDictionary * dic = @{@"token":UserInfo.userInfo.token,@"type":@"1"};
+    if (![VerifyHelper empty:UserInfo.userInfo.image]) {
+        dic = @{@"token":UserInfo.userInfo.token,@"type":@"1",@"filePathOld":UserInfo.userInfo.image};
+    }
+    
+    [NetWorkHelper uploadFileRequest:imageData param:dic method:UploadFiles completeBlock:^(NSDictionary *data) {
         NSDictionary * dic = data[@"rel"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshHeaderIcon" object:dic];
     } errorBlock:^(NSError *error) {
         
+    } uploadProgress:^(NSProgress *progress) {
+        
     }];
+    
     NSLog(@"%@\n%@",originImage,image);
 }
 

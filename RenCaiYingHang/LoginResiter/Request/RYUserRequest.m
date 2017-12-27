@@ -220,6 +220,8 @@
         NSDictionary * info = data[@"rel"];
         /** 存id */
         UserInfo.userInfo.resumeId = info[@"id"];
+        UserInfo.userInfo.image = info[@"image"];
+        UserInfo.userInfo.resumeImage = info[@"resumeImage"];
 //        NSDictionary * dic = UserInfo.userInfo.mj_keyValues;
 //        NSData * dataUser  = [NSKeyedArchiver archivedDataWithRootObject:dic];
 //        [[NSUserDefaults standardUserDefaults] setObject:dataUser forKey:@"RYUserInfo"];

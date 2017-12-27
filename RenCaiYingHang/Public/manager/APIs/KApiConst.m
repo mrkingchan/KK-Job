@@ -97,7 +97,10 @@ NSString * const CenterMessage = @"apply/message/messageTag";
 NSString * const AppPay = @"appWxPay/recharge";
 
 /** 职位搜索 **/
-NSString * const NearJobSearch = @"public/job/searchAjax";
+NSString * const NearJobSearch = @"public/job/searchRadar";
+
+/** 上传文件 */
+NSString * const UploadFiles = @"securityCenter/uploadTotal";
 
 @end
 

@@ -10,4 +10,6 @@
 
 @interface WalletViewController : RYWebViewController
 
+@property (nonatomic,assign) NSInteger type;
+
 @end

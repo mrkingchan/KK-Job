@@ -16,6 +16,8 @@ pod 'RSKImageCropper'
 
 pod 'CDDPagerController'
 
+pod 'HUPhotoBrowser'
+
 pod 'PGDatePicker'
 
 end

@@ -15,6 +15,8 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - CDDPagerController (1.1.3)
+  - HUPhotoBrowser (1.3.1):
+    - SVProgressHUD
   - MJExtension (3.0.13)
   - MJRefresh (3.1.15.1)
   - PGDatePicker (1.5.12):
@@ -24,11 +26,13 @@ PODS:
   - SDWebImage (4.2.2):
     - SDWebImage/Core (= 4.2.2)
   - SDWebImage/Core (4.2.2)
+  - SVProgressHUD (2.2.2)
   - TZImagePickerController (1.9.6)
 
 DEPENDENCIES:
   - AFNetworking
   - CDDPagerController
+  - HUPhotoBrowser
   - MJExtension
   - MJRefresh
   - PGDatePicker
@@ -39,14 +43,16 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   CDDPagerController: e832fb34d75d45f871cc29ce1cc06ccf5dd7c200
+  HUPhotoBrowser: 136b1830da6e3231c823f83e1ce8b2288add312a
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: 5f8552bc25ca8751c010f621c1098dbdaacbccd6
   PGDatePicker: 4db162e6bd07df60e1d1c5fe3aaeb8f761b9322c
   PGPickerView: cb49c6b3e2a39148bef9f666fa58bb349e0c3b85
   RSKImageCropper: d9a1acbc0600bf8decc8f0d21895872c99a9e4cf
   SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
+  SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   TZImagePickerController: 276dc7c0cc70da9ee354046474b405d87ef81c89
 
-PODFILE CHECKSUM: ad02ed3434a7e8703b29f1dc9fe04c40485161f6
+PODFILE CHECKSUM: f27bf85cee2707ecb8766ed7713f51ed949a3dcf
 
 COCOAPODS: 1.3.1

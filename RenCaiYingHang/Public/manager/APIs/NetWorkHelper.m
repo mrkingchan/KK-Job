@@ -106,6 +106,7 @@
                    method:(NSString *)method
             completeBlock:(SuccessBlock)completeBlock
                errorBlock:(FailureBlock)errorBlock
+           uploadProgress:(ProgressBlock)progressBlock
 {
     NSString *requestUrl = [NSString stringWithFormat:@"%@%@",KBaseURL,method];
     
@@ -124,6 +125,7 @@
         
         //上传进度
         dispatch_sync(dispatch_get_main_queue(), ^{
+            progressBlock(uploadProgress);
             NSLog(@"progress is %@",uploadProgress);
         });
         

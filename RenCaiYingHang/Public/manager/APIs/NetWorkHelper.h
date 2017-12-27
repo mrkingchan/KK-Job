@@ -10,12 +10,13 @@
 
 typedef void (^SuccessBlock)(NSDictionary *data);
 typedef void (^FailureBlock)(NSError *error);
+typedef void (^ProgressBlock)(NSProgress *progress);
 
 @interface NetWorkHelper : NSObject
 
 @property (nonatomic, copy) SuccessBlock successBlock;
 @property (nonatomic, copy) FailureBlock failureBlock;
-
+@property (nonatomic, copy) ProgressBlock progressBlock;
 
 +(id)sharedAFHTTPManager;
 
@@ -50,6 +51,7 @@ typedef void (^FailureBlock)(NSError *error);
                     param:(NSDictionary *)param
                    method:(NSString *)method
             completeBlock:(SuccessBlock)completeBlock
-               errorBlock:(FailureBlock)errorBlock;
+               errorBlock:(FailureBlock)errorBlock
+           uploadProgress:(ProgressBlock)progressBlock;
 
 @end

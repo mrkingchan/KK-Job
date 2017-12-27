@@ -8,6 +8,8 @@
 
 #import "RYNavigationController.h"
 
+#import "ScanSucessViewController.h"
+
 @interface RYNavigationController ()<SGScanningQRCodeVCDelegate>
 
 @end
@@ -68,7 +70,7 @@
     }
     
     [RYUserRequest scanCodeInterviewAwardWithWithParamer:str suceess:^(NSString *urlString) {
-        
+        [self pushViewController:[[ScanSucessViewController alloc] init] animated:true];
     } failure:^(id errorCode) {
         
     }];

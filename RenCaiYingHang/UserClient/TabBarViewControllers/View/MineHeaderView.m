@@ -77,7 +77,13 @@
 - (void) reloadHeaderIcon:(NSNotification *) info
 {
     NSDictionary * dic =  info.object;
+    UserInfo.userInfo.image = dic[@"image"];
     [_iconBtn sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KIMGURL,dic[@"image"]]] forState:UIControlStateNormal];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshHeaderIcon" object:nil];
 }
 
 @end

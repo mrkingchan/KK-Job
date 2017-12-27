@@ -116,6 +116,9 @@
 		8F85D8F91FD938C800BC1A7D /* OSGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8F71FD938C800BC1A7D /* OSGuideViewController.m */; };
 		8FDAAA261FF1DD8A00BDF5E5 /* AppPayRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDAAA251FF1DD8A00BDF5E5 /* AppPayRequest.m */; };
 		8FE02C2B1FE8B56B009286E3 /* UITextField+SystemFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE02C2A1FE8B56B009286E3 /* UITextField+SystemFont.m */; };
+		8FEC30401FF36E3C0073B1A3 /* RYProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC303F1FF36E3C0073B1A3 /* RYProgressView.m */; };
+		8FEC30441FF37BFE0073B1A3 /* ScanSucessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC30431FF37BFE0073B1A3 /* ScanSucessViewController.m */; };
+		8FEC304A1FF393BC0073B1A3 /* BankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC30491FF393BC0073B1A3 /* BankCardViewController.m */; };
 		8FF04D421FDA26AA00B14036 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF04D401FDA26AA00B14036 /* TextViewCell.m */; };
 		8FF04D431FDA26AA00B14036 /* TextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF04D411FDA26AA00B14036 /* TextViewCell.xib */; };
 		8FF04D461FDA3A9300B14036 /* NecessaryInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF04D451FDA3A9300B14036 /* NecessaryInfoViewController.m */; };
@@ -367,6 +370,12 @@
 		8FDAAA251FF1DD8A00BDF5E5 /* AppPayRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppPayRequest.m; sourceTree = "<group>"; };
 		8FE02C291FE8B56B009286E3 /* UITextField+SystemFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+SystemFont.h"; sourceTree = "<group>"; };
 		8FE02C2A1FE8B56B009286E3 /* UITextField+SystemFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+SystemFont.m"; sourceTree = "<group>"; };
+		8FEC303E1FF36E3C0073B1A3 /* RYProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYProgressView.h; sourceTree = "<group>"; };
+		8FEC303F1FF36E3C0073B1A3 /* RYProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYProgressView.m; sourceTree = "<group>"; };
+		8FEC30421FF37BFE0073B1A3 /* ScanSucessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanSucessViewController.h; sourceTree = "<group>"; };
+		8FEC30431FF37BFE0073B1A3 /* ScanSucessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanSucessViewController.m; sourceTree = "<group>"; };
+		8FEC30481FF393BC0073B1A3 /* BankCardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankCardViewController.h; sourceTree = "<group>"; };
+		8FEC30491FF393BC0073B1A3 /* BankCardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BankCardViewController.m; sourceTree = "<group>"; };
 		8FF04D3F1FDA26AA00B14036 /* TextViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextViewCell.h; sourceTree = "<group>"; };
 		8FF04D401FDA26AA00B14036 /* TextViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextViewCell.m; sourceTree = "<group>"; };
 		8FF04D411FDA26AA00B14036 /* TextViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewCell.xib; sourceTree = "<group>"; };
@@ -508,6 +517,8 @@
 				8F0EF4D81FE3D39500D179D5 /* RYAreaPickView.m */,
 				8F5088011FEA7B8000743B9C /* RYAlertAction.h */,
 				8F5088021FEA7B8000743B9C /* RYAlertAction.m */,
+				8FEC303E1FF36E3C0073B1A3 /* RYProgressView.h */,
+				8FEC303F1FF36E3C0073B1A3 /* RYProgressView.m */,
 			);
 			path = "function-view";
 			sourceTree = "<group>";
@@ -568,6 +579,7 @@
 		8F1F66591FD95EC0004BF8F1 /* Setup */ = {
 			isa = PBXGroup;
 			children = (
+				8FEC30411FF37BB50073B1A3 /* ScanSucess */,
 				8F151E521FDFA7E100F15CF7 /* Rader(雷达) */,
 				8F728C271FDE2F5500C6247B /* AssetsManagement */,
 				8FF04D501FDA7F8400B14036 /* SetupChildrens */,
@@ -1030,6 +1042,8 @@
 				8F85D8E81FD92A9300BC1A7D /* HandleH5ViewController.m */,
 				8F1F0BE01FF0F29C00CE2FB5 /* WalletViewController.h */,
 				8F1F0BE11FF0F29C00CE2FB5 /* WalletViewController.m */,
+				8FEC30481FF393BC0073B1A3 /* BankCardViewController.h */,
+				8FEC30491FF393BC0073B1A3 /* BankCardViewController.m */,
 			);
 			path = H5;
 			sourceTree = "<group>";
@@ -1075,6 +1089,15 @@
 				8F85D8F71FD938C800BC1A7D /* OSGuideViewController.m */,
 			);
 			path = Guide;
+			sourceTree = "<group>";
+		};
+		8FEC30411FF37BB50073B1A3 /* ScanSucess */ = {
+			isa = PBXGroup;
+			children = (
+				8FEC30421FF37BFE0073B1A3 /* ScanSucessViewController.h */,
+				8FEC30431FF37BFE0073B1A3 /* ScanSucessViewController.m */,
+			);
+			path = ScanSucess;
 			sourceTree = "<group>";
 		};
 		8FF04D3B1FDA263600B14036 /* view(通用视图) */ = {
@@ -1294,6 +1317,7 @@
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/PGDatePicker/PGDatePicker/PGDatePicker.bundle",
 				"${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -1349,6 +1373,7 @@
 				8F1CA8421FE7C62200BBD208 /* UIButton+SystemFont.m in Sources */,
 				8FF04D5C1FDA81E800B14036 /* IdentificationViewController.m in Sources */,
 				8F0EF4C51FE36A7A00D179D5 /* PCCircleView.m in Sources */,
+				8FEC304A1FF393BC0073B1A3 /* BankCardViewController.m in Sources */,
 				8F85D8BF1FD927E600BC1A7D /* LoadingView.m in Sources */,
 				8F1F665C1FD96168004BF8F1 /* HomePageViewController.m in Sources */,
 				8F1F665F1FD961A5004BF8F1 /* CompanyCenterViewController.m in Sources */,
@@ -1439,6 +1464,7 @@
 				8F1F666D1FD964E8004BF8F1 /* UploadResumeViewController.m in Sources */,
 				8F85D8F91FD938C800BC1A7D /* OSGuideViewController.m in Sources */,
 				8F85D8721FD9250200BC1A7D /* UIFactory.m in Sources */,
+				8FEC30401FF36E3C0073B1A3 /* RYProgressView.m in Sources */,
 				8F1F66541FD94DCD004BF8F1 /* JobH5ViewController.m in Sources */,
 				8F1F66661FD963CD004BF8F1 /* PrivacyViewController.m in Sources */,
 				8F85D8A61FD9257400BC1A7D /* SGBottomView.m in Sources */,
@@ -1447,6 +1473,7 @@
 				8F85D8CF1FD9282E00BC1A7D /* UserInfoManage.m in Sources */,
 				8F1F0BDE1FF0C86C00CE2FB5 /* JKBannarView.m in Sources */,
 				8F728C2A1FDE2F9F00C6247B /* AssetsManagementViewController.m in Sources */,
+				8FEC30441FF37BFE0073B1A3 /* ScanSucessViewController.m in Sources */,
 				8F85D8A21FD9257400BC1A7D /* ScanSuccessJumpVC.m in Sources */,
 				8F3BDA5B1FED007500C4B472 /* MineCollectionViewCell.m in Sources */,
 				8F85D8A31FD9257400BC1A7D /* SGGenerateQRCodeVC.m in Sources */,

@@ -98,4 +98,7 @@ extern NSString * const AppPay;
 /** 职位搜索 **/
 extern NSString * const NearJobSearch;
 
+/** 上传文件 */
+extern NSString * const UploadFiles;
+
 @end

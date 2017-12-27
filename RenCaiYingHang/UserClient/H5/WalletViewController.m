@@ -8,6 +8,8 @@
 
 #import "WalletViewController.h"
 
+#import "RechargeViewController.h"
+
 @interface WalletViewController ()
 
 @property (nonatomic,copy) NSString * oldUrlString;
@@ -29,7 +31,16 @@
     // Do any additional setup after loading the view.
     
     _oldUrlString = self.url;
-   // [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
+    self.jsMethodName = @"recharge";
+}
+
+- (void)backNative
+{
+    if (_type == 1) {
+        [self.navigationController popToRootViewControllerAnimated:true];
+    }else{
+        [self.navigationController popViewControllerAnimated:true];
+    }
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {

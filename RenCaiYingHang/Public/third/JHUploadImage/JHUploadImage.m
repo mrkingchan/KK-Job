@@ -21,9 +21,11 @@ static JHUploadImage *_jhUploadImage = nil;
     return _jhUploadImage;
 }
 
-- (void)showActionSheetInFatherViewController:(UIViewController *)fatherVC  delegate:(id<JHUploadImageDelegate>)aDelegate {
+- (void)showActionSheetInFatherViewController:(UIViewController *)fatherVC  delegate:(id<JHUploadImageDelegate>)aDelegate canEdit:(BOOL)canEdit{
+    
     _jhUploadImage.uploadImageDelegate = aDelegate;
     _fatherViewController = fatherVC;
+    _canEdit = &canEdit;
     
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
                                                        delegate:self
@@ -48,7 +50,7 @@ static JHUploadImage *_jhUploadImage = nil;
         UIImagePickerController *imagePC = [[UIImagePickerController alloc] init];
         imagePC.sourceType                = UIImagePickerControllerSourceTypeCamera;
         imagePC.delegate                  = self;
-        imagePC.allowsEditing             = YES;
+        imagePC.allowsEditing             = _canEdit;
         [_fatherViewController presentViewController:imagePC
                                             animated:YES
                                           completion:^{
@@ -62,18 +64,20 @@ static JHUploadImage *_jhUploadImage = nil;
         [alert show];
     }
 }
+
 //图片库方法(从手机的图片库中查找图片)
 - (void)fromPhotos {
     UIImagePickerController *imagePC = [[UIImagePickerController alloc] init];
     imagePC.navigationBar.translucent = NO;
     imagePC.sourceType                = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePC.delegate                  = self;
-    imagePC.allowsEditing             = YES;
+    imagePC.allowsEditing             = _canEdit;
     [_fatherViewController presentViewController:imagePC
                                         animated:YES
                                       completion:^{
                                       }];
 }
+
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     

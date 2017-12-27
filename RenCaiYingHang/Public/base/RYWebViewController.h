@@ -20,12 +20,12 @@
 
 @property (nonatomic, copy) NSString * url;
 
-@property (nonatomic, strong) WKUserContentController * userController;
-
 /**
  有多个可以设置成数组
  */
 @property (nonatomic, copy) NSString * jsMethodName;
 
+//点击返回的方法
+- (void)backNative;
 
 @end

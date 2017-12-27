@@ -134,9 +134,9 @@ static NSString * SetUPTableViewCellID = @"UITableViewCell";
         {
             CommonH5Controller * h5 = [[CommonH5Controller alloc] init];
             h5.title = self.dataArray[indexPath.section][indexPath.row];
-            h5.url = @[@"https://www.baidu.com",@"https://www.so.com",@"http://www.youku.com"][indexPath.row];
-            h5.progressViewColor = [UIColor redColor];
-             [self.navigationController pushViewController:h5 animated:true];
+            NSArray * infoArr = @[@"public/about",@"public/dynamic",@"public/news"];
+            h5.url = [UtilityHelper addUrlToken:infoArr[indexPath.row]];
+            [self.navigationController pushViewController:h5 animated:true];
         }
             break;
         case 2:
@@ -170,7 +170,10 @@ static NSString * SetUPTableViewCellID = @"UITableViewCell";
  */
 - (void) loginOutClick:(UIButton *)sender
 {
-    
+    [UserInfo loginOut];
+    [RYDefaults setObject:@"" forKey:[NSString stringWithFormat:@"RYUserInfo"]];
+    UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+    [UIApplication sharedApplication].keyWindow.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
 }
 
 - (void)didReceiveMemoryWarning {

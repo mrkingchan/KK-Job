@@ -31,19 +31,11 @@
     return _loading;
 }
 
-- (WKUserContentController *)userController
-{
-    if (!_userController) {
-        _userController = [[WKUserContentController alloc] init];
-    }
-    return _userController;
-}
-
 - (WKWebViewConfiguration *)webConfiguration
 {
     if (!_webConfiguration) {
         _webConfiguration = [[WKWebViewConfiguration alloc] init];
-        _webConfiguration.userContentController = self.userController;
+        _webConfiguration.userContentController = [[WKUserContentController alloc] init];
     }
     return _webConfiguration;
 }
@@ -123,7 +115,7 @@
 {
     NSString * url = [NSString stringWithFormat:@"%@",self.webView.URL];
     NSString * origalUrl = [url componentsSeparatedByString:@"?"][0];
-    if ([self.url rangeOfString:origalUrl].location !=NSNotFound) {
+    if ([self.url rangeOfString:origalUrl].location != NSNotFound  || [url rangeOfString:@"apply/trans/withDrawalsResult"].location != NSNotFound) {
         [self closeNative];
     }else{
         //判断是否有上一层H5页面
@@ -162,7 +154,7 @@
 {
     _jsMethodName = jsMethodName;
     //注册方法
-    [self.userController addScriptMessageHandler:self name:jsMethodName];
+    [self.webConfiguration.userContentController addScriptMessageHandler:self name:jsMethodName];
 }
 
 - (void)setUrl:(NSString *)url
@@ -265,7 +257,7 @@
 }
 
 - (void)dealloc{
-    [self.userController removeScriptMessageHandlerForName:self.jsMethodName];
+    [self.webConfiguration.userContentController removeScriptMessageHandlerForName:self.jsMethodName];
    // [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
 }
 

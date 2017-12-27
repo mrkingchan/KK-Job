@@ -392,7 +392,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="eWX-z9-wqw" firstAttribute="leading" secondItem="zNO-nE-D65" secondAttribute="leading" id="1gg-Gp-rv0"/>
                             <constraint firstItem="Qzx-WH-aNv" firstAttribute="top" secondItem="5BG-Fl-zAt" secondAttribute="bottom" constant="25" id="84Z-xf-4Oo"/>
