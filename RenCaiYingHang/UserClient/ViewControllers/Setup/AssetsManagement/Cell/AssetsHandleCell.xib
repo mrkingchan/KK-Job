@@ -37,7 +37,7 @@
                         <rect key="frame" x="80" y="10" width="193.5" height="29.5"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     </textField>
                 </subviews>
                 <constraints>
@@ -53,6 +53,9 @@
                     <constraint firstAttribute="bottom" secondItem="eqL-9S-vVa" secondAttribute="bottom" constant="10" id="hSC-Fy-xWd"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="textField" destination="Bjy-7F-D9n" id="vfv-qQ-7d0"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

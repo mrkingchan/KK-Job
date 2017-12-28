@@ -8,6 +8,8 @@
 
 #import "DropInBoxViewController.h"
 
+#import "DropDetailViewController.h"
+
 @interface DropInBoxViewController ()
 
 @end
@@ -24,6 +26,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[UtilityHelper addUrlToken:@"apply/delivery"]]]];
+}
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
+    if (![url isEqualToString:[UtilityHelper addUrlToken:@"apply/delivery"]]) {
+        DropDetailViewController * h5 = [[DropDetailViewController alloc] init];
+        h5.url = [UtilityHelper addTokenForUrlSting:url];
+        [self.navigationController pushViewController:h5 animated:true];
+        decisionHandler(WKNavigationActionPolicyCancel);
+    }else{
+        decisionHandler(WKNavigationActionPolicyAllow);
+    }
 }
 
 

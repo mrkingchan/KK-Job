@@ -195,7 +195,11 @@ const  Byte iv[] = {1,2,3,4,5,6,7,8};
 {
     NSString * jsonstr =   [@{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey} mj_JSONString];
     ;
-    return  [NSString stringWithFormat:@"%@?token=%@",urlString,[UtilityHelper encryptUseDES2:jsonstr key:DESKEY]];
+    NSString * accountStr = @"?";
+    if ([urlString rangeOfString:accountStr].location != NSNotFound) {
+        accountStr = @"&";
+    }
+    return  [NSString stringWithFormat:@"%@%@token=%@",urlString,accountStr,[UtilityHelper encryptUseDES2:jsonstr key:DESKEY]];
 }
 
 @end

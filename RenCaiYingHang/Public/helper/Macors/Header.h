@@ -11,6 +11,10 @@
 
 #import <UIKit/UIKit.h>
 
+/** AppPay **/
+#import "WXApi.h"
+#import <AlipaySDK/AlipaySDK.h>
+
 /** model **/
 #import "AuthenticationModel.h"
 
@@ -38,7 +42,6 @@
 #import "RYBusinessTabBarController.h"
 
 #import "CommonH5Controller.h"
-#import "HandleH5ViewController.h"
 
 /**  CustomView  **/
 #import "TextViewCell.h"
@@ -73,5 +76,6 @@
 #import "UIButton+SystemFont.h"
 #import "UILabel+SystemFont.h"
 #import "UITextField+SystemFont.h"
+#import "UIImageView+RotateImgV.h"
 
 #endif /* Header_h */

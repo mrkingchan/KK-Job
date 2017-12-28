@@ -120,13 +120,13 @@ static NSString * identifier = @"CollectionViewCell";
 /** 加载大头针 **/
 - (void) loadData:(NSDictionary *)paramer
 {
-    [AreaRequest getJobInfoWithParamer:paramer suceess:^(NSArray *dataArr) {
-        [self.dataArray addObjectsFromArray:dataArr];
-        [self initGUI];
-        [self nearbyPointWithArr:self.dataArray];
-    } failure:^(id errorCode) {
-        
-    }];
+//    [AreaRequest getJobInfoWithParamer:paramer suceess:^(NSArray *dataArr) {
+//        [self.dataArray addObjectsFromArray:dataArr];
+//        [self initGUI];
+//        [self nearbyPointWithArr:self.dataArray];
+//    } failure:^(id errorCode) {
+//
+//    }];
 //    for (int i = 0; i<10; i++) {
 //        RyJobModel *model = [[RyJobModel alloc]init];
 //        model.comshortname = [NSString stringWithFormat:@"目的地地址%d",i];

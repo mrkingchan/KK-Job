@@ -1,13 +1,13 @@
 //
-//  HandleH5ViewController.h
+//  AgentViewController.h
 //  RenCaiYingHang
 //
-//  Created by Macx on 2017/12/7.
+//  Created by Macx on 2017/12/28.
 //  Copyright © 2017年 Macx. All rights reserved.
 //
 
 #import "RYWebViewController.h"
 
-@interface HandleH5ViewController : RYWebViewController
+@interface AgentViewController : RYWebViewController
 
 @end

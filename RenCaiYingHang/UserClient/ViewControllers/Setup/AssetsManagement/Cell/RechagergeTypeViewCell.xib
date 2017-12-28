@@ -34,6 +34,7 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKy-cj-T8E">
                         <rect key="frame" x="270" y="10" width="30" height="29.5"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="Zob-3f-whP"/>
                         </constraints>
@@ -61,7 +62,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="checkbox_chosed" width="20" height="20"/>
-        <image name="checkbox_nor" width="20" height="20"/>
+        <image name="checkbox_chosed" width="37" height="37"/>
+        <image name="checkbox_nor" width="37" height="37"/>
     </resources>
 </document>

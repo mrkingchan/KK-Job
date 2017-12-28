@@ -10,6 +10,8 @@
 
 #import "CenterMessageModel.h"
 
+#import "BannerImageModel.h"
+
 @interface RYUserRequest : NSObject
 
 /** 验证手机号码是否存在 */
@@ -58,7 +60,7 @@
 + (void) scanCodeInterviewAwardWithWithParamer:(NSString *)paramer suceess:(void(^)(NSString * urlString))sucess failure:(void(^)(id errorCode))failure;
 
 /** 个人中心获取简历基本信息 **/
-+ (void) appUsGetBaseInfoSuceess:(void(^)(NSDictionary * baseInfo))sucess failure:(void(^)(id errorCode))failure;
++ (void) appUsGetBaseInfoSuceess:(void(^)(NSDictionary * baseInfo,NSArray * imageArr))sucess failure:(void(^)(id errorCode))failure;
 
 /** 个人中心获取消息 */
 + (void) centerMessageSucess:(void(^)(NSArray * dataArr))sucess failure:(void(^)(id errorCode))failure;

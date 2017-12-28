@@ -11,7 +11,13 @@
 #import "AssetsHandleCell.h"
 #import "RechagergeTypeViewCell.h"
 
-@interface RechargeViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "AppPayRequest.h"
+
+@interface RechargeViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+
+@property (nonatomic,assign) AppPayType payType;
+
+@property (nonatomic,copy) NSString * rechargeNumbers;
 
 @property (nonatomic,strong) UITableView * tableView;
 
@@ -49,6 +55,9 @@ static NSString * RechagergeTypeViewCellID = @"RechagergeTypeViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"充值";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(weixinPaySuccess:) name:@"WeXinPayCallBack" object:nil];
+    
     [self configurationTableView];
 }
 
@@ -62,7 +71,50 @@ static NSString * RechagergeTypeViewCellID = @"RechagergeTypeViewCell";
 /** 确认充值 */
 - (void) buttonClick:(UIButton *) sender
 {
-   
+    if([VerifyHelper empty:_rechargeNumbers])
+    {
+        [self alertMessageWithViewController:self message:@"充值金额不能为空"];
+        return;
+    }
+    
+    [self showAlertWithTitle:@"支付账号申请中..." message:@"去做其他操作" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
+        alertMaker.addActionCancelTitle(@"确定");
+    } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
+        [self.navigationController popToRootViewControllerAnimated:true];
+    }];
+    
+//    NSDictionary * dic = @{@"type":@(_payType),@"moneyNum":@([_rechargeNumbers floatValue]),@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey,@"businessType":@"CZ"};
+//    [AppPayRequest thirdPayWithParamer:dic suceess:^(NSDictionary *dic) {
+//        [self callThirdPayWithParamer:dic type:_payType];
+//    } failure:^(id errorCode) {
+//
+//    }];
+}
+
+/** 调起第三方支付 **/
+- (void) callThirdPayWithParamer:(NSDictionary *) paramer type:(NSInteger) type
+{
+    switch (type) {
+        case WeixinPay:
+        {
+            [AppPayRequest weixinPayWithParamer:paramer];
+        }
+            break;
+        case AliPay:
+        {
+            [AppPayRequest aliPayWithParamer:paramer callback:^(NSDictionary *dic) {
+                
+            }];
+        }
+            break;
+        case HuiChaoPay:
+        {
+            
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark UITableViewDataSource
@@ -79,11 +131,17 @@ static NSString * RechagergeTypeViewCellID = @"RechagergeTypeViewCell";
 {
     if (indexPath.section == 0) {
         AssetsHandleCell * cell = [tableView dequeueReusableCellWithIdentifier:AssetsHandleCellID];
+        cell.textField.delegate = self;
+        [cell.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         return cell;
     }
     RechagergeTypeViewCell * cell = [tableView dequeueReusableCellWithIdentifier:RechagergeTypeViewCellID];
     cell.title.text = self.dataArray[indexPath.row];
     cell.selectBtn.tag = indexPath.row;
+    if (indexPath.row == 0) {
+        cell.selectBtn.selected = true;
+        _payType = WeixinPay;
+    }
     [cell.selectBtn addTarget:self action:@selector(cellButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.selectButtonArray addObject:cell.selectBtn];
     return cell;
@@ -136,7 +194,10 @@ static NSString * RechagergeTypeViewCellID = @"RechagergeTypeViewCell";
         for (UIButton * button in self.selectButtonArray)
         {
             if (button.tag == indexPath.row)
+            {
                 button.selected = YES;
+                _payType = indexPath.row + 1;
+            }
             else
                 button.selected = NO;
         }
@@ -149,10 +210,26 @@ static NSString * RechagergeTypeViewCellID = @"RechagergeTypeViewCell";
     for (UIButton * button in self.selectButtonArray)
     {
         if (sender == button)
+        {
             button.selected = YES;
+            _payType =  button.tag + 1;
+        }
         else
             button.selected = NO;
     }
+}
+
+
+- (void) textFieldDidChange:(UITextField *) textField
+{
+    _rechargeNumbers = textField.text;
+}
+
+#pragma mark 微信支付回掉
+- (void)weixinPaySuccess:(NSNotification *) info
+{
+    PayResp *resp = info.userInfo[@"PayResp"];
+    NSLog(@"微信支付返回数据:%@",resp);
 }
 
 - (NSMutableArray *)selectButtonArray

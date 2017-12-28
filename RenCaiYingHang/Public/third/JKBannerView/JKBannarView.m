@@ -93,7 +93,7 @@
 {
     
     JKBannerCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ID" forIndexPath:indexPath];
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:_items[indexPath.row]] placeholderImage:[UIImage imageNamed:@"4.jpg"]];
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:_items[indexPath.row]] placeholderImage:[UIImage imageNamed:@"0.jpg"]];
     return cell;
     
 }

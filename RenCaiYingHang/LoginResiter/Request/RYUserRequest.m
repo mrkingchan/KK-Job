@@ -206,18 +206,26 @@
     NSDictionary * dic = @{KDatas:paramer,@"token":UserInfo.userInfo.token};
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         //返回的应该是跳转链接
+        sucess(@"xxx");
     } failure:^(NSError *error) {
         
     }];
 }
 
 /** 个人中心获取简历基本信息 **/
-+ (void) appUsGetBaseInfoSuceess:(void(^)(NSDictionary * baseInfo))sucess failure:(void(^)(id errorCode))failure
++ (void) appUsGetBaseInfoSuceess:(void(^)(NSDictionary * baseInfo,NSArray * imageArr))sucess failure:(void(^)(id errorCode))failure
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,AppUsGetBaseInfo];
     NSDictionary * dic = @{@"token":UserInfo.userInfo.token};
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         NSDictionary * info = data[@"rel"];
+        
+        NSArray * arr = info[@"systemImage"];
+        NSMutableArray * array = [NSMutableArray array];
+        for (NSDictionary * d in arr) {
+            BannerImageModel * model = [[BannerImageModel alloc] initWithDictionary:d];
+            [array addObject:model.urlString];
+        }
         /** 存id */
         UserInfo.userInfo.resumeId = info[@"id"];
         UserInfo.userInfo.image = info[@"image"];
@@ -225,7 +233,7 @@
 //        NSDictionary * dic = UserInfo.userInfo.mj_keyValues;
 //        NSData * dataUser  = [NSKeyedArchiver archivedDataWithRootObject:dic];
 //        [[NSUserDefaults standardUserDefaults] setObject:dataUser forKey:@"RYUserInfo"];
-        sucess(info);
+        sucess(info,array.copy);
     } failure:^(NSError *error) {
         
     }];

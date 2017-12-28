@@ -8,6 +8,8 @@
 
 #import "JobH5ViewController.h"
 
+#import "JobDetailViewController.h"
+
 @interface JobH5ViewController ()
 
 @end
@@ -17,12 +19,27 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.webView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - KNavBarHeight - KToolHeight);
+    self.webView.frame = CGRectMake(0, KNavBarHeight, kScreenWidth, kScreenHeight - KNavBarHeight - KToolHeight);
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSString * jsonstr =   [@{@"lat":UserInfo.userInfo.token,@"lon":UserInfo.userInfo.pkey} mj_JSONString];
+    ;
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@?data=%@",KBaseURL,[UtilityHelper decryptUseDES2:jsonstr key:DESKEY]]]]]];
+}
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
+    if (![url isEqualToString:[UtilityHelper addUrlToken:@"public/job/search"]]) {
+        JobDetailViewController * h5 = [[JobDetailViewController alloc] init];
+        h5.url = [UtilityHelper addTokenForUrlSting:url];
+        [self.navigationController pushViewController:h5 animated:true];
+        decisionHandler(WKNavigationActionPolicyCancel);
+    }else{
+        decisionHandler(WKNavigationActionPolicyAllow);
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -1,22 +1,35 @@
 //
-//  HandleH5ViewController.m
+//  AgentViewController.m
 //  RenCaiYingHang
 //
-//  Created by Macx on 2017/12/7.
+//  Created by Macx on 2017/12/28.
 //  Copyright © 2017年 Macx. All rights reserved.
 //
 
-#import "HandleH5ViewController.h"
+#import "AgentViewController.h"
 
-@interface HandleH5ViewController ()
+@interface AgentViewController ()
 
 @end
 
-@implementation HandleH5ViewController
+@implementation AgentViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.webView.frame = CGRectMake(0, KNavBarHeight, kScreenWidth, kScreenHeight - KNavBarHeight);
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"人才经纪人";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:UIIMAGE(@"1s") style:UIBarButtonItemStylePlain target:self action:@selector(shareToUser)];
+}
+
+- (void) shareToUser
+{
+    
 }
 
 - (void)didReceiveMemoryWarning {

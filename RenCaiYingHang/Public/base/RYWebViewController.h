@@ -28,4 +28,6 @@
 //点击返回的方法
 - (void)backNative;
 
+- (void) addRightBtn;
+
 @end

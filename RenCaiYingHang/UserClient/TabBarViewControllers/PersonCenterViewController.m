@@ -16,6 +16,7 @@
 #import "WalletViewController.h"
 #import "SetupViewController.h"
 #import "UploadResumeViewController.h"
+#import "AgentViewController.h"
 
 //#import "PrivacyViewController.h"
 //#import "AssetsManagementViewController.h"
@@ -99,8 +100,9 @@ static NSString * footerId = @"MineFooterView";
 
 - (void) requestData
 {
-    [RYUserRequest appUsGetBaseInfoSuceess:^(NSDictionary *baseInfo) {
+    [RYUserRequest appUsGetBaseInfoSuceess:^(NSDictionary * baseInfo,NSArray * imageArr) {
         [self.topArr addObject:baseInfo];
+        [self.topArr addObject:imageArr];
         [self loadData];
     } failure:^(id errorCode) {
         
@@ -148,9 +150,12 @@ static NSString * footerId = @"MineFooterView";
     if([kind isEqualToString:UICollectionElementKindSectionHeader])
     {
         MineHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerId forIndexPath:indexPath];
-        headerView.dataArr = [NSArray arrayWithObjects:@"http://a.cphotos.bdimg.com/timg?image&quality=100&size=b4000_4000&sec=1479712043&di=5c01c9250aaa411825d6802cf8c9c57e&src=http://pic.baike.soso.com/p/20111015/bki-20111015183540-1861675088.jpg",@"http://img4.duitang.com/uploads/item/201511/22/20151122231316_E5A8F.thumb.700_0.jpeg",@"http://img5.duitang.com/uploads/item/201502/24/20150224142121_axcUN.jpeg",@"http://a.cphotos.bdimg.com/timg?image&quality=100&size=b4000_4000&sec=1479712043&di=1ff2077e9749540187c1b1daae8b370b&src=http://img103.mypsd.com.cn/20130502/1/Mypsd_13585_201305020822350023B.jpg",nil];
-        for (NSDictionary * d in self.topArr) {
-            headerView.user = d;
+        for (id class in self.topArr) {
+            if ([class isKindOfClass:[NSArray class]]) {
+                headerView.dataArr = class;
+            }else if ([class isKindOfClass:[NSDictionary class]]){
+                headerView.user = class;
+            }
         }
         headerView.mineHeaderClickCallBack = ^(NSInteger index) {
             [self imageClickPushWithIndex:index];
@@ -232,7 +237,9 @@ static NSString * footerId = @"MineFooterView";
         case 2:
         {
             WalletViewController * h5 = [[WalletViewController alloc] init];
-            h5.url = [UtilityHelper addUrlToken:@"apply/userWallet"];
+            h5.url = [UtilityHelper addUrlToken:@"identity/userWallet"];
+            h5.jsMethodName = @"recharge";
+            h5.type = 0;
             [self.navigationController pushViewController:h5 animated:true];
         }
             break;
@@ -254,11 +261,20 @@ static NSString * footerId = @"MineFooterView";
             break;
         case 0:
         case 5:
-        case 6:
         {
             CommonH5Controller * h5 = [[CommonH5Controller alloc] init];
-            NSArray * infoArr = @[@"apply/resume/modifyRes",@"",@"",@"",@"",@"apply/invitation",@"apply/recommended",@""];
-            h5.url = [UtilityHelper addUrlToken:infoArr[indexPath.row]];
+            if (indexPath.row == 0) {
+                h5.url = [UtilityHelper addUrlToken:@"apply/resume/modifyRes"];
+            }else{
+                h5.url = [UtilityHelper addUrlToken:@"apply/invitation"];
+            }
+            [self.navigationController pushViewController:h5 animated:true];
+        }
+            break;
+        case 6:
+        {
+            AgentViewController * h5 = [[AgentViewController alloc] init];
+            h5.url = [UtilityHelper addUrlToken:@"apply/recommended"];
             [self.navigationController pushViewController:h5 animated:true];
         }
         default:
@@ -300,7 +316,7 @@ static NSString * footerId = @"MineFooterView";
 /** 头部图片点击push **/
 - (void) imageClickPushWithIndex:(NSInteger) index
 {
-    
+    [self alertMessageWithViewController:self message:[NSString stringWithFormat:@"点击了%zd",index]];
 }
 
 #pragma mark - JHUploadImageDelegate

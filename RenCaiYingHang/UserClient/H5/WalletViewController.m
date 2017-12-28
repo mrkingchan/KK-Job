@@ -31,7 +31,6 @@
     // Do any additional setup after loading the view.
     
     _oldUrlString = self.url;
-    self.jsMethodName = @"recharge";
 }
 
 - (void)backNative
@@ -39,7 +38,19 @@
     if (_type == 1) {
         [self.navigationController popToRootViewControllerAnimated:true];
     }else{
-        [self.navigationController popViewControllerAnimated:true];
+        NSString * url = [NSString stringWithFormat:@"%@",self.webView.URL];
+        NSString * origalUrl = [url componentsSeparatedByString:@"?"][0];
+        if ([self.url rangeOfString:origalUrl].location != NSNotFound  || [url rangeOfString:@"apply/trans/withDrawalsResult"].location != NSNotFound) {
+            [self.navigationController popViewControllerAnimated:true];
+        }else{
+            //判断是否有上一层H5页面
+            if ([self.webView canGoBack]) {
+                //如果有则返回
+                [self.webView goBack];
+            }else{
+                [self.navigationController popViewControllerAnimated:true];
+            }
+        }
     }
 }
 
@@ -71,8 +82,9 @@
  */
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
-    if ([message.name isEqualToString:self.jsMethodName]) {
-        //code...
+    if ([message.name isEqualToString:@"recharge"]) {
+        RechargeViewController * recharge = [[RechargeViewController alloc] init];
+        [self.navigationController pushViewController:recharge animated:true];
     }
 }
 

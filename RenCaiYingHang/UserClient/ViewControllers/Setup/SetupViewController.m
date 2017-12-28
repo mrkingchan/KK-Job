@@ -13,6 +13,8 @@
 #import "FeebBackViewController.h"
 #import "GestureManageController.h"
 
+#import "PCCircleViewConst.h"
+
 @interface SetupViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView * tableView;
@@ -145,7 +147,7 @@ static NSString * SetUPTableViewCellID = @"UITableViewCell";
                 case 0:
                 {
                     FeebBackViewController * feed = [[FeebBackViewController alloc] init];
-                    feed.title = self.dataArray[indexPath.section][indexPath.row];
+                    feed.url = [UtilityHelper addUrlToken:@"public/feedback"];
                     [self.navigationController pushViewController:feed animated:true];
                 }
                     break;
@@ -172,6 +174,8 @@ static NSString * SetUPTableViewCellID = @"UITableViewCell";
 {
     [UserInfo loginOut];
     [RYDefaults setObject:@"" forKey:[NSString stringWithFormat:@"RYUserInfo"]];
+    [PCCircleViewConst saveGesture:nil Key:gestureFinalSaveKey];
+    [[NSUserDefaults standardUserDefaults] setObject:@"close" forKey:@"setOn"];
     UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
     [UIApplication sharedApplication].keyWindow.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
 }

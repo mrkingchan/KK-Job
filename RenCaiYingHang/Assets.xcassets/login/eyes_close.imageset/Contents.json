@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "eyes_close.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "eyes_close@2x.png",
       "scale" : "2x"
     },
     {

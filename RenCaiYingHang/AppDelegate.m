@@ -40,6 +40,10 @@
     /** crash Application windows are expected to have a root **/
     self.window.rootViewController = [[UIViewController alloc] init];
     
+    
+    //向微信注册
+    [WXApi registerApp:WeXinAppID];
+    
     /** 新版本引导页出现 */
     if ([OSGuideViewController isShow]) {
         OSGuideViewController * guide = [[OSGuideViewController alloc] init];
@@ -113,6 +117,64 @@
     [[UITabBar appearance] setTintColor:[UIColor darkGrayColor]];
 }
 
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary*)options
+{
+    //判断是微信还是支付宝操作
+    if ([[NSString stringWithFormat:@"%@",url] rangeOfString:[NSString stringWithFormat:@"%@:",WeXinAppID]].location != NSNotFound){
+        return  [WXApi handleOpenURL:url delegate:self];
+    }else{
+        if ([url.host isEqualToString:@"safepay"]) {
+            //跳转支付宝钱包进行支付，处理支付结果
+            [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+                NSLog(@"result = %@",resultDic);
+            }];
+        }
+        return YES;
+    }
+}
+
+#pragma mark 微信支付回掉
+- (void)onResp:(BaseResp *)resp
+{
+//    if ([resp isKindOfClass:[SendAuthResp class]])
+//    {
+//        SendAuthResp *temp = (SendAuthResp *)resp;
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"WeXinLoginCallBack" object:self userInfo:@{@"SendAuthResp":temp}];
+//    }
+    if ([resp isKindOfClass:[PayResp class]]){
+        PayResp *response = (PayResp*)resp;
+        switch(response.errCode){
+            case 0:
+                //服务器端查询支付通知或查询API返回的结果再提示成功
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"WeXinPayCallBack" object:self userInfo:@{@"PayResp":resp}];
+                NSLog(@"支付成功");
+                break;
+            default:
+                NSLog(@"支付失败，retcode=%d",resp.errCode);
+                break;
+        }
+    }
+}
+
+-(void) onReq:(BaseReq*)req
+{
+    
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    if ([url.host isEqualToString:@"safepay"]) {
+        //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+        }];
+    }
+    return YES;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

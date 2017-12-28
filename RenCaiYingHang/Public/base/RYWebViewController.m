@@ -8,6 +8,9 @@
 
 #import "RYWebViewController.h"
 
+#import "CompanyViewController.h"
+#import "DropInBoxViewController.h"
+
 @interface RYWebViewController ()<WKNavigationDelegate,WKScriptMessageHandler,WKUIDelegate>
 
 @property (nonatomic,strong) LoadingView * loading;
@@ -98,16 +101,25 @@
 
 - (void)addLeftButton
 {
-    //判断是否有上一层H5页面
-    if ([self.webView canGoBack]) {
-        //同时设置返回按钮和关闭按钮为导航栏左边的按钮
-        self.navigationItem.leftBarButtonItem = self.backItem;
-//        self.navigationItem.leftBarButtonItems = @[self.backItem, self.closeItem];
+    if ([self isKindOfClass:[CompanyViewController class]] || [self isKindOfClass:[DropInBoxViewController class]]) {
+        return;
     }
+    self.navigationItem.leftBarButtonItem = self.backItem;
+    //判断是否有上一层H5页面
+//    if ([self.webView canGoBack]) {
+        //同时设置返回按钮和关闭按钮为导航栏左边的按钮
+//        self.navigationItem.leftBarButtonItems = @[self.backItem, self.closeItem];
+//    }
 //    else{
 //        //同时设置返回按钮和关闭按钮为导航栏左边的按钮
 //        self.navigationItem.leftBarButtonItem = self.backItem;
 //    }
+}
+
+/** 添加分享按钮 */
+-(void)addRightBtn
+{
+    
 }
 
 //点击返回的方法
@@ -122,6 +134,8 @@
         if ([self.webView canGoBack]) {
             //如果有则返回
             [self.webView goBack];
+        }else{
+            [self closeNative];
         }
     }
 }
@@ -228,11 +242,13 @@
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
     [self addLeftButton];
+    [self addRightBtn];
 }
 
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
     [self addLeftButton];
+    [self addRightBtn];
    // [self.loading dismiss];
 }
 
