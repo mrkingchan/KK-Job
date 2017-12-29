@@ -41,7 +41,7 @@
     NSDictionary * dic = [UtilityHelper encryptParmar:paramer];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         
-        [UtilityHelper saveUserInfoWith:data];
+        [UtilityHelper saveUserInfoWith:data[@"rel"] isFinishBaseInfo:false keyName:UserCache];
         sucess(true);
         
     } failure:^(NSError *error) {
@@ -101,7 +101,7 @@
     NSDictionary * dic = [UtilityHelper encryptParmar:paramer];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         
-        [UtilityHelper saveUserInfoWith:data];
+        [UtilityHelper saveUserInfoWith:data[@"rel"] isFinishBaseInfo:false keyName:UserCache];
         sucess(true);
         
     } failure:^(NSError *error) {
@@ -224,7 +224,7 @@
         NSMutableArray * array = [NSMutableArray array];
         for (NSDictionary * d in arr) {
             BannerImageModel * model = [[BannerImageModel alloc] initWithDictionary:d];
-            [array addObject:model.urlString];
+            [array addObject:model];
         }
         /** 存id */
         UserInfo.userInfo.resumeId = info[@"id"];

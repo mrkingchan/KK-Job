@@ -12,6 +12,8 @@
 
 @interface JobH5ViewController ()
 
+@property (nonatomic,copy) NSString * urlString ;
+
 @end
 
 @implementation JobH5ViewController
@@ -25,14 +27,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSString * jsonstr =   [@{@"lat":UserInfo.userInfo.token,@"lon":UserInfo.userInfo.pkey} mj_JSONString];
+    NSString * jsonstr =   [@{@"lat":@(UserInfo.userInfo.lat),@"lon":@(UserInfo.userInfo.lon)} mj_JSONString];
     ;
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@?data=%@",KBaseURL,[UtilityHelper decryptUseDES2:jsonstr key:DESKEY]]]]]];
+    _urlString = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@?data=%@",KBaseURL,[UtilityHelper decryptUseDES2:jsonstr key:DESKEY]]];
+    [self alertMessageWithViewController:self message:_urlString];
 }
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
-    if (![url isEqualToString:[UtilityHelper addUrlToken:@"public/job/search"]]) {
+    if (![url isEqualToString:_urlString]) {
         JobDetailViewController * h5 = [[JobDetailViewController alloc] init];
         h5.url = [UtilityHelper addTokenForUrlSting:url];
         [self.navigationController pushViewController:h5 animated:true];

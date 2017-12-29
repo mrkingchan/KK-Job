@@ -66,12 +66,34 @@
 /** 进入 */
 - (IBAction)insertLogin:(UIButton *)sender {
     
+    if (![VerifyHelper checkMobileTel:_phoneTf.text ctl:self]) {
+        return;
+    }
+    if ([VerifyHelper empty:_codetf.text]) {
+        [self alertMessageWithViewController:self message:@"验证码不能为空"];
+        return;
+    }
+    
+    [RYUserRequest userLoginWithParamer:@{@"loginType":@"2",@"phone":_phoneTf.text,@"dxCode":_codetf.text} suceess:^(BOOL isSendSuccess) {
+        [UtilityHelper insertApp];
+    } failure:^(id errorCode) {
+        
+    }];
 }
 
 /** 获取验证码 */
 - (IBAction)gainAuthCode:(UIButton *)sender {
-    _time = KAuthCodeSecond;
-    [self countDown];
+    if (![VerifyHelper checkMobileTel:_phoneTf.text ctl:self]) {
+        return;
+    }
+    [RYUserRequest gainAuthCodeWithParamer:@{@"phone":_phoneTf.text} suceess:^(BOOL isSendSuccess) {
+        if (isSendSuccess) {
+            _time = KAuthCodeSecond;
+            [self countDown];
+        }
+    } failure:^(id errorCode) {
+        
+    }];
 }
 
 /** 返回密码登陆 **/

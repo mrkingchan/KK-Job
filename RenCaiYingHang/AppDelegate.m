@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import "ViewController.h"
+
 #import "OSGuideViewController.h"
 
 #import "GestureSetController.h"
@@ -23,9 +25,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-
-    [self gestureAuth];
     
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    /** crash Application windows are expected to have a root **/
+    self.window.rootViewController = [[UIViewController alloc] init];
+    
+    [self gestureAuth];
     /** 是否进入后台操作了 */
     //_isEnterBackground = false;
     
@@ -35,15 +41,30 @@
     /** 导航样式 **/
     [self configAppearance];
     
-    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor whiteColor];
-    /** crash Application windows are expected to have a root **/
-    self.window.rootViewController = [[UIViewController alloc] init];
-    
-    
     //向微信注册
     [WXApi registerApp:WeXinAppID];
     
+    //[self jungleToJump];
+    /** 自定制启动页 */
+    [self diyLaunchView];
+    
+    [self.window makeKeyAndVisible];
+    
+    return YES;
+}
+
+- (void) diyLaunchView
+{
+    ViewController * viewController = [[ViewController alloc] init];
+    viewController.pushCallBack = ^{
+        [self jungleToJump];
+    };
+    self.window.rootViewController = viewController;
+}
+
+/** 根据不同的形式跳转 */
+- (void) jungleToJump
+{
     /** 新版本引导页出现 */
     if ([OSGuideViewController isShow]) {
         OSGuideViewController * guide = [[OSGuideViewController alloc] init];
@@ -53,10 +74,6 @@
     }else{
         [self clickEnter];
     }
-    
-    [self.window makeKeyAndVisible];
-    
-    return YES;
 }
 
 /** 判断是否需要手势认证 */
@@ -82,7 +99,8 @@
             self.window.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
             [self.window.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
         }else{
-            [UtilityHelper insertApp];
+            //[UtilityHelper insertApp];
+            [UtilityHelper jumpDifferentApp:UserInfo.userInfo.isFinishBaseInfo window:self.window];
         }
     }
 }
@@ -90,7 +108,7 @@
 /** 用户缓存 **/
 - (void) gainUserModel
 {
-    NSData * data = [RYDefaults objectForKey:[NSString stringWithFormat:@"RYUserInfo"]];
+    NSData * data = [RYDefaults objectForKey:[NSString stringWithFormat:UserCache]];
     if (data) {
         if ([data isKindOfClass:[NSString class]]) {
             if (data.length <= 0) {

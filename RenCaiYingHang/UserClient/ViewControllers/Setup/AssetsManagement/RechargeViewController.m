@@ -64,7 +64,7 @@ static NSString * RechagergeTypeViewCellID = @"RechagergeTypeViewCell";
 - (void) configurationTableView
 {
     self.tableView.tableFooterView = [self tableFooterView];
-    self.dataArray = @[@"微信支付",@"支付宝支付",@"汇潮支付"];
+    self.dataArray = @[@[@"wx",@"微信支付"],@[@"zfb",@"支付宝支付"],@[@"hc",@"汇潮支付"]];
     [self.tableView reloadData];
 }
 
@@ -77,18 +77,12 @@ static NSString * RechagergeTypeViewCellID = @"RechagergeTypeViewCell";
         return;
     }
     
-    [self showAlertWithTitle:@"支付账号申请中..." message:@"去做其他操作" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
-        alertMaker.addActionCancelTitle(@"确定");
-    } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
-        [self.navigationController popToRootViewControllerAnimated:true];
+    NSDictionary * dic = @{@"type":@(_payType),@"moneyNum":@([_rechargeNumbers floatValue]),@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey,@"businessType":@"CZ"};
+    [AppPayRequest thirdPayWithParamer:dic suceess:^(NSDictionary *dic) {
+        [self callThirdPayWithParamer:dic type:_payType];
+    } failure:^(id errorCode) {
+
     }];
-    
-//    NSDictionary * dic = @{@"type":@(_payType),@"moneyNum":@([_rechargeNumbers floatValue]),@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey,@"businessType":@"CZ"};
-//    [AppPayRequest thirdPayWithParamer:dic suceess:^(NSDictionary *dic) {
-//        [self callThirdPayWithParamer:dic type:_payType];
-//    } failure:^(id errorCode) {
-//
-//    }];
 }
 
 /** 调起第三方支付 **/
@@ -136,7 +130,8 @@ static NSString * RechagergeTypeViewCellID = @"RechagergeTypeViewCell";
         return cell;
     }
     RechagergeTypeViewCell * cell = [tableView dequeueReusableCellWithIdentifier:RechagergeTypeViewCellID];
-    cell.title.text = self.dataArray[indexPath.row];
+    cell.icon.image = UIIMAGE(self.dataArray[indexPath.row][0]);
+    cell.title.text = self.dataArray[indexPath.row][1];
     cell.selectBtn.tag = indexPath.row;
     if (indexPath.row == 0) {
         cell.selectBtn.selected = true;

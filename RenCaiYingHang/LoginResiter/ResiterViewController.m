@@ -108,7 +108,7 @@
         return;
     }
     [RYUserRequest userRegisterWithParamer:@{@"phone":_phoneTf.text,@"fromWay":@"7",@"dxCode":_codeTf.text,@"tiPhone":_inviteTf.text,@"password":_pwTf.text} suceess:^(BOOL isSendSuccess) {
-        [UtilityHelper insertApp];
+        [UtilityHelper jumpDifferentApp:false window:[UIApplication sharedApplication].keyWindow];
     } failure:^(id errorCode) {
         
     }];

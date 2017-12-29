@@ -8,6 +8,8 @@
 
 #import "AgentViewController.h"
 
+#import "RYShareView.h"
+
 @interface AgentViewController ()
 
 @end
@@ -24,12 +26,43 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"人才经纪人";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:UIIMAGE(@"1s") style:UIBarButtonItemStylePlain target:self action:@selector(shareToUser)];
+    self.jsMethodName = @"shareToUser";
 }
 
-- (void) shareToUser
+/**
+ 与后台协商方法调用
+ */
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
-    
+    if ([message.name isEqualToString:@"shareToUser"]) {
+        //code...
+        NSDictionary * d = message.body;
+        UIImage * image = [UtilityHelper composeImg:UIIMAGE(@"pager1") img1:[UtilityHelper qrImageForString:d[@"url"] imageSize:100 logoImageSize:0]];
+        RYShareView * share = [[RYShareView alloc] initWithFrame:[UIScreen mainScreen].bounds type:ShareUser];
+        share.image = image;
+        [[UIApplication sharedApplication].keyWindow addSubview:share];
+        
+        share.shareCallBack = ^(NSInteger index) {
+
+            WXMediaMessage * message = [WXMediaMessage message];
+            [message setThumbImage:[UIImage imageWithData:[self imageWithImage:image scaledToSize:CGSizeMake(100, 100 * kScreenHeight/320)]]];
+            
+            SendMessageToWXReq * req = [[SendMessageToWXReq alloc] init];
+            req.bText = false;
+            req.message  = message;
+            req.scene =  index == 10 ? WXSceneSession : WXSceneTimeline;
+            [WXApi sendReq:req];
+        };
+    }
+}
+
+- (NSData *)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
+{
+    UIGraphicsBeginImageContext(newSize);
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return UIImageJPEGRepresentation(newImage, 1.0);
 }
 
 - (void)didReceiveMemoryWarning {

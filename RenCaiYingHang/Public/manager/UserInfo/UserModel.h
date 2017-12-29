@@ -26,4 +26,12 @@
 /** 附件简历地址 */
 @property (nonatomic,copy) NSString * resumeImage;
 
+/** 纬度 */
+@property (nonatomic,assign) double lat;
+/** 经度 **/
+@property (nonatomic,assign) double lon;
+
+/** 是否基本信息 **/
+@property (nonatomic,assign) BOOL isFinishBaseInfo;
+
 @end

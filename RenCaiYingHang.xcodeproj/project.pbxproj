@@ -69,7 +69,6 @@
 		8F85D8251FD922A500BC1A7D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8241FD922A500BC1A7D /* ViewController.m */; };
 		8F85D8281FD922A500BC1A7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F85D8261FD922A500BC1A7D /* Main.storyboard */; };
 		8F85D82A1FD922A500BC1A7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F85D8291FD922A500BC1A7D /* Assets.xcassets */; };
-		8F85D82D1FD922A500BC1A7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F85D82B1FD922A500BC1A7D /* LaunchScreen.storyboard */; };
 		8F85D8301FD922A500BC1A7D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D82F1FD922A500BC1A7D /* main.m */; };
 		8F85D83A1FD922A500BC1A7D /* RenCaiYingHangTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8391FD922A500BC1A7D /* RenCaiYingHangTests.m */; };
 		8F85D8451FD922A500BC1A7D /* RenCaiYingHangUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8441FD922A500BC1A7D /* RenCaiYingHangUITests.m */; };
@@ -140,6 +139,7 @@
 		8FE1A3801FF4F9D10022CDB0 /* DropDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1A37F1FF4F9D10022CDB0 /* DropDetailViewController.m */; };
 		8FE1A3831FF4FC240022CDB0 /* CompanyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1A3821FF4FC240022CDB0 /* CompanyDetailViewController.m */; };
 		8FE1A3861FF502F60022CDB0 /* JobDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1A3851FF502F60022CDB0 /* JobDetailViewController.m */; };
+		8FE3111C1FF61F6500624D20 /* RYShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE3111B1FF61F6500624D20 /* RYShareView.m */; };
 		8FEC30401FF36E3C0073B1A3 /* RYProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC303F1FF36E3C0073B1A3 /* RYProgressView.m */; };
 		8FEC30441FF37BFE0073B1A3 /* ScanSucessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC30431FF37BFE0073B1A3 /* ScanSucessViewController.m */; };
 		8FEC304A1FF393BC0073B1A3 /* BankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC30491FF393BC0073B1A3 /* BankCardViewController.m */; };
@@ -297,7 +297,6 @@
 		8F85D8241FD922A500BC1A7D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8F85D8271FD922A500BC1A7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8F85D8291FD922A500BC1A7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8F85D82C1FD922A500BC1A7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8F85D82E1FD922A500BC1A7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F85D82F1FD922A500BC1A7D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8F85D8351FD922A500BC1A7D /* RenCaiYingHangTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RenCaiYingHangTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -426,6 +425,8 @@
 		8FE1A3821FF4FC240022CDB0 /* CompanyDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyDetailViewController.m; sourceTree = "<group>"; };
 		8FE1A3841FF502F60022CDB0 /* JobDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobDetailViewController.h; sourceTree = "<group>"; };
 		8FE1A3851FF502F60022CDB0 /* JobDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JobDetailViewController.m; sourceTree = "<group>"; };
+		8FE3111A1FF61F6500624D20 /* RYShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYShareView.h; sourceTree = "<group>"; };
+		8FE3111B1FF61F6500624D20 /* RYShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYShareView.m; sourceTree = "<group>"; };
 		8FEC303E1FF36E3C0073B1A3 /* RYProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYProgressView.h; sourceTree = "<group>"; };
 		8FEC303F1FF36E3C0073B1A3 /* RYProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYProgressView.m; sourceTree = "<group>"; };
 		8FEC30421FF37BFE0073B1A3 /* ScanSucessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanSucessViewController.h; sourceTree = "<group>"; };
@@ -821,7 +822,6 @@
 				8F85D8241FD922A500BC1A7D /* ViewController.m */,
 				8F85D8261FD922A500BC1A7D /* Main.storyboard */,
 				8F85D8291FD922A500BC1A7D /* Assets.xcassets */,
-				8F85D82B1FD922A500BC1A7D /* LaunchScreen.storyboard */,
 				8F85D82E1FD922A500BC1A7D /* Info.plist */,
 				8F85D82F1FD922A500BC1A7D /* main.m */,
 			);
@@ -1128,6 +1128,7 @@
 		8F85D8D21FD9288A00BC1A7D /* H5 */ = {
 			isa = PBXGroup;
 			children = (
+				8FE311191FF61EE400624D20 /* ShareCell */,
 				8F1F666E1FD96960004BF8F1 /* TabBarH5 */,
 				8F85D8E41FD92A8300BC1A7D /* CommonH5Controller.h */,
 				8F85D8E51FD92A8300BC1A7D /* CommonH5Controller.m */,
@@ -1218,6 +1219,15 @@
 				8FE1A3661FF4C0D00022CDB0 /* AlipaySDK.framework */,
 			);
 			path = AliPay;
+			sourceTree = "<group>";
+		};
+		8FE311191FF61EE400624D20 /* ShareCell */ = {
+			isa = PBXGroup;
+			children = (
+				8FE3111A1FF61F6500624D20 /* RYShareView.h */,
+				8FE3111B1FF61F6500624D20 /* RYShareView.m */,
+			);
+			path = ShareCell;
 			sourceTree = "<group>";
 		};
 		8FEC30411FF37BB50073B1A3 /* ScanSucess */ = {
@@ -1399,7 +1409,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F3BDA611FED093300C4B472 /* MineHeaderView.xib in Resources */,
-				8F85D82D1FD922A500BC1A7D /* LaunchScreen.storyboard in Resources */,
 				8F728C381FDE375D00C6247B /* RechagergeTypeViewCell.xib in Resources */,
 				8F3BDA5C1FED007500C4B472 /* MineCollectionViewCell.xib in Resources */,
 				8F85D82A1FD922A500BC1A7D /* Assets.xcassets in Resources */,
@@ -1577,6 +1586,7 @@
 				8F85D8B01FD925CA00BC1A7D /* GTMBase64.m in Sources */,
 				8F0EF4D11FE39CBD00D179D5 /* RYUserRequest.m in Sources */,
 				8F1CA81F1FE764CB00BBD208 /* RyJobModel.m in Sources */,
+				8FE3111C1FF61F6500624D20 /* RYShareView.m in Sources */,
 				8F0EF4B81FE366D100D179D5 /* GestureSetController.m in Sources */,
 				8F85D8F21FD92B1900BC1A7D /* ResiterViewController.m in Sources */,
 				8F85D85D1FD9241800BC1A7D /* RYTabBarController.m in Sources */,
@@ -1656,14 +1666,6 @@
 				8F85D8271FD922A500BC1A7D /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		8F85D82B1FD922A500BC1A7D /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8F85D82C1FD922A500BC1A7D /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

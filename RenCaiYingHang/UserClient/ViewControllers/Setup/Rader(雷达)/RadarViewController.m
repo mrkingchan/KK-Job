@@ -318,6 +318,9 @@ static NSString * identifier = @"CollectionViewCell";
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
+    //获取定位地址
+    UserInfo.userInfo.lat = userLocation.location.coordinate.latitude;
+    UserInfo.userInfo.lon = userLocation.location.coordinate.longitude;
     [self loadData:@{@"lat":@(userLocation.location.coordinate.latitude),@"lon":@(userLocation.location.coordinate.longitude)}];
 //    NSLog(@"userLocation:longitude:%f---latitude:%f",userLocation.location.coordinate.longitude,userLocation.location.coordinate.latitude);
 //    MKCoordinateSpan span = {0.3,0.1};

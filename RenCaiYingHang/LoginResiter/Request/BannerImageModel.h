@@ -10,12 +10,8 @@
 
 @interface BannerImageModel : RYBaseModel
 
-@property (nonatomic,copy) NSString * fromCom;
+@property (nonatomic,copy) NSString * clickUrl;
 
 @property (nonatomic,copy) NSString * urlString;
-
-//为以后有跳转做防备
-//@property (nonatomic,copy) NSString * pushUrl;
-//"fromCom":"人才赢行","picUrl":"show/1507790882208742.jpg"
 
 @end

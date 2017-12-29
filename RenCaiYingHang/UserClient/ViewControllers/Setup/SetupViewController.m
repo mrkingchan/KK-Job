@@ -173,7 +173,7 @@ static NSString * SetUPTableViewCellID = @"UITableViewCell";
 - (void) loginOutClick:(UIButton *)sender
 {
     [UserInfo loginOut];
-    [RYDefaults setObject:@"" forKey:[NSString stringWithFormat:@"RYUserInfo"]];
+    [RYDefaults setObject:@"" forKey:[NSString stringWithFormat:UserCache]];
     [PCCircleViewConst saveGesture:nil Key:gestureFinalSaveKey];
     [[NSUserDefaults standardUserDefaults] setObject:@"close" forKey:@"setOn"];
     UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];

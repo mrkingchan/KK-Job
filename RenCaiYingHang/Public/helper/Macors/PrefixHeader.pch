@@ -16,9 +16,11 @@
 
 #define RYDefaults [NSUserDefaults standardUserDefaults]
 
+#define UserCache @"RYUserInfo"
+
 #define kIOS11Later [[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0
 
-#define WeXinAppID @""
+#define WeXinAppID @"wx779203d95b24f1b6"
 
 
 #define AdaptiveRate [UIScreen mainScreen].bounds.size.height / 736

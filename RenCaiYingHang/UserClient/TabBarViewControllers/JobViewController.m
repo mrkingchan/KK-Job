@@ -43,8 +43,6 @@
 {
     JobH5ViewController * jobH5 = [[JobH5ViewController alloc] init];
     jobH5.title = @"推荐";
-    jobH5.url = [UtilityHelper addUrlToken:@"public/job/search"];
-    jobH5.progressViewColor = [UIColor redColor];
     [self addChildViewController:jobH5];
     
     RadarViewController * recentMap = [[RadarViewController alloc] init];

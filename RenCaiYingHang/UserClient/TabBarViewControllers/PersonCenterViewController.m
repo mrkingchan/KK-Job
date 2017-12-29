@@ -152,7 +152,11 @@ static NSString * footerId = @"MineFooterView";
         MineHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerId forIndexPath:indexPath];
         for (id class in self.topArr) {
             if ([class isKindOfClass:[NSArray class]]) {
-                headerView.dataArr = class;
+                NSMutableArray * array = [NSMutableArray array];
+                for (BannerImageModel * model in class) {
+                    [array addObject:model.urlString];
+                }
+                headerView.dataArr = array.copy;
             }else if ([class isKindOfClass:[NSDictionary class]]){
                 headerView.user = class;
             }
@@ -316,7 +320,14 @@ static NSString * footerId = @"MineFooterView";
 /** 头部图片点击push **/
 - (void) imageClickPushWithIndex:(NSInteger) index
 {
-    [self alertMessageWithViewController:self message:[NSString stringWithFormat:@"点击了%zd",index]];
+    for (id class in self.topArr) {
+        if ([class isKindOfClass:[NSArray class]]) {
+            BannerImageModel * model = class[index];
+            AgentViewController * h5 = [[AgentViewController alloc] init];
+            h5.url = [UtilityHelper addUrlToken:model.clickUrl];
+            [self.navigationController pushViewController:h5 animated:true];
+        }
+    }
 }
 
 #pragma mark - JHUploadImageDelegate

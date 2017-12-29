@@ -65,16 +65,16 @@
 /** 扫码回掉 */
 -(void)scanSuccessBarcodeJump:(NSString*)str
 {
-    [self pushViewController:[[ScanSucessViewController alloc] init] animated:true];
-//    if ([str rangeOfString:KDatas].location !=NSNotFound) {
-//        str =  [str componentsSeparatedByString:@"datas="][1];
-//    }
-//
-//    [RYUserRequest scanCodeInterviewAwardWithWithParamer:str suceess:^(NSString *urlString) {
-//        [self pushViewController:[[ScanSucessViewController alloc] init] animated:true];
-//    } failure:^(id errorCode) {
-//
-//    }];
+    //[self pushViewController:[[ScanSucessViewController alloc] init] animated:true];
+    if ([str rangeOfString:KDatas].location !=NSNotFound) {
+        str =  [str componentsSeparatedByString:@"datas="][1];
+    }
+
+    [RYUserRequest scanCodeInterviewAwardWithWithParamer:str suceess:^(NSString *urlString) {
+        [self pushViewController:[[ScanSucessViewController alloc] init] animated:true];
+    } failure:^(id errorCode) {
+
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

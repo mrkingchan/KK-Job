@@ -20,17 +20,34 @@
 + (void) insertApp
 {
     [RYUserRequest whetherBaseInfoWithParamer:@{@"token":UserInfo.userInfo.token} suceess:^(BOOL isSendSuccess) {
+        
         if (isSendSuccess) {
-            /** 默认进入雷达页面 **/
-            [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
-            [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+            NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
+            [UtilityHelper saveUserInfoWith:rel isFinishBaseInfo:true keyName:UserCache];
+            [UtilityHelper jumpDifferentApp:true window:[UIApplication sharedApplication].keyWindow];
         }else{
-            RYNavigationController * root = [[RYNavigationController alloc] initWithRootViewController:[[NecessaryInfoViewController alloc] init]];
-            [UIApplication sharedApplication].keyWindow.rootViewController = root;
+            
+            NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
+            [UtilityHelper saveUserInfoWith:rel isFinishBaseInfo:false keyName:UserCache];
+            [UtilityHelper jumpDifferentApp:false window:[UIApplication sharedApplication].keyWindow];
         }
     } failure:^(id errorCode) {
 
     }];
+}
+
+/** 根据基本信息判断 **/
++ (void) jumpDifferentApp:(BOOL) isFinishBaseInfo window:(UIWindow *) window
+{
+    if (isFinishBaseInfo) {
+        /** 默认进入雷达页面 **/
+        window.rootViewController = [[RYTabBarController alloc] init];
+        [window.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+    }else{
+        RYNavigationController * root = [[RYNavigationController alloc] initWithRootViewController:[[NecessaryInfoViewController alloc] init]];
+        window.rootViewController = root;
+    }
+    
     //            /** 如果没有绑定企业了那么就去绑定企业界面 **/
     //            /** 默认进入企业端页面 **/
     //            [UIApplication sharedApplication].keyWindow.rootViewController = [[RYBusinessTabBarController alloc] init];
@@ -38,12 +55,13 @@
 }
 
 /** 缓存数据 */
-+ (void) saveUserInfoWith:(NSDictionary *)data
++ (void) saveUserInfoWith:(NSDictionary *)data isFinishBaseInfo:(BOOL) isFinishBaseInfo keyName:(NSString *)keyName
 {
-    NSDictionary * rel = data[@"rel"];
-    [UserInfoManage shareInstance].userInfo =  [[UserModel alloc] initWithDictionary:rel];
+    UserInfo.userInfo =  [[UserModel alloc] initWithDictionary:data];
+    UserInfo.userInfo.isFinishBaseInfo = isFinishBaseInfo;
+    NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
     NSData * dataUser  = [NSKeyedArchiver archivedDataWithRootObject:rel];
-    [RYDefaults setObject:dataUser forKey:[NSString stringWithFormat:@"RYUserInfo"]];
+    [RYDefaults setObject:dataUser forKey:keyName];
 }
 
 /** 自适应高度 **/
@@ -159,6 +177,96 @@ const  Byte iv[] = {1,2,3,4,5,6,7,8};
     }
 }
 
+/** 生成二维码 **/
++ (UIImage *)qrImageForString:(NSString *)string imageSize:(CGFloat)Imagesize logoImageSize:(CGFloat)waterImagesize{
+    CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
+    [filter setDefaults];
+    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
+    [filter setValue:data forKey:@"inputMessage"];//通过kvo方式给一个字符串，生成二维码
+    [filter setValue:@"H" forKey:@"inputCorrectionLevel"];//设置二维码的纠错水平，越高纠错水平越高，可以污损的范围越大
+    CIImage *outPutImage = [filter outputImage];//拿到二维码图片
+    return [UtilityHelper createNonInterpolatedUIImageFormCIImage:outPutImage withSize:Imagesize waterImageSize:waterImagesize];
+}
+
++ (UIImage *)createNonInterpolatedUIImageFormCIImage:(CIImage *)image withSize:(CGFloat) size waterImageSize:(CGFloat)waterImagesize{
+    CGRect extent = CGRectIntegral(image.extent);
+    CGFloat scale = MIN(size/CGRectGetWidth(extent), size/CGRectGetHeight(extent));
+    
+    // 1.创建bitmap;
+    size_t width = CGRectGetWidth(extent) * scale;
+    size_t height = CGRectGetHeight(extent) * scale;
+    //创建一个DeviceGray颜色空间
+    CGColorSpaceRef cs = CGColorSpaceCreateDeviceGray();
+    //CGBitmapContextCreate(void * _Nullable data, size_t width, size_t height, size_t bitsPerComponent, size_t bytesPerRow, CGColorSpaceRef  _Nullable space, uint32_t bitmapInfo)
+    //width：图片宽度像素
+    //height：图片高度像素
+    //bitsPerComponent：每个颜色的比特值，例如在rgba-32模式下为8
+    //bitmapInfo：指定的位图应该包含一个alpha通道。
+    CGContextRef bitmapRef = CGBitmapContextCreate(nil, width, height, 8, 0, cs, (CGBitmapInfo)kCGImageAlphaNone);
+    CIContext *context = [CIContext contextWithOptions:nil];
+    //创建CoreGraphics image
+    CGImageRef bitmapImage = [context createCGImage:image fromRect:extent];
+    
+    CGContextSetInterpolationQuality(bitmapRef, kCGInterpolationNone);
+    CGContextScaleCTM(bitmapRef, scale, scale);
+    CGContextDrawImage(bitmapRef, extent, bitmapImage);
+    
+    // 2.保存bitmap到图片
+    CGImageRef scaledImage = CGBitmapContextCreateImage(bitmapRef);
+    CGContextRelease(bitmapRef); CGImageRelease(bitmapImage);
+    
+    //原图
+    UIImage *outputImage = [UIImage imageWithCGImage:scaledImage];
+    //给二维码加 logo 图
+    UIGraphicsBeginImageContextWithOptions(outputImage.size, NO, [[UIScreen mainScreen] scale]);
+    [outputImage drawInRect:CGRectMake(0,0 , size, size)];
+    //logo图
+    UIImage *waterimage = [UIImage imageNamed:@"icon_imgApp"];
+    //把logo图画到生成的二维码图片上，注意尺寸不要太大（最大不超过二维码图片的%30），太大会造成扫不出来
+    [waterimage drawInRect:CGRectMake((size-waterImagesize)/2.0, (size-waterImagesize)/2.0, waterImagesize, waterImagesize)];
+    UIImage *newPic = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newPic;
+}
+
+/** 拼接两图 */
++ (UIImage *)addImage:(UIImage *)image1 toImage:(UIImage *)image2 {
+    
+    UIGraphicsBeginImageContext(image1.size);
+    
+    // Draw image1
+    [image1 drawInRect:CGRectMake(0, 0, image1.size.width, image1.size.height)];
+    
+    // Draw image2
+    [image2 drawInRect:CGRectMake(20, image1.size.height - image2.size.height - 20, image2.size.width, image2.size.height)];
+    
+    UIImage *resultingImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return resultingImage;
+}
+
+/** 拼接两图 */
++ (UIImage *)composeImg:(UIImage *) img img1:(UIImage *)img1
+{
+    CGImageRef imgRef = img.CGImage;
+    CGFloat w = CGImageGetWidth(imgRef);
+    CGFloat h = CGImageGetHeight(imgRef);
+    
+    CGImageRef imgRef1 = img1.CGImage;
+    CGFloat w1 = CGImageGetWidth(imgRef1);
+    CGFloat h1 = CGImageGetHeight(imgRef1);
+    
+    UIGraphicsBeginImageContext(CGSizeMake(w, h));
+    [img drawInRect:CGRectMake(0, 0, w, h)];//先把大图 画到上下文中
+    [img1 drawInRect:CGRectMake(20, h - h1 - 70, w1, h1)];//再把小图放在上下文中
+    UIImage *resultImg = UIGraphicsGetImageFromCurrentImageContext();//从当前上下文中获得最终图片
+    UIGraphicsEndImageContext();//关闭上下文
+    
+    return resultImg;
+}
+
 /** 获取当前时间 */
 + (NSString*)getCurrentTimes {
     
@@ -181,6 +289,24 @@ const  Byte iv[] = {1,2,3,4,5,6,7,8};
     return currentTimeString;
     
 }
+
+/** 存图片 **/
++ (void) cacheImageWithImageName:(NSString *) name image:(UIImage *)image
+{
+    NSString *path_document = NSHomeDirectory();
+    //设置一个图片的存储路径
+    NSString *imagePath = [path_document stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@.png",name]];
+    //把图片直接保存到指定的路径（同时应该把图片的路径imagePath存起来，下次就可以直接用来取）
+    [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
+}
+
+/** 拿图片 */
++ (UIImage *) gainImageFromFilePath:(NSString *) name
+{
+    NSString *path_document = NSHomeDirectory();
+    return [UIImage imageWithContentsOfFile:[path_document stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@.png",name]]];
+}
+
 
 /** >>>>> 传 token 和 pKey<<<<< **/
 + (NSString *) addUrlToken:(NSString *)urlParamer
