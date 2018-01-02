@@ -35,6 +35,7 @@
 		8F1F0BDE1FF0C86C00CE2FB5 /* JKBannarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F0BDB1FF0C86C00CE2FB5 /* JKBannarView.m */; };
 		8F1F0BDF1FF0C86C00CE2FB5 /* JKBannerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F0BDD1FF0C86C00CE2FB5 /* JKBannerCollectionViewCell.m */; };
 		8F1F0BE21FF0F29C00CE2FB5 /* WalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F0BE11FF0F29C00CE2FB5 /* WalletViewController.m */; };
+		8F1F24CC1FFB8204003F3B37 /* HCH5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F24CB1FFB8204003F3B37 /* HCH5ViewController.m */; };
 		8F1F66511FD9485C004BF8F1 /* RYWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66501FD9485C004BF8F1 /* RYWebViewController.m */; };
 		8F1F66541FD94DCD004BF8F1 /* JobH5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66531FD94DCD004BF8F1 /* JobH5ViewController.m */; };
 		8F1F66581FD94E1C004BF8F1 /* RadarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66571FD94E1C004BF8F1 /* RadarViewController.m */; };
@@ -237,6 +238,8 @@
 		8F1F0BDD1FF0C86C00CE2FB5 /* JKBannerCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKBannerCollectionViewCell.m; sourceTree = "<group>"; };
 		8F1F0BE01FF0F29C00CE2FB5 /* WalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletViewController.h; sourceTree = "<group>"; };
 		8F1F0BE11FF0F29C00CE2FB5 /* WalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletViewController.m; sourceTree = "<group>"; };
+		8F1F24CA1FFB8204003F3B37 /* HCH5ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCH5ViewController.h; sourceTree = "<group>"; };
+		8F1F24CB1FFB8204003F3B37 /* HCH5ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HCH5ViewController.m; sourceTree = "<group>"; };
 		8F1F664F1FD9485C004BF8F1 /* RYWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYWebViewController.h; sourceTree = "<group>"; };
 		8F1F66501FD9485C004BF8F1 /* RYWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYWebViewController.m; sourceTree = "<group>"; };
 		8F1F66521FD94DCD004BF8F1 /* JobH5ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobH5ViewController.h; sourceTree = "<group>"; };
@@ -1144,6 +1147,8 @@
 				8FE1A3821FF4FC240022CDB0 /* CompanyDetailViewController.m */,
 				8FE1A3841FF502F60022CDB0 /* JobDetailViewController.h */,
 				8FE1A3851FF502F60022CDB0 /* JobDetailViewController.m */,
+				8F1F24CA1FFB8204003F3B37 /* HCH5ViewController.h */,
+				8F1F24CB1FFB8204003F3B37 /* HCH5ViewController.m */,
 			);
 			path = H5;
 			sourceTree = "<group>";
@@ -1620,6 +1625,7 @@
 				8F1F0BDE1FF0C86C00CE2FB5 /* JKBannarView.m in Sources */,
 				8F728C2A1FDE2F9F00C6247B /* AssetsManagementViewController.m in Sources */,
 				8FEC30441FF37BFE0073B1A3 /* ScanSucessViewController.m in Sources */,
+				8F1F24CC1FFB8204003F3B37 /* HCH5ViewController.m in Sources */,
 				8F85D8A21FD9257400BC1A7D /* ScanSuccessJumpVC.m in Sources */,
 				8F3BDA5B1FED007500C4B472 /* MineCollectionViewCell.m in Sources */,
 				8F26E1181FF49A3700E93F14 /* UIImageView+RotateImgV.m in Sources */,

@@ -56,7 +56,7 @@
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,NearJobSearch];
     NSString * jsonstr =   [@{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey} mj_JSONString];
-    NSDictionary * dic = @{KDatas:[UtilityHelper encryptUseDES2:[paramer mj_JSONString] key:DESKEY],@"token":[UtilityHelper encryptUseDES2:jsonstr key:DESKEY]};
+    NSDictionary * dic = @{@"data":[UtilityHelper encryptUseDES2:[paramer mj_JSONString] key:DESKEY],@"token":[UtilityHelper encryptUseDES2:jsonstr key:DESKEY]};
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         NSMutableArray * arr = [NSMutableArray array];
         NSArray * rel = data[@"rel"];

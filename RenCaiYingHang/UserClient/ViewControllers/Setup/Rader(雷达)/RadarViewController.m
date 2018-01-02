@@ -120,6 +120,28 @@ static NSString * identifier = @"CollectionViewCell";
 /** 加载大头针 **/
 - (void) loadData:(NSDictionary *)paramer
 {
+    NSDictionary * dic = @{@"query":@{@"match_all":@{}},@"size":@(2)};
+    NSLog(@"d: %@\n c: %@",dic,@"{\"query\":{\"match_all\":{}},\"size\":2}");
+    
+    NSDictionary * d =
+  @{
+    @"sort":@[
+  @{@"_geo_distance":
+  @{@"location":
+  @{@"lat":@(22.54),@"lon":@(114.05)},@"order":@"asc",@"unit":@"km"}}],
+    @"query":
+  @{@"filter":
+  @{@"geo_distance":
+  @{@"distance":@"2km",@"location":
+  @{@"lat":@(22.54),@"lon":@(114.05)}}}},
+    @"size":@(2)};
+    
+    [NetWorkHelper getWithURLString:@"http://192.168.2.8:9200/index_rcyh/t_job_search/_search?pretty" parameters:d success:^(NSDictionary *data) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
 //    [AreaRequest getJobInfoWithParamer:paramer suceess:^(NSArray *dataArr) {
 //        [self.dataArray addObjectsFromArray:dataArr];
 //        [self initGUI];

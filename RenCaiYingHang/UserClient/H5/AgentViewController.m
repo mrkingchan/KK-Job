@@ -37,7 +37,7 @@
     if ([message.name isEqualToString:@"shareToUser"]) {
         //code...
         NSDictionary * d = message.body;
-        UIImage * image = [UtilityHelper composeImg:UIIMAGE(@"pager1") img1:[UtilityHelper qrImageForString:d[@"url"] imageSize:100 logoImageSize:0]];
+        UIImage * image = [UtilityHelper composeImg:UIIMAGE(@"test") img1:[UtilityHelper qrImageForString:d[@"url"] imageSize:kScreenWidth/3 logoImageSize:0]];
         RYShareView * share = [[RYShareView alloc] initWithFrame:[UIScreen mainScreen].bounds type:ShareUser];
         share.image = image;
         [[UIApplication sharedApplication].keyWindow addSubview:share];
@@ -45,8 +45,12 @@
         share.shareCallBack = ^(NSInteger index) {
 
             WXMediaMessage * message = [WXMediaMessage message];
-            [message setThumbImage:[UIImage imageWithData:[self imageWithImage:image scaledToSize:CGSizeMake(100, 100 * kScreenHeight/320)]]];
-            
+            [message setThumbImage:image];
+
+            WXImageObject * imageObject = [WXImageObject object];
+            imageObject.imageData = UIImagePNGRepresentation(image);
+            message.mediaObject=imageObject;
+
             SendMessageToWXReq * req = [[SendMessageToWXReq alloc] init];
             req.bText = false;
             req.message  = message;

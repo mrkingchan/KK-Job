@@ -192,6 +192,9 @@
     
     if ([urlString rangeOfString:LoginPort].location !=NSNotFound && [dic[@"reCode"] isEqualToString:@"X2222"]) {
         return true;
+    }else if ([urlString rangeOfString:LoginPort].location !=NSNotFound && ![dic[@"reCode"] isEqualToString:@"X2222"]){
+        [NetWorkHelper showMessage:dic[@"reMsg"]];
+        return false;
     }
     
     if ([dic[@"reCode"] isEqualToString:@"X9043"]) {

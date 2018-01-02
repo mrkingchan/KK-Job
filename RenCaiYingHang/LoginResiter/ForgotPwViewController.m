@@ -89,8 +89,8 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
     }
     NSDictionary * dic = @{@"phone":self.authModel.phone,@"phoneCode":self.authModel.codeString,@"newPassword":self.authModel.newsPassWord,@"confirmPassword":self.authModel.confirmPassWord};
     [RYUserRequest findLoginPwdWithParamer:dic suceess:^(BOOL isSuccess) {
-        [self alertMessageWithViewController:self message:@"登陆密码重置成功"];
         [self.navigationController popViewControllerAnimated:true];
+        [self alertMessageWithViewController:self message:@"登陆密码重置成功"];
     } failure:^(id errorCode) {
         
     }];
@@ -154,11 +154,10 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
 
 - (void) gainAuthCode
 {
-    
-    if (![VerifyHelper checkMobileTel:UserInfo.userInfo.tel ctl:self]) {
+    if (![VerifyHelper checkMobileTel:self.authModel.phone ctl:self]) {
         return;
     }
-    [RYUserRequest gainAuthCodeWithParamer:@{@"phone":UserInfo.userInfo.tel} suceess:^(BOOL isSendSuccess) {
+    [RYUserRequest gainAuthCodeWithParamer:@{@"phone":self.authModel.phone} suceess:^(BOOL isSendSuccess) {
         _time = KAuthCodeSecond;
         [self countDown];
     } failure:^(id errorCode) {

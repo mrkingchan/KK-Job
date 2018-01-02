@@ -8,6 +8,8 @@
 
 #import "RechargeViewController.h"
 
+#import "HCH5ViewController.h"
+
 #import "AssetsHandleCell.h"
 #import "RechagergeTypeViewCell.h"
 
@@ -78,32 +80,37 @@ static NSString * RechagergeTypeViewCellID = @"RechagergeTypeViewCell";
     }
     
     NSDictionary * dic = @{@"type":@(_payType),@"moneyNum":@([_rechargeNumbers floatValue]),@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey,@"businessType":@"CZ"};
-    [AppPayRequest thirdPayWithParamer:dic suceess:^(NSDictionary *dic) {
-        [self callThirdPayWithParamer:dic type:_payType];
+    [AppPayRequest thirdPayWithParamer:dic suceess:^(id responese) {
+        [self callThirdPayWithParamer:responese type:_payType];
     } failure:^(id errorCode) {
 
     }];
 }
 
 /** 调起第三方支付 **/
-- (void) callThirdPayWithParamer:(NSDictionary *) paramer type:(NSInteger) type
+- (void) callThirdPayWithParamer:(id)paramer type:(NSInteger) type
 {
     switch (type) {
         case WeixinPay:
         {
-            [AppPayRequest weixinPayWithParamer:paramer];
+            NSDictionary * dic = paramer;
+            [AppPayRequest weixinPayWithParamer:dic];
         }
             break;
         case AliPay:
         {
-            [AppPayRequest aliPayWithParamer:paramer callback:^(NSDictionary *dic) {
+            NSString * str = paramer;
+            [AppPayRequest aliPayWithParamer:str callback:^(NSDictionary *dic) {
                 
             }];
         }
             break;
         case HuiChaoPay:
         {
-            
+            NSString * str = paramer;
+            HCH5ViewController * hc = [[HCH5ViewController alloc] init];
+            hc.url = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@appWxPay/remittancePayment?orderNumber=%@&businessType=CZ",KBaseURL,str]];
+            [self.navigationController pushViewController:hc animated:true];
         }
             break;
         default:

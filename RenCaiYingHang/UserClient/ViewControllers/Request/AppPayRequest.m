@@ -11,12 +11,12 @@
 @implementation AppPayRequest
 
 //第三方支付
-+ (void) thirdPayWithParamer:(NSDictionary *)paramer suceess:(void(^)(NSDictionary * dic))sucess failure:(void(^)(id errorCode))failure
++ (void) thirdPayWithParamer:(NSDictionary *)paramer suceess:(void(^)(id resopnse))sucess failure:(void(^)(id errorCode))failure
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,AppPay];
     NSDictionary * dic = [UtilityHelper encryptParmar:paramer];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
-        if ([VerifyHelper isNull:data key:@"rel"]) {
+        if (![VerifyHelper isNull:data key:@"rel"]) {
             sucess(data[@"rel"]);
         }
     } failure:^(NSError *error) {

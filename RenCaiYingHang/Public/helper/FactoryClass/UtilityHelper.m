@@ -217,16 +217,16 @@ const  Byte iv[] = {1,2,3,4,5,6,7,8};
     
     //原图
     UIImage *outputImage = [UIImage imageWithCGImage:scaledImage];
-    //给二维码加 logo 图
-    UIGraphicsBeginImageContextWithOptions(outputImage.size, NO, [[UIScreen mainScreen] scale]);
-    [outputImage drawInRect:CGRectMake(0,0 , size, size)];
-    //logo图
-    UIImage *waterimage = [UIImage imageNamed:@"icon_imgApp"];
-    //把logo图画到生成的二维码图片上，注意尺寸不要太大（最大不超过二维码图片的%30），太大会造成扫不出来
-    [waterimage drawInRect:CGRectMake((size-waterImagesize)/2.0, (size-waterImagesize)/2.0, waterImagesize, waterImagesize)];
-    UIImage *newPic = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newPic;
+//    //给二维码加 logo 图
+//    UIGraphicsBeginImageContextWithOptions(outputImage.size, NO, [[UIScreen mainScreen] scale]);
+//    [outputImage drawInRect:CGRectMake(0,0 , size, size)];
+//    //logo图
+//    UIImage *waterimage = [UIImage imageNamed:@"icon_imgApp"];
+//    //把logo图画到生成的二维码图片上，注意尺寸不要太大（最大不超过二维码图片的%30），太大会造成扫不出来
+//    [waterimage drawInRect:CGRectMake((size-waterImagesize)/2.0, (size-waterImagesize)/2.0, waterImagesize, waterImagesize)];
+//    UIImage *newPic = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+    return outputImage;
 }
 
 /** 拼接两图 */

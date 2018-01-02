@@ -169,7 +169,7 @@
 + (BOOL)checkMobileTel:(NSString *)tel ctl:(UIViewController *) ctl
 {
     //香港澳门 8 台湾10
-    if(tel.length == 8 || tel.length == 10  || ( tel.length ==11 && [tel hasPrefix:@"1"])){
+    if(tel.length == 8 || tel.length == 10  || ( tel.length == 11 && [tel hasPrefix:@"1"])){
         return YES;
     }else{
         [ctl showAlertWithTitle:@"手机号不正确" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {

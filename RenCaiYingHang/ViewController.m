@@ -22,7 +22,6 @@
 
 - (void) initView
 {
-    
     UIImageView * imageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.view addSubview:imageView];
     
@@ -35,7 +34,6 @@
             _pushCallBack();
         }
     }];
-
 }
 
 - (void)didReceiveMemoryWarning {
