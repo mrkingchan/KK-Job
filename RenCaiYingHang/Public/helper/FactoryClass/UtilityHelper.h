@@ -56,6 +56,9 @@
 /** 获取当前时间 */
 + (NSString*)getCurrentTimes;
 
+/** 提示信息 */
++ (void) alertMessage:(NSString *) message ctl:(UIViewController *) ctl;
+
 /** 存图片 **/
 + (void) cacheImageWithImageName:(NSString *) name image:(UIImage *)image;
 

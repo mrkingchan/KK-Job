@@ -8,17 +8,28 @@
 
 #import "AppDelegate.h"
 
+// 引入JPush功能所需头文件
+#import <JPUSHService.h>
+// iOS10注册APNs所需头文件
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
+// 如果需要使用idfa功能所需要引入的头文件（可选）
+#import <AdSupport/AdSupport.h>
+
 #import "ViewController.h"
-
 #import "OSGuideViewController.h"
-
 #import "GestureSetController.h"
 
-@interface AppDelegate ()<OSGuideSelectDelegate>
+@interface AppDelegate ()<OSGuideSelectDelegate,JPUSHRegisterDelegate>
 
 @property (nonatomic,assign) BOOL isEnterBackground;
 
 @end
+
+static NSString *pushappKey = @"8ff9fa7a21f9ab75fcef566a";
+static NSString *pushchannel = @"App Store";
+static BOOL isProduction = true;
 
 @implementation AppDelegate
 
@@ -41,11 +52,19 @@
     /** 导航样式 **/
     [self configAppearance];
     
+    //注册极光
+    [self regsiterJPush:launchOptions];
+    // apn 内容获取：
+    NSDictionary * remoteNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
+    NSLog(@">>>>%@",remoteNotification);
+    
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
+    
     //向微信注册
     [WXApi registerApp:WeXinAppID];
     
-    //[self jungleToJump];
-    /** 自定制启动页 */
+    /** 自定制广告页 */
     [self diyLaunchView];
     
     [self.window makeKeyAndVisible];
@@ -53,6 +72,15 @@
     return YES;
 }
 
+- (void)networkDidReceiveMessage:(NSNotification *)notification {
+    NSDictionary * userInfo = [notification userInfo];
+    NSString *content = [userInfo valueForKey:@"content"];
+    NSDictionary *extras = [userInfo valueForKey:@"extras"];
+    NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //服务端传递的Extras附加字段，key是自己定义的
+    
+}
+
+/** 自定制广告页 */
 - (void) diyLaunchView
 {
     ViewController * viewController = [[ViewController alloc] init];
@@ -135,6 +163,27 @@
     [[UITabBar appearance] setTintColor:[UIColor darkGrayColor]];
 }
 
+/** 注册极光 */
+- (void) regsiterJPush:(NSDictionary *)launchOptions
+{
+    // 注册获得device Token
+    NSString *advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    
+    // 3.0.0及以后版本注册可以这样写，也可以继续用旧的注册方式
+    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        
+    }
+    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+    
+    //如不需要使用IDFA，advertisingIdentifier 可为nil
+    [JPUSHService setupWithOption:launchOptions appKey:pushappKey
+                          channel:pushchannel
+                 apsForProduction:isProduction
+            advertisingIdentifier:advertisingId];
+}
+
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary*)options
 {
@@ -180,6 +229,7 @@
     
 }
 
+/** 支付宝回掉 **/
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -192,6 +242,127 @@
         }];
     }
     return YES;
+}
+
+#pragma mark - 极光推送
+
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    [JPUSHService registerDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application
+didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+}
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [JPUSHService handleRemoteNotification:userInfo];
+    NSLog(@"收到通知:%@", [self logDic:userInfo]);
+    //去注册通知
+    BOOL isActive = application.applicationState == UIApplicationStateActive ? true : false;
+    if (isActive)
+    {
+        // NSLog(@"程序正在运动状态");
+    }
+    else
+    {
+        // NSLog(@"程序在后台运行");
+    }
+}
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo
+fetchCompletionHandler:
+(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    [JPUSHService handleRemoteNotification:userInfo];
+    if ([[UIDevice currentDevice].systemVersion floatValue]<10.0 || application.applicationState>0) {
+        //去注册通知
+        [self application:application didReceiveRemoteNotification:userInfo];
+    }
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+- (void)application:(UIApplication *)application
+didReceiveLocalNotification:(UILocalNotification *)notification {
+    //[JPUSHService showLocalNotificationAtFront:notification identifierKey:nil];
+}
+
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#pragma mark- JPUSHRegisterDelegate
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    
+    UNNotificationRequest *request = notification.request; // 收到推送的请求
+    UNNotificationContent *content = request.content; // 收到推送的消息内容
+    
+    NSNumber *badge = content.badge;  // 推送消息的角标
+    NSString *body = content.body;    // 推送消息体
+    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+    NSString *title = content.title;  // 推送消息的标题
+    
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+        //去注册通知
+         [self application:[UIApplication sharedApplication] didReceiveRemoteNotification:userInfo];
+        NSLog(@"iOS10 前台收到远程通知:%@", [self logDic:userInfo]);
+    }
+    else {
+        // 判断为本地通知
+        NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+    }
+    completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
+}
+
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+    
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    UNNotificationRequest *request = response.notification.request; // 收到推送的请求
+    UNNotificationContent *content = request.content; // 收到推送的消息内容
+    
+    NSNumber *badge = content.badge;  // 推送消息的角标
+    NSString *body = content.body;    // 推送消息体
+    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+    NSString *title = content.title;  // 推送消息的标题
+    
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        
+        [JPUSHService handleRemoteNotification:userInfo];
+        //去注册通知
+        [self application:[UIApplication sharedApplication] didReceiveRemoteNotification:userInfo];
+        NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
+    }
+    else {
+        // 判断为本地通知
+        NSLog(@"iOS10 收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+    }
+    
+    completionHandler();  // 系统要求执行这个方法
+}
+#endif
+
+// log NSSet with UTF8
+// if not ,log will be \Uxxx
+- (NSString *)logDic:(NSDictionary *)dic {
+    if (![dic count]) {
+        return nil;
+    }
+    NSString *tempStr1 =
+    [[dic description] stringByReplacingOccurrencesOfString:@"\\u"
+                                                 withString:@"\\U"];
+    NSString *tempStr2 =
+    [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+    NSString *tempStr3 =
+    [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *str = [NSPropertyListSerialization propertyListWithData:tempData options:0 format:NULL error:NULL];
+    [NSPropertyListSerialization  propertyListWithData:tempData options:NSPropertyListImmutable format:NULL error:NULL];
+    return str;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -207,6 +378,7 @@
 //    NSString *date2 = [NSString stringWithFormat:@"%ld", (long)[senddate timeIntervalSince1970]];
 //    [[NSUserDefaults standardUserDefaults] setObject:date2 forKey:@"lastTime"];
 //    NSLog(@"date2时间戳 = %@",date2);
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
 }
 
 

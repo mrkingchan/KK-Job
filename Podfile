@@ -10,6 +10,8 @@ pod 'MJRefresh'
 
 pod 'SDWebImage'
 
+pod 'JPush'
+
 pod 'TZImagePickerController'
 
 pod 'RSKImageCropper'

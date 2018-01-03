@@ -290,6 +290,16 @@ const  Byte iv[] = {1,2,3,4,5,6,7,8};
     
 }
 
+/** 提示信息 */
++ (void) alertMessage:(NSString *) message ctl:(UIViewController *) ctl
+{
+    [ctl showAlertWithTitle:message message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
+        alertMaker.addActionCancelTitle(@"确定");
+    } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
+        
+    }];
+}
+
 /** 存图片 **/
 + (void) cacheImageWithImageName:(NSString *) name image:(UIImage *)image
 {

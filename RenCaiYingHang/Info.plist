@@ -66,6 +66,10 @@
 	<string>人才赢行需要使用此功能</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>人才赢行需要使用此功能</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

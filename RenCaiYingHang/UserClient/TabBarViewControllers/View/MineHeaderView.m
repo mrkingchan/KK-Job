@@ -40,6 +40,10 @@
 - (void)setUser:(NSDictionary *)user
 {
     _user = user;
+    
+    self.iconBtn.layer.cornerRadius = self.iconBtn.height / 2;
+    _iconBtn.clipsToBounds = true;
+    
     userName.text = user[@"name"];
     userStates.text = user[@"job_condition_id_desc"];
     [_iconBtn sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KIMGURL,user[@"image"]]] forState:UIControlStateNormal];
@@ -67,8 +71,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-    self.iconBtn.layer.cornerRadius = self.iconBtn.height/2;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHeaderIcon:) name:@"refreshHeaderIcon" object:nil];
     // Initialization code

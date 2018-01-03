@@ -8,6 +8,8 @@
 
 #import "JobDetailViewController.h"
 
+#import "RYShareView.h"
+
 @interface JobDetailViewController ()
 
 @property (nonatomic,copy) NSString * oldUrlString;
@@ -43,7 +45,27 @@
 /** 分享 */
 - (void) shareToUser
 {
+    NSString * url = [NSString stringWithFormat:@"%@",self.webView.URL];
+    RYShareView * share = [[RYShareView alloc] initWithFrame:[UIScreen mainScreen].bounds type:ShareJob];
+    [[UIApplication sharedApplication].keyWindow addSubview:share];
     
+    share.shareCallBack = ^(NSInteger index) {
+        
+        WXMediaMessage * message = [WXMediaMessage message];
+        message.title = @"分享职位";
+        message.description = @"描述";
+        [message setThumbImage:UIIMAGE(@"AppIcon")];
+       
+        WXWebpageObject * webpageObject = [WXWebpageObject object];
+        webpageObject.webpageUrl = url;
+        message.mediaObject = webpageObject;
+        
+        SendMessageToWXReq * req = [[SendMessageToWXReq alloc] init];
+        req.bText = false;
+        req.message  = message;
+        req.scene =  index == 10 ? WXSceneSession : WXSceneTimeline;
+        [WXApi sendReq:req];
+    };
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {

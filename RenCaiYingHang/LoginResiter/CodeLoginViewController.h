@@ -6,8 +6,8 @@
 //  Copyright © 2017年 Macx. All rights reserved.
 //
 
-#import "RYViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface CodeLoginViewController : RYViewController
+@interface CodeLoginViewController : UIViewController
 
 @end

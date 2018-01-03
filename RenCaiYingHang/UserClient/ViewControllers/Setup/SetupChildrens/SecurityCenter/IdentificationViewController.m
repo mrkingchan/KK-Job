@@ -69,7 +69,7 @@ static NSString * CurrentTableViewCellID = @"LabelTextFieldCell";
         [self alertMessageWithViewController:self message:@"用户名不能为空"];
         return;
     }
-    if ([VerifyHelper validateIDCardNumber:self.authModel.idcardNum]) {
+    if (![VerifyHelper validateIDCardNumber:self.authModel.idcardNum]) {
         [self alertMessageWithViewController:self message:@"身份证不正确"];
         return;
     }

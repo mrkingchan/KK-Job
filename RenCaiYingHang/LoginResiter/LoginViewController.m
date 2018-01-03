@@ -28,7 +28,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:true animated:animated];
+     [self.navigationController setNavigationBarHidden:true animated:animated];
     // 去掉返回手势
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
     self.navigationController.interactivePopGestureRecognizer.enabled = false;
@@ -38,7 +38,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:false animated:animated];
     self.navigationController.interactivePopGestureRecognizer.enabled = true;
 }
 
@@ -62,8 +61,8 @@
     if (![VerifyHelper checkMobileTel:_phoneTf.text ctl:self]) {
         return;
     }
-    if ([VerifyHelper empty:_pwTf.text] &&[_pwTf.text length] <8) {
-        [self errorPassword];
+    if ([VerifyHelper empty:_pwTf.text] &&[_pwTf.text length] < 8) {
+        [UtilityHelper alertMessage:@"验证码不能为空" ctl:self];
         return;
     }
     
@@ -79,6 +78,14 @@
 {
     _textField = textField;
     return true;
+}
+
+/** 键盘通知 **/
+- (void) addNotification
+{
+    NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
+    [notification addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [notification addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification

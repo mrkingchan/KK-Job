@@ -37,7 +37,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:true animated:animated];
     // 去掉返回手势
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = false;
@@ -48,7 +47,6 @@
 {
     [super viewWillDisappear:animated];
     [self stop];
-    [self.navigationController setNavigationBarHidden:false animated:animated];
     self.navigationController.interactivePopGestureRecognizer.enabled = true;
 }
 
@@ -63,6 +61,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:UIIMAGE(@"bg")]];
     [self addNotification];
 }
@@ -100,11 +99,11 @@
         return;
     }
     if ([VerifyHelper empty:_codeTf.text]) {
-        [self emptyPhoneCode];
+        [UtilityHelper alertMessage:@"验证码不能为空" ctl:self];
         return;
     }
     if ([VerifyHelper empty:_pwTf.text] || [_pwTf.text length] < 8) {
-        [self errorPassword];
+        [UtilityHelper alertMessage:@"密码不正确" ctl:self];
         return;
     }
     [RYUserRequest userRegisterWithParamer:@{@"phone":_phoneTf.text,@"fromWay":@"7",@"dxCode":_codeTf.text,@"tiPhone":_inviteTf.text,@"password":_pwTf.text} suceess:^(BOOL isSendSuccess) {
@@ -162,6 +161,14 @@
 {
     _textField = textField;
     return true;
+}
+
+/** 键盘通知 **/
+- (void) addNotification
+{
+    NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
+    [notification addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [notification addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification

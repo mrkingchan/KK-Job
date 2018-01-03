@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,14 +21,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZCa-QG-6xY">
-                        <rect key="frame" x="20" y="5" width="40" height="40"/>
+                        <rect key="frame" x="20" y="8" width="34.5" height="34.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="40" id="3d7-4B-BMu"/>
-                            <constraint firstAttribute="height" constant="40" id="BZU-k3-fdl"/>
+                            <constraint firstAttribute="width" secondItem="ZCa-QG-6xY" secondAttribute="height" multiplier="1:1" id="F4G-oc-3QS"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3i-ZB-drl">
-                        <rect key="frame" x="70" y="10" width="39.5" height="29.5"/>
+                        <rect key="frame" x="64.5" y="10" width="39.5" height="29.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -42,11 +43,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="Y3i-ZB-drl" secondAttribute="bottom" constant="10" id="G85-3T-chs"/>
+                    <constraint firstItem="ZCa-QG-6xY" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="NFM-jx-rbA"/>
                     <constraint firstItem="SKy-cj-T8E" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="fE5-4w-hYC"/>
                     <constraint firstItem="Y3i-ZB-drl" firstAttribute="leading" secondItem="ZCa-QG-6xY" secondAttribute="trailing" constant="10" id="jh9-hg-PfT"/>
                     <constraint firstItem="Y3i-ZB-drl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="kKp-jH-2N4"/>
-                    <constraint firstItem="ZCa-QG-6xY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="liL-pj-hYK"/>
-                    <constraint firstAttribute="bottom" secondItem="ZCa-QG-6xY" secondAttribute="bottom" constant="5" id="rWz-zj-O7M"/>
+                    <constraint firstItem="ZCa-QG-6xY" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.7" id="pTj-7u-MLC"/>
                     <constraint firstItem="ZCa-QG-6xY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="rvP-rc-xFO"/>
                     <constraint firstAttribute="trailing" secondItem="SKy-cj-T8E" secondAttribute="trailing" constant="20" id="xci-hp-ri0"/>
                     <constraint firstAttribute="bottom" secondItem="SKy-cj-T8E" secondAttribute="bottom" constant="10" id="zOr-yj-X14"/>

@@ -17,7 +17,7 @@
 + (BOOL)isNull:(NSDictionary *)dict key:(NSString*)key;
 
 /** 验证身份证是否合法 **/
-+ (BOOL)validateIDCardNumber:(NSString *)value;
++ (BOOL)validateIDCardNumber:(NSString *)identityCard;
 
 /** MD5加密 **/
 + (NSString *)md5:(NSString *)str;

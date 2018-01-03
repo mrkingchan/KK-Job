@@ -39,7 +39,7 @@ static NSString * msgLabCellID = @"MsgViewCell";
 {
     _dataArr = dataArr;
     for (CenterMessageModel * model in self.dataArr[0]) {
-        [self.msgArr addObject:model.title];
+        [self.msgArr addObject:model.content];
     }
     self.tableView.frame = CGRectMake(0, 0, kScreenWidth, [self.dataArr[1] count] * 45 + 45 + 20 );
     [self.tableView reloadData];
