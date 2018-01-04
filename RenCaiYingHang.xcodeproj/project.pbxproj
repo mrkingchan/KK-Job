@@ -59,6 +59,8 @@
 		8F3BDA721FED25C000C4B472 /* MsgViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F3BDA701FED25C000C4B472 /* MsgViewCell.xib */; };
 		8F5087FC1FEA5C1500743B9C /* AuthenticationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5087FB1FEA5C1500743B9C /* AuthenticationModel.m */; };
 		8F5088031FEA7B8000743B9C /* RYAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5088021FEA7B8000743B9C /* RYAlertAction.m */; };
+		8F514D691FFE086E0097A3AA /* SMKCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F514D661FFE086E0097A3AA /* SMKCycleScrollView.m */; };
+		8F514D6A1FFE086E0097A3AA /* UIView+SEKExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F514D681FFE086E0097A3AA /* UIView+SEKExtension.m */; };
 		8F728C261FDE1FC300C6247B /* JHUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F728C251FDE1FC300C6247B /* JHUploadImage.m */; };
 		8F728C2A1FDE2F9F00C6247B /* AssetsManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F728C291FDE2F9F00C6247B /* AssetsManagementViewController.m */; };
 		8F728C2D1FDE356200C6247B /* RechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F728C2C1FDE356200C6247B /* RechargeViewController.m */; };
@@ -282,6 +284,10 @@
 		8F5087FB1FEA5C1500743B9C /* AuthenticationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationModel.m; sourceTree = "<group>"; };
 		8F5088011FEA7B8000743B9C /* RYAlertAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYAlertAction.h; sourceTree = "<group>"; };
 		8F5088021FEA7B8000743B9C /* RYAlertAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYAlertAction.m; sourceTree = "<group>"; };
+		8F514D651FFE086E0097A3AA /* SMKCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMKCycleScrollView.h; sourceTree = "<group>"; };
+		8F514D661FFE086E0097A3AA /* SMKCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKCycleScrollView.m; sourceTree = "<group>"; };
+		8F514D671FFE086E0097A3AA /* UIView+SEKExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SEKExtension.h"; sourceTree = "<group>"; };
+		8F514D681FFE086E0097A3AA /* UIView+SEKExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SEKExtension.m"; sourceTree = "<group>"; };
 		8F728C241FDE1FC300C6247B /* JHUploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHUploadImage.h; sourceTree = "<group>"; };
 		8F728C251FDE1FC300C6247B /* JHUploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHUploadImage.m; sourceTree = "<group>"; };
 		8F728C281FDE2F9F00C6247B /* AssetsManagementViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetsManagementViewController.h; sourceTree = "<group>"; };
@@ -757,6 +763,18 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		8F514D641FFE086E0097A3AA /* SMKCycleScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				8F514D651FFE086E0097A3AA /* SMKCycleScrollView.h */,
+				8F514D661FFE086E0097A3AA /* SMKCycleScrollView.m */,
+				8F514D671FFE086E0097A3AA /* UIView+SEKExtension.h */,
+				8F514D681FFE086E0097A3AA /* UIView+SEKExtension.m */,
+			);
+			name = SMKCycleScrollView;
+			path = "../../../../../Downloads/VerticalScroller-master/VerticalScroller/SMKCycleScrollView";
+			sourceTree = "<group>";
+		};
 		8F728C231FDE1FC300C6247B /* JHUploadImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -901,6 +919,7 @@
 		8F85D8561FD9236A00BC1A7D /* third */ = {
 			isa = PBXGroup;
 			children = (
+				8F514D641FFE086E0097A3AA /* SMKCycleScrollView */,
 				8F1F0BD91FF0C86C00CE2FB5 /* JKBannerView */,
 				8F0EF4B01FE366D100D179D5 /* GestureLock */,
 				8F728C231FDE1FC300C6247B /* JHUploadImage */,
@@ -1619,6 +1638,7 @@
 				8F85D8A41FD9257400BC1A7D /* SGScanningQRCodeVC.m in Sources */,
 				8F0EF4C91FE36A7A00D179D5 /* PCLockLabel.m in Sources */,
 				8F1F0BDF1FF0C86C00CE2FB5 /* JKBannerCollectionViewCell.m in Sources */,
+				8F514D6A1FFE086E0097A3AA /* UIView+SEKExtension.m in Sources */,
 				8F5088031FEA7B8000743B9C /* RYAlertAction.m in Sources */,
 				8F85D8221FD922A400BC1A7D /* AppDelegate.m in Sources */,
 				8F1CA82E1FE7688100BBD208 /* JXMapNavigationView.m in Sources */,
@@ -1630,6 +1650,7 @@
 				8F1F66661FD963CD004BF8F1 /* PrivacyViewController.m in Sources */,
 				8F85D8A61FD9257400BC1A7D /* SGBottomView.m in Sources */,
 				8F85D8661FD9246400BC1A7D /* RYBaseModel.m in Sources */,
+				8F514D691FFE086E0097A3AA /* SMKCycleScrollView.m in Sources */,
 				8F85D8A01FD9257400BC1A7D /* UIView+SDAutoLayout.m in Sources */,
 				8F85D8CF1FD9282E00BC1A7D /* UserInfoManage.m in Sources */,
 				8F1F0BDE1FF0C86C00CE2FB5 /* JKBannarView.m in Sources */,

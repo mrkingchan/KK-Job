@@ -38,7 +38,7 @@
 
 + (void) aliPayWithParamer:(NSString *)paramer callback:(void(^)(NSDictionary * dic))callback
 {
-    NSString * appScheme = @"2017101809367268";
+    NSString * appScheme = @"2017122201077259";
     [[AlipaySDK defaultService] payOrder:paramer fromScheme:appScheme callback:^(NSDictionary *resultDic) {
         if (callback) {
             callback(resultDic);

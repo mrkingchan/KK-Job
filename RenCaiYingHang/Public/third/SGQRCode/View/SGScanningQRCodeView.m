@@ -71,7 +71,7 @@ static CGFloat const timer_animation_Duration = 0.05;
     // 扫描动画添加
     self.animation_line = [[UIImageView alloc] init];
     _animation_line.image = [UIImage imageNamed:@"QRCodeLine"];
-    _animation_line.frame = CGRectMake(scanContent_X * 0.5, scanContentViewY, self.frame.size.width - scanContent_X , animation_line_H);
+    _animation_line.frame = CGRectMake(scanContent_X , scanContentViewY, self.frame.size.width - scanContent_X * 2 , animation_line_H);
     [self.basedLayer addSublayer:_animation_line.layer];
     
     // 添加定时器

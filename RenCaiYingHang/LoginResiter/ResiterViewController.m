@@ -12,6 +12,7 @@
 {
     CGRect origin_rect;
     UITextField * _textField;
+    BOOL isAnimation;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *phoneView;
@@ -54,6 +55,7 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     _phoneView.layer.cornerRadius = _codeView.layer.cornerRadius = _tuijianView.layer.cornerRadius = _pwView.layer.cornerRadius = _regsiterBtn.layer.cornerRadius = _phoneView.height/2;
     _phoneTf.delegate = _codeTf.delegate =  _pwTf.delegate =_inviteTf.delegate = self;
 }
@@ -61,9 +63,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:UIIMAGE(@"bg")]];
     [self addNotification];
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeBeyBoard)];
+    [self.view addGestureRecognizer:tap];
+    isAnimation = false;
 }
 
 /** 密码登陆 */
@@ -106,7 +110,8 @@
         [UtilityHelper alertMessage:@"密码不正确" ctl:self];
         return;
     }
-    [RYUserRequest userRegisterWithParamer:@{@"phone":_phoneTf.text,@"fromWay":@"7",@"dxCode":_codeTf.text,@"tiPhone":_inviteTf.text,@"password":_pwTf.text} suceess:^(BOOL isSendSuccess) {
+    NSString * regID = [RYDefaults objectForKey:@"jgRegId"];
+    [RYUserRequest userRegisterWithParamer:@{@"phone":_phoneTf.text,@"fromWay":@"7",@"dxCode":_codeTf.text,@"tiPhone":_inviteTf.text,@"password":_pwTf.text,@"jgRegId":regID} suceess:^(BOOL isSendSuccess) {
         [UtilityHelper jumpDifferentApp:false window:[UIApplication sharedApplication].keyWindow];
     } failure:^(id errorCode) {
         
@@ -171,6 +176,18 @@
     [notification addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
+/** 隐藏键盘 */
+- (void)closeBeyBoard
+{
+    for (id class in self.view.subviews)
+    {
+        if ([class isKindOfClass:[UITextView class]] || [class isKindOfClass:[UITextField class]]) {
+            [class endEditing:YES];
+        }
+    }
+    [self.view endEditing:YES];
+}
+
 - (void)keyboardWillShow:(NSNotification *)notification
 {
     //获取键盘的高度
@@ -184,6 +201,9 @@
     CGFloat h = kScreenHeight - _textField.superview.bottom - height  ;
     
     if (h < 0) {
+        
+        isAnimation = true;
+        
         [UIView animateWithDuration:0.3 animations:^{
             self.view.frame = CGRectMake(0, h, kScreenWidth, kScreenHeight);
         }];
@@ -192,10 +212,12 @@
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    [UIView animateWithDuration:0.3 animations:^{
-        self.view.frame = origin_rect;
-        origin_rect = CGRectZero;
-    }];
+    if ( isAnimation) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.view.frame = origin_rect;
+            origin_rect = CGRectZero;
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

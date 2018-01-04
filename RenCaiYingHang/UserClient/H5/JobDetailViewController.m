@@ -46,26 +46,40 @@
 - (void) shareToUser
 {
     NSString * url = [NSString stringWithFormat:@"%@",self.webView.URL];
-    RYShareView * share = [[RYShareView alloc] initWithFrame:[UIScreen mainScreen].bounds type:ShareJob];
-    [[UIApplication sharedApplication].keyWindow addSubview:share];
+    NSString * urlString = [NSString stringWithFormat:@"http://weixin.rcyhj.com/public/job/jobDetails?%@",[url componentsSeparatedByString:@"?"][1]];
+    NSString * datas = [url componentsSeparatedByString:@"="][1];
+    NSString * idStr = [datas componentsSeparatedByString:@"&"][0];
     
-    share.shareCallBack = ^(NSInteger index) {
+    [NetWorkHelper getWithURLString:[NSString stringWithFormat:@"%@public/job/appJobDetails?datas=%@",KBaseURL,idStr] parameters:nil success:^(NSDictionary *data) {
+        NSDictionary * rel = data[@"rel"];
+        NSData * imageData =  [NSData
+                               dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KIMGURL,rel[@"com_logo"]]]];
+        UIImage * image = [UIImage imageWithData:imageData];
+        if (![VerifyHelper empty:rel]) {
+            RYShareView * share = [[RYShareView alloc] initWithFrame:[UIScreen mainScreen].bounds type:ShareJob];
+            [[UIApplication sharedApplication].keyWindow addSubview:share];
+            
+            share.shareCallBack = ^(NSInteger index) {
+                
+                WXMediaMessage * message = [WXMediaMessage message];
+                message.title = rel[@"job_name"];
+                message.description = [NSString stringWithFormat:@"薪资范围%@k-%@k",rel[@"salary_min"],rel[@"salary_max"]];
+                [message setThumbImage:image];
+                
+                WXWebpageObject * webpageObject = [WXWebpageObject object];
+                webpageObject.webpageUrl = urlString;
+                message.mediaObject = webpageObject;
+                
+                SendMessageToWXReq * req = [[SendMessageToWXReq alloc] init];
+                req.bText = false;
+                req.message  = message;
+                req.scene =  index == 10 ? WXSceneSession : WXSceneTimeline;
+                [WXApi sendReq:req];
+            };
+        }
+    } failure:^(NSError *error) {
         
-        WXMediaMessage * message = [WXMediaMessage message];
-        message.title = @"分享职位";
-        message.description = @"描述";
-        [message setThumbImage:UIIMAGE(@"AppIcon")];
-       
-        WXWebpageObject * webpageObject = [WXWebpageObject object];
-        webpageObject.webpageUrl = url;
-        message.mediaObject = webpageObject;
-        
-        SendMessageToWXReq * req = [[SendMessageToWXReq alloc] init];
-        req.bText = false;
-        req.message  = message;
-        req.scene =  index == 10 ? WXSceneSession : WXSceneTimeline;
-        [WXApi sendReq:req];
-    };
+    }];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
@@ -82,12 +96,17 @@
 #pragma mark 跳转的操作
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
-    if (![url isEqualToString:_oldUrlString]) {
-        _oldUrlString = url;
-        [self.webView  loadRequest:[NSURLRequest requestWithURL:navigationAction.request.URL]];
-        decisionHandler(WKNavigationActionPolicyAllow);
+    if ([url rangeOfString:KBaseURL].location != NSNotFound) {
+        if (![url isEqualToString:_oldUrlString]) {
+            _oldUrlString = url;
+            [self.webView  loadRequest:[NSURLRequest requestWithURL:navigationAction.request.URL]];
+            decisionHandler(WKNavigationActionPolicyAllow);
+        }else{
+            decisionHandler(WKNavigationActionPolicyAllow);
+        }
     }else{
-        decisionHandler(WKNavigationActionPolicyAllow);
+        decisionHandler(WKNavigationActionPolicyCancel);
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];      
     }
 }
 

@@ -193,7 +193,7 @@ static NSString * footerId = @"MineFooterView";
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0, 0.25, 0.25, 0);
+    return UIEdgeInsetsMake(0, 0.25, 0.5, 0);
 }
 
 

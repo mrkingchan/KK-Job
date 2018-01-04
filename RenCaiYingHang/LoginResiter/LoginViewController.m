@@ -12,6 +12,7 @@
 {
     CGRect origin_rect;
     UITextField * _textField;
+    BOOL isAnimation;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *phoneView;
@@ -28,7 +29,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-     [self.navigationController setNavigationBarHidden:true animated:animated];
+    [self.navigationController setNavigationBarHidden:true animated:animated];
     // 去掉返回手势
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
     self.navigationController.interactivePopGestureRecognizer.enabled = false;
@@ -54,23 +55,40 @@
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:UIIMAGE(@"bg")]];
     [self addNotification];
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeBeyBoard)];
+    [self.view addGestureRecognizer:tap];
+    isAnimation = false;
 }
 
 /** 登陆账号 */
 - (IBAction)loginAccount:(UIButton *)sender {
+    
+    [self closeBeyBoard];
+    
     if (![VerifyHelper checkMobileTel:_phoneTf.text ctl:self]) {
         return;
     }
-    if ([VerifyHelper empty:_pwTf.text] &&[_pwTf.text length] < 8) {
-        [UtilityHelper alertMessage:@"验证码不能为空" ctl:self];
+    if ([VerifyHelper empty:_pwTf.text] || [_pwTf.text length] < 8) {
+        [UtilityHelper alertMessage:@"密码不正确" ctl:self];
         return;
     }
-    
-    [RYUserRequest userLoginWithParamer:@{@"loginType":@"1",@"phone":_phoneTf.text,@"password":_pwTf.text} suceess:^(BOOL isSendSuccess) {
+    NSString * regID = [RYDefaults objectForKey:@"jgRegId"];
+    [RYUserRequest userLoginWithParamer:@{@"loginType":@"1",@"phone":_phoneTf.text,@"password":_pwTf.text,@"jgRegId":regID} suceess:^(BOOL isSendSuccess) {
         [UtilityHelper insertApp];
     } failure:^(id errorCode) {
         
     }];
+}
+
+- (void)closeBeyBoard
+{
+    for (id class in self.view.subviews)
+    {
+        if ([class isKindOfClass:[UITextView class]] || [class isKindOfClass:[UITextField class]]) {
+            [class endEditing:YES];
+        }
+    }
+    [self.view endEditing:YES];
 }
 
 #pragma mark  -键盘
@@ -101,18 +119,25 @@
     CGFloat h = kScreenHeight - _textField.superview.bottom - height  ;
     
     if (h < 0) {
-        [UIView animateWithDuration:0.3 animations:^{
+        
+        isAnimation = true;
+        
+        [UIView animateWithDuration:0.2 animations:^{
             self.view.frame = CGRectMake(0, h, kScreenWidth, kScreenHeight);
+            [self.view layoutIfNeeded];
         }];
     }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    [UIView animateWithDuration:0.3 animations:^{
-        self.view.frame = origin_rect;
-        origin_rect = CGRectZero;
-    }];
+    if (isAnimation) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.view.frame = origin_rect;
+            [self.view layoutIfNeeded];
+            origin_rect = CGRectZero;
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

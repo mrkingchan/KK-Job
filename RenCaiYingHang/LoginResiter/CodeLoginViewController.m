@@ -12,6 +12,7 @@
 {
     CGRect origin_rect;
     UITextField * _textField;
+    BOOL isAnimation;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
@@ -50,6 +51,7 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     _phoneView.layer.cornerRadius = _codeView.layer.cornerRadius = _loginBtn.layer.cornerRadius = _phoneView.height/2;
     _phoneTf.delegate = _codetf.delegate = self;
 }
@@ -59,6 +61,9 @@
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:UIIMAGE(@"bg")]];
     [self addNotification];
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeBeyBoard)];
+    [self.view addGestureRecognizer:tap];
+    isAnimation = false;
 }
 
 /** 进入 */
@@ -71,8 +76,8 @@
         [UtilityHelper alertMessage:@"验证码不能为空" ctl:self];;
         return;
     }
-    
-    [RYUserRequest userLoginWithParamer:@{@"loginType":@"2",@"phone":_phoneTf.text,@"dxCode":_codetf.text} suceess:^(BOOL isSendSuccess) {
+    NSString * regID = [RYDefaults objectForKey:@"jgRegId"];
+    [RYUserRequest userLoginWithParamer:@{@"loginType":@"2",@"phone":_phoneTf.text,@"dxCode":_codetf.text,@"jgRegId":regID} suceess:^(BOOL isSendSuccess) {
         [UtilityHelper insertApp];
     } failure:^(id errorCode) {
         
@@ -146,6 +151,17 @@
     [notification addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
+- (void)closeBeyBoard
+{
+    for (id class in self.view.subviews)
+    {
+        if ([class isKindOfClass:[UITextView class]] || [class isKindOfClass:[UITextField class]]) {
+            [class endEditing:YES];
+        }
+    }
+    [self.view endEditing:YES];
+}
+
 - (void)keyboardWillShow:(NSNotification *)notification
 {
     //获取键盘的高度
@@ -159,6 +175,9 @@
     CGFloat h = kScreenHeight - _textField.superview.bottom - height  ;
     
     if (h < 0) {
+        
+        isAnimation = true;
+        
         [UIView animateWithDuration:0.3 animations:^{
             self.view.frame = CGRectMake(0, h, kScreenWidth, kScreenHeight);
         }];
@@ -167,10 +186,12 @@
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    [UIView animateWithDuration:0.3 animations:^{
-        self.view.frame = origin_rect;
-        origin_rect = CGRectZero;
-    }];
+    if ( isAnimation) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.view.frame = origin_rect;
+            origin_rect = CGRectZero;
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

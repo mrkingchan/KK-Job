@@ -13,6 +13,7 @@
     UIButton * currentBtn;
     CGRect origin_rect;
     UITextField * _textField;
+    BOOL isAnimation;
 }
 
 @property (nonatomic,strong) AuthenticationModel * authModel;
@@ -64,6 +65,7 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
     self.title = @"登陆密码";
     [self addNotification];
     [self configurationTableView];
+    isAnimation = false;
 }
 
 - (void) configurationTableView
@@ -117,7 +119,11 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
         LabelTextFieldCell * cell = [tableView dequeueReusableCellWithIdentifier:LabelTextFieldCellID];
         cell.titleLabel.text = self.dataArray[indexPath.row];
         cell.textField.textAlignment = 0;
-        cell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",self.dataArray[indexPath.row]];
+        if (indexPath.row == 0)
+            cell.textField.placeholder = @"请输入手机号";
+        else
+            cell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",self.dataArray[indexPath.row]];
+        
         cell.textField.tag = indexPath.row;
         cell.textField.delegate = self;
         [cell.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
@@ -240,6 +246,9 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
     CGFloat h = kScreenHeight - (_textField.tag+1) * 50 - height - KNavBarHeight ;
     
     if (h < 0) {
+        
+        isAnimation  = true;
+        
         [UIView animateWithDuration:0.3 animations:^{
             self.view.frame = CGRectMake(0, h, kScreenWidth, kScreenHeight);
         }];
@@ -248,10 +257,12 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    [UIView animateWithDuration:0.3 animations:^{
-        self.view.frame = origin_rect;
-        origin_rect = CGRectZero;
-    }];
+    if (isAnimation) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.view.frame = origin_rect;
+            origin_rect = CGRectZero;
+        }];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated

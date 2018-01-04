@@ -37,7 +37,7 @@
     if ([message.name isEqualToString:@"shareToUser"]) {
         //code...
         NSDictionary * d = message.body;
-        UIImage * image = [UtilityHelper composeImg:UIIMAGE(@"test") img1:[UtilityHelper qrImageForString:d[@"url"] imageSize:kScreenWidth/3 logoImageSize:0]];
+        UIImage * image = [UtilityHelper composeImg:UIIMAGE(@"share") img1:[UtilityHelper qrImageForString:d[@"url"] imageSize:kScreenWidth/3 logoImageSize:0]];
         RYShareView * share = [[RYShareView alloc] initWithFrame:[UIScreen mainScreen].bounds type:ShareUser];
         share.image = image;
         [[UIApplication sharedApplication].keyWindow addSubview:share];

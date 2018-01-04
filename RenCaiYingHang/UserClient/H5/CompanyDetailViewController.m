@@ -60,12 +60,17 @@
 #pragma mark 跳转的操作
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
-    if (![url isEqualToString:_oldUrlString]) {
-        _oldUrlString = url;
-        [self.webView  loadRequest:[NSURLRequest requestWithURL:navigationAction.request.URL]];
-        decisionHandler(WKNavigationActionPolicyAllow);
+    if ([url rangeOfString:KBaseURL].location != NSNotFound) {
+        if (![url isEqualToString:_oldUrlString]) {
+            _oldUrlString = url;
+            [self.webView  loadRequest:[NSURLRequest requestWithURL:navigationAction.request.URL]];
+            decisionHandler(WKNavigationActionPolicyAllow);
+        }else{
+            decisionHandler(WKNavigationActionPolicyAllow);
+        }
     }else{
-        decisionHandler(WKNavigationActionPolicyAllow);
+       decisionHandler(WKNavigationActionPolicyCancel);
+       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];  
     }
 }
 

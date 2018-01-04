@@ -28,8 +28,8 @@
 @end
 
 static NSString *pushappKey = @"8ff9fa7a21f9ab75fcef566a";
-static NSString *pushchannel = @"App Store";
-static BOOL isProduction = true;
+static NSString *pushchannel = @"Publish channel";//@"Publish channel"; App Store
+static BOOL isProduction = false;//false true
 
 @implementation AppDelegate
 
@@ -54,12 +54,6 @@ static BOOL isProduction = true;
     
     //注册极光
     [self regsiterJPush:launchOptions];
-    // apn 内容获取：
-    NSDictionary * remoteNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
-    NSLog(@">>>>%@",remoteNotification);
-    
-    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
     
     //向微信注册
     [WXApi registerApp:WeXinAppID];
@@ -72,13 +66,6 @@ static BOOL isProduction = true;
     return YES;
 }
 
-- (void)networkDidReceiveMessage:(NSNotification *)notification {
-    NSDictionary * userInfo = [notification userInfo];
-    NSString *content = [userInfo valueForKey:@"content"];
-    NSDictionary *extras = [userInfo valueForKey:@"extras"];
-    NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //服务端传递的Extras附加字段，key是自己定义的
-    
-}
 
 /** 自定制广告页 */
 - (void) diyLaunchView
@@ -182,6 +169,16 @@ static BOOL isProduction = true;
                           channel:pushchannel
                  apsForProduction:isProduction
             advertisingIdentifier:advertisingId];
+    
+    [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
+        if(resCode == 0){
+            [RYDefaults setObject:registrationID forKey:@"jgRegId"];
+            NSLog(@"registrationID获取成功：%@",registrationID);
+        }
+        else{
+            NSLog(@"registrationID获取失败，code：%d",resCode);
+        }
+    }];
 }
 
 
@@ -378,12 +375,13 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 //    NSString *date2 = [NSString stringWithFormat:@"%ld", (long)[senddate timeIntervalSince1970]];
 //    [[NSUserDefaults standardUserDefaults] setObject:date2 forKey:@"lastTime"];
 //    NSLog(@"date2时间戳 = %@",date2);
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    [application setApplicationIconBadgeNumber:0];
 }
 
 

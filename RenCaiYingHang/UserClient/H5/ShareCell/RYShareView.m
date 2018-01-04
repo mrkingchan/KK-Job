@@ -27,7 +27,7 @@
 
 - (void) initUI:(RYShareViewType) type
 {
-    self.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
+    self.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.8];
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeFromSuperview)];
     [self addGestureRecognizer:tap];
     

@@ -27,7 +27,7 @@
     /*
      *  图片的添加
      */
-    _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 0, self.frame.size.width-20, self.frame.size.height)];
+    _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     _imageView.contentMode = UIViewContentModeScaleAspectFill;
 //    _imageView.layer.cornerRadius = 4;
 //    _imageView.clipsToBounds = YES;

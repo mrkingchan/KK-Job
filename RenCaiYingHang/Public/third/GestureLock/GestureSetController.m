@@ -167,7 +167,7 @@
     imageView.center = CGPointMake(kScreenW/2, self.msgLabel.top - 40);
     imageView.layer.cornerRadius = 30;
     imageView.clipsToBounds = YES;
-    [imageView setImage:UIIMAGE(@"nogif")];
+    [imageView setImage:UIIMAGE(@"AppIcon")];
     [self.view addSubview:imageView];
     
     // 管理手势密码

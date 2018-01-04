@@ -8,15 +8,17 @@
 
 #import "MineFooterView.h"
 
+//竖向跑马灯
+#import "SMKCycleScrollView.h"
 #import "MsgViewCell.h"
 
 @interface MineFooterView ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView * tableView;
 
-@property (nonatomic, strong) NSTimer * timer;
-
 @property (nonatomic, strong) NSMutableArray * msgArr;
+
+@property (nonatomic, strong) SMKCycleScrollView * cycleScrollView;
 
 @end
 
@@ -43,31 +45,6 @@ static NSString * msgLabCellID = @"MsgViewCell";
     }
     self.tableView.frame = CGRectMake(0, 0, kScreenWidth, [self.dataArr[1] count] * 45 + 45 + 20 );
     [self.tableView reloadData];
-    [self addTimer];
-}
-
-/**设置定时器*/
-- (void) addTimer
-{
-    self.timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(loadData) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-}
-
-/** 重排数据 */
-- (void) loadData
-{
-    if (self.msgArr.count == 0) {
-        [self removeTimer];
-        return;
-    }
-    NSString * string = self.msgArr[0];
-    for (int i = 0; i< self.msgArr.count - 1; i++)
-    {
-        self.msgArr[i] = self.msgArr[i+1];
-    }
-    self.msgArr[self.msgArr.count - 1] = string;
-    NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:0];
-    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (NSMutableArray *)msgArr
@@ -109,7 +86,18 @@ static NSString * msgLabCellID = @"MsgViewCell";
         return cell;
     }
     MsgViewCell * cell = [tableView dequeueReusableCellWithIdentifier:msgLabCellID];
-    cell.msgLab.text = self.msgArr.count == 0 ? @"":self.msgArr[0];
+    if (self.msgArr.count > 0) {
+        self.cycleScrollView = [[SMKCycleScrollView alloc] init];
+        self.cycleScrollView.frame = CGRectMake(80, 5, kScreenWidth - 90, cell.contentView.height - 10);
+       
+        self.cycleScrollView.titleFont = systemOfFont(13);
+        [cell.contentView addSubview:self.cycleScrollView];
+        
+        self.cycleScrollView.titleArray =  self.msgArr;
+        [self.cycleScrollView setSelectedBlock:^(NSInteger index, NSString *title) {
+            //        NSLog(@"%zd-----%@",index,title);
+        }];
+    }
     return cell;
 }
 
@@ -154,17 +142,6 @@ static NSString * msgLabCellID = @"MsgViewCell";
             _mineFooterClickCallBack(indexPath.row);
         }
     }
-}
-
-- (void)removeTimer
-{
-    [self.timer invalidate];
-    self.timer = nil;
-}
-
-- (void)dealloc
-{
-    [self removeTimer];
 }
 
 @end

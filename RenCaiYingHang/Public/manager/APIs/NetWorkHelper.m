@@ -145,6 +145,10 @@
     UIWindow * window = [UIApplication sharedApplication].keyWindow;
     for (id class in window.subviews)
     {
+        if ([class isKindOfClass:[UITextField class]]) {
+            [class endEditing:true];
+        }
+        
         if ([class isKindOfClass:[UIAlertView class]] || [class isKindOfClass:[UIAlertController class]]) {
             isExist = true;
             return;
