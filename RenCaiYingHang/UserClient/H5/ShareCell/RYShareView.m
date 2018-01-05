@@ -32,7 +32,7 @@
     [self addGestureRecognizer:tap];
     
     if (type == ShareUser) {
-        _imageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         [self addSubview:_imageView];
     }
     for (int i = 0; i < 2; i++) {
@@ -44,6 +44,8 @@
 - (void)setImage:(UIImage *)image
 {
     _image = image;
+    _imageView.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    _imageView.center = self.center;
     _imageView.image = image;
 }
 

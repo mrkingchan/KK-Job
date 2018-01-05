@@ -62,8 +62,8 @@
             share.shareCallBack = ^(NSInteger index) {
                 
                 WXMediaMessage * message = [WXMediaMessage message];
-                message.title = rel[@"job_name"];
-                message.description = [NSString stringWithFormat:@"薪资范围%@k-%@k",rel[@"salary_min"],rel[@"salary_max"]];
+                message.title = [NSString stringWithFormat:@"%@[%@k-%@k]",rel[@"job_name"],rel[@"salary_min"],rel[@"salary_max"]];
+                message.description = [NSString stringWithFormat:@"面试奖:%@元,入职奖:%@元\r\n%@",@"10",rel[@"subsidy"],rel[@"com_name"]];
                 [message setThumbImage:image];
                 
                 WXWebpageObject * webpageObject = [WXWebpageObject object];

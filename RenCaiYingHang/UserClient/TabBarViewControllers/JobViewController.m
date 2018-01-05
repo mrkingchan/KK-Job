@@ -9,7 +9,9 @@
 #import "JobViewController.h"
 
 #import "JobH5ViewController.h"
-#import "RadarViewController.h"
+#import "MARaderViewController.h"
+
+//#import "RadarViewController.h"
 
 @interface JobViewController ()
 
@@ -45,7 +47,7 @@
     jobH5.title = @"推荐";
     [self addChildViewController:jobH5];
     
-    RadarViewController * recentMap = [[RadarViewController alloc] init];
+    MARaderViewController * recentMap = [[MARaderViewController alloc] init];
     recentMap.title = @"雷达";
     recentMap.view.backgroundColor = Color235;
     [self addChildViewController:recentMap];

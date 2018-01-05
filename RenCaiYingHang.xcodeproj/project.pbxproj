@@ -165,6 +165,15 @@
 		8FF04D751FDA90B500B14036 /* LabelViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF04D731FDA90B500B14036 /* LabelViewCell.xib */; };
 		8FF04D791FDA947900B14036 /* LabelSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF04D771FDA947900B14036 /* LabelSwitchCell.m */; };
 		8FF04D7A1FDA947900B14036 /* LabelSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF04D781FDA947900B14036 /* LabelSwitchCell.xib */; };
+		8FF2D0C71FFF1BF7002F18B4 /* MARaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2D0C61FFF1BF7002F18B4 /* MARaderViewController.m */; };
+		8FF2D0CB1FFF1E46002F18B4 /* CustomCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2D0CA1FFF1E46002F18B4 /* CustomCalloutView.m */; };
+		8FF2D0CE1FFF1E9A002F18B4 /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2D0CD1FFF1E9A002F18B4 /* CustomAnnotationView.m */; };
+		8FF2D0D11FFF1F85002F18B4 /* CurrentLocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2D0D01FFF1F85002F18B4 /* CurrentLocationAnnotation.m */; };
+		8FF2D0D81FFF1FA9002F18B4 /* XYQProgressHUD+XYQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2D0D41FFF1FA9002F18B4 /* XYQProgressHUD+XYQ.m */; };
+		8FF2D0D91FFF1FA9002F18B4 /* XYQProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8FF2D0D51FFF1FA9002F18B4 /* XYQProgressHUD.bundle */; };
+		8FF2D0DA1FFF1FA9002F18B4 /* XYQProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2D0D71FFF1FA9002F18B4 /* XYQProgressHUD.m */; };
+		8FF2D0E11FFF577E002F18B4 /* RaderSearchViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2D0DF1FFF577E002F18B4 /* RaderSearchViewCell.m */; };
+		8FF2D0E21FFF577E002F18B4 /* RaderSearchViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF2D0E01FFF577E002F18B4 /* RaderSearchViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -476,6 +485,22 @@
 		8FF04D761FDA947900B14036 /* LabelSwitchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LabelSwitchCell.h; sourceTree = "<group>"; };
 		8FF04D771FDA947900B14036 /* LabelSwitchCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LabelSwitchCell.m; sourceTree = "<group>"; };
 		8FF04D781FDA947900B14036 /* LabelSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelSwitchCell.xib; sourceTree = "<group>"; };
+		8FF2D0C51FFF1BF7002F18B4 /* MARaderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MARaderViewController.h; sourceTree = "<group>"; };
+		8FF2D0C61FFF1BF7002F18B4 /* MARaderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MARaderViewController.m; sourceTree = "<group>"; };
+		8FF2D0C91FFF1E46002F18B4 /* CustomCalloutView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCalloutView.h; sourceTree = "<group>"; };
+		8FF2D0CA1FFF1E46002F18B4 /* CustomCalloutView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomCalloutView.m; sourceTree = "<group>"; };
+		8FF2D0CC1FFF1E9A002F18B4 /* CustomAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomAnnotationView.h; sourceTree = "<group>"; };
+		8FF2D0CD1FFF1E9A002F18B4 /* CustomAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
+		8FF2D0CF1FFF1F85002F18B4 /* CurrentLocationAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrentLocationAnnotation.h; sourceTree = "<group>"; };
+		8FF2D0D01FFF1F85002F18B4 /* CurrentLocationAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrentLocationAnnotation.m; sourceTree = "<group>"; };
+		8FF2D0D31FFF1FA9002F18B4 /* XYQProgressHUD+XYQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XYQProgressHUD+XYQ.h"; sourceTree = "<group>"; };
+		8FF2D0D41FFF1FA9002F18B4 /* XYQProgressHUD+XYQ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XYQProgressHUD+XYQ.m"; sourceTree = "<group>"; };
+		8FF2D0D51FFF1FA9002F18B4 /* XYQProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = XYQProgressHUD.bundle; sourceTree = "<group>"; };
+		8FF2D0D61FFF1FA9002F18B4 /* XYQProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYQProgressHUD.h; sourceTree = "<group>"; };
+		8FF2D0D71FFF1FA9002F18B4 /* XYQProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYQProgressHUD.m; sourceTree = "<group>"; };
+		8FF2D0DE1FFF577E002F18B4 /* RaderSearchViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RaderSearchViewCell.h; sourceTree = "<group>"; };
+		8FF2D0DF1FFF577E002F18B4 /* RaderSearchViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RaderSearchViewCell.m; sourceTree = "<group>"; };
+		8FF2D0E01FFF577E002F18B4 /* RaderSearchViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RaderSearchViewCell.xib; sourceTree = "<group>"; };
 		A68C80F547ABF9E727A34E6C /* Pods-RenCaiYingHang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RenCaiYingHang.release.xcconfig"; path = "Pods/Target Support Files/Pods-RenCaiYingHang/Pods-RenCaiYingHang.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -627,9 +652,10 @@
 		8F151E521FDFA7E100F15CF7 /* Rader(雷达) */ = {
 			isa = PBXGroup;
 			children = (
+				8FF2D0C81FFF1C05002F18B4 /* MACutomView */,
 				8F1CA81C1FE7648900BBD208 /* StifleHandle */,
-				8F1F66561FD94E1C004BF8F1 /* RadarViewController.h */,
-				8F1F66571FD94E1C004BF8F1 /* RadarViewController.m */,
+				8FF2D0C51FFF1BF7002F18B4 /* MARaderViewController.h */,
+				8FF2D0C61FFF1BF7002F18B4 /* MARaderViewController.m */,
 			);
 			path = "Rader(雷达)";
 			sourceTree = "<group>";
@@ -637,6 +663,8 @@
 		8F1CA81C1FE7648900BBD208 /* StifleHandle */ = {
 			isa = PBXGroup;
 			children = (
+				8F1F66561FD94E1C004BF8F1 /* RadarViewController.h */,
+				8F1F66571FD94E1C004BF8F1 /* RadarViewController.m */,
 				8F1CA8311FE7688C00BBD208 /* CollectionViewCell.h */,
 				8F1CA82F1FE7688C00BBD208 /* CollectionViewCell.m */,
 				8F1CA8301FE7688C00BBD208 /* CollectionViewCell.xib */,
@@ -919,6 +947,7 @@
 		8F85D8561FD9236A00BC1A7D /* third */ = {
 			isa = PBXGroup;
 			children = (
+				8FF2D0D21FFF1FA9002F18B4 /* XYQProgressHUD */,
 				8F514D641FFE086E0097A3AA /* SMKCycleScrollView */,
 				8F1F0BD91FF0C86C00CE2FB5 /* JKBannerView */,
 				8F0EF4B01FE366D100D179D5 /* GestureLock */,
@@ -1316,6 +1345,34 @@
 			path = SecurityCenter;
 			sourceTree = "<group>";
 		};
+		8FF2D0C81FFF1C05002F18B4 /* MACutomView */ = {
+			isa = PBXGroup;
+			children = (
+				8FF2D0C91FFF1E46002F18B4 /* CustomCalloutView.h */,
+				8FF2D0CA1FFF1E46002F18B4 /* CustomCalloutView.m */,
+				8FF2D0CC1FFF1E9A002F18B4 /* CustomAnnotationView.h */,
+				8FF2D0CD1FFF1E9A002F18B4 /* CustomAnnotationView.m */,
+				8FF2D0CF1FFF1F85002F18B4 /* CurrentLocationAnnotation.h */,
+				8FF2D0D01FFF1F85002F18B4 /* CurrentLocationAnnotation.m */,
+				8FF2D0DE1FFF577E002F18B4 /* RaderSearchViewCell.h */,
+				8FF2D0DF1FFF577E002F18B4 /* RaderSearchViewCell.m */,
+				8FF2D0E01FFF577E002F18B4 /* RaderSearchViewCell.xib */,
+			);
+			path = MACutomView;
+			sourceTree = "<group>";
+		};
+		8FF2D0D21FFF1FA9002F18B4 /* XYQProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				8FF2D0D31FFF1FA9002F18B4 /* XYQProgressHUD+XYQ.h */,
+				8FF2D0D41FFF1FA9002F18B4 /* XYQProgressHUD+XYQ.m */,
+				8FF2D0D51FFF1FA9002F18B4 /* XYQProgressHUD.bundle */,
+				8FF2D0D61FFF1FA9002F18B4 /* XYQProgressHUD.h */,
+				8FF2D0D71FFF1FA9002F18B4 /* XYQProgressHUD.m */,
+			);
+			path = XYQProgressHUD;
+			sourceTree = "<group>";
+		};
 		E0A2B5E10A6EA302CE528044 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1447,8 +1504,10 @@
 				8F3BDA5C1FED007500C4B472 /* MineCollectionViewCell.xib in Resources */,
 				8F85D82A1FD922A500BC1A7D /* Assets.xcassets in Resources */,
 				8F3BDA661FED094800C4B472 /* MineFooterView.xib in Resources */,
+				8FF2D0D91FFF1FA9002F18B4 /* XYQProgressHUD.bundle in Resources */,
 				8F85D8A81FD9257400BC1A7D /* sound.caf in Resources */,
 				8F728C331FDE367200C6247B /* AssetsHandleCell.xib in Resources */,
+				8FF2D0E21FFF577E002F18B4 /* RaderSearchViewCell.xib in Resources */,
 				8F1CA8331FE7688D00BBD208 /* CollectionViewCell.xib in Resources */,
 				8FF04D751FDA90B500B14036 /* LabelViewCell.xib in Resources */,
 				8FE1A3671FF4C0D00022CDB0 /* AlipaySDK.bundle in Resources */,
@@ -1488,6 +1547,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RenCaiYingHang/Pods-RenCaiYingHang-resources.sh",
+				"${PODS_ROOT}/AMap3DMap/MAMapKit.framework/AMap.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/PGDatePicker/PGDatePicker/PGDatePicker.bundle",
 				"${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle",
@@ -1564,11 +1624,14 @@
 				8F85D89D1FD9257400BC1A7D /* EJAlertViewController.m in Sources */,
 				8F1CA8281FE7668200BBD208 /* RyAnnotationView.m in Sources */,
 				8F85D8601FD9243900BC1A7D /* RYNavigationController.m in Sources */,
+				8FF2D0D11FFF1F85002F18B4 /* CurrentLocationAnnotation.m in Sources */,
 				8F0EF4DC1FE3D6C800D179D5 /* AreaModel.m in Sources */,
+				8FF2D0CE1FFF1E9A002F18B4 /* CustomAnnotationView.m in Sources */,
 				8F85D8631FD9244800BC1A7D /* RYViewController.m in Sources */,
 				8F85D8251FD922A500BC1A7D /* ViewController.m in Sources */,
 				8F85D8DA1FD9297700BC1A7D /* JobViewController.m in Sources */,
 				8F1F66691FD9645B004BF8F1 /* AddPrivacyCompanyViewController.m in Sources */,
+				8FF2D0D81FFF1FA9002F18B4 /* XYQProgressHUD+XYQ.m in Sources */,
 				8FE1A3861FF502F60022CDB0 /* JobDetailViewController.m in Sources */,
 				8F1F66581FD94E1C004BF8F1 /* RadarViewController.m in Sources */,
 				8F85D8BA1FD9261200BC1A7D /* UITextView+Placeholder.m in Sources */,
@@ -1577,6 +1640,7 @@
 				8F1F66621FD9626D004BF8F1 /* SetupViewController.m in Sources */,
 				8F2A2B6B1FEA0240003E5507 /* NecessarySexCell.m in Sources */,
 				8FE1A3801FF4F9D10022CDB0 /* DropDetailViewController.m in Sources */,
+				8FF2D0DA1FFF1FA9002F18B4 /* XYQProgressHUD.m in Sources */,
 				8F1CA8221FE7657A00BBD208 /* RyAnnotation.m in Sources */,
 				8F3BDA601FED093300C4B472 /* MineHeaderView.m in Sources */,
 				8FF04D591FDA801B00B14036 /* FeebBackViewController.m in Sources */,
@@ -1589,6 +1653,7 @@
 				8FF04D461FDA3A9300B14036 /* NecessaryInfoViewController.m in Sources */,
 				8F0EF4B91FE366D100D179D5 /* GestureVerifyViewController.m in Sources */,
 				8F85D8CE1FD9282E00BC1A7D /* NetWorkHelper.m in Sources */,
+				8FF2D0CB1FFF1E46002F18B4 /* CustomCalloutView.m in Sources */,
 				8F85D8C21FD9280D00BC1A7D /* MyRefreshHeader.m in Sources */,
 				8F728C261FDE1FC300C6247B /* JHUploadImage.m in Sources */,
 				8F3BDA711FED25C000C4B472 /* MsgViewCell.m in Sources */,
@@ -1659,7 +1724,9 @@
 				8F1F24CC1FFB8204003F3B37 /* HCH5ViewController.m in Sources */,
 				8F85D8A21FD9257400BC1A7D /* ScanSuccessJumpVC.m in Sources */,
 				8F3BDA5B1FED007500C4B472 /* MineCollectionViewCell.m in Sources */,
+				8FF2D0E11FFF577E002F18B4 /* RaderSearchViewCell.m in Sources */,
 				8F26E1181FF49A3700E93F14 /* UIImageView+RotateImgV.m in Sources */,
+				8FF2D0C71FFF1BF7002F18B4 /* MARaderViewController.m in Sources */,
 				8F85D8A31FD9257400BC1A7D /* SGGenerateQRCodeVC.m in Sources */,
 				8F1F66511FD9485C004BF8F1 /* RYWebViewController.m in Sources */,
 			);

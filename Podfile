@@ -22,4 +22,12 @@ pod 'HUPhotoBrowser'
 
 pod 'PGDatePicker'
 
+pod 'AMapFoundation'
+
+pod 'AMapLocation'
+
+pod 'AMapSearch'
+
+pod 'AMap3DMap'
+
 end

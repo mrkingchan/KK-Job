@@ -14,6 +14,13 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - AMap3DMap (5.6.0):
+    - AMapFoundation (~> 1.4)
+  - AMapFoundation (1.4.2)
+  - AMapLocation (2.5.0):
+    - AMapFoundation (~> 1.4)
+  - AMapSearch (5.5.0):
+    - AMapFoundation (~> 1.4)
   - CDDPagerController (1.1.3)
   - HUPhotoBrowser (1.3.1):
     - SVProgressHUD
@@ -34,6 +41,10 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - AMap3DMap
+  - AMapFoundation
+  - AMapLocation
+  - AMapSearch
   - CDDPagerController
   - HUPhotoBrowser
   - JPush
@@ -46,6 +57,10 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  AMap3DMap: 2ac4f9ad7f2f8b015013d8d282c55882bcd68dc9
+  AMapFoundation: 6c0471c9a6a0ad17dad46e3d800ad56ca170f82a
+  AMapLocation: d02bd8c0081b0bc51b2e4cf89925ef57448263c9
+  AMapSearch: dc9958acfb61b58dcbce79736bf14a39dde7506f
   CDDPagerController: e832fb34d75d45f871cc29ce1cc06ccf5dd7c200
   HUPhotoBrowser: 136b1830da6e3231c823f83e1ce8b2288add312a
   JCore: 18fc8725124f26e55625eaf224659b3a999dcf63
@@ -59,6 +74,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   TZImagePickerController: 276dc7c0cc70da9ee354046474b405d87ef81c89
 
-PODFILE CHECKSUM: 177d14c39511d7c465a082fbcdad9ab1af2907db
+PODFILE CHECKSUM: 7e795911f6f3f05be322491a5bdda99ea3884b6f
 
 COCOAPODS: 1.3.1

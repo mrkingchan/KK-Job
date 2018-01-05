@@ -17,6 +17,8 @@
 // 如果需要使用idfa功能所需要引入的头文件（可选）
 #import <AdSupport/AdSupport.h>
 
+#import <AMapFoundationKit/AMapFoundationKit.h>
+
 #import "ViewController.h"
 #import "OSGuideViewController.h"
 #import "GestureSetController.h"
@@ -54,6 +56,9 @@ static BOOL isProduction = false;//false true
     
     //注册极光
     [self regsiterJPush:launchOptions];
+    
+    //注册高德
+    [AMapServices sharedServices].apiKey = MAMapKey;
     
     //向微信注册
     [WXApi registerApp:WeXinAppID];
