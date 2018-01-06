@@ -386,7 +386,6 @@ static NSString * identifier = @"CollectionViewCell";
 /** 搜索关键词 */
 - (void) closeBeyBoard
 {
-    [super closeBeyBoard];
     for (id class in self.view.subviews)
     {
         if ([class isKindOfClass:[RaderSearchViewCell class]]) {
@@ -397,6 +396,7 @@ static NSString * identifier = @"CollectionViewCell";
             }
         }
     }
+    [super closeBeyBoard];
 }
 
 - (void) addCollectionView
@@ -438,7 +438,7 @@ static NSString * identifier = @"CollectionViewCell";
     cell.collectionViewCellCallBack = ^(NSInteger index) {
         if (index == 11) {
             JobDetailViewController * h5 = [[JobDetailViewController alloc] init];
-            h5.url = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@public/job/jobDetails?datas=%@",KBaseURL,[UtilityHelper encryptUseDES2:[NSString stringWithFormat:@"%zd",model.jobid] key:DESKEY]]];
+            h5.url = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@public/job/jobDetails?datas=%@",KBaseURL,[UtilityHelper encryptParmar:@{@"jobid":@(model.jobid)}]]];
             [self.navigationController pushViewController:h5 animated:true];
         }else if (index == 12){
             CompanyDetailViewController * h5 = [[CompanyDetailViewController alloc] init];
