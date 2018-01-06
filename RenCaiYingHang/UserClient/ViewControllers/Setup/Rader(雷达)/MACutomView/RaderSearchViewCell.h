@@ -10,4 +10,7 @@
 
 @interface RaderSearchViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UITextField *textFiled;
+
+
 @end

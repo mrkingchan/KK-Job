@@ -101,6 +101,7 @@
     NSDictionary * dic = [UtilityHelper encryptParmar:paramer];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         
+        [RYDefaults setObject:data[@"reCode"] forKey:@"UserReCode"];
         [UtilityHelper saveUserInfoWith:data[@"rel"] isFinishBaseInfo:false keyName:UserCache];
         sucess(true);
         

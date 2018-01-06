@@ -10,7 +10,6 @@
 
 @implementation CollectionViewCell
 {
-    
     __weak IBOutlet UILabel *jobName;
     __weak IBOutlet UILabel *interviewNumber;
     __weak IBOutlet UILabel *entryNumber;
@@ -33,7 +32,24 @@
 {
     _model = model;
     jobName.text = model.jobname;
-    //interviewNumber.text = [NSString stringWithFormat:@"10"];
+    
+    entryNumber.text = [NSString stringWithFormat:@"%.f",model.subsidy];
+    salaryRange.text = model.salaryrange;
+    address.text = [NSString stringWithFormat:@"%@-%@",model._city,model._district];
+    years.text = model.job_exp_name;
+    education.text = model.diploma_name;
+    
+    [companyIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KIMGURL,model.comlogo]] placeholderImage:nil];
+    companyName.text = model.comname;
+    companyInfo.text = [NSString stringWithFormat:@"%@|%@|%@",model.finance_name,model.scale_name,model.industry_name];
+    
+    NSString * datetime = [model.updateTime componentsSeparatedByString:@" "][1];
+    NSArray * timeArr = [datetime componentsSeparatedByString:@":"];
+    dateTime.text = [NSString stringWithFormat:@"%@:%@",timeArr[0],timeArr[1]];
+    
+    entryCompanyView.hidden = model.award == 0 ? true : false;
+    extraAward.text = [NSString stringWithFormat:@"%.f",model.award];
+    
 }
 
 - (void)awakeFromNib {

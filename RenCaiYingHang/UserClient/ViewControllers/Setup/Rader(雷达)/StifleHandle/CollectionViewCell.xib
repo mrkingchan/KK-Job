@@ -209,10 +209,24 @@
                                     <action selector="buttonClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="anm-xi-24H"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bsh-wf-98z">
+                                <rect key="frame" x="300" y="-5" width="15" height="15"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="I52-rW-jzK"/>
+                                    <constraint firstAttribute="width" constant="15" id="iEF-Q0-1pL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="close"/>
+                                <connections>
+                                    <action selector="buttonClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Vgl-XC-0lU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Aur-2p-QJf" firstAttribute="leading" secondItem="3Tk-AU-Jc6" secondAttribute="leading" constant="10" id="0VU-DB-rcv"/>
+                            <constraint firstAttribute="trailing" secondItem="Bsh-wf-98z" secondAttribute="trailing" constant="-5" id="2pe-8F-aRS"/>
                             <constraint firstItem="jaO-qs-0Ic" firstAttribute="leading" secondItem="ZQw-kc-y26" secondAttribute="trailing" constant="10" id="3uw-nT-tzT"/>
                             <constraint firstItem="TtM-b5-dek" firstAttribute="leading" secondItem="3Tk-AU-Jc6" secondAttribute="leading" id="4PZ-G3-Kic"/>
                             <constraint firstItem="jaO-qs-0Ic" firstAttribute="top" secondItem="mSM-zR-LFQ" secondAttribute="bottom" constant="10" id="4gZ-oF-U0J"/>
@@ -227,6 +241,7 @@
                             <constraint firstItem="4Kk-So-pOm" firstAttribute="leading" secondItem="3Tk-AU-Jc6" secondAttribute="leading" constant="10" id="J3j-UV-m6I"/>
                             <constraint firstAttribute="trailing" secondItem="ESY-K9-J4W" secondAttribute="trailing" id="JbJ-ch-Vwh"/>
                             <constraint firstItem="qyr-yj-Znh" firstAttribute="top" secondItem="ESY-K9-J4W" secondAttribute="bottom" constant="9.5" id="Jky-GI-oyy"/>
+                            <constraint firstItem="Bsh-wf-98z" firstAttribute="top" secondItem="3Tk-AU-Jc6" secondAttribute="top" constant="-5" id="M1U-ik-ZUS"/>
                             <constraint firstAttribute="trailing" secondItem="KV3-bW-RX2" secondAttribute="trailing" id="MJ1-9s-Aqd"/>
                             <constraint firstAttribute="trailing" secondItem="wcn-Lg-zB3" secondAttribute="trailing" constant="10" id="Q9h-UI-hcn"/>
                             <constraint firstItem="qOI-pA-EO5" firstAttribute="top" secondItem="3Tk-AU-Jc6" secondAttribute="top" constant="70" id="R3x-Tf-Klh"/>
@@ -292,6 +307,7 @@
     </objects>
     <resources>
         <image name="address" width="25" height="25"/>
+        <image name="close" width="25" height="25"/>
         <image name="education" width="25" height="25"/>
         <image name="entry_award" width="25" height="25"/>
         <image name="interview_award" width="25" height="25"/>

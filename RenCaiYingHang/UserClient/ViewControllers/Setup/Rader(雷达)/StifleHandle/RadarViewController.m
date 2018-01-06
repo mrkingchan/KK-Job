@@ -195,14 +195,14 @@ static NSString * identifier = @"CollectionViewCell";
     if (arr.count>0) {
         for (int i = 0; i<arr.count; i++) {
             RyJobModel *model = arr[i];
-            CLLocationCoordinate2D location1=CLLocationCoordinate2DMake(model.latitude, model.longitude);
+//            CLLocationCoordinate2D location1=CLLocationCoordinate2DMake(model.latitude, model.longitude);
             RyAnnotation *annotation1 = [[RyAnnotation alloc]init];
             annotation1.title = model.comname;
-            annotation1.coordinate= location1;
+         //   annotation1.coordinate= location1;
             annotation1.image = UIIMAGE(@"address");
             annotation1.icon = UIIMAGE(@"address");
             annotation1.detail = model.jobname;
-            annotation1.distance = model.distance;
+          //  annotation1.distance = model.distance;
             annotation1.tag = i;
             [_mapView addAnnotation:annotation1];
         }
@@ -341,8 +341,8 @@ static NSString * identifier = @"CollectionViewCell";
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
     //获取定位地址
-    UserInfo.userInfo.lat = userLocation.location.coordinate.latitude;
-    UserInfo.userInfo.lon = userLocation.location.coordinate.longitude;
+//    UserInfo.userInfo.lat = userLocation.location.coordinate.latitude;
+//    UserInfo.userInfo.lon = userLocation.location.coordinate.longitude;
     [self loadData:@{@"lat":@(userLocation.location.coordinate.latitude),@"lon":@(userLocation.location.coordinate.longitude)}];
 //    NSLog(@"userLocation:longitude:%f---latitude:%f",userLocation.location.coordinate.longitude,userLocation.location.coordinate.latitude);
 //    MKCoordinateSpan span = {0.3,0.1};

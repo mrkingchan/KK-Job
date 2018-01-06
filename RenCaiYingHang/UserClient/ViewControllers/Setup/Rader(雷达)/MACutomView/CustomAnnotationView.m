@@ -35,10 +35,9 @@
             self.calloutView.center = CGPointMake(CGRectGetWidth(self.bounds) / 2.f + self.calloutOffset.x,
                                                   -CGRectGetHeight(self.calloutView.bounds) / 2.f + self.calloutOffset.y);
         }
-        
-        self.calloutView.image = [UIImage imageNamed:@"address"];
         self.calloutView.title = self.annotation.title;
         self.calloutView.subtitle = self.annotation.subtitle;
+        self.calloutView.index = self.index;
         
         [self addSubview:self.calloutView];
     }

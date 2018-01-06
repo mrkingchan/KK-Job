@@ -234,7 +234,7 @@ static NSString * footerId = @"MineFooterView";
         case 7:
         {
             //进入企业
-            [UIApplication sharedApplication].keyWindow.rootViewController = [[RYBusinessTabBarController alloc] init];
+            [UIApplication sharedApplication].keyWindow.rootViewController = [[HomePageViewController alloc] init];
             [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
         }
             break;

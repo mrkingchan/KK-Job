@@ -14,4 +14,6 @@
 
 @property (nonatomic, readonly) CustomCalloutView *calloutView;
 
+@property (nonatomic,assign) NSInteger index;
+
 @end

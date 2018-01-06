@@ -58,8 +58,7 @@
 - (void) configurationUI
 {
     self.showMessage.frame = CGRectMake(self.view.width - 80, self.cell.bottom + 10, 70, 30);
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIIMAGE(@"checkbox_chosed") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(commitData:)];
-    //    self.showMessage.sd_layout.leftSpaceToView(self.view, kScreenWidth - 80).topSpaceToView(self.cell, 10).widthIs(70).heightIs(30);
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(commitData:)];
 }
 
 /** 数据提交 **/

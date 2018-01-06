@@ -6,8 +6,8 @@
 //  Copyright © 2017年 Macx. All rights reserved.
 //
 
-#import "RYViewController.h"
+#import "RYWebViewController.h"
 
-@interface HomePageViewController : RYViewController
+@interface HomePageViewController : RYWebViewController
 
 @end

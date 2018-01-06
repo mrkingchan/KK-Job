@@ -24,12 +24,30 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:true animated:animated];
     //self.selectIndex = 1;
+    [self requestExprJob];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:false animated:animated];
+}
+
+/** 获取推荐关键词 */
+- (void) requestExprJob
+{
+    NSString * urlString = [NSString stringWithFormat:@"%@securityCenter/ appResumeExpectJob",KBaseURL];
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary * dic = @{@"token":UserInfo.userInfo.token};
+    [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
+        
+        NSDictionary * dic = data[@"rel"];
+        
+        [RYDefaults setObject:dic[@"expect_job"] forKey:@"expect_job"];
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)viewDidLoad {

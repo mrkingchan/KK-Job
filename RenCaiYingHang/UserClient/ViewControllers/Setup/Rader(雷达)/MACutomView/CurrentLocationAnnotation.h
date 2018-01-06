@@ -10,4 +10,6 @@
 
 @interface CurrentLocationAnnotation : MAPointAnnotation
 
+@property (nonatomic,assign) NSInteger index;
+
 @end

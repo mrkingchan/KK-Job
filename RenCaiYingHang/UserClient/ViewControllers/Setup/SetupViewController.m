@@ -172,12 +172,18 @@ static NSString * SetUPTableViewCellID = @"UITableViewCell";
  */
 - (void) loginOutClick:(UIButton *)sender
 {
-    [UserInfo loginOut];
-    [RYDefaults setObject:@"" forKey:[NSString stringWithFormat:UserCache]];
-    [PCCircleViewConst saveGesture:nil Key:gestureFinalSaveKey];
-    [[NSUserDefaults standardUserDefaults] setObject:@"close" forKey:@"setOn"];
-    UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-    [UIApplication sharedApplication].keyWindow.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
+    [NetWorkHelper getWithURLString:[UtilityHelper addUrlToken:@"securityCenter/appSignOut"] parameters:nil success:^(NSDictionary *data) {
+        
+        [UserInfo loginOut];
+        [RYDefaults setObject:@"" forKey:[NSString stringWithFormat:UserCache]];
+        [PCCircleViewConst saveGesture:nil Key:gestureFinalSaveKey];
+        [[NSUserDefaults standardUserDefaults] setObject:@"close" forKey:@"setOn"];
+        UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+        [UIApplication sharedApplication].keyWindow.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -9,7 +9,6 @@
 #import "RYBusinessTabBarController.h"
 
 #import "HomePageViewController.h"
-#import "CompanyCenterViewController.h"
 
 @interface RYBusinessTabBarController ()
 
@@ -26,7 +25,6 @@
 - (void) addViewControllers
 {
     [self addChildViewController:[[HomePageViewController alloc] init] navTitle:@"职位" tabbarTitle:@"推荐" tabbarImage:@"1"];
-    [self addChildViewController:[[CompanyCenterViewController alloc] init] navTitle:@"企业总心" tabbarTitle:@"企业" tabbarImage:@"2"];
 }
 
 - (void)addChildViewController:(UIViewController *)controller navTitle:(NSString *)navTitle tabbarTitle:(NSString *)tabbarTitle tabbarImage:(NSString *)tabbarImage{

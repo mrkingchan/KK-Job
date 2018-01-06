@@ -34,10 +34,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    // 去掉返回手势
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = false;
-    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -53,6 +49,7 @@
     [super viewDidLayoutSubviews];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     _phoneView.layer.cornerRadius = _codeView.layer.cornerRadius = _loginBtn.layer.cornerRadius = _phoneView.height/2;
+    _phoneView.backgroundColor = _codeView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.3];
     _phoneTf.delegate = _codetf.delegate = self;
 }
 

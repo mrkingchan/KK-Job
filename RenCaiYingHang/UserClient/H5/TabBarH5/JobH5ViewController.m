@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSString * jsonstr =   [@{@"lat":@(UserInfo.userInfo.lat),@"lon":@(UserInfo.userInfo.lon)} mj_JSONString];
+    NSString * jsonstr =   [@{@"lat":@(0.00),@"lon":@(0.00)} mj_JSONString];
     ;
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@public/job/search?data=%@",KBaseURL,[UtilityHelper decryptUseDES2:jsonstr key:DESKEY]]]]]];
     _urlString = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@public/job/search?data=%@",KBaseURL,[UtilityHelper decryptUseDES2:jsonstr key:DESKEY]]];

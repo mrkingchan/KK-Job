@@ -32,6 +32,13 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
 
 @implementation ForgotPwViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:false animated:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = true;
+}
+
 - (UITableView *)tableView
 {
     if (!_tableView) {

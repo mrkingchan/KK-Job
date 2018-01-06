@@ -39,19 +39,21 @@
 /** 根据基本信息判断 **/
 + (void) jumpDifferentApp:(BOOL) isFinishBaseInfo window:(UIWindow *) window
 {
-    if (isFinishBaseInfo) {
-        /** 默认进入雷达页面 **/
-        window.rootViewController = [[RYTabBarController alloc] init];
-        [window.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+    if (UserInfo.userInfo.isComUser == 1 && [UserInfo.userInfo.reCode isEqualToString:@"X1111"]) {
+        if (isFinishBaseInfo) {
+            /** 默认进入雷达页面 **/
+            window.rootViewController = [[RYTabBarController alloc] init];
+            [window.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+        }else{
+            RYNavigationController * root = [[RYNavigationController alloc] initWithRootViewController:[[NecessaryInfoViewController alloc] init]];
+            window.rootViewController = root;
+        }
     }else{
-        RYNavigationController * root = [[RYNavigationController alloc] initWithRootViewController:[[NecessaryInfoViewController alloc] init]];
-        window.rootViewController = root;
+        /** 如果没有绑定企业了那么就去绑定企业界面 **/
+        /** 默认进入企业端页面 **/
+        window.rootViewController = [[HomePageViewController alloc] init];
+        [window.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
     }
-    
-    //            /** 如果没有绑定企业了那么就去绑定企业界面 **/
-    //            /** 默认进入企业端页面 **/
-    //            [UIApplication sharedApplication].keyWindow.rootViewController = [[RYBusinessTabBarController alloc] init];
-    //            [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
 }
 
 /** 缓存数据 */
@@ -59,6 +61,7 @@
 {
     UserInfo.userInfo =  [[UserModel alloc] initWithDictionary:data];
     UserInfo.userInfo.isFinishBaseInfo = isFinishBaseInfo;
+    UserInfo.userInfo.reCode = [RYDefaults objectForKey:@"UserReCode"];
     NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
     NSData * dataUser  = [NSKeyedArchiver archivedDataWithRootObject:rel];
     [RYDefaults setObject:dataUser forKey:keyName];

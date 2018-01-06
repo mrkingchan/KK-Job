@@ -10,9 +10,11 @@
 
 @interface CustomCalloutView : UIView
 
-@property (nonatomic, strong) UIImage *image; //商户图
-@property (nonatomic, copy) NSString *title; //商户名
-@property (nonatomic, copy) NSString *subtitle; //地址
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *subtitle;
 
+@property (nonatomic,assign) NSInteger index;
+
+@property (nonatomic,copy) void(^annotationClickCallBack)(void);
 
 @end

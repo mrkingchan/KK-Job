@@ -13,6 +13,7 @@
     CGRect origin_rect;
     UITextField * _textField;
     BOOL isAnimation;
+    NSInteger index;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *phoneView;
@@ -38,10 +39,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    // 去掉返回手势
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = false;
-    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -57,6 +54,7 @@
     [super viewDidLayoutSubviews];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     _phoneView.layer.cornerRadius = _codeView.layer.cornerRadius = _tuijianView.layer.cornerRadius = _pwView.layer.cornerRadius = _regsiterBtn.layer.cornerRadius = _phoneView.height/2;
+    _phoneView.backgroundColor = _codeView.backgroundColor = _tuijianView.backgroundColor = _pwView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.3];
     _phoneTf.delegate = _codeTf.delegate =  _pwTf.delegate =_inviteTf.delegate = self;
 }
 
@@ -68,6 +66,7 @@
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeBeyBoard)];
     [self.view addGestureRecognizer:tap];
     isAnimation = false;
+    index = 1;
 }
 
 /** 密码登陆 */
@@ -111,7 +110,8 @@
         return;
     }
     NSString * regID = [RYDefaults objectForKey:@"jgRegId"];
-    [RYUserRequest userRegisterWithParamer:@{@"phone":_phoneTf.text,@"fromWay":@"7",@"dxCode":_codeTf.text,@"tiPhone":_inviteTf.text,@"password":_pwTf.text,@"jgRegId":regID} suceess:^(BOOL isSendSuccess) {
+    NSDictionary * dic = @{@"phone":_phoneTf.text,@"fromWay":@"7",@"dxCode":_codeTf.text,@"tiPhone":_inviteTf.text,@"password":_pwTf.text,@"jgRegId":regID,@"isComUser":@(index)};
+    [RYUserRequest userRegisterWithParamer:dic suceess:^(BOOL isSendSuccess) {
         [UtilityHelper jumpDifferentApp:false window:[UIApplication sharedApplication].keyWindow];
     } failure:^(id errorCode) {
         
@@ -159,6 +159,11 @@
     }
     self.codeBtn.enabled = true;
     [self.codeBtn setTitle:@"验证码" forState:UIControlStateNormal];
+}
+
+/**  求职还是招聘 */
+- (IBAction)changeSementControl:(UISegmentedControl *)sender {
+    index = sender.selectedSegmentIndex + 1;
 }
 
 #pragma mark  -键盘

@@ -46,9 +46,9 @@ static NSString * TableViewCellID = @"UITableViewCell";
 
 - (void) configurationTableView
 {
-    self.dataArray = @[@[@"声音与震动"],@[@"有人对我的资料感兴趣",@"有人查看了我的资料",@"有人新发布了我期望的职位"],@[@"重要消息未接收时短信提醒"]];
-    self.typeArr = @[@"0",@"0",@"0"].mutableCopy;
-    self.messageArray = @[@"即时提醒",@"每日提醒",@"每周提醒",@"每月提醒"];
+    self.dataArray = @[@[@"声音与震动"],@[@"有人对我的资料感兴趣",@"有人查看了我的资料",@"有人新发布了我期望的职位"]];//@[@"重要消息未接收时短信提醒"]
+    //self.typeArr = @[@"0",@"0",@"0"].mutableCopy;
+    //self.messageArray = @[@"即时提醒",@"每日提醒",@"每周提醒",@"每月提醒"];
     [self.tableView reloadData];
 }
 
@@ -75,11 +75,12 @@ static NSString * TableViewCellID = @"UITableViewCell";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.font = cell.detailTextLabel.font = systemOfFont(16);
         cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
-        cell.detailTextLabel.text = self.messageArray[[self.typeArr[indexPath.row] integerValue]];
+        cell.detailTextLabel.text = @"即时提醒";//self.messageArray[[self.typeArr[indexPath.row] integerValue]];
         return cell;
     }else{
         LabelSwitchCell * cell = [tableView dequeueReusableCellWithIdentifier:LabelSwitchCellID];
         cell.titleLabel.text = self.dataArray[indexPath.section][indexPath.row];
+        [cell.switchHandle addTarget:self action:@selector(gestureUnLockSwitchChanged:) forControlEvents:UIControlEventValueChanged];
         return cell;
     }
 }
@@ -117,16 +118,29 @@ static NSString * TableViewCellID = @"UITableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1) {
-        RYAlertSheet * sheet = [[RYAlertSheet alloc] initWithButtons:self.messageArray];
-        [sheet show];
+//    if (indexPath.section == 1) {
+//        RYAlertSheet * sheet = [[RYAlertSheet alloc] initWithButtons:self.messageArray];
+//        [sheet show];
+//
+//        sheet.ryAlertSheetCall = ^(NSInteger index) {
+//            /** 先网路处理 **/
+//            [self.typeArr replaceObjectAtIndex:indexPath.row withObject:@(index)];
+//            [self.tableView reloadData];
+//        };
+//    }
+}
+
+- (void)gestureUnLockSwitchChanged:(UISwitch *)sender
+{
+    sender.on = !sender.on;
+    NSInteger isSend = sender.on == true ? 1: 2;
+    NSDictionary * dic = @{@"token":UserInfo.userInfo.token,@"jgWhetherSend":@(isSend)};
+    NSDictionary * encry = [UtilityHelper encryptParmar:dic];
+    [NetWorkHelper getWithURLString:[NSString stringWithFormat:@"%@securityCenter/appWhetherJgSend",KBaseURL] parameters:encry success:^(NSDictionary *data) {
         
-        sheet.ryAlertSheetCall = ^(NSInteger index) {
-            /** 先网路处理 **/
-            [self.typeArr replaceObjectAtIndex:indexPath.row withObject:@(index)];
-            [self.tableView reloadData];
-        };
-    }
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

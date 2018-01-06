@@ -16,8 +16,11 @@
 @property (nonatomic,copy) NSString * pkey;
 /** 手机号 **/
 @property (nonatomic,copy) NSString * tel;
-/** id区分个人还是企业 **/
 
+/** id区分个人还是企业 **/
+@property (nonatomic,assign) NSInteger isComUser;
+/** reCode 个人还是企业(微信端客户) **/
+@property (nonatomic,copy) NSString * reCode;
 
 /** resumeId **/
 @property (nonatomic,copy) NSString * resumeId;
@@ -25,11 +28,6 @@
 @property (nonatomic,copy) NSString * image;
 /** 附件简历地址 */
 @property (nonatomic,copy) NSString * resumeImage;
-
-/** 纬度 */
-@property (nonatomic,assign) double lat;
-/** 经度 **/
-@property (nonatomic,assign) double lon;
 
 /** 是否基本信息 **/
 @property (nonatomic,assign) BOOL isFinishBaseInfo;

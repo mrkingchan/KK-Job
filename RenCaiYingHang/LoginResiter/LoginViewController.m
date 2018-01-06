@@ -30,10 +30,6 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:true animated:animated];
-    // 去掉返回手势
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-    self.navigationController.interactivePopGestureRecognizer.enabled = false;
-    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -47,6 +43,7 @@
 {
     [super viewDidLayoutSubviews];
     _phoneView.layer.cornerRadius = _pwView.layer.cornerRadius = _loginBtn.layer.cornerRadius =  _phoneView.height/2;
+    _phoneView.backgroundColor = _pwView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.3];
     _phoneTf.delegate = _pwTf.delegate = self;
 }
 
@@ -73,7 +70,8 @@
         return;
     }
     NSString * regID = [RYDefaults objectForKey:@"jgRegId"];
-    [RYUserRequest userLoginWithParamer:@{@"loginType":@"1",@"phone":_phoneTf.text,@"password":_pwTf.text,@"jgRegId":regID} suceess:^(BOOL isSendSuccess) {
+    NSDictionary * dic = @{@"loginType":@"1",@"phone":_phoneTf.text,@"password":_pwTf.text,@"jgRegId":regID};
+    [RYUserRequest userLoginWithParamer:dic suceess:^(BOOL isSendSuccess) {
         [UtilityHelper insertApp];
     } failure:^(id errorCode) {
         
