@@ -47,8 +47,11 @@ extern NSString * const GetProvinceInfo;
 /** 省份id获取城市接口 */
 extern NSString * const GetCityInfo;
 
-/** 验证是否完善了基本资料 */
+/** 验证是否完善了个人基本资料 */
 extern NSString * const WhetherBasicInfo;
+
+/** 验证是否完善了企业基本资料 */
+extern NSString * const AppComWhetherBaseInfo;
 
 /** 基本资料 */
 extern NSString * const BasicInfo;

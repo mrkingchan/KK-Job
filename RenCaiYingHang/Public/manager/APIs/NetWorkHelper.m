@@ -190,7 +190,7 @@
 /** 接口回掉 **/
 + (BOOL) isSuceessCallBackWithUrlString:(NSString * )urlString response:(NSDictionary *) dic
 {
-    if (([urlString rangeOfString:WhetherBasicInfo].location !=NSNotFound) || ([urlString rangeOfString:GetEmailAndIdcard].location !=NSNotFound) || ([urlString rangeOfString:IsLoginOut].location !=NSNotFound)) {
+    if (([urlString rangeOfString:WhetherBasicInfo].location !=NSNotFound) || ([urlString rangeOfString:GetEmailAndIdcard].location !=NSNotFound) || ([urlString rangeOfString:IsLoginOut].location !=NSNotFound) || ([urlString rangeOfString:AppComWhetherBaseInfo].location !=NSNotFound)) {
         return true;
     }
     

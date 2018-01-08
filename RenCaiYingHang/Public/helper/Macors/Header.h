@@ -69,6 +69,8 @@
 
 #import <PGDatePicker.h>
 
+#import "XYQProgressHUD+XYQ.h"
+
 /**  Category  **/
 #import "UIColor+HexString.h"
 #import "UIView+Rect.h"

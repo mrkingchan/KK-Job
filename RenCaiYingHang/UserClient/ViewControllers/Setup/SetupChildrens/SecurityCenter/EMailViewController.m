@@ -151,12 +151,11 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
     }
     NSDictionary * dic = @{@"username":UserInfo.userInfo.tel,@"email":self.authModel.email};
     [RYUserRequest bindingEmailWithParamer:dic suceess:^(BOOL isSuccess) {
-        [self.navigationController popViewControllerAnimated:true];
+        _time = KAuthCodeSecond;
+        [self countDown];
     } failure:^(id errorCode) {
         
     }];
-    _time = KAuthCodeSecond;
-    [self countDown];
 }
 
 /** 开始读秒 */

@@ -72,6 +72,7 @@
 	<string>人才赢行需要使用此功能</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>location</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UIMainStoryboardFile</key>

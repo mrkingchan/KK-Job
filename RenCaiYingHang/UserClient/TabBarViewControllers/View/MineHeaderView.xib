@@ -23,8 +23,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EYy-RW-gr7">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyn-27-fAC">
-                                    <rect key="frame" x="20" y="33" width="39" height="25"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="007" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyn-27-fAC">
+                                    <rect key="frame" x="20" y="33" width="36" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="IAW-Hz-dag"/>
                                     </constraints>
@@ -32,8 +32,8 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="aa-bbbb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBS-xK-8W8">
-                                    <rect key="frame" x="20" y="58" width="59" height="25"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目前离职，正在找工作" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBS-xK-8W8">
+                                    <rect key="frame" x="20" y="58" width="153" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="Gua-BL-Bmy"/>
                                     </constraints>
@@ -64,7 +64,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <color key="backgroundColor" red="0.94117647058823528" green="0.35686274509803922" blue="0.28235294117647058" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="z3f-Wc-lI9" firstAttribute="top" secondItem="EYy-RW-gr7" secondAttribute="top" constant="10" id="0qw-yN-bmX"/>
                                 <constraint firstItem="wyn-27-fAC" firstAttribute="centerY" secondItem="EYy-RW-gr7" secondAttribute="centerY" id="EJZ-Ot-bdw"/>

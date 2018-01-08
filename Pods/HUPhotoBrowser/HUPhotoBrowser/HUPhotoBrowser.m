@@ -11,7 +11,6 @@
 #import "hu_const.h"
 #import "HUWebImage.h"
 #import <SVProgressHUD/SVProgressHUD.h>
-#import <Photos/Photos.h>
 
 @interface HUPhotoBrowser () <UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout> {
     CGRect _endTempFrame;
@@ -65,7 +64,7 @@
     [browser configureBrowser];
     [browser animateImageViewAtIndex:index];
     browser.dismissDlock = block;
-
+    
     return browser;
 }
 
@@ -344,8 +343,9 @@
     HUPhotoBrowserCell *cell = (HUPhotoBrowserCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:_currentPage inSection:0]];
     UIImage *seavedImage = cell.imageView.image;
     if (seavedImage) {
-        UIImageWriteToSavedPhotosAlbum(seavedImage, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
+         UIImageWriteToSavedPhotosAlbum(seavedImage, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
     }
+   
 }
 
 - (void)imageSavedToPhotosAlbum:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {

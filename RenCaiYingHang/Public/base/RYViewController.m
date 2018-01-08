@@ -33,8 +33,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kWhiteColor;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doSomething:) name:@"UserJPushNotification" object:nil];
 }
 
+- (void) doSomething:(NSNotification *)notification
+{
+    //NSDictionary *userInfo = [notification userInfo];
+    NSString * notificationName = [notification name];
+    if ([notificationName isEqualToString:@"UserJPushNotification"]) {
+         self.tabBarController.selectedIndex =  2;
+    }
+}
+
+
+/** 登陆认证,此方法已失效 */
 - (void) loginAuth
 {
     NSDictionary * a = @{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey};

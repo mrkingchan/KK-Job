@@ -20,14 +20,14 @@
 /** 根据基本信息判断 **/
 + (void) jumpDifferentApp:(BOOL) isFinishBaseInfo window:(UIWindow *) window;
 
+/** 获取是否完成了企业信息接口(最新) **/
++ (void) gainIsFinishComInfo;
+
 /** 缓存数据 */
 + (void) saveUserInfoWith:(NSDictionary *)data isFinishBaseInfo:(BOOL) isFinishBaseInfo keyName:(NSString *)keyName;
 
-/** 自适应高度**/
-+  (CGFloat) fitHeightWithLabel:(NSString *)currentString size:(CGSize)size font:(UIFont*)font;
-
-/** 自适应宽度**/
-+  (CGFloat) fitWidthWithLabel:(NSString *)currentString font:(UIFont*)font;
+/** 自适应宽高 **/
++  (CGSize) fitHeightWithLabel:(NSString *)currentString size:(CGSize)size font:(UIFont*)font;
 
 /** DES加密 **/
 + (NSDictionary *) encryptParmar:(NSDictionary *)paramer;

@@ -119,7 +119,6 @@ static BOOL isProduction = false;//false true
             self.window.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
             [self.window.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
         }else{
-            //[UtilityHelper insertApp];
             [UtilityHelper jumpDifferentApp:UserInfo.userInfo.isFinishBaseInfo window:self.window];
         }
     }
@@ -263,17 +262,17 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [JPUSHService handleRemoteNotification:userInfo];
     NSLog(@"收到通知:%@", [self logDic:userInfo]);
-    //去注册通知
-    BOOL isActive = application.applicationState == UIApplicationStateActive ? true : false;
-    if (isActive)
+    
+    NSString * type = userInfo[@"pushType"];
+    NSDictionary * info = userInfo[@"aps"];
+    
+    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive && [type isEqualToString:@"user"])
     {
-        // NSLog(@"程序正在运动状态");
-    }
-    else
-    {
-        // NSLog(@"程序在后台运行");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UserJPushNotification" object:info];
     }
 }
+
+
 
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -401,6 +400,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 //        }
 //        _isEnterBackground = false;
 //    }
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
 

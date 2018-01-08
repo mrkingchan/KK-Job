@@ -10,15 +10,13 @@ pod 'MJRefresh'
 
 pod 'SDWebImage'
 
+pod 'HUPhotoBrowser'
+
 pod 'JPush'
 
 pod 'TZImagePickerController'
 
-pod 'RSKImageCropper'
-
 pod 'CDDPagerController'
-
-pod 'HUPhotoBrowser'
 
 pod 'PGDatePicker'
 
@@ -28,6 +26,6 @@ pod 'AMapLocation'
 
 pod 'AMapSearch'
 
-pod 'AMap3DMap'
+pod 'AMap2DMap'
 
 end

@@ -6,6 +6,7 @@
 //  Copyright © 2017年 Macx. All rights reserved.
 //
 
+
 #import "RadarViewController.h"
 
 #import <CoreLocation/CoreLocation.h>
@@ -21,7 +22,7 @@
 #import <objc/runtime.h>
 
 @interface RadarViewController ()<MKMapViewDelegate,CLLocationManagerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>{
-    
+
     CLLocationManager *_locationManager;
     MKMapView *_mapView;
     RyAnnotation *currentAnnotation;
@@ -44,6 +45,7 @@ static NSString * identifier = @"CollectionViewCell";
 
 @implementation RadarViewController
 
+
 - (NSMutableArray *)dataArray
 {
     if (!_dataArray) {
@@ -60,7 +62,7 @@ static NSString * identifier = @"CollectionViewCell";
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.itemSize = CGSizeMake(kScreenWidth, 180);
         layout.minimumInteritemSpacing = 0.0f;
-        
+
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, kScreenHeight - KToolHeight - KNavBarHeight - 200, kScreenWidth , 200) collectionViewLayout:layout];
         _collectionView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.0];
         _collectionView.delegate = self;
@@ -98,7 +100,7 @@ static NSString * identifier = @"CollectionViewCell";
     pinchBool = NO;
     haveGetUserLocation = NO;
     geocoder=[[CLGeocoder alloc]init];
-    
+
     for (UIView *view in _mapView.subviews) {
         NSString *viewName = NSStringFromClass([view class]);
         if ([viewName isEqualToString:@"_MKMapContentView"]) {
@@ -111,7 +113,7 @@ static NSString * identifier = @"CollectionViewCell";
                     [gestureRecognizer addTarget:self action:@selector(mapViewPinchGesture:)];
                 }
             }
-            
+
         }
     }
     [self initGUI];
@@ -122,7 +124,7 @@ static NSString * identifier = @"CollectionViewCell";
 {
     NSDictionary * dic = @{@"query":@{@"match_all":@{}},@"size":@(2)};
     NSLog(@"d: %@\n c: %@",dic,@"{\"query\":{\"match_all\":{}},\"size\":2}");
-    
+
     NSDictionary * d =
   @{
     @"sort":@[
@@ -135,13 +137,13 @@ static NSString * identifier = @"CollectionViewCell";
   @{@"distance":@"2km",@"location":
   @{@"lat":@(22.54),@"lon":@(114.05)}}}},
     @"size":@(2)};
-    
+
     [NetWorkHelper getWithURLString:@"http://192.168.2.8:9200/index_rcyh/t_job_search/_search?pretty" parameters:d success:^(NSDictionary *data) {
-        
+
     } failure:^(NSError *error) {
-        
+
     }];
-    
+
 //    [AreaRequest getJobInfoWithParamer:paramer suceess:^(NSArray *dataArr) {
 //        [self.dataArray addObjectsFromArray:dataArr];
 //        [self initGUI];
@@ -167,24 +169,24 @@ static NSString * identifier = @"CollectionViewCell";
     CGRect rect=[UIScreen mainScreen].bounds;
     _mapView=[[MKMapView alloc]initWithFrame:rect];
     [self.view addSubview:_mapView];
-    
+
     //请求定位服务
     _locationManager = [[CLLocationManager alloc]init];
     _locationManager.delegate = self;
-    
-    
+
+
     if(![CLLocationManager locationServicesEnabled]||[CLLocationManager authorizationStatus]!=kCLAuthorizationStatusAuthorizedWhenInUse){
         [_locationManager requestWhenInUseAuthorization];
         //[_locationManager startUpdatingLocation];
     }
-    
+
     //用户位置追踪(用户位置追踪用于标记用户当前位置，此时会调用定位服务)
     _mapView.userTrackingMode = MKUserTrackingModeFollow;//MKUserTrackingModeFollowWithHeading;
-    
+
     //设置地图类型
     _mapView.mapType = MKMapTypeStandard;
     _mapView.showsUserLocation = YES;
-    
+
     [self.view insertSubview:_mapView belowSubview:self.collectionView];
     [self.collectionView reloadData];
     //添加大头针
@@ -221,7 +223,7 @@ static NSString * identifier = @"CollectionViewCell";
     [_locationManager stopUpdatingLocation];
     CLLocation *currentLocation = [locations lastObject];
     CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
-    
+
     //反编码
     [geoCoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (placemarks.count > 0) {
@@ -234,7 +236,7 @@ static NSString * identifier = @"CollectionViewCell";
 //            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:currentCity style:UIBarButtonItemStylePlain target:self action:@selector(selectCityName:)];
             NSLog(@"%@",currentCity); //这就是当前的城市
             NSLog(@"%@",placeMark.name);//具体地址:  xx市xx区xx街道
-            
+
             /** 定位成功再调用 */
             //[self loadData];
         }
@@ -244,14 +246,14 @@ static NSString * identifier = @"CollectionViewCell";
         else if (error) {
             NSLog(@"location error: %@ ",error);
         }
-        
+
     }];
 }
 
 /** 选择城市 **/
 - (void) selectCityName:(UIBarButtonItem *)item
 {
-    
+
 }
 
 #pragma mark - 地图控件代理方法
@@ -272,28 +274,28 @@ static NSString * identifier = @"CollectionViewCell";
         //重新设置此类大头针视图的大头针模型(因为有可能是从缓存池中取出来的，位置是放到缓存池时的位置)
         annotationView.annotation = annotation;
         annotationView.image = ((RyAnnotation *)annotation).image;//设置大头针视图的图片
-        
+
         return annotationView;
     }else if([annotation isKindOfClass:[RyCalloutAnnotation class]]){
         //对于作为弹出详情视图的自定义大头针视图无弹出交互功能（canShowCallout=false，这是默认值），在其中可以自由添加其他视图（因为它本身继承于UIView）
         RyAnnotationView * calloutView = [RyAnnotationView  calloutViewWithMapView:mapView];
         calloutView.ryAnnotation = (RyCalloutAnnotation *)annotation;
-        
+
         [calloutView getReturnMark:^(NSString *mark) {
             NSLog(@"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%@",mark);
-            
+
             //从目前位置导航到指定地
             [self.mapNavigationView showMapNavigationViewWithtargetLatitude:currentAnnotation.coordinate.latitude targetLongitute:currentAnnotation.coordinate.longitude toName:currentAnnotation.title];
             [self.view addSubview:_mapNavigationView];
-            
+
             //从指定地导航到另一个指定地
             //            [self.mapNavigationView showMapNavigationViewFormcurrentLatitude:30.306906 currentLongitute:120.107265 TotargetLatitude:currentAnnotation.coordinate.latitude targetLongitute:currentAnnotation.coordinate.longitude toName:currentAnnotation.title];
            // [self.view addSubview:_mapNavigationView];
-            
+
         }];
-        
+
         return calloutView;
-        
+
     } else {
         return nil;
     }
@@ -372,7 +374,7 @@ static NSString * identifier = @"CollectionViewCell";
             if (finished) {
                 [UIView animateWithDuration:0.05 animations:^{
                     imgView.transform = CGAffineTransformMakeScale(1.0, 0.8);
-                    
+
                 }completion:^(BOOL finished){
                     if (finished) {
                         [UIView animateWithDuration:0.1 animations:^{
@@ -384,11 +386,11 @@ static NSString * identifier = @"CollectionViewCell";
                         }];
                     }
                 }];
-                
+
             }
         }];
     }
-    
+
 }
 
 -(void)addCenterLocationViewWithCenterPoint:(CGPoint)point
@@ -400,7 +402,7 @@ static NSString * identifier = @"CollectionViewCell";
         imgView.center = _mapView.center;
         [self.view addSubview:imgView];
     }
-    
+
 }
 
 #pragma mark 根据坐标取得地名
@@ -412,13 +414,13 @@ static NSString * identifier = @"CollectionViewCell";
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                
+
             });
         }else{
             haveGetUserLocation = NO;
             NSLog(@"error:%@",error.localizedDescription);
         }
-        
+
     }];
 }
 
@@ -475,19 +477,19 @@ static NSString * identifier = @"CollectionViewCell";
             NSLog(@"SpanGesture Changed");
             spanBool = YES;
         }
-            
+
             break;
         case UIGestureRecognizerStateCancelled:{
             NSLog(@"SpanGesture Cancelled");
         }
-            
+
             break;
         case UIGestureRecognizerStateEnded:{
             NSLog(@"SpanGesture Ended");
         }
-            
+
             break;
-            
+
         default:
             break;
     }
@@ -504,30 +506,30 @@ static NSString * identifier = @"CollectionViewCell";
             NSLog(@"PinchGesture Changed");
             pinchBool = YES;
         }
-            
+
             break;
         case UIGestureRecognizerStateCancelled:{
             NSLog(@"PinchGesture Cancelled");
         }
-            
+
             break;
         case UIGestureRecognizerStateEnded:{
             pinchBool = NO;
             NSLog(@"PinchGesture Ended");
         }
-            
+
             break;
-            
+
         default:
             break;
     }
-    
+
 }
 
 #pragma mark - touchs
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    
+
 }
 
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -538,7 +540,7 @@ static NSString * identifier = @"CollectionViewCell";
 
 -(void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    
+
 }
 
 /** 去设置定位 **/
@@ -577,4 +579,5 @@ static NSString * identifier = @"CollectionViewCell";
 */
 
 @end
+
 

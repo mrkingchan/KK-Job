@@ -49,8 +49,11 @@ NSString * const GetProvinceInfo = @"identity/getProvinceInfo";
 /** 省份id获取城市接口 */
 NSString * const GetCityInfo = @"identity/getCityInfoByFather";
 
-/** 验证是否完善了基本资料 */
+/** 验证是否完善了个人基本资料 */
 NSString * const WhetherBasicInfo = @"securityCenter/whetherBaseInfo";
+
+/** 验证是否完善了企业基本资料 */
+NSString * const AppComWhetherBaseInfo = @"securityCenter/appComWhetherBaseInfo";
 
 /** 基本资料 */
 NSString * const BasicInfo = @"identity/regist/basicInfo";

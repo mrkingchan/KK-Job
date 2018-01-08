@@ -234,8 +234,15 @@ static NSString * footerId = @"MineFooterView";
         case 7:
         {
             //进入企业
-            [UIApplication sharedApplication].keyWindow.rootViewController = [[HomePageViewController alloc] init];
-            [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+            if (!UserInfo.userInfo.isFinishComInfo) {
+                [UtilityHelper gainIsFinishComInfo];
+            }else{
+                UserInfo.userInfo.isComUser = 2;
+                NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
+                NSData * dataUser  = [NSKeyedArchiver archivedDataWithRootObject:rel];
+                [RYDefaults setObject:dataUser forKey:UserCache];
+                [UIApplication sharedApplication].keyWindow.rootViewController = [[HomePageViewController alloc] init];
+            }
         }
             break;
         case 2:
@@ -334,7 +341,6 @@ static NSString * footerId = @"MineFooterView";
 - (void)uploadImageToServerWithImage:(UIImage *)image OriginImage:(UIImage *)originImage
 {
     NSData * imageData = UIImageJPEGRepresentation(image, 0.7);
-    //@"file":imageData,
     NSDictionary * dic = @{@"token":UserInfo.userInfo.token,@"type":@"1"};
     if (![VerifyHelper empty:UserInfo.userInfo.image]) {
         dic = @{@"token":UserInfo.userInfo.token,@"type":@"1",@"filePathOld":UserInfo.userInfo.image};

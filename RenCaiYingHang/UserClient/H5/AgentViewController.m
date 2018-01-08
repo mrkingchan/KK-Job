@@ -9,6 +9,7 @@
 #import "AgentViewController.h"
 
 #import "RYShareView.h"
+#import "HImageUtility.h"
 
 @interface AgentViewController ()
 
@@ -35,20 +36,38 @@
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
     if ([message.name isEqualToString:@"shareToUser"]) {
-        //code...
+        //code... UserInfo.userInfo.name 
         NSDictionary * d = message.body;
-        UIImage * image = [UtilityHelper composeImg:UIIMAGE(@"share") img1:[UtilityHelper qrImageForString:d[@"url"] imageSize:80 logoImageSize:0]];
+        
+        //压缩图
+        UIImage * thumimage = [UtilityHelper composeImg:UIIMAGE(@"share") img1:[UtilityHelper qrImageForString:d[@"url"] imageSize:60 logoImageSize:0]];
+        UIImage * finalImage = [HImageUtility imageWithText:[NSString stringWithFormat:@"%@邀请你一起",UserInfo.userInfo.name]
+                                    textFont:14
+                                   textColor:kNavBarTintColor
+                                   textFrame:CGRectMake(130, thumimage.size.height - 100, 150, 20)
+                                 originImage:thumimage
+                      imageLocationViewFrame:CGRectMake(0, 0, thumimage.size.width, thumimage.size.height)];
+        //高清图
+        UIImage * bigImage = [UtilityHelper composeImg:UIIMAGE(@"shareBig") img1:[UtilityHelper qrImageForString:d[@"url"] imageSize:100 logoImageSize:0]];
+        UIImage * finBigImage = [HImageUtility imageWithText:[NSString stringWithFormat:@"%@邀请你一起",UserInfo.userInfo.name]
+                                                   textFont:20
+                                                  textColor:kNavBarTintColor
+                                                  textFrame:CGRectMake(260, bigImage.size.height - 200, 150, 20)
+                                                originImage:bigImage
+                                     imageLocationViewFrame:CGRectMake(0, 0, bigImage.size.width, bigImage.size.height)];
+        
         RYShareView * share = [[RYShareView alloc] initWithFrame:[UIScreen mainScreen].bounds type:ShareUser];
-        share.image = image;
+        share.image = finalImage;
         [[UIApplication sharedApplication].keyWindow addSubview:share];
         
         share.shareCallBack = ^(NSInteger index) {
 
             WXMediaMessage * message = [WXMediaMessage message];
-            [message setThumbImage:image];
+            [message setThumbImage:finalImage];
 
             WXImageObject * imageObject = [WXImageObject object];
-            imageObject.imageData = UIImagePNGRepresentation(image);
+            //高清图
+            imageObject.imageData = UIImagePNGRepresentation(finBigImage);
             message.mediaObject=imageObject;
 
             SendMessageToWXReq * req = [[SendMessageToWXReq alloc] init];

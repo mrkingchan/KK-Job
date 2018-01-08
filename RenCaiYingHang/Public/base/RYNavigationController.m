@@ -22,12 +22,12 @@
     //设置标题字体颜色
     [self.navigationBar setTitleTextAttributes:
      @{NSFontAttributeName:systemOfFont(18),
-       NSForegroundColorAttributeName:[UIColor darkTextColor]
+       NSForegroundColorAttributeName:kWhiteColor
        }];
     
     //设置左右按钮字体颜色
     [[UIBarButtonItem appearance]  setTitleTextAttributes:@{NSFontAttributeName:systemOfFont(14),
-                                                            NSForegroundColorAttributeName:[UIColor darkTextColor]
+                                                            NSForegroundColorAttributeName:kWhiteColor
                                                             } forState:UIControlStateNormal];
     
     self.navigationBar.barTintColor = kNavBarTintColor;
@@ -50,7 +50,7 @@
 - (void)setBackItem:(UIViewController *)controller{
     self.interactivePopGestureRecognizer.delegate = nil;
     //[UIIMAGE(@"nav_back") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-    UIBarButtonItem * back = [[UIBarButtonItem alloc] initWithImage:UIIMAGE(@"nav_back") style:UIBarButtonItemStylePlain target:self action:@selector(s_backTapEvent)];
+    UIBarButtonItem * back = [[UIBarButtonItem alloc] initWithImage:[UIIMAGE(@"nav_back") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(s_backTapEvent)];
     controller.navigationItem.leftBarButtonItem = back;
 }
 

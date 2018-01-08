@@ -38,7 +38,7 @@
                         <rect key="frame" x="86" y="10" width="124" height="29.5"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                        <textInputTraits key="textInputTraits"/>
                     </textField>
                 </subviews>
                 <constraints>

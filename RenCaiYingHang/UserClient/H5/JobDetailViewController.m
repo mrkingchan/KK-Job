@@ -36,7 +36,7 @@
 {
     NSString * url = [NSString stringWithFormat:@"%@",self.webView.URL];
     if ([url rangeOfString:@"public/job/jobDetails"].location != NSNotFound) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:UIIMAGE(@"1s") style:UIBarButtonItemStylePlain target:self action:@selector(shareToUser)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:UIIMAGE(@"shareToUser") style:UIBarButtonItemStylePlain target:self action:@selector(shareToUser)];
     }else{
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:(UIBarButtonItemStyleDone) target:self action:nil];
     }

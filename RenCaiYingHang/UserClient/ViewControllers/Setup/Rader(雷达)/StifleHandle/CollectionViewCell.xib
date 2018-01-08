@@ -265,25 +265,10 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bsh-wf-98z">
-                        <rect key="frame" x="305" y="5" width="15" height="15"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="15" id="Itf-8v-VQy"/>
-                            <constraint firstAttribute="width" constant="15" id="yFM-ng-OHH"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <state key="normal" image="close"/>
-                        <connections>
-                            <action selector="buttonClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Vgl-XC-0lU"/>
-                        </connections>
-                    </button>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="3Tk-AU-Jc6" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="7FO-33-2gJ"/>
-                <constraint firstAttribute="trailing" secondItem="Bsh-wf-98z" secondAttribute="trailing" id="TlM-gC-WUF"/>
-                <constraint firstItem="Bsh-wf-98z" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="b6d-2n-zht"/>
                 <constraint firstAttribute="trailing" secondItem="3Tk-AU-Jc6" secondAttribute="trailing" constant="5" id="cmT-zY-MaJ"/>
                 <constraint firstAttribute="bottom" secondItem="3Tk-AU-Jc6" secondAttribute="bottom" id="iXl-A6-c0a"/>
                 <constraint firstItem="3Tk-AU-Jc6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="qfw-yp-PqZ"/>
@@ -303,11 +288,11 @@
                 <outlet property="salaryRange" destination="Zxk-QS-PN4" id="igQ-7A-2tq"/>
                 <outlet property="years" destination="NTg-8u-Gpa" id="kZZ-ND-trz"/>
             </connections>
+            <point key="canvasLocation" x="-39" y="139"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="address" width="25" height="25"/>
-        <image name="close" width="25" height="25"/>
         <image name="education" width="25" height="25"/>
         <image name="entry_award" width="25" height="25"/>
         <image name="interview_award" width="25" height="25"/>

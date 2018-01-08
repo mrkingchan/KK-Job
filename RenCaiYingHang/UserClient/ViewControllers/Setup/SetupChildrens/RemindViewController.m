@@ -46,7 +46,7 @@ static NSString * TableViewCellID = @"UITableViewCell";
 
 - (void) configurationTableView
 {
-    self.dataArray = @[@[@"声音与震动"],@[@"有人对我的资料感兴趣",@"有人查看了我的资料",@"有人新发布了我期望的职位"]];//@[@"重要消息未接收时短信提醒"]
+    self.dataArray = @[@[@"声音与震动"],@[@"有人查看了我的简历",@"有人查看了我简历的联系方式",@"面试结果提醒"]];//@"有人对我的资料感兴趣",@"有人查看了我的资料",@"有人新发布了我期望的职位"  @[@"重要消息未接收时短信提醒"]
     //self.typeArr = @[@"0",@"0",@"0"].mutableCopy;
     //self.messageArray = @[@"即时提醒",@"每日提醒",@"每周提醒",@"每月提醒"];
     [self.tableView reloadData];

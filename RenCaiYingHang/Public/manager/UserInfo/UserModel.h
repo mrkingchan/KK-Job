@@ -21,7 +21,13 @@
 @property (nonatomic,assign) NSInteger isComUser;
 /** reCode 个人还是企业(微信端客户) **/
 @property (nonatomic,copy) NSString * reCode;
+/** comId **/
+@property (nonatomic,copy) NSString * com_id;
 
+
+
+/** 名字 */
+@property (nonatomic,copy) NSString * name;
 /** resumeId **/
 @property (nonatomic,copy) NSString * resumeId;
 /** 头像 */
@@ -29,7 +35,9 @@
 /** 附件简历地址 */
 @property (nonatomic,copy) NSString * resumeImage;
 
-/** 是否基本信息 **/
+/** 是否个人基本信息 **/
 @property (nonatomic,assign) BOOL isFinishBaseInfo;
+/** 是否企业基本信息 **/
+@property (nonatomic,assign) BOOL isFinishComInfo;
 
 @end

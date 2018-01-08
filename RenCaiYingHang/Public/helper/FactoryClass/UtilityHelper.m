@@ -16,30 +16,38 @@
 
 @implementation UtilityHelper
 
-/** 进入app **/
+/** 每次登陆必走方法 **/
 + (void) insertApp
 {
-    [RYUserRequest whetherBaseInfoWithParamer:@{@"token":UserInfo.userInfo.token} suceess:^(BOOL isSendSuccess) {
-        
-        if (isSendSuccess) {
-            NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
-            [UtilityHelper saveUserInfoWith:rel isFinishBaseInfo:true keyName:UserCache];
-            [UtilityHelper jumpDifferentApp:true window:[UIApplication sharedApplication].keyWindow];
-        }else{
+    //个人用户
+    if (UserInfo.userInfo.isComUser == 1 || [UserInfo.userInfo.reCode isEqualToString:@"X2222"])
+    {
+        [RYUserRequest whetherBaseInfoWithParamer:@{@"token":UserInfo.userInfo.token} suceess:^(BOOL isSendSuccess) {
             
-            NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
-            [UtilityHelper saveUserInfoWith:rel isFinishBaseInfo:false keyName:UserCache];
-            [UtilityHelper jumpDifferentApp:false window:[UIApplication sharedApplication].keyWindow];
-        }
-    } failure:^(id errorCode) {
-
-    }];
+            if (isSendSuccess) {
+                NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
+                [UtilityHelper saveUserInfoWith:rel isFinishBaseInfo:true keyName:UserCache];
+                [UtilityHelper jumpDifferentApp:true window:[UIApplication sharedApplication].keyWindow];
+            }else{
+                
+                NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
+                [UtilityHelper saveUserInfoWith:rel isFinishBaseInfo:false keyName:UserCache];
+                [UtilityHelper jumpDifferentApp:false window:[UIApplication sharedApplication].keyWindow];
+            }
+        } failure:^(id errorCode) {
+            
+        }];
+    }
+    else
+    {
+        [self gainIsFinishComInfo];
+    }
 }
 
 /** 根据基本信息判断 **/
 + (void) jumpDifferentApp:(BOOL) isFinishBaseInfo window:(UIWindow *) window
 {
-    if (UserInfo.userInfo.isComUser == 1 && [UserInfo.userInfo.reCode isEqualToString:@"X1111"]) {
+    if (UserInfo.userInfo.isComUser == 1 || [UserInfo.userInfo.reCode isEqualToString:@"X2222"]) {
         if (isFinishBaseInfo) {
             /** 默认进入雷达页面 **/
             window.rootViewController = [[RYTabBarController alloc] init];
@@ -51,9 +59,36 @@
     }else{
         /** 如果没有绑定企业了那么就去绑定企业界面 **/
         /** 默认进入企业端页面 **/
-        window.rootViewController = [[HomePageViewController alloc] init];
-        [window.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+        /** 如果缓存的是未完成企业信息,那么调用 */
+        if (UserInfo.userInfo.isFinishComInfo) {
+            window.rootViewController = [[HomePageViewController alloc] init];
+            [window.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+        }else{
+           [self gainIsFinishComInfo];
+        }
     }
+}
+
+/** 获取是否完成了企业信息接口(最新) **/
++ (void) gainIsFinishComInfo
+{
+    [RYUserRequest appComWhetherBaseInfoWithParamer:@{@"token":UserInfo.userInfo.token} suceess:^(BOOL isSendSuccess,NSDictionary * rel) {
+        if (![VerifyHelper isNull:rel key:@"com_id"]) {
+            UserInfo.userInfo.com_id = rel[@"com_id"];
+        }
+        UserInfo.userInfo.isComUser = 2;
+        if (isSendSuccess) {
+            UserInfo.userInfo.isFinishComInfo = true;
+        }
+        NSDictionary * d = UserInfo.userInfo.mj_keyValues;
+        NSData * dataUser  = [NSKeyedArchiver archivedDataWithRootObject:d];
+        [RYDefaults setObject:dataUser forKey:UserCache];
+        
+        [UIApplication sharedApplication].keyWindow.rootViewController = [[HomePageViewController alloc] init];
+        
+    } failure:^(id errorCode) {
+        
+    }];
 }
 
 /** 缓存数据 */
@@ -67,24 +102,15 @@
     [RYDefaults setObject:dataUser forKey:keyName];
 }
 
-/** 自适应高度 **/
-+  (CGFloat) fitHeightWithLabel:(NSString *)currentString size:(CGSize)size font:(UIFont*)font
+/** 自适应宽高 **/
++  (CGSize) fitHeightWithLabel:(NSString *)currentString size:(CGSize)size font:(UIFont*)font
 {
-    CGFloat height = [currentString boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil].size.height;
-    return height;
+    CGSize finSize = [currentString boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil].size;
+    //size.height size.width
+    return finSize;
 }
 
-/** 自适应宽度 **/
-+  (CGFloat) fitWidthWithLabel:(NSString *)currentString font:(UIFont*)font
-{
-    CGRect tmpRect = [currentString boundingRectWithSize:CGSizeMake(kScreenWidth, 2000) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName, nil] context:nil];
-    CGFloat width = tmpRect.size.width;
-    return width;
-}
-
-/**
- DES加密
- */
+/** DES加密 */
 + (NSDictionary *) encryptParmar:(NSDictionary *)paramer
 {
     NSString * jsonStr = [paramer mj_JSONString];
@@ -263,7 +289,7 @@ const  Byte iv[] = {1,2,3,4,5,6,7,8};
     
     UIGraphicsBeginImageContext(CGSizeMake(w, h));
     [img drawInRect:CGRectMake(0, 0, w, h)];//先把大图 画到上下文中
-    [img1 drawInRect:CGRectMake(20, h - h1 - 70, w1, h1)];//再把小图放在上下文中
+    [img1 drawInRect:CGRectMake(w/320*50+10, h - h1 - w/320*50, w1, h1)];//再把小图放在上下文中
     UIImage *resultImg = UIGraphicsGetImageFromCurrentImageContext();//从当前上下文中获得最终图片
     UIGraphicsEndImageContext();//关闭上下文
     

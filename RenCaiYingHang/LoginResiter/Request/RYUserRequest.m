@@ -67,15 +67,31 @@
     }];
 }
 
-/** 是否完善基本信息 **/
-+ (void) whetherBaseInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure
+/** 是否完善企业基本信息 **/
++ (void) appComWhetherBaseInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess,NSDictionary * rel))sucess failure:(void(^)(id errorCode))failure
+{
+    NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,AppComWhetherBaseInfo];
+    [NetWorkHelper postWithURLString:urlString parameters:paramer success:^(NSDictionary *data) {
+        NSDictionary * rel = data[@"rel"];
+        if ([data[@"reCode"] isEqualToString:@"X0000"]) {
+           sucess(true,rel);
+        }else{
+           sucess(false,rel);
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+/** 是否完善企业基本信息 **/
++ (void) whetherComBaseInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,WhetherBasicInfo];
     [NetWorkHelper postWithURLString:urlString parameters:paramer success:^(NSDictionary *data) {
         if ([data[@"reCode"] isEqualToString:@"X0000"]) {
-           sucess(true);
+            sucess(true);
         }else{
-           sucess(false);
+            sucess(false);
         }
     } failure:^(NSError *error) {
         
@@ -231,9 +247,8 @@
         UserInfo.userInfo.resumeId = info[@"id"];
         UserInfo.userInfo.image = info[@"image"];
         UserInfo.userInfo.resumeImage = info[@"resumeImage"];
-//        NSDictionary * dic = UserInfo.userInfo.mj_keyValues;
-//        NSData * dataUser  = [NSKeyedArchiver archivedDataWithRootObject:dic];
-//        [[NSUserDefaults standardUserDefaults] setObject:dataUser forKey:@"RYUserInfo"];
+        UserInfo.userInfo.name = info[@"name"];
+        
         sucess(info,array.copy);
     } failure:^(NSError *error) {
         

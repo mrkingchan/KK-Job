@@ -27,7 +27,7 @@
 
 - (void) initUI:(RYShareViewType) type
 {
-    self.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.8];
+    self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeFromSuperview)];
     [self addGestureRecognizer:tap];
     
@@ -35,9 +35,17 @@
         _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         [self addSubview:_imageView];
     }
+    
+    UIView * bgView = [UIFactory initViewWithFrame:CGRectMake(0, kScreenHeight - 50, kScreenWidth, 50) color:[UIColor lightGrayColor]];
+    [self addSubview:bgView];
+    
     for (int i = 0; i < 2; i++) {
-        UIButton * button = [UIFactory initButtonWithFrame:CGRectMake(kScreenWidth/2*i, kScreenHeight - 50, kScreenWidth/2, 50) image:UIIMAGE(@"AppIcon") cornerRadius:0 tag:10+i target:self action:@selector(buttonClick:)];
-        [self addSubview:button];
+        UIButton * button = [UIFactory initButtonWithFrame:CGRectMake((kScreenWidth/2 + 0.25)*i, 0, kScreenWidth/2 - 0.25, 50) image:UIIMAGE(i==0?@"share_friend":@"share_circle") cornerRadius:0 tag:10+i target:self action:@selector(buttonClick:)];
+        [button setTitle:i==0?@"  微信好友":@"  微信朋友圈" forState:UIControlStateNormal];
+        [button setBackgroundColor:kWhiteColor];
+        [button setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
+        button.titleLabel.font = systemOfFont(16);
+        [bgView addSubview:button];
     }
 }
 

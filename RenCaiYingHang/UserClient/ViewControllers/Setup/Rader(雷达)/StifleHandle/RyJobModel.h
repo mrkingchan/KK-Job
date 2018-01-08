@@ -21,8 +21,8 @@
 
 @property(nonatomic,copy)NSString *_city;//": "深圳市", //城市名称
 @property(nonatomic,copy)NSString *_district;//": "罗湖区", //区县
-@property(nonatomic,assign)int jobid;//": 1510647725849124, //职位id
-@property(nonatomic,assign)int comid;//": 1510542150833744, //公司id
+@property(nonatomic,copy)NSString * jobid;//": 1510647725849124, //职位id
+@property(nonatomic,copy)NSString * comid;//": 1510542150833744, //公司id
 @property(nonatomic,copy)NSString *comname;//": "深圳市金瑞康源生态技术有限公司",
 @property(nonatomic,assign)float subsidy;//": 165, //补贴
 @property(nonatomic,copy)NSString *comshortname;//": "金瑞康", //公司简称

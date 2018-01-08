@@ -14,7 +14,6 @@
 // 自定义大头针 气泡
 #import "CustomAnnotationView.h"
 #import "CurrentLocationAnnotation.h"
-#import "XYQProgressHUD+XYQ.h"
 
 #import "JXMapNavigationView.h"
 
@@ -141,7 +140,7 @@ static NSString * identifier = @"CollectionViewCell";
         {
             annotationView = [[CustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIndetifier];
         }
-        annotationView.image = [UIImage imageNamed:@"address"];
+        annotationView.image = [UIImage imageNamed:@"mapAddress"];
         // 设置为NO，用以调用自定义的calloutView
         annotationView.canShowCallout = NO;
         
@@ -159,8 +158,7 @@ static NSString * identifier = @"CollectionViewCell";
  */
 - (void)onCloudSearchDone:(AMapCloudSearchBaseRequest *)request response:(AMapCloudPOISearchResponse *)response
 {
-    //5
-    [XYQProgressHUD hideHUD];
+  //  [XYQProgressHUD hideHUD];
     
     if (response.POIs.count == 0)
     {
@@ -170,6 +168,7 @@ static NSString * identifier = @"CollectionViewCell";
     //
     [self.mapView removeAnnotations:self.searchPoiArray];
     [self.searchPoiArray removeAllObjects];
+    [self.dataArray removeAllObjects];
     
     //解析response获取POI信息，具体解析见 Demo
     NSLog(@" >>> %@",response.POIs);
@@ -179,13 +178,13 @@ static NSString * identifier = @"CollectionViewCell";
         // 这里使用了自定义的坐标是为了区分系统坐标 不然蓝点会被替代
         CurrentLocationAnnotation *annotation = [[CurrentLocationAnnotation alloc] init];
         [annotation setCoordinate:CLLocationCoordinate2DMake(obj.location.latitude, obj.location.longitude)];
-        [annotation setTitle:[NSString stringWithFormat:@"%@ - %ld米", obj.name, (long)obj.distance]];
+        [annotation setTitle:[NSString stringWithFormat:@"%@ - %ldm", obj.name, (long)obj.distance]];
         [annotation setSubtitle:obj.address];
         [annotation setIndex:idx];
         
         [self.searchPoiArray addObject:annotation];
         
-        NSLog(@">>>>>%@ %f %f",obj.customFields,obj.location.latitude,obj.location.longitude);
+        //NSLog(@">>>>>%@ %f %f",obj.customFields,obj.location.latitude,obj.location.longitude);
         
         RyJobModel * model = [[RyJobModel alloc] initWithDictionary:obj.customFields];
         model.jobname = obj.name;
@@ -218,6 +217,7 @@ static NSString * identifier = @"CollectionViewCell";
     if ([view.annotation isKindOfClass:[MKUserLocation class]]) {
         return;
     }
+    NSLog(@"当前点击:%zd",current.index);
 #pragma mark 点击滚动到zhidingweizhi
     [self addCollectionView];
     [[self collectionView] reloadData];
@@ -232,24 +232,6 @@ static NSString * identifier = @"CollectionViewCell";
     [self.mapView addAnnotations:self.searchPoiArray];
 }
 
-// 定位
-- (void)actionLocation
-{
-    if (self.mapView.userTrackingMode == MAUserTrackingModeFollow)
-    {
-        [self.mapView setUserTrackingMode:MAUserTrackingModeNone animated:YES];
-    }
-    else
-    {
-        [self.mapView setCenterCoordinate:self.mapView.userLocation.coordinate animated:YES];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            // 因为下面这句的动画有bug，所以要延迟0.5s执行，动画由上一句产生
-            [self.mapView setUserTrackingMode:MAUserTrackingModeFollow animated:YES];
-        });
-    }
-}
-
 #pragma mark - Initialization
 // 主视图
 - (void)initMapView
@@ -257,6 +239,11 @@ static NSString * identifier = @"CollectionViewCell";
     self.mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), self.view.bounds.size.height)];
     self.mapView.delegate = self;
     [self.view addSubview:self.mapView];
+    
+    /** 向下轻扫 */
+    UISwipeGestureRecognizer *swipeGestureRecognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+    [self.view addGestureRecognizer:swipeGestureRecognizerLeft];
+    swipeGestureRecognizerLeft.direction = UISwipeGestureRecognizerDirectionDown;
 }
 
 - (void)initSearch
@@ -401,22 +388,24 @@ static NSString * identifier = @"CollectionViewCell";
 
 - (void) addCollectionView
 {
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    layout.itemSize = CGSizeMake(kScreenWidth, 180);
-    layout.minimumInteritemSpacing = 0.0f;
-    
-    _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, kScreenHeight - KToolHeight - KNavBarHeight - 200, kScreenWidth , 200) collectionViewLayout:layout];
-    _collectionView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.0];
-    _collectionView.delegate = self;
-    _collectionView.dataSource = self;
-    _collectionView.pagingEnabled = YES;
-    _collectionView.showsHorizontalScrollIndicator = NO;
-    _collectionView.showsVerticalScrollIndicator = NO;
-    [_collectionView registerNib:[UINib nibWithNibName:identifier bundle:nil] forCellWithReuseIdentifier:identifier];
-    _collectionView.contentSize = CGSizeMake(kScreenWidth*10, 200);
-    _collectionView.contentOffset = CGPointMake(0, 0);
-    [self.view addSubview:_collectionView];
+    if (!_collectionView) {
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        layout.itemSize = CGSizeMake(kScreenWidth, 180);
+        layout.minimumInteritemSpacing = 0.0f;
+        
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, kScreenHeight - KToolHeight - KNavBarHeight - 200, kScreenWidth , 200) collectionViewLayout:layout];
+        _collectionView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.0];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.pagingEnabled = true;
+        _collectionView.showsHorizontalScrollIndicator = false;
+        _collectionView.showsVerticalScrollIndicator = false;
+        [_collectionView registerNib:[UINib nibWithNibName:identifier bundle:nil] forCellWithReuseIdentifier:identifier];
+        _collectionView.contentSize = CGSizeMake(kScreenWidth*10, 200);
+        _collectionView.contentOffset = CGPointMake(0, 0);
+        [self.view addSubview:_collectionView];
+    }
 }
 
 #pragma mark ------
@@ -438,14 +427,12 @@ static NSString * identifier = @"CollectionViewCell";
     cell.collectionViewCellCallBack = ^(NSInteger index) {
         if (index == 11) {
             JobDetailViewController * h5 = [[JobDetailViewController alloc] init];
-            h5.url = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@public/job/jobDetails?datas=%@",KBaseURL,[UtilityHelper encryptParmar:@{@"jobid":@(model.jobid)}]]];
+            h5.url = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@public/job/jobDetails?datas=%@",KBaseURL,[UtilityHelper encryptUseDES2:[@{@"jobId":model.jobid} mj_JSONString] key:DESKEY]]];
             [self.navigationController pushViewController:h5 animated:true];
         }else if (index == 12){
             CompanyDetailViewController * h5 = [[CompanyDetailViewController alloc] init];
-            h5.url = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@public/company/coms/%@.html",KBaseURL,[NSString stringWithFormat:@"%zd",model.comid]]];
+            h5.url = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@public/company/coms/%@.html",KBaseURL,[NSString stringWithFormat:@"%@",model.comid]]];
             [self.navigationController pushViewController:h5 animated:true];
-        }else if (index == 13){
-            [_collectionView removeFromSuperview];
         }
     };
     return cell;
@@ -463,6 +450,13 @@ static NSString * identifier = @"CollectionViewCell";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(kScreenWidth, 180);
+}
+
+/** 下滑清除 */
+- (void)swipe:(UISwipeGestureRecognizer *)sender
+{
+    [_collectionView removeFromSuperview];
+    _collectionView = nil;
 }
 
 /*
