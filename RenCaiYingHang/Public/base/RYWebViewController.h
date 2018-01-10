@@ -30,4 +30,10 @@
 
 - (void) addRightBtn;
 
+/** 添加手势 */
+- (void) addTapGesture;
+
+/** 去掉手势 */
+- (void) removeTapGesture;
+
 @end

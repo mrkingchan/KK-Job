@@ -26,11 +26,8 @@
 /** 登陆认证 **/
 + (void) loginAuthWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure;
 
-/** 是否完个人善基本信息 **/
-+ (void) whetherBaseInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure;
-
-/** 是否完善企业基本信息 **/
-+ (void) appComWhetherBaseInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess,NSDictionary * rel))sucess failure:(void(^)(id errorCode))failure;
+/** 是否完善基本信息 **/
++ (void) whetherBaseInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(NSString * whetherUserBaseInfo,NSDictionary * whetherComBaseInfo))sucess failure:(void(^)(id errorCode))failure;
 
 /** 基本信息 */
 + (void) uploadBaseInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess))sucess failure:(void(^)(id errorCode))failure;

@@ -70,8 +70,16 @@
         return;
     }
     NSString * regID = [RYDefaults objectForKey:@"jgRegId"];
-    NSDictionary * dic = @{@"loginType":@"1",@"phone":_phoneTf.text,@"password":_pwTf.text,@"jgRegId":regID};
+    
+    NSDictionary * dic = @{@"loginType":@"1",@"phone":_phoneTf.text,@"password":_pwTf.text};
+    /** 推送注册id不为空 */
+    if (![VerifyHelper empty:regID])
+    {
+        dic = @{@"loginType":@"1",@"phone":_phoneTf.text,@"password":_pwTf.text,@"jgRegId":regID};
+    }
+    [XYQProgressHUD showMessage:@"登陆中...."];
     [RYUserRequest userLoginWithParamer:dic suceess:^(BOOL isSendSuccess) {
+        [XYQProgressHUD hideHUD];
         [UtilityHelper insertApp];
     } failure:^(id errorCode) {
         

@@ -62,6 +62,7 @@
 		8F5088031FEA7B8000743B9C /* RYAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5088021FEA7B8000743B9C /* RYAlertAction.m */; };
 		8F514D691FFE086E0097A3AA /* SMKCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F514D661FFE086E0097A3AA /* SMKCycleScrollView.m */; };
 		8F514D6A1FFE086E0097A3AA /* UIView+SEKExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F514D681FFE086E0097A3AA /* UIView+SEKExtension.m */; };
+		8F5E3D4A2004E275007CA925 /* RYSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5E3D492004E275007CA925 /* RYSelectViewController.m */; };
 		8F728C261FDE1FC300C6247B /* JHUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F728C251FDE1FC300C6247B /* JHUploadImage.m */; };
 		8F728C2A1FDE2F9F00C6247B /* AssetsManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F728C291FDE2F9F00C6247B /* AssetsManagementViewController.m */; };
 		8F728C2D1FDE356200C6247B /* RechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F728C2C1FDE356200C6247B /* RechargeViewController.m */; };
@@ -301,6 +302,8 @@
 		8F514D661FFE086E0097A3AA /* SMKCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKCycleScrollView.m; sourceTree = "<group>"; };
 		8F514D671FFE086E0097A3AA /* UIView+SEKExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SEKExtension.h"; sourceTree = "<group>"; };
 		8F514D681FFE086E0097A3AA /* UIView+SEKExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SEKExtension.m"; sourceTree = "<group>"; };
+		8F5E3D482004E275007CA925 /* RYSelectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYSelectViewController.h; sourceTree = "<group>"; };
+		8F5E3D492004E275007CA925 /* RYSelectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYSelectViewController.m; sourceTree = "<group>"; };
 		8F728C241FDE1FC300C6247B /* JHUploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHUploadImage.h; sourceTree = "<group>"; };
 		8F728C251FDE1FC300C6247B /* JHUploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHUploadImage.m; sourceTree = "<group>"; };
 		8F728C281FDE2F9F00C6247B /* AssetsManagementViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetsManagementViewController.h; sourceTree = "<group>"; };
@@ -1240,6 +1243,8 @@
 				8F85D8F41FD92B2A00BC1A7D /* ForgotPwViewController.m */,
 				8F1CA83A1FE7AC0C00BBD208 /* CodeLoginViewController.h */,
 				8F1CA83B1FE7AC0C00BBD208 /* CodeLoginViewController.m */,
+				8F5E3D482004E275007CA925 /* RYSelectViewController.h */,
+				8F5E3D492004E275007CA925 /* RYSelectViewController.m */,
 			);
 			path = LoginResiter;
 			sourceTree = "<group>";
@@ -1734,6 +1739,7 @@
 				8FF2D0E11FFF577E002F18B4 /* RaderSearchViewCell.m in Sources */,
 				8F26E1181FF49A3700E93F14 /* UIImageView+RotateImgV.m in Sources */,
 				8FF2D0C71FFF1BF7002F18B4 /* MARaderViewController.m in Sources */,
+				8F5E3D4A2004E275007CA925 /* RYSelectViewController.m in Sources */,
 				8F85D8A31FD9257400BC1A7D /* SGGenerateQRCodeVC.m in Sources */,
 				8F1F66511FD9485C004BF8F1 /* RYWebViewController.m in Sources */,
 			);
@@ -1913,7 +1919,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qianfutong.talentsblank;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bc6506bb-1642-478e-ae29-f2dfbb0085ef";
+				PROVISIONING_PROFILE = "be9b7c94-1fde-4ad1-91af-2075dd002d7d";
 				PROVISIONING_PROFILE_SPECIFIER = RenCaiYingHang;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1944,7 +1950,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qianfutong.talentsblank;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bc6506bb-1642-478e-ae29-f2dfbb0085ef";
+				PROVISIONING_PROFILE = "be9b7c94-1fde-4ad1-91af-2075dd002d7d";
 				PROVISIONING_PROFILE_SPECIFIER = RenCaiYingHang;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

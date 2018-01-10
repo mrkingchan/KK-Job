@@ -128,7 +128,6 @@
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ofq-Y3-UIj">
                                 <rect key="frame" x="10" y="110" width="50" height="50"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="Tf9-DA-kcs"/>
                                     <constraint firstAttribute="height" constant="50" id="dLU-8M-Sfi"/>

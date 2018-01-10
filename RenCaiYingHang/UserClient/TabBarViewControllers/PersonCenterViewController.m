@@ -95,12 +95,17 @@ static NSString * footerId = @"MineFooterView";
 - (void)viewDidLoad{
     [super viewDidLoad];
     
+    /** 修改了简历 */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:@"resumeStateChange" object:nil];
+    
     [self requestData];
 }
 
 - (void) requestData
 {
+    [XYQProgressHUD showMessage:@"加载中..."];
     [RYUserRequest appUsGetBaseInfoSuceess:^(NSDictionary * baseInfo,NSArray * imageArr) {
+        [XYQProgressHUD hideHUD];
         [self.topArr addObject:baseInfo];
         [self.topArr addObject:imageArr];
         [self loadData];
@@ -109,6 +114,7 @@ static NSString * footerId = @"MineFooterView";
     }];
     
     [RYUserRequest centerMessageSucess:^(NSArray *dataArr) {
+        [XYQProgressHUD hideHUD];
         self.tabDataArr = @[dataArr,@[@[@"private",@"隐私设置"],@[@"notifi",@"通知"]]];
         [self loadData];
     } failure:^(id errorCode) {
@@ -234,15 +240,7 @@ static NSString * footerId = @"MineFooterView";
         case 7:
         {
             //进入企业
-            if (!UserInfo.userInfo.isFinishComInfo) {
-                [UtilityHelper gainIsFinishComInfo];
-            }else{
-                UserInfo.userInfo.isComUser = 2;
-                NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
-                NSData * dataUser  = [NSKeyedArchiver archivedDataWithRootObject:rel];
-                [RYDefaults setObject:dataUser forKey:UserCache];
-                [UIApplication sharedApplication].keyWindow.rootViewController = [[HomePageViewController alloc] init];
-            }
+           [UtilityHelper changeClient:1 ctl:self];
         }
             break;
         case 2:

@@ -8,8 +8,6 @@
 
 #import "NetWorkHelper.h"
 
-#import "LoadingView.h"
-
 @implementation NetWorkHelper
 
 
@@ -46,11 +44,8 @@
     
     //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/javascript",@"text/html", nil];
     
-    [self showLoading];
-    
     [manager GET:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (successBlock) {
-            [self disMissLoading];
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:NULL];
             NSLog(@">>>>>>>:%@",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
             if (![dic[@"reCode"] isEqualToString:@"X0000"] && [VerifyHelper isNull:dic key:@"reCode"]) {
@@ -61,7 +56,6 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failureBlock) {
-            [self disMissLoading];
             failureBlock(error);
             NSLog(@"网络异常 - T_T%@", error);
         }
@@ -78,12 +72,7 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
    // manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer.timeoutInterval = 15;
-    
-    [self showLoading];
-    
     [manager POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [self disMissLoading];
-        
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:NULL];
         BOOL isSucess = [self isSuceessCallBackWithUrlString:urlString response:dic];
         if (successBlock && isSucess) {
@@ -93,7 +82,6 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failureBlock) {
-            [self disMissLoading];
             failureBlock(error);
             NSLog(@"网络异常 - T_T%@", error);
             [NetWorkHelper showMessage:@"网络异常"];
@@ -160,42 +148,15 @@
     }
 }
 
-/** 加载框 **/
-+ (void) showLoading
-{
-    BOOL isExist = false;
-    for (UIView * view in [UIApplication sharedApplication].keyWindow.subviews) {
-        if ([view isKindOfClass:[LoadingView class]]) {
-            isExist = true;
-            return;
-        }
-    }
-    if (!isExist){
-        LoadingView * loading = [[LoadingView alloc] initWithFrame:CGRectZero];
-        [loading show];
-    }
-}
-
-/** 移除加载框 **/
-+ (void) disMissLoading
-{
-    for (UIView * view in [UIApplication sharedApplication].keyWindow.subviews) {
-        if ([view isKindOfClass:[LoadingView class]]) {
-            LoadingView * load = (LoadingView *) view;
-            [load dismiss];
-        }
-    }
-}
-
 /** 接口回掉 **/
 + (BOOL) isSuceessCallBackWithUrlString:(NSString * )urlString response:(NSDictionary *) dic
 {
-    if (([urlString rangeOfString:WhetherBasicInfo].location !=NSNotFound) || ([urlString rangeOfString:GetEmailAndIdcard].location !=NSNotFound) || ([urlString rangeOfString:IsLoginOut].location !=NSNotFound) || ([urlString rangeOfString:AppComWhetherBaseInfo].location !=NSNotFound)) {
+    if (([urlString rangeOfString:GetEmailAndIdcard].location !=NSNotFound) || ([urlString rangeOfString:IsLoginOut].location !=NSNotFound) ) {
         return true;
     }
     
-    //x1111 企业 x2222个人
-    if ([urlString rangeOfString:LoginPort].location !=NSNotFound && ([dic[@"reCode"] isEqualToString:@"X2222"]||[dic[@"reCode"] isEqualToString:@"X1111"])) {
+    //x1111 企业 x2222个人 x3333中间页
+    if ([urlString rangeOfString:LoginPort].location !=NSNotFound && ([dic[@"reCode"] isEqualToString:@"X2222"]||[dic[@"reCode"] isEqualToString:@"X1111"]||[dic[@"reCode"] isEqualToString:@"X3333"])) {
         return true;
     }
     

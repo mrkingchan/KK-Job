@@ -123,9 +123,11 @@ static NSString * NecessarySexCellID = @"NecessarySexCell";
     NSDictionary * dic = @{@"name":self.postArr[0],@"gender":self.postArr[1],@"diploma":self.postArr[2],@"workyearX":self.postArr[3],@"birthday":self.postArr[4],@"expectjob":self.postArr[5],@"salrange":self.postArr[6],@"city":@(cityId)};
     [RYUserRequest uploadBaseInfoWithParamer:dic suceess:^(BOOL isSendSuccess) {
         /** 默认进入雷达页面 **/
-        
+        UserInfo.userInfo.reCode = @"X2222";
         NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
-        [UtilityHelper saveUserInfoWith:rel isFinishBaseInfo:true keyName:UserCache];
+        [UtilityHelper saveUserInfoWith:rel keyName:UserCache];
+        
+        
         [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
         [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
     } failure:^(id errorCode) {

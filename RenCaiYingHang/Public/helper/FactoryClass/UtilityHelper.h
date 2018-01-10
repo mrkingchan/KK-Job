@@ -17,14 +17,14 @@
 /** 进入app **/
 + (void) insertApp;
 
-/** 根据基本信息判断 **/
-+ (void) jumpDifferentApp:(BOOL) isFinishBaseInfo window:(UIWindow *) window;
+/** X3333进来的问题 */
++ (void) noRecodeInsertApp;
 
-/** 获取是否完成了企业信息接口(最新) **/
-+ (void) gainIsFinishComInfo;
+/** 切换 **/
++ (void) changeClient:(NSInteger) clientType ctl:(UIViewController *) ctl;
 
 /** 缓存数据 */
-+ (void) saveUserInfoWith:(NSDictionary *)data isFinishBaseInfo:(BOOL) isFinishBaseInfo keyName:(NSString *)keyName;
++ (void) saveUserInfoWith:(NSDictionary *)data keyName:(NSString *)keyName;
 
 /** 自适应宽高 **/
 +  (CGSize) fitHeightWithLabel:(NSString *)currentString size:(CGSize)size font:(UIFont*)font;

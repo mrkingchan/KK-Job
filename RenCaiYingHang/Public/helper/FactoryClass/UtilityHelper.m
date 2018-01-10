@@ -8,6 +8,8 @@
 
 #import "UtilityHelper.h"
 
+#import "RYSelectViewController.h"
+
 #import "LoginViewController.h"
 
 #import "GTMBase64.h"
@@ -16,86 +18,125 @@
 
 @implementation UtilityHelper
 
-/** 每次登陆必走方法 **/
+/** 登陆注册代码可封装 **/
+
+/** 登陆注册走 **/
 + (void) insertApp
 {
-    //个人用户
-    if (UserInfo.userInfo.isComUser == 1 || [UserInfo.userInfo.reCode isEqualToString:@"X2222"])
+    if ([UserInfo.userInfo.reCode isEqualToString:@"X2222"]) {
+        /** 默认进入雷达页面 **/
+        [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
+        [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+    }
+    else if([UserInfo.userInfo.reCode isEqualToString:@"X1111"])
     {
-        [RYUserRequest whetherBaseInfoWithParamer:@{@"token":UserInfo.userInfo.token} suceess:^(BOOL isSendSuccess) {
-            
-            if (isSendSuccess) {
-                NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
-                [UtilityHelper saveUserInfoWith:rel isFinishBaseInfo:true keyName:UserCache];
-                [UtilityHelper jumpDifferentApp:true window:[UIApplication sharedApplication].keyWindow];
-            }else{
-                
-                NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
-                [UtilityHelper saveUserInfoWith:rel isFinishBaseInfo:false keyName:UserCache];
-                [UtilityHelper jumpDifferentApp:false window:[UIApplication sharedApplication].keyWindow];
-            }
-        } failure:^(id errorCode) {
-            
-        }];
+        HomePageViewController * homeCtl = [[HomePageViewController alloc] init];
+        homeCtl.isFinishComInfo = true;
+        [UIApplication sharedApplication].keyWindow.rootViewController = homeCtl;
+        [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
     }
     else
     {
-        [self gainIsFinishComInfo];
+        RYNavigationController * root = [[RYNavigationController alloc] initWithRootViewController:[[RYSelectViewController alloc] init]];
+        [UIApplication sharedApplication].keyWindow.rootViewController = root;
     }
 }
 
-/** 根据基本信息判断 **/
-+ (void) jumpDifferentApp:(BOOL) isFinishBaseInfo window:(UIWindow *) window
+/** X3333进来的问题 */
++ (void) noRecodeInsertApp
 {
-    if (UserInfo.userInfo.isComUser == 1 || [UserInfo.userInfo.reCode isEqualToString:@"X2222"]) {
-        if (isFinishBaseInfo) {
-            /** 默认进入雷达页面 **/
-            window.rootViewController = [[RYTabBarController alloc] init];
-            [window.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+    NSDictionary * paramer = @{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey};
+    [RYUserRequest whetherBaseInfoWithParamer:paramer suceess:^(NSString * whetherUserBaseInfo,NSDictionary * whetherComBaseInfo) {
+    
+        if(![[whetherComBaseInfo allKeys] containsObject:@"comUserInfo"]||[whetherUserBaseInfo isEqualToString:@"yes"])
+        {
+            if (![[whetherComBaseInfo allKeys] containsObject:@"comUserInfo"]) {
+                UserInfo.userInfo.reCode = @"X1111";
+                UserInfo.userInfo.comId = whetherComBaseInfo[@"com_id"];
+                UserInfo.userInfo.comname = whetherComBaseInfo[@"comname"];
+                NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
+                [UtilityHelper saveUserInfoWith:rel keyName:UserCache];
+                
+                HomePageViewController * homeCtl = [[HomePageViewController alloc] init];
+                homeCtl.isFinishComInfo = true;
+                [UIApplication sharedApplication].keyWindow.rootViewController = homeCtl;
+            }
+            if ([whetherUserBaseInfo isEqualToString:@"yes"]) {
+                UserInfo.userInfo.reCode = @"X2222";
+                NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
+                [UtilityHelper saveUserInfoWith:rel keyName:UserCache];
+                [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
+            }
         }else{
-            RYNavigationController * root = [[RYNavigationController alloc] initWithRootViewController:[[NecessaryInfoViewController alloc] init]];
-            window.rootViewController = root;
+            RYNavigationController * root = [[RYNavigationController alloc] initWithRootViewController:[[RYSelectViewController alloc] init]];
+            [UIApplication sharedApplication].keyWindow.rootViewController = root;
         }
-    }else{
-        /** 如果没有绑定企业了那么就去绑定企业界面 **/
-        /** 默认进入企业端页面 **/
-        /** 如果缓存的是未完成企业信息,那么调用 */
-        if (UserInfo.userInfo.isFinishComInfo) {
-            window.rootViewController = [[HomePageViewController alloc] init];
-            [window.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
-        }else{
-           [self gainIsFinishComInfo];
-        }
-    }
+    } failure:^(id errorCode) {
+        
+    }];
 }
 
-/** 获取是否完成了企业信息接口(最新) **/
-+ (void) gainIsFinishComInfo
+/** 切换 **/
++ (void) changeClient:(NSInteger) clientType ctl:(UIViewController *) ctl
 {
-    [RYUserRequest appComWhetherBaseInfoWithParamer:@{@"token":UserInfo.userInfo.token} suceess:^(BOOL isSendSuccess,NSDictionary * rel) {
-        if (![VerifyHelper isNull:rel key:@"com_id"]) {
-            UserInfo.userInfo.com_id = rel[@"com_id"];
-        }
-        UserInfo.userInfo.isComUser = 2;
-        if (isSendSuccess) {
-            UserInfo.userInfo.isFinishComInfo = true;
-        }
-        NSDictionary * d = UserInfo.userInfo.mj_keyValues;
-        NSData * dataUser  = [NSKeyedArchiver archivedDataWithRootObject:d];
-        [RYDefaults setObject:dataUser forKey:UserCache];
+    NSDictionary * paramer = @{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey};
+    [RYUserRequest whetherBaseInfoWithParamer:paramer suceess:^(NSString * whetherUserBaseInfo,NSDictionary * whetherComBaseInfo) {
         
-        [UIApplication sharedApplication].keyWindow.rootViewController = [[HomePageViewController alloc] init];
-        
+        switch (clientType) {
+            case 1: /** 2是企业版跳个人版 */
+            {
+                UserInfo.userInfo.reCode = @"X1111";
+                if([[whetherComBaseInfo allKeys] containsObject:@"comUserInfo"])
+                    
+                {
+                    NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
+                    [UtilityHelper saveUserInfoWith:rel keyName:UserCache];
+                    
+                    HomePageViewController * homeCtl = [[HomePageViewController alloc] init];
+                    homeCtl.isFinishComInfo = false;
+                    [UIApplication sharedApplication].keyWindow.rootViewController = homeCtl;
+                }
+                else
+                {
+                    UserInfo.userInfo.comId = whetherComBaseInfo[@"com_id"];
+                    UserInfo.userInfo.comname = whetherComBaseInfo[@"comname"];
+                    NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
+                    [UtilityHelper saveUserInfoWith:rel keyName:UserCache];
+                    
+                    HomePageViewController * homeCtl = [[HomePageViewController alloc] init];
+                    homeCtl.isFinishComInfo = true;
+                    [UIApplication sharedApplication].keyWindow.rootViewController = homeCtl;
+                }
+            }
+                break;
+            case 2:/** 1是个人版跳企业版 */
+            {
+                if ([whetherUserBaseInfo isEqualToString:@"yes"]) {
+                    
+                    UserInfo.userInfo.reCode = @"X2222";
+                    NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
+                    [UtilityHelper saveUserInfoWith:rel keyName:UserCache];
+                    
+                    [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
+                    
+                }else{
+                   RYNavigationController * pushCtl = [[RYNavigationController alloc] initWithRootViewController:ctl];
+                   [pushCtl pushViewController:[[NecessaryInfoViewController alloc] init] animated:true];
+                }
+            }
+                break;
+            default:
+                break;
+        }
     } failure:^(id errorCode) {
         
     }];
 }
 
 /** 缓存数据 */
-+ (void) saveUserInfoWith:(NSDictionary *)data isFinishBaseInfo:(BOOL) isFinishBaseInfo keyName:(NSString *)keyName
++ (void) saveUserInfoWith:(NSDictionary *)data keyName:(NSString *)keyName
 {
     UserInfo.userInfo =  [[UserModel alloc] initWithDictionary:data];
-    UserInfo.userInfo.isFinishBaseInfo = isFinishBaseInfo;
     UserInfo.userInfo.reCode = [RYDefaults objectForKey:@"UserReCode"];
     NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
     NSData * dataUser  = [NSKeyedArchiver archivedDataWithRootObject:rel];

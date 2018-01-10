@@ -50,6 +50,30 @@
     }
 }
 
+// 页面开始加载时调用
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
+    [XYQProgressHUD showMessage:@"加载中..."];
+    [self removeTapGesture];
+}
+
+// 当内容开始返回时调用
+- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
+    [XYQProgressHUD hideHUD];
+    [self removeTapGesture];
+}
+
+// 页面加载完成之后调用
+- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
+    [XYQProgressHUD hideHUD];
+    [self removeTapGesture];
+}
+
+// 页面加载失败时调用
+- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
+    [XYQProgressHUD hideHUD];
+    [self addTapGesture];
+}
+
 /**  初始化定位 */
 - (void)configLocationManager
 {

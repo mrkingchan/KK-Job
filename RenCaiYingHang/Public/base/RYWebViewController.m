@@ -11,9 +11,12 @@
 #import "CompanyViewController.h"
 #import "DropInBoxViewController.h"
 
+#import "RYShareView.h"
+
 @interface RYWebViewController ()<WKNavigationDelegate,WKScriptMessageHandler,WKUIDelegate>
 
-@property (nonatomic,strong) LoadingView * loading;
+/** 重新加载手势 */
+@property (nonatomic,retain) UITapGestureRecognizer * tap;
 
 @property (nonatomic,strong) UIProgressView * progressView;
 
@@ -25,14 +28,6 @@
 @end
 
 @implementation RYWebViewController
-
-- (LoadingView *)loading
-{
-    if (!_loading) {
-        _loading = [[LoadingView alloc] initWithFrame:CGRectZero];
-    }
-    return _loading;
-}
 
 - (WKWebViewConfiguration *)webConfiguration
 {
@@ -99,6 +94,7 @@
 //    }
 }
 
+/** 区分返回 */
 - (void)addLeftButton
 {
     if ([self isKindOfClass:[CompanyViewController class]] || [self isKindOfClass:[DropInBoxViewController class]]) {
@@ -119,7 +115,52 @@
 /** 添加分享按钮 */
 -(void)addRightBtn
 {
+    NSString * url = [NSString stringWithFormat:@"%@",self.webView.URL];
+    if ([url rangeOfString:@"public/job/jobDetails"].location != NSNotFound) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:UIIMAGE(@"shareToUser") style:UIBarButtonItemStylePlain target:self action:@selector(shareToUser)];
+    }else{
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:(UIBarButtonItemStyleDone) target:self action:nil];
+    }
+}
+
+/** 分享 */
+- (void) shareToUser
+{
+    NSString * url = [NSString stringWithFormat:@"%@",self.webView.URL];
+    NSString * urlString = [NSString stringWithFormat:@"http://weixin.rcyhj.com/public/job/jobDetails?%@",[url componentsSeparatedByString:@"?"][1]];
+    NSString * datas = [url componentsSeparatedByString:@"="][1];
+    NSString * idStr = [datas componentsSeparatedByString:@"&"][0];
     
+    [NetWorkHelper getWithURLString:[NSString stringWithFormat:@"%@public/job/appJobDetails?datas=%@",KBaseURL,idStr] parameters:nil success:^(NSDictionary *data) {
+        NSDictionary * rel = data[@"rel"];
+        NSData * imageData =  [NSData
+                               dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KIMGURL,rel[@"com_logo"]]]];
+        UIImage * image = [UIImage imageWithData:imageData];
+        if (![VerifyHelper empty:rel]) {
+            RYShareView * share = [[RYShareView alloc] initWithFrame:[UIScreen mainScreen].bounds type:ShareJob];
+            [[UIApplication sharedApplication].keyWindow addSubview:share];
+            
+            share.shareCallBack = ^(NSInteger index) {
+                
+                WXMediaMessage * message = [WXMediaMessage message];
+                message.title = [NSString stringWithFormat:@"%@[%@k-%@k]",rel[@"job_name"],rel[@"salary_min"],rel[@"salary_max"]];
+                message.description = [NSString stringWithFormat:@"面试奖:%@元,入职奖:%@元\r\n%@",@"10",rel[@"subsidy"],rel[@"com_name"]];
+                [message setThumbImage:image];
+                
+                WXWebpageObject * webpageObject = [WXWebpageObject object];
+                webpageObject.webpageUrl = urlString;
+                message.mediaObject = webpageObject;
+                
+                SendMessageToWXReq * req = [[SendMessageToWXReq alloc] init];
+                req.bText = false;
+                req.message  = message;
+                req.scene =  index == 10 ? WXSceneSession : WXSceneTimeline;
+                [WXApi sendReq:req];
+            };
+        }
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 //点击返回的方法
@@ -155,15 +196,6 @@
     return _backItem;
 }
 
-//- (UIBarButtonItem *)closeItem
-//{
-//    if (!_closeItem) {
-//        _closeItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeNative)];
-//        _closeItem.tintColor = [UIColor blackColor];
-//    }
-//    return _closeItem;
-//}
-
 - (void)setJsMethodName:(NSString *)jsMethodName
 {
     _jsMethodName = jsMethodName;
@@ -175,6 +207,28 @@
 {
     _url = url;
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+}
+
+/** 添加手势 */
+- (void) addTapGesture
+{
+    _tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reloadRequest)];
+    [self.view addGestureRecognizer:_tap];
+    
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:UIIMAGE(@"nonetwork")]];
+}
+
+/** 去掉手势 */
+- (void) removeTapGesture
+{
+    [self.view removeGestureRecognizer:_tap];
+    [self.view setBackgroundColor:kWhiteColor];
+}
+
+/** 重新加载 */
+- (void) reloadRequest
+{
+    [self.webView loadRequest:[NSURLRequest requestWithURL:self.webView.URL]];
 }
 
 #pragma mark --进度条
@@ -232,23 +286,27 @@
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
     //[self.loading show];
+    [self removeTapGesture];
 }
 
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
    // [self.loading dismiss];
+    [self removeTapGesture];
 }
 
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
     [self addLeftButton];
     [self addRightBtn];
+    [self removeTapGesture];
 }
 
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
     [self addLeftButton];
     [self addRightBtn];
+    [self addTapGesture];
    // [self.loading dismiss];
 }
 

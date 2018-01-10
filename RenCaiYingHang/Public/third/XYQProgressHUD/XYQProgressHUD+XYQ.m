@@ -50,7 +50,7 @@
     hud.removeFromSuperViewOnHide = YES;
     
     // YES代表需要蒙版效果
-    hud.diXYQackground = YES;
+    hud.diXYQackground = false;
     
     return hud;
 }

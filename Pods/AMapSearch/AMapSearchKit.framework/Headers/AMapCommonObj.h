@@ -797,4 +797,5 @@
 @property (nonatomic, assign) NSInteger     distance; 
 ///图片信息
 @property (nonatomic, strong) NSArray<AMapCloudImage *> *images;
+
 @end

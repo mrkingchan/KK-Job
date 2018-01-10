@@ -27,7 +27,7 @@
     
     //设置左右按钮字体颜色
     [[UIBarButtonItem appearance]  setTitleTextAttributes:@{NSFontAttributeName:systemOfFont(14),
-                                                            NSForegroundColorAttributeName:kWhiteColor
+                                                            NSForegroundColorAttributeName:[UIColor blackColor]
                                                             } forState:UIControlStateNormal];
     
     self.navigationBar.barTintColor = kNavBarTintColor;
@@ -68,13 +68,18 @@
     //[self pushViewController:[[ScanSucessViewController alloc] init] animated:true];
     if ([str rangeOfString:KDatas].location !=NSNotFound) {
         str =  [str componentsSeparatedByString:@"datas="][1];
+        [RYUserRequest scanCodeInterviewAwardWithWithParamer:str suceess:^(NSString *urlString) {
+            [self pushViewController:[[ScanSucessViewController alloc] init] animated:true];
+        } failure:^(id errorCode) {
+            
+        }];
+    }else{
+        [self showAlertWithTitle:@"无效二维码" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
+            alertMaker.addActionCancelTitle(@"确定");
+        } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
+            
+        }];
     }
-
-    [RYUserRequest scanCodeInterviewAwardWithWithParamer:str suceess:^(NSString *urlString) {
-        [self pushViewController:[[ScanSucessViewController alloc] init] animated:true];
-    } failure:^(id errorCode) {
-
-    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -20,7 +20,7 @@ NSString * const KDatas = @"datas";
 //@"http://192.168.2.122:8084/app_rcyh/"
 //@"http://192.168.2.101:8083/app_rcyh/"
 //@"http://192.168.2.8:8085/app_rcyh/"
-NSString * const KBaseURL = @"http://192.168.2.101:8083/app_rcyh/";
+NSString * const KBaseURL = @"http://192.168.2.8:8085/app_rcyh/";
 
 /** 图片拼接地址 */
 NSString * const KIMGURL = @"http://pf.rcyhj.com/";
@@ -49,11 +49,8 @@ NSString * const GetProvinceInfo = @"identity/getProvinceInfo";
 /** 省份id获取城市接口 */
 NSString * const GetCityInfo = @"identity/getCityInfoByFather";
 
-/** 验证是否完善了个人基本资料 */
+/** 验证是否完善了基本资料 */
 NSString * const WhetherBasicInfo = @"securityCenter/whetherBaseInfo";
-
-/** 验证是否完善了企业基本资料 */
-NSString * const AppComWhetherBaseInfo = @"securityCenter/appComWhetherBaseInfo";
 
 /** 基本资料 */
 NSString * const BasicInfo = @"identity/regist/basicInfo";

@@ -41,7 +41,8 @@
     NSDictionary * dic = [UtilityHelper encryptParmar:paramer];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         
-        [UtilityHelper saveUserInfoWith:data[@"rel"] isFinishBaseInfo:false keyName:UserCache];
+        [RYDefaults setObject:@"X3333" forKey:@"UserReCode"];
+        [UtilityHelper saveUserInfoWith:data[@"rel"] keyName:UserCache];
         sucess(true);
         
     } failure:^(NSError *error) {
@@ -67,17 +68,15 @@
     }];
 }
 
-/** 是否完善企业基本信息 **/
-+ (void) appComWhetherBaseInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSendSuccess,NSDictionary * rel))sucess failure:(void(^)(id errorCode))failure
+/** 是否完善基本信息 **/
++ (void) whetherBaseInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(NSString * whetherUserBaseInfo,NSDictionary *  whetherComBaseInfo))sucess failure:(void(^)(id errorCode))failure
 {
-    NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,AppComWhetherBaseInfo];
-    [NetWorkHelper postWithURLString:urlString parameters:paramer success:^(NSDictionary *data) {
+    NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,WhetherBasicInfo];
+    NSString * paramerStr = [paramer mj_JSONString];
+    NSString * encry = [UtilityHelper encryptUseDES2:paramerStr key:DESKEY];
+    [NetWorkHelper postWithURLString:urlString parameters:@{@"token":encry} success:^(NSDictionary *data){
         NSDictionary * rel = data[@"rel"];
-        if ([data[@"reCode"] isEqualToString:@"X0000"]) {
-           sucess(true,rel);
-        }else{
-           sucess(false,rel);
-        }
+        sucess(rel[@"whetherUserBaseInfo"],rel[@"comUserInfo"]);
     } failure:^(NSError *error) {
         
     }];
@@ -118,7 +117,7 @@
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         
         [RYDefaults setObject:data[@"reCode"] forKey:@"UserReCode"];
-        [UtilityHelper saveUserInfoWith:data[@"rel"] isFinishBaseInfo:false keyName:UserCache];
+        [UtilityHelper saveUserInfoWith:data[@"rel"] keyName:UserCache];
         sucess(true);
         
     } failure:^(NSError *error) {

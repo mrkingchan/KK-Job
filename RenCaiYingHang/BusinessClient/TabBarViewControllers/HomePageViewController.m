@@ -8,7 +8,11 @@
 
 #import "HomePageViewController.h"
 
+#import "PCCircleViewConst.h"
+
 @interface HomePageViewController ()<WKScriptMessageHandler>
+
+@property (nonatomic,assign) BOOL isFirst;
 
 @property (nonatomic,copy) NSString * oldUrlString;
 
@@ -32,21 +36,50 @@
 /** 加载h5 */
 - (void) loadRequeset
 {
-    _oldUrlString = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@%@",KBaseURL,@"identity/company/regist/name"]];
-    if (UserInfo.userInfo.isFinishComInfo) {
-        NSString * jsonstr =   [@{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey,@"comId":UserInfo.userInfo.com_id} mj_JSONString];
+    if (_isFinishComInfo) {
+        NSString * jsonstr =   [@{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey,@"comId":UserInfo.userInfo.comId} mj_JSONString];
         ;
         _oldUrlString = [NSString stringWithFormat:@"%@%@?token=%@",KBaseURL,@"identity/comUserIndex",[UtilityHelper encryptUseDES2:jsonstr key:DESKEY]];
+    }else{
+        _oldUrlString = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@%@",KBaseURL,@"identity/company/regist/name"]];
     }
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_oldUrlString]]];
 }
 
 /** 注册检测 */
 - (void) regsiterMethod
-{
-     [self.webConfiguration.userContentController addScriptMessageHandler:self name:@"comToUser"];
+{    
+    [self.webConfiguration.userContentController addScriptMessageHandler:self name:@"comToUser"];
     [self.webConfiguration.userContentController addScriptMessageHandler:self name:@"comLoginOut"];
-    [self.webConfiguration.userContentController addScriptMessageHandler:self name:@"comAppPay"];
+    [self.webConfiguration.userContentController addScriptMessageHandler:self name:@"comWeixinPay"];
+    [self.webConfiguration.userContentController addScriptMessageHandler:self name:@"comAliPay"];
+}
+
+// 页面开始加载时调用
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
+    if (!_isFirst) {
+        _isFirst = true;
+        [XYQProgressHUD showMessage:@"加载中..."];
+    }
+    [self removeTapGesture];
+}
+
+// 当内容开始返回时调用
+- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
+    [XYQProgressHUD hideHUD];
+    [self removeTapGesture];
+}
+
+// 页面加载完成之后调用
+- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
+    [XYQProgressHUD hideHUD];
+    [self removeTapGesture];
+}
+
+// 页面加载失败时调用
+- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
+    [XYQProgressHUD hideHUD];
+    [self addTapGesture];
 }
 
 #pragma mark 跳转的操作
@@ -66,27 +99,33 @@
     if ([message.name isEqualToString:@"comToUser"]) {
         [self changeToUserClient];
     }else if ([message.name isEqualToString:@"comLoginOut"]){
-        //NSDictionary * d = message.body;
-    }else if ([message.name isEqualToString:@"comAppPay"]){
+        [self comLoginOutApp];
+    }else if ([message.name isEqualToString:@"comWeixinPay"]){
         
-    }
-}
-
-- (void) changeToUserClient
-{
-    UserInfo.userInfo.isComUser = 1;
-    NSDictionary * d = UserInfo.userInfo.mj_keyValues;
-    NSData * dataUser  = [NSKeyedArchiver archivedDataWithRootObject:d];
-    [RYDefaults setObject:dataUser forKey:UserCache];
-    
-    if (UserInfo.userInfo.isFinishBaseInfo) {
-        [UtilityHelper jumpDifferentApp:true window:[UIApplication sharedApplication].keyWindow];
-    }else{
-        [UtilityHelper insertApp];
+    }else if ([message.name isEqualToString:@"comAliPay"]){
+        
     }}
 
+/** 切换到求职端 */
+- (void) changeToUserClient
+{
+    [UtilityHelper changeClient:2 ctl:self];
+}
+
+/** 退出登录 **/
+- (void) comLoginOutApp
+{
+    [UserInfo loginOut];
+    [RYDefaults setObject:@"" forKey:[NSString stringWithFormat:UserCache]];
+    [PCCircleViewConst saveGesture:nil Key:gestureFinalSaveKey];
+    [[NSUserDefaults standardUserDefaults] setObject:@"close" forKey:@"setOn"];
+    UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+    [UIApplication sharedApplication].keyWindow.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
+}
+
 - (void)dealloc{
-    [self.webConfiguration.userContentController removeScriptMessageHandlerForName:@"comAppPay"];
+    [self.webConfiguration.userContentController removeScriptMessageHandlerForName:@"comWeixinPay"];
+    [self.webConfiguration.userContentController removeScriptMessageHandlerForName:@"comAliPay"];
     [self.webConfiguration.userContentController removeScriptMessageHandlerForName:@"comToUser"];
     [self.webConfiguration.userContentController removeScriptMessageHandlerForName:@"comLoginOut"];
 }

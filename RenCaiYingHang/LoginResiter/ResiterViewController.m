@@ -13,7 +13,6 @@
     CGRect origin_rect;
     UITextField * _textField;
     BOOL isAnimation;
-    NSInteger index;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *phoneView;
@@ -66,7 +65,6 @@
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeBeyBoard)];
     [self.view addGestureRecognizer:tap];
     isAnimation = false;
-    index = 1;
 }
 
 /** 密码登陆 */
@@ -110,9 +108,18 @@
         return;
     }
     NSString * regID = [RYDefaults objectForKey:@"jgRegId"];
-    NSDictionary * dic = @{@"phone":_phoneTf.text,@"fromWay":@"7",@"dxCode":_codeTf.text,@"tiPhone":_inviteTf.text,@"password":_pwTf.text,@"jgRegId":regID,@"isComUser":@(index)};
+    
+    NSDictionary * dic = @{@"phone":_phoneTf.text,@"fromWay":@"7",@"dxCode":_codeTf.text,@"tiPhone":_inviteTf.text,@"password":_pwTf.text};
+    /** 推送注册id不为空 */
+    if (![VerifyHelper empty:regID])
+    {
+        dic = @{@"phone":_phoneTf.text,@"fromWay":@"7",@"dxCode":_codeTf.text,@"tiPhone":_inviteTf.text,@"password":_pwTf.text,@"jgRegId":regID};
+    }
+    
+    [XYQProgressHUD showMessage:@"注册中..."];
     [RYUserRequest userRegisterWithParamer:dic suceess:^(BOOL isSendSuccess) {
-        [UtilityHelper jumpDifferentApp:false window:[UIApplication sharedApplication].keyWindow];
+        [XYQProgressHUD hideHUD];
+        [UtilityHelper insertApp];
     } failure:^(id errorCode) {
         
     }];
@@ -159,11 +166,6 @@
     }
     self.codeBtn.enabled = true;
     [self.codeBtn setTitle:@"验证码" forState:UIControlStateNormal];
-}
-
-/**  求职还是招聘 */
-- (IBAction)changeSementControl:(UISegmentedControl *)sender {
-    index = sender.selectedSegmentIndex + 1;
 }
 
 #pragma mark  -键盘

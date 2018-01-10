@@ -6,7 +6,7 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "checkbox_nor@2x.png",
+      "filename" : "gpsStat1@2x.png",
       "scale" : "2x"
     },
     {
@@ -17,8 +17,5 @@
   "info" : {
     "version" : 1,
     "author" : "xcode"
-  },
-  "properties" : {
-    "template-rendering-intent" : "original"
   }
 }

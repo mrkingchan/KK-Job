@@ -26,7 +26,6 @@ static NSString * msgLabCellID = @"MsgViewCell";
 
 @implementation MineFooterView
 
-
 - (UITableView *)tableView
 {
     if (!_tableView) {

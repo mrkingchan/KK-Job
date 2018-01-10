@@ -160,16 +160,15 @@ static NSString * identifier = @"CollectionViewCell";
 {
   //  [XYQProgressHUD hideHUD];
     
-    if (response.POIs.count == 0)
-    {
-        return;
-    }
-    
-    //
     [self.mapView removeAnnotations:self.searchPoiArray];
     [self.searchPoiArray removeAllObjects];
     [self.dataArray removeAllObjects];
     
+    if (response.POIs.count == 0)
+    {
+        return;
+    }
+
     //解析response获取POI信息，具体解析见 Demo
     NSLog(@" >>> %@",response.POIs);
     
@@ -311,13 +310,15 @@ static NSString * identifier = @"CollectionViewCell";
     [self initSearch];
     [self initMapView];
     [self initSearchKeyWords];
+    [self addBackLoaction];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(message:) name:@"expect_job" object:nil];
     /** 意向职位 */
     _keywords =  [RYDefaults objectForKey:@"expect_job"];
     
-    self.mapView.showsUserLocation = YES;
+    self.mapView.showsUserLocation = true;
     self.mapView.userTrackingMode = MAUserTrackingModeFollowWithHeading;
-    [self.mapView setZoomLevel:16 animated:YES];
+    [self.mapView setZoomLevel:13 animated:true];
     self.isfirst = false;
 }
 
@@ -328,15 +329,17 @@ static NSString * identifier = @"CollectionViewCell";
     [self initCenterView];
     
     self.mapView.zoomLevel = 16;              ///缩放级别（默认3-19，有室内地图时为3-20）
-    self.mapView.showsUserLocation = YES;    ///是否显示用户位置
-    self.mapView.showsCompass = NO;          /// 是否显示指南针
-    self.mapView.showsScale = NO;           ///是否显示比例尺
+    self.mapView.showsUserLocation = true;    ///是否显示用户位置
+    self.mapView.showsCompass = false;          /// 是否显示指南针
+    self.mapView.showsScale = false;           ///是否显示比例尺
     self.mapView.minZoomLevel = 5;          /// 限制最小缩放级别
 }
 
 - (void)cloudPlaceAroundSearch:(CLLocationCoordinate2D)coordinate keywords:(NSString *)keywords
 {
     //[self centerAnnotationView];
+    [_collectionView removeFromSuperview];
+    _collectionView = nil;
     
     AMapCloudPOIAroundSearchRequest *placeAround = [[AMapCloudPOIAroundSearchRequest alloc] init];
     [placeAround setTableID:(NSString *)TableID];
@@ -363,6 +366,16 @@ static NSString * identifier = @"CollectionViewCell";
 
 }
 
+/** 通知搜索 */
+- (void) message:(NSNotification *) notifi
+{
+    /** 意向职位 */
+    _keywords = notifi.object;
+    [RYDefaults setObject:_keywords forKey:@"expect_job"];
+    [self cloudPlaceAroundSearch:self.mapView.centerCoordinate keywords:_keywords];
+}
+
+/** 搜索UI */
 - (void) initSearchKeyWords
 {
     RaderSearchViewCell * cell = [[NSBundle mainBundle] loadNibNamed:@"RaderSearchViewCell" owner:nil options:nil].lastObject;
@@ -386,6 +399,32 @@ static NSString * identifier = @"CollectionViewCell";
     [super closeBeyBoard];
 }
 
+/** 回到定位位置 */
+- (void) addBackLoaction
+{
+    UIButton *ret = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    ret.backgroundColor = [UIColor whiteColor];
+    ret.layer.cornerRadius = 4;
+    
+    [ret setImage:[UIImage imageNamed:@"gpsStat1"] forState:UIControlStateNormal];
+    [ret addTarget:self action:@selector(gpsAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:ret];
+    
+    ret.center = CGPointMake(CGRectGetMidX(ret.bounds) + 10,
+                self.view.bounds.size.height -  CGRectGetMidY(ret.bounds) - 20 - KToolHeight);
+    ret.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
+}
+
+- (void)gpsAction:(UIButton *) sender
+{
+    if(self.mapView.userLocation.updating && self.mapView.userLocation.location) {
+        [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:YES];
+        [sender setSelected:YES];
+    }
+}
+
+/** 添加列表 */
 - (void) addCollectionView
 {
     if (!_collectionView) {

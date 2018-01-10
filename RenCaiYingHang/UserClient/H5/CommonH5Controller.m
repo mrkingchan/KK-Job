@@ -28,6 +28,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _oldUrlString = self.url;
+    
+    if ([_oldUrlString containsString:@"apply/resume/modifyRes"] != NSNotFound) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"resumeStateChange" object:nil];
+    }
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {

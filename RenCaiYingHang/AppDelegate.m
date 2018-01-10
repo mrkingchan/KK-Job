@@ -30,7 +30,7 @@
 @end
 
 static NSString *pushappKey = @"8ff9fa7a21f9ab75fcef566a";
-static NSString *pushchannel = @"Publish channel";//@"Publish channel"; App Store
+static NSString *pushchannel = @"App Store";
 static BOOL isProduction = false;//false true
 
 @implementation AppDelegate
@@ -50,9 +50,6 @@ static BOOL isProduction = false;//false true
     
     /** 获取是否存在缓存 */
     [self gainUserModel];
-    
-    /** 导航样式 **/
-    [self configAppearance];
     
     //注册极光
     [self regsiterJPush:launchOptions];
@@ -119,7 +116,11 @@ static BOOL isProduction = false;//false true
             self.window.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
             [self.window.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
         }else{
-            [UtilityHelper jumpDifferentApp:UserInfo.userInfo.isFinishBaseInfo window:self.window];
+            if ([UserInfo.userInfo.reCode isEqualToString:@"X3333"]) {
+                [UtilityHelper noRecodeInsertApp];
+            }else{
+                [UtilityHelper insertApp];
+            }
         }
     }
 }
@@ -146,12 +147,6 @@ static BOOL isProduction = false;//false true
     }else{
         UserInfo.is_login = NO;
     }
-}
-
-- (void)configAppearance
-{
-    [[UINavigationBar appearance] setTintColor:[UIColor darkTextColor]];
-    [[UITabBar appearance] setTintColor:[UIColor darkGrayColor]];
 }
 
 /** 注册极光 */

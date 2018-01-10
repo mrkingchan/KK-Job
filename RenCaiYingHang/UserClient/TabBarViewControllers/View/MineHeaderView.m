@@ -25,13 +25,13 @@
 {
     __weak IBOutlet UILabel *userName;
     __weak IBOutlet UILabel *userStates;
-    
 }
 
 - (JKBannarView *)bannerScrollView
 {
     if (!_bannerScrollView) {
         _bannerScrollView = [[JKBannarView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth , self.height*0.4) viewSize:CGSizeMake(kScreenWidth, self.height * 0.4)];
+        _bannerScrollView.backgroundColor = kNavBarTintColor;
         [_bgView addSubview:_bannerScrollView];
     }
     return _bannerScrollView;

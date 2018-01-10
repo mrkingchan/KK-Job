@@ -43,6 +43,8 @@
         
         NSDictionary * dic = data[@"rel"];
         
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"expect_job" object:dic[@"expect_job"]];
+        
         [RYDefaults setObject:dic[@"expect_job"] forKey:@"expect_job"];
         
     } failure:^(NSError *error) {

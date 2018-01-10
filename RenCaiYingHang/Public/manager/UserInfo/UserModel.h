@@ -17,13 +17,17 @@
 /** 手机号 **/
 @property (nonatomic,copy) NSString * tel;
 
-/** id区分个人还是企业 **/
-@property (nonatomic,assign) NSInteger isComUser;
-/** reCode 个人还是企业(微信端客户) **/
+/** reCode 个人还是企业(微信端客户)
+ X1111 企业
+ X2222 个人
+ X3333 中间页
+ **/
 @property (nonatomic,copy) NSString * reCode;
-/** comId **/
-@property (nonatomic,copy) NSString * com_id;
 
+/** comId **/
+@property (nonatomic,copy) NSString * comId;
+
+@property (nonatomic,copy) NSString * comname;
 
 
 /** 名字 */
@@ -35,9 +39,5 @@
 /** 附件简历地址 */
 @property (nonatomic,copy) NSString * resumeImage;
 
-/** 是否个人基本信息 **/
-@property (nonatomic,assign) BOOL isFinishBaseInfo;
-/** 是否企业基本信息 **/
-@property (nonatomic,assign) BOOL isFinishComInfo;
 
 @end

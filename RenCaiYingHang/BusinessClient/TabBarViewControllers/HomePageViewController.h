@@ -10,4 +10,6 @@
 
 @interface HomePageViewController : RYWebViewController
 
+@property (nonatomic,assign) BOOL isFinishComInfo;
+
 @end

@@ -58,7 +58,8 @@
 - (void) configurationUI
 {
     self.showMessage.frame = CGRectMake(self.view.width - 80, self.cell.bottom + 10, 70, 30);
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(commitData:)];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:UIIMAGE(@"checkbox_chosed") style:UIBarButtonItemStylePlain target:self action:@selector(commitData:)];
 }
 
 /** 数据提交 **/
