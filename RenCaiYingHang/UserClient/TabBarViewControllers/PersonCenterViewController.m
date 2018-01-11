@@ -241,16 +241,18 @@ static NSString * footerId = @"MineFooterView";
         case 7:
         {
             //进入企业
-           [UtilityHelper changeClient:1];
+            [self alertMessageWithViewController:self message:@"敬请期待"];
+            //[UtilityHelper changeClient:1];
         }
             break;
         case 2:
         {
-            WalletViewController * h5 = [[WalletViewController alloc] init];
-            h5.url = [UtilityHelper addUrlToken:@"identity/userWallet"];
-            h5.jsMethodName = @"recharge";
-            h5.type = 0;
-            [self.navigationController pushViewController:h5 animated:true];
+            [self alertMessageWithViewController:self message:@"敬请期待"];
+//            WalletViewController * h5 = [[WalletViewController alloc] init];
+//            h5.url = [UtilityHelper addUrlToken:@"identity/userWallet"];
+//            h5.jsMethodName = @"recharge";
+//            h5.type = 0;
+//            [self.navigationController pushViewController:h5 animated:true];
         }
             break;
         case 3:
