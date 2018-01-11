@@ -92,7 +92,7 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
         [self emptyPhoneCode];
         return;
     }
-    if ([VerifyHelper empty:self.authModel.newsPassWord] || self.authModel.newsPassWord.length < 8 || [VerifyHelper empty:self.authModel.confirmPassWord] || self.authModel.confirmPassWord.length < 8) {
+    if ([VerifyHelper empty:self.authModel.newsPassWord] || (self.authModel.confirmPassWord.length < 6 && self.authModel.confirmPassWord.length >12) || [VerifyHelper empty:self.authModel.confirmPassWord] || (self.authModel.confirmPassWord.length < 6 && self.authModel.confirmPassWord.length >12)) {
         [self errorPassword];
         return;
     }
@@ -171,6 +171,7 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
         return;
     }
     [RYUserRequest gainAuthCodeWithParamer:@{@"phone":self.authModel.phone} suceess:^(BOOL isSendSuccess) {
+        [XYQProgressHUD showSuccess:@"发送成功"];
         _time = KAuthCodeSecond;
         [self countDown];
     } failure:^(id errorCode) {

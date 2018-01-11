@@ -58,7 +58,7 @@
 
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
-    [XYQProgressHUD hideHUD];
+    //[XYQProgressHUD hideHUD];
     [self removeTapGesture];
 }
 

@@ -85,6 +85,7 @@
         return;
     }
     [RYUserRequest gainAuthCodeWithParamer:@{@"phone":_phoneTf.text} suceess:^(BOOL isSendSuccess) {
+        [XYQProgressHUD showSuccess:@"发送成功"];
         if (isSendSuccess) {
             _time = KAuthCodeSecond;
             [self countDown];
@@ -103,8 +104,8 @@
         [UtilityHelper alertMessage:@"验证码不能为空" ctl:self];
         return;
     }
-    if ([VerifyHelper empty:_pwTf.text] || [_pwTf.text length] < 8) {
-        [UtilityHelper alertMessage:@"密码不正确" ctl:self];
+    if ([VerifyHelper empty:_pwTf.text] || ([_pwTf.text length] < 6 && [_pwTf.text length] < 12) ) {
+        [UtilityHelper alertMessage:@"密码格式不正确" ctl:self];
         return;
     }
     NSString * regID = [RYDefaults objectForKey:@"jgRegId"];

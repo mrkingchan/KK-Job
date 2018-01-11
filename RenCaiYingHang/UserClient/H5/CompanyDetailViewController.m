@@ -12,8 +12,6 @@
 
 @interface CompanyDetailViewController ()
 
-@property (nonatomic,copy) NSString * oldUrlString;
-
 @end
 
 @implementation CompanyDetailViewController
@@ -29,7 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _oldUrlString = self.url;
 }
 
 - (void)addRightBtn
@@ -90,23 +87,6 @@
         {
             self.title = self.webView.title;
         }
-    }
-}
-
-#pragma mark 跳转的操作
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
-    if ([url rangeOfString:KBaseURL].location != NSNotFound) {
-        if (![url isEqualToString:_oldUrlString]) {
-            _oldUrlString = url;
-            [self.webView  loadRequest:[NSURLRequest requestWithURL:navigationAction.request.URL]];
-            decisionHandler(WKNavigationActionPolicyAllow);
-        }else{
-            decisionHandler(WKNavigationActionPolicyAllow);
-        }
-    }else{
-       decisionHandler(WKNavigationActionPolicyCancel);
-       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];  
     }
 }
 

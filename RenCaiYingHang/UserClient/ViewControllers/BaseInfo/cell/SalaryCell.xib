@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="SalaryCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入期望薪资" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J2g-a1-wWL">
+                        <rect key="frame" x="130" y="10" width="120" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="H5I-by-2di"/>
+                        </constraints>
+                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                    </textField>
+                    <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNY-Fw-M2R">
+                        <rect key="frame" x="250" y="10" width="60" height="23.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="QmK-kh-jsc"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="面议" image="sex_nor">
+                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected" image="sex_selected">
+                            <color key="titleColor" red="0.94117647059999998" green="0.35686274509999999" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="buttonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="vHG-Mq-55m"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="10" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2rA-kh-2sx">
+                        <rect key="frame" x="20" y="10" width="100" height="23.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="p14-xR-vfW"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <inset key="titleEdgeInsets" minX="-1" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="期望薪资" image="sex_nor">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected" image="sex_selected">
+                            <color key="titleColor" red="0.94117647059999998" green="0.35686274509999999" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="buttonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ul2-yh-V1z"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="XNY-Fw-M2R" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="5a4-TH-QeM"/>
+                    <constraint firstItem="XNY-Fw-M2R" firstAttribute="leading" secondItem="J2g-a1-wWL" secondAttribute="trailing" id="7Q3-Nt-dkx"/>
+                    <constraint firstAttribute="bottom" secondItem="J2g-a1-wWL" secondAttribute="bottom" constant="9.5" id="Bnh-Cz-YE8"/>
+                    <constraint firstAttribute="bottom" secondItem="2rA-kh-2sx" secondAttribute="bottom" constant="10" id="PiR-bt-eLk"/>
+                    <constraint firstAttribute="bottom" secondItem="XNY-Fw-M2R" secondAttribute="bottom" constant="10" id="bnZ-jU-ZNO"/>
+                    <constraint firstItem="J2g-a1-wWL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="gd2-Sn-zli"/>
+                    <constraint firstItem="2rA-kh-2sx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="jBK-EA-qky"/>
+                    <constraint firstItem="J2g-a1-wWL" firstAttribute="leading" secondItem="2rA-kh-2sx" secondAttribute="trailing" constant="10" id="noL-Rx-7nA"/>
+                    <constraint firstItem="2rA-kh-2sx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="xmf-I2-1Wr"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="qwBtn" destination="2rA-kh-2sx" id="JGK-nH-xDB"/>
+                <outlet property="selectMianYi" destination="XNY-Fw-M2R" id="uCU-q3-pN4"/>
+                <outlet property="tf" destination="J2g-a1-wWL" id="Dfo-b7-H0k"/>
+            </connections>
+            <point key="canvasLocation" x="82" y="66"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="sex_nor" width="22" height="22"/>
+        <image name="sex_selected" width="22" height="22"/>
+    </resources>
+</document>

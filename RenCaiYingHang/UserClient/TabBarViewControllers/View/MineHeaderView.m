@@ -58,7 +58,6 @@
         if (_mineHeaderClickCallBack) {
             _mineHeaderClickCallBack(index);
         }
-        NSLog(@"点击图片%ld",index);
     }];
 }
 

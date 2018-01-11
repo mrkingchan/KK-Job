@@ -32,7 +32,7 @@
     NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
     if (![url isEqualToString:[UtilityHelper addUrlToken:CompanyList]]) {
         CompanyDetailViewController * h5 = [[CompanyDetailViewController alloc] init];
-        h5.url = url;
+        h5.url = [UtilityHelper addTokenForUrlSting:url];
         [self.navigationController pushViewController:h5 animated:true];
         decisionHandler(WKNavigationActionPolicyCancel);
     }else{
@@ -48,7 +48,7 @@
 
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
-    [XYQProgressHUD hideHUD];
+   // [XYQProgressHUD hideHUD];
     [self removeTapGesture];
 }
 

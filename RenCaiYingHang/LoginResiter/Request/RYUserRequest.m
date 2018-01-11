@@ -41,8 +41,11 @@
     NSDictionary * dic = [UtilityHelper encryptParmar:paramer];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         
-        [RYDefaults setObject:@"X3333" forKey:@"UserReCode"];
-        [UtilityHelper saveUserInfoWith:data[@"rel"] keyName:UserCache];
+        UserInfo.userInfo =  [[UserModel alloc] initWithDictionary:data[@"rel"]];
+        UserInfo.userInfo.reCode = @"X3333";
+        NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
+        [UtilityHelper saveUserInfoWith:rel keyName:UserCache];
+        
         sucess(true);
         
     } failure:^(NSError *error) {
@@ -116,8 +119,11 @@
     NSDictionary * dic = [UtilityHelper encryptParmar:paramer];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         
-        [RYDefaults setObject:data[@"reCode"] forKey:@"UserReCode"];
-        [UtilityHelper saveUserInfoWith:data[@"rel"] keyName:UserCache];
+        UserInfo.userInfo =  [[UserModel alloc] initWithDictionary:data[@"rel"]];
+        UserInfo.userInfo.reCode = data[@"reCode"];
+        NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
+        [UtilityHelper saveUserInfoWith:rel keyName:UserCache];
+        
         sucess(true);
         
     } failure:^(NSError *error) {

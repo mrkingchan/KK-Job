@@ -65,8 +65,8 @@
     if (![VerifyHelper checkMobileTel:_phoneTf.text ctl:self]) {
         return;
     }
-    if ([VerifyHelper empty:_pwTf.text] || [_pwTf.text length] < 8) {
-        [UtilityHelper alertMessage:@"密码不正确" ctl:self];
+    if ([VerifyHelper empty:_pwTf.text] || ([_pwTf.text length] < 6 && [_pwTf.text length] < 12) ) {
+        [UtilityHelper alertMessage:@"密码格式不正确" ctl:self];
         return;
     }
     NSString * regID = [RYDefaults objectForKey:@"jgRegId"];

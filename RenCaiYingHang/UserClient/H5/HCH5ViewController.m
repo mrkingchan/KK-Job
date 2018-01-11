@@ -10,8 +10,6 @@
 
 @interface HCH5ViewController ()
 
-@property (nonatomic,copy) NSString * oldUrlString;
-
 @end
 
 @implementation HCH5ViewController
@@ -27,7 +25,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _oldUrlString = self.url;
 }
 
 //点击返回的方法
@@ -56,18 +53,6 @@
         {
             self.title = self.webView.title;
         }
-    }
-}
-
-#pragma mark 跳转的操作
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
-    if (![url isEqualToString:_oldUrlString]) {
-        _oldUrlString = url;
-        [self.webView  loadRequest:[NSURLRequest requestWithURL:navigationAction.request.URL]];
-        decisionHandler(WKNavigationActionPolicyAllow);
-    }else{
-        decisionHandler(WKNavigationActionPolicyAllow);
     }
 }
 

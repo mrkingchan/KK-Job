@@ -18,22 +18,17 @@
 
 @implementation UtilityHelper
 
-/** 登陆注册代码可封装 **/
-
 /** 登陆注册走 **/
 + (void) insertApp
 {
     if ([UserInfo.userInfo.reCode isEqualToString:@"X2222"]) {
-        /** 默认进入雷达页面 **/
         [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
-        [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
     }
     else if([UserInfo.userInfo.reCode isEqualToString:@"X1111"])
     {
         HomePageViewController * homeCtl = [[HomePageViewController alloc] init];
         homeCtl.isFinishComInfo = true;
         [UIApplication sharedApplication].keyWindow.rootViewController = homeCtl;
-        [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
     }
     else
     {
@@ -77,13 +72,13 @@
 }
 
 /** 切换 **/
-+ (void) changeClient:(NSInteger) clientType ctl:(UIViewController *) ctl
++ (void) changeClient:(NSInteger) clientType
 {
     NSDictionary * paramer = @{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey};
     [RYUserRequest whetherBaseInfoWithParamer:paramer suceess:^(NSString * whetherUserBaseInfo,NSDictionary * whetherComBaseInfo) {
         
         switch (clientType) {
-            case 1: /** 2是企业版跳个人版 */
+            case 1: /** 1是个人版跳企业版 */
             {
                 UserInfo.userInfo.reCode = @"X1111";
                 if([[whetherComBaseInfo allKeys] containsObject:@"comUserInfo"])
@@ -109,7 +104,7 @@
                 }
             }
                 break;
-            case 2:/** 1是个人版跳企业版 */
+            case 2:/** 2是企业版跳个人版 */
             {
                 if ([whetherUserBaseInfo isEqualToString:@"yes"]) {
                     
@@ -120,8 +115,8 @@
                     [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
                     
                 }else{
-                   RYNavigationController * pushCtl = [[RYNavigationController alloc] initWithRootViewController:ctl];
-                   [pushCtl pushViewController:[[NecessaryInfoViewController alloc] init] animated:true];
+                   
+                    [UIApplication sharedApplication].keyWindow.rootViewController =  [[RYNavigationController alloc] initWithRootViewController:[[NecessaryInfoViewController alloc] init]];
                 }
             }
                 break;
@@ -136,10 +131,7 @@
 /** 缓存数据 */
 + (void) saveUserInfoWith:(NSDictionary *)data keyName:(NSString *)keyName
 {
-    UserInfo.userInfo =  [[UserModel alloc] initWithDictionary:data];
-    UserInfo.userInfo.reCode = [RYDefaults objectForKey:@"UserReCode"];
-    NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
-    NSData * dataUser  = [NSKeyedArchiver archivedDataWithRootObject:rel];
+    NSData * dataUser  = [NSKeyedArchiver archivedDataWithRootObject:data];
     [RYDefaults setObject:dataUser forKey:keyName];
 }
 

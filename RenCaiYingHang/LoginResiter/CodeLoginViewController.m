@@ -97,6 +97,7 @@
         return;
     }
     [RYUserRequest gainAuthCodeWithParamer:@{@"phone":_phoneTf.text} suceess:^(BOOL isSendSuccess) {
+        [XYQProgressHUD showSuccess:@"发送成功"];
         if (isSendSuccess) {
             _time = KAuthCodeSecond;
             [self countDown];

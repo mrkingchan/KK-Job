@@ -106,6 +106,7 @@ static NSString * footerId = @"MineFooterView";
     [XYQProgressHUD showMessage:@"加载中..."];
     [RYUserRequest appUsGetBaseInfoSuceess:^(NSDictionary * baseInfo,NSArray * imageArr) {
         [XYQProgressHUD hideHUD];
+        [self.topArr removeAllObjects];
         [self.topArr addObject:baseInfo];
         [self.topArr addObject:imageArr];
         [self loadData];
@@ -240,7 +241,7 @@ static NSString * footerId = @"MineFooterView";
         case 7:
         {
             //进入企业
-           [UtilityHelper changeClient:1 ctl:self];
+           [UtilityHelper changeClient:1];
         }
             break;
         case 2:

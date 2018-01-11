@@ -66,7 +66,7 @@
 
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
-    [XYQProgressHUD hideHUD];
+    //[XYQProgressHUD hideHUD];
     [self removeTapGesture];
 }
 
@@ -109,7 +109,11 @@
 /** 切换到求职端 */
 - (void) changeToUserClient
 {
-    [UtilityHelper changeClient:2 ctl:self];
+    if ([UserInfo.userInfo.reCode isEqualToString:@"X3333"]) {
+        [UtilityHelper insertApp];
+    }else{
+        [UtilityHelper changeClient:2];
+    }
 }
 
 /** 退出登录 **/

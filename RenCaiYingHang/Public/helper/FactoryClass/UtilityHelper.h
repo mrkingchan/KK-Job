@@ -21,7 +21,7 @@
 + (void) noRecodeInsertApp;
 
 /** 切换 **/
-+ (void) changeClient:(NSInteger) clientType ctl:(UIViewController *) ctl;
++ (void) changeClient:(NSInteger) clientType;
 
 /** 缓存数据 */
 + (void) saveUserInfoWith:(NSDictionary *)data keyName:(NSString *)keyName;

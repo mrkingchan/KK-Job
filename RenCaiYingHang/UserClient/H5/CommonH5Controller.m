@@ -10,8 +10,6 @@
 
 @interface CommonH5Controller ()
 
-@property (nonatomic,copy) NSString * oldUrlString;
-
 @end
 
 @implementation CommonH5Controller
@@ -27,9 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _oldUrlString = self.url;
     
-    if ([_oldUrlString containsString:@"apply/resume/modifyRes"] != NSNotFound) {
+    if ([self.url containsString:@"apply/resume/modifyRes"] != NSNotFound) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"resumeStateChange" object:nil];
     }
 }
@@ -42,22 +39,6 @@
         {
             self.title = self.webView.title;
         }
-    }
-}
-
-#pragma mark 跳转的操作
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
-    if (![url isEqualToString:_oldUrlString]) {
-//        CommonH5Controller * h5 = [[CommonH5Controller alloc] init];
-//        h5.url = [UtilityHelper addTokenForUrlSting:url];
-//        [self.navigationController pushViewController:h5 animated:true];
-//        decisionHandler(WKNavigationActionPolicyCancel);
-        _oldUrlString = url;
-        [self.webView  loadRequest:[NSURLRequest requestWithURL:navigationAction.request.URL]];
-        decisionHandler(WKNavigationActionPolicyAllow);
-    }else{
-        decisionHandler(WKNavigationActionPolicyAllow);
     }
 }
 

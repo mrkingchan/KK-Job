@@ -8,7 +8,7 @@
 
 #import "MineFooterView.h"
 
-//竖向跑马灯
+////竖向跑马灯
 #import "SMKCycleScrollView.h"
 #import "MsgViewCell.h"
 
@@ -88,10 +88,10 @@ static NSString * msgLabCellID = @"MsgViewCell";
     if (self.msgArr.count > 0) {
         self.cycleScrollView = [[SMKCycleScrollView alloc] init];
         self.cycleScrollView.frame = CGRectMake(80, 5, kScreenWidth - 90, cell.contentView.height - 10);
-       
+
         self.cycleScrollView.titleFont = systemOfFont(13);
         [cell.contentView addSubview:self.cycleScrollView];
-        
+
         self.cycleScrollView.titleArray =  self.msgArr;
         [self.cycleScrollView setSelectedBlock:^(NSInteger index, NSString *title) {
             //        NSLog(@"%zd-----%@",index,title);

@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _oldUrlString = self.url;
+   // _oldUrlString = self.url;
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
@@ -43,17 +43,17 @@
     }
 }
 
-#pragma mark 跳转的操作
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
-    if (![url isEqualToString:self.oldUrlString]) {
-        _oldUrlString = url;
-        [self.webView  loadRequest:[NSURLRequest requestWithURL:navigationAction.request.URL]];
-        decisionHandler(WKNavigationActionPolicyAllow);
-    }else{
-        decisionHandler(WKNavigationActionPolicyAllow);
-    }
-}
+//#pragma mark 跳转的操作
+//- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+//    NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
+//    if (![url isEqualToString:self.oldUrlString]) {
+//        _oldUrlString = url;
+//        [self.webView  loadRequest:[NSURLRequest requestWithURL:navigationAction.request.URL]];
+//        decisionHandler(WKNavigationActionPolicyAllow);
+//    }else{
+//        decisionHandler(WKNavigationActionPolicyAllow);
+//    }
+//}
 
 /**
  与后台协商方法调用

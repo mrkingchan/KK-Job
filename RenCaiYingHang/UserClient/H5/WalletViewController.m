@@ -30,7 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _oldUrlString = self.url;
+   // _oldUrlString = self.url;
 }
 
 - (void)backNative
@@ -65,21 +65,19 @@
     }
 }
 
-#pragma mark 跳转的操作
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
-    if (![url isEqualToString:self.oldUrlString]) {
-        _oldUrlString = url;
-        [self.webView  loadRequest:[NSURLRequest requestWithURL:navigationAction.request.URL]];
-        decisionHandler(WKNavigationActionPolicyAllow);
-    }else{
-        decisionHandler(WKNavigationActionPolicyAllow);
-    }
-}
+//#pragma mark 跳转的操作
+//- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+//    NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
+//    if (![url isEqualToString:self.oldUrlString]) {
+//        _oldUrlString = url;
+//        [self.webView  loadRequest:[NSURLRequest requestWithURL:navigationAction.request.URL]];
+//        decisionHandler(WKNavigationActionPolicyAllow);
+//    }else{
+//        decisionHandler(WKNavigationActionPolicyAllow);
+//    }
+//}
 
-/**
- 与后台协商方法调用
- */
+/** 与后台协商方法调用 */
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
     if ([message.name isEqualToString:@"recharge"]) {
