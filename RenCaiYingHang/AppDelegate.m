@@ -31,7 +31,7 @@
 
 static NSString *pushappKey = @"8ff9fa7a21f9ab75fcef566a";
 static NSString *pushchannel = @"App Store";
-static BOOL isProduction = false;//false true
+static BOOL isProduction = true;//false true
 
 @implementation AppDelegate
 
@@ -186,7 +186,8 @@ static BOOL isProduction = false;//false true
     //判断是微信还是支付宝操作
     if ([[NSString stringWithFormat:@"%@",url] rangeOfString:[NSString stringWithFormat:@"%@:",WeXinAppID]].location != NSNotFound){
         return  [WXApi handleOpenURL:url delegate:self];
-    }else{
+    }
+    else{
         if ([url.host isEqualToString:@"safepay"]) {
             //跳转支付宝钱包进行支付，处理支付结果
             [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
@@ -218,11 +219,6 @@ static BOOL isProduction = false;//false true
                 break;
         }
     }
-}
-
--(void) onReq:(BaseReq*)req
-{
-    
 }
 
 /** 支付宝回掉 **/

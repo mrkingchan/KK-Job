@@ -10,4 +10,14 @@
 
 @implementation AuthenticationModel
 
+- (instancetype)initWithDictionary:(NSDictionary *)dic
+{
+    if (self = [super init])
+    {
+        _idcardNum = dic[@"idCard"];
+        [self mj_setKeyValues:dic];
+    }
+    return self;
+}
+
 @end

@@ -21,7 +21,8 @@
 /** 登陆注册走 **/
 + (void) insertApp
 {
-    if ([UserInfo.userInfo.reCode isEqualToString:@"X2222"]) {
+    if ([UserInfo.userInfo.reCode isEqualToString:@"X2222"])
+    {
         [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
     }
     else if([UserInfo.userInfo.reCode isEqualToString:@"X1111"])

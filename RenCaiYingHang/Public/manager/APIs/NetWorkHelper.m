@@ -141,6 +141,10 @@
             isExist = true;
             return;
         }
+        
+        if ([class isKindOfClass:[XYQProgressHUD class]]) {
+            [class removeFromSuperview];
+        }
     }
     if (!isExist) {
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:message message:@"" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];

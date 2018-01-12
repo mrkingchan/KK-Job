@@ -71,18 +71,23 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
 /** 立即认证 **/
 - (void) buttonClick:(UIButton *) sender
 {
-    if (![VerifyHelper validateEmail:self.authModel.email]) {
-        [self alertMessageWithViewController:self message:@"邮箱格式不正确"];
+    if ([VerifyHelper empty:self.authModel.email]) {
+        [self alertMessageWithViewController:self message:@"邮箱不能为空"];
         return;
     }
     if ([VerifyHelper empty:self.authModel.codeString]) {
         [self emptyPhoneCode];
         return;
     }
-    NSDictionary * dic = @{@"username":self.authModel.email,@"validCode":self.authModel.codeString};
+    self.authModel.email = [self.authModel.email stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSDictionary * dic = @{@"username":UserInfo.userInfo.tel,@"validCode":self.authModel.codeString};
     [RYUserRequest authEmailWithParamer:dic suceess:^(BOOL isSuccess) {
-        [self alertMessageWithViewController:self message:@"邮箱绑定成功"];
-        [self.navigationController popViewControllerAnimated:true];
+        
+        [self showAlertWithTitle:@"邮箱绑定成功" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
+            alertMaker.addActionCancelTitle(@"确定");
+        } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
+            [self.navigationController popViewControllerAnimated:true];
+        }];
     } failure:^(id errorCode) {
         
     }];
@@ -145,12 +150,14 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
 
 - (void) gainAuthCode
 {
-    if (![VerifyHelper validateEmail:self.authModel.email]) {
-        [self alertMessageWithViewController:self message:@"邮箱格式不正确"];
+    if ([VerifyHelper empty:self.authModel.email]) {
+        [self alertMessageWithViewController:self message:@"邮箱不能为空"];
         return;
     }
+    self.authModel.email = [self.authModel.email stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSDictionary * dic = @{@"username":UserInfo.userInfo.tel,@"email":self.authModel.email};
     [RYUserRequest bindingEmailWithParamer:dic suceess:^(BOOL isSuccess) {
+        [XYQProgressHUD showSuccess:@"发送成功"];
         _time = KAuthCodeSecond;
         [self countDown];
     } failure:^(id errorCode) {

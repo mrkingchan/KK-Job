@@ -8,9 +8,9 @@
 
 #import "MineFooterView.h"
 
-////竖向跑马灯
-#import "SMKCycleScrollView.h"
 #import "MsgViewCell.h"
+
+#import "CLRollLabel.h"
 
 @interface MineFooterView ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -18,7 +18,7 @@
 
 @property (nonatomic, strong) NSMutableArray * msgArr;
 
-@property (nonatomic, strong) SMKCycleScrollView * cycleScrollView;
+@property (nonatomic, strong) CLRollLabel * rollLabel;
 
 @end
 
@@ -54,6 +54,15 @@ static NSString * msgLabCellID = @"MsgViewCell";
     return _msgArr;
 }
 
+- (CLRollLabel *)rollLabel
+{
+    if (!_rollLabel) {
+        _rollLabel = [[CLRollLabel alloc] initWithFrame:CGRectZero font:systemOfFont(15) textColor:[UIColor darkTextColor]];
+        _rollLabel.rollSpeed = 0.3;
+    }
+    return _rollLabel;
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -86,16 +95,14 @@ static NSString * msgLabCellID = @"MsgViewCell";
     }
     MsgViewCell * cell = [tableView dequeueReusableCellWithIdentifier:msgLabCellID];
     if (self.msgArr.count > 0) {
-        self.cycleScrollView = [[SMKCycleScrollView alloc] init];
-        self.cycleScrollView.frame = CGRectMake(80, 5, kScreenWidth - 90, cell.contentView.height - 10);
-
-        self.cycleScrollView.titleFont = systemOfFont(13);
-        [cell.contentView addSubview:self.cycleScrollView];
-
-        self.cycleScrollView.titleArray =  self.msgArr;
-        [self.cycleScrollView setSelectedBlock:^(NSInteger index, NSString *title) {
-            //        NSLog(@"%zd-----%@",index,title);
-        }];
+        self.rollLabel.frame = CGRectMake(cell.msgLab.left, cell.msgLab.top, kScreenWidth - cell.msgLab.left - 10, cell.msgLab.height);
+        [cell.contentView addSubview:self.rollLabel];
+        
+        NSString * string = self.msgArr[0];
+        for (int i = 1; i < self.msgArr.count; i++) {
+            string = [NSString stringWithFormat:@"%@    %@",string,self.msgArr[i]];
+        }
+        self.rollLabel.text = string;
     }
     return cell;
 }

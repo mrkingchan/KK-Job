@@ -261,13 +261,15 @@ static NSString * SalaryCellID = @"SalaryCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self closeBeyBoard];
     switch (indexPath.row) {
         case 2:
         {
             [self alertShowWithArr:self.educationArr indexPath:indexPath];
         }
             break;
-        case 3:{
+        case 3:
+        {
             [self alertShowWithArr:self.experienceArr indexPath:indexPath];
         }
             break;

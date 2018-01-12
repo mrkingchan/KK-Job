@@ -21,7 +21,6 @@
 - (void)guidePageControllerWithImages:(NSArray *)images
 {
     UIScrollView *gui = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-    gui.backgroundColor = [UIColor redColor];
     gui.delegate = self;
     gui.pagingEnabled = YES;
     // 隐藏滑动条
@@ -38,21 +37,32 @@
             [self.btnEnter setBackgroundImage:[UIImage imageNamed:images[i]] forState:UIControlStateNormal];;
             self.btnEnter;
         })];
-        
-        [self.btnEnter addSubview:({
+    
+        if (i == images.count - 1) {
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [btn setTitle:@"跳过" forState:UIControlStateNormal];
-            if (i == images.count - 1) {
-                [btn setTitle:@"点击进入" forState:UIControlStateNormal];
-            }
+            [btn setTitle:@"点击进入" forState:UIControlStateNormal];
             btn.frame = CGRectMake(kScreenWidth * i, kScreenHeight - 50, 100, 30);
             btn.center = CGPointMake(kScreenWidth / 2, kScreenHeight - 60);
             btn.layer.cornerRadius = 4;
             btn.clipsToBounds = YES;
             btn.backgroundColor = [UIColor lightGrayColor];
             [btn addTarget:self action:@selector(clickEnter) forControlEvents:UIControlEventTouchUpInside];
-            btn;
-        })];
+            [self.btnEnter addSubview:btn];
+        }
+//        [self.btnEnter addSubview:({
+//            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//            [btn setTitle:@"跳过" forState:UIControlStateNormal];
+//            if (i == images.count - 1) {
+//                [btn setTitle:@"点击进入" forState:UIControlStateNormal];
+//            }
+//            btn.frame = CGRectMake(kScreenWidth * i, kScreenHeight - 50, 100, 30);
+//            btn.center = CGPointMake(kScreenWidth / 2, kScreenHeight - 60);
+//            btn.layer.cornerRadius = 4;
+//            btn.clipsToBounds = YES;
+//            btn.backgroundColor = [UIColor lightGrayColor];
+//            [btn addTarget:self action:@selector(clickEnter) forControlEvents:UIControlEventTouchUpInside];
+//            btn;
+//        })];
     }
     gui.contentSize = CGSizeMake(kScreenWidth * images.count, 0);
     [self.view addSubview:gui];
@@ -61,8 +71,11 @@
     self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth / 2, 30)];
     self.pageControl.center = CGPointMake(kScreenWidth / 2, kScreenHeight - 95);
     [self.view addSubview:self.pageControl];
+    self.pageControl.currentPageIndicatorTintColor = kNavBarTintColor;
+    self.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
     self.pageControl.numberOfPages = images.count;
 }
+
 - (void)clickEnter
 {
     if (self.delegate != nil && [self.delegate respondsToSelector:@selector(clickEnter)]) {

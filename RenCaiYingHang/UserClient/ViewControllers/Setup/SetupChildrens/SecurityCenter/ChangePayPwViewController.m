@@ -74,6 +74,8 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
 /** 立即认证 **/
 - (void) buttonClick:(UIButton *) sender
 {
+    [self closeBeyBoard];
+    
     if (![VerifyHelper checkMobileTel:UserInfo.userInfo.tel ctl:self]) {
         return;
     }
@@ -81,14 +83,23 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
         [self emptyPhoneCode];
         return;
     }
-    if ([VerifyHelper empty:self.authModel.newsPassWord] || self.authModel.newsPassWord.length < 8 || [VerifyHelper empty:self.authModel.confirmPassWord] || self.authModel.confirmPassWord.length < 8) {
+    if ([VerifyHelper empty:self.authModel.newsPassWord] || self.authModel.newsPassWord.length !=6 || [VerifyHelper empty:self.authModel.confirmPassWord] || self.authModel.confirmPassWord.length !=6) {
         [self errorPassword];
         return;
     }
+    
+    if (![self.authModel.newsPassWord isEqualToString:self.authModel.confirmPassWord]) {
+        [UtilityHelper alertMessage:@"两次密码不一致" ctl:self];
+        return;
+    }
+    
     NSDictionary * dic = @{@"phone":UserInfo.userInfo.tel,@"phoneCode":self.authModel.codeString,@"newPassword":self.authModel.newsPassWord,@"confirmPassword":self.authModel.confirmPassWord};
     [RYUserRequest chgTradePwdByPhoneWithParamer:dic suceess:^(BOOL isSuccess) {
-        [self alertMessageWithViewController:self message:@"交易密码设置成功"];
-        [self.navigationController popViewControllerAnimated:true];
+        [self showAlertWithTitle:@"交易密码设置成功" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
+            alertMaker.addActionCancelTitle(@"确定");
+        } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
+            [self.navigationController popViewControllerAnimated:true];
+        }];
     } failure:^(id errorCode) {
         
     }];
@@ -122,6 +133,7 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
         }else{
             cell.textField.textAlignment = 0;
             cell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",self.dataArray[indexPath.row]];
+            cell.textField.secureTextEntry = true;
         }
         cell.textField.tag = indexPath.row;
         cell.textField.delegate = self;
@@ -163,6 +175,7 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
         return;
     }
     [RYUserRequest gainAuthCodeWithParamer:@{@"phone":UserInfo.userInfo.tel} suceess:^(BOOL isSendSuccess) {
+        [XYQProgressHUD showSuccess:@"发送成功"];
         _time = KAuthCodeSecond;
         [self countDown];
     } failure:^(id errorCode) {

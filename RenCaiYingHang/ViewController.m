@@ -53,11 +53,13 @@
     [NetWorkHelper getWithURLString:[NSString stringWithFormat:@"%@securityCenter/appGuidePagePic",KBaseURL] parameters:nil success:^(NSDictionary *data) {
         NSDictionary * d = data[@"rel"];
         NSArray * arr = d[@"guidePagePic"];
-        NSDictionary * dict = arr[0];
-        NSString * picUrl = dict[@"picUrl"];
-        NSData * imageData =  [NSData
-                                dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KIMGURL,picUrl]]];
-        [RYDefaults setObject:imageData forKey:@"adImage"];
+        if (![VerifyHelper empty:arr]) {
+            NSDictionary * dict = arr[0];
+            NSString * picUrl = dict[@"picUrl"];
+            NSData * imageData =  [NSData
+                                   dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KIMGURL,picUrl]]];
+            [RYDefaults setObject:imageData forKey:@"adImage"];
+        }
     } failure:^(NSError *error) {
         
     }];

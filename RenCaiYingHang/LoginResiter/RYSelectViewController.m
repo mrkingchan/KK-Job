@@ -29,6 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"选择您的角色";
     [self configurationReturnBack];
     [self initButtons];
 }
@@ -43,7 +44,7 @@
 - (void) initButtons
 {
     for (int i = 0; i < 2; i++) {
-        UIButton * button = [UIFactory initButtonWithFrame:CGRectMake(kScreenWidth * 0.2,KNavBarHeight + (kScreenHeight - KNavBarHeight - kScreenWidth * 0.6 * 0.6 * 2)/3 * (i+1) + kScreenWidth * 0.6 * 0.6*i,kScreenWidth * 0.6, kScreenWidth * 0.6 * 0.6) title:@[@"求职端",@"企业端"][i] textColor:kWhiteColor font:systemOfFont(20) cornerRadius:10 tag:i+10 target:self action: @selector(buttonClick:)];
+        UIButton * button = [UIFactory initButtonWithFrame:CGRectMake(kScreenWidth * 0.2,KNavBarHeight + (kScreenHeight - KNavBarHeight - kScreenWidth * 0.6 * 0.6 * 2)/3 * (i+1) + kScreenWidth * 0.6 * 0.6*i,kScreenWidth * 0.6, kScreenWidth * 0.6 * 0.6) title:@[@"求职",@"招聘"][i] textColor:kWhiteColor font:systemOfFont(20) cornerRadius:10 tag:i+10 target:self action: @selector(buttonClick:)];
         button.backgroundColor = kNavBarTintColor;
         [self.view addSubview:button];
     }

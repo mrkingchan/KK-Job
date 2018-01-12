@@ -18,11 +18,13 @@
     if (sender.tag == 10) {
         qwBtn.selected = true;
         _selectMianYi.selected = false;
+        _tf.enabled = true;
         [_tf setText:@""];
     }else{
         qwBtn.selected = false;
         _selectMianYi.selected = true;
-        _tf.text = @"0";
+        _tf.enabled = false;
+        [_tf setText:@""];
         if (_necessaryMianYiSelectCall) {
             _necessaryMianYiSelectCall(sender.selected);
         }

@@ -82,9 +82,9 @@
         dic = @{@"loginType":@"2",@"phone":_phoneTf.text,@"dxCode":_codetf.text,@"jgRegId":regID};
     }
     
-    [XYQProgressHUD showMessage:@"登陆中...."];
+    [XYQProgressHUD showMessage:@"登陆中...." toView:[UIApplication sharedApplication].keyWindow];
     [RYUserRequest userLoginWithParamer:dic suceess:^(BOOL isSendSuccess) {
-        [XYQProgressHUD hideHUD];
+        [XYQProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow];
         [UtilityHelper insertApp];
     } failure:^(id errorCode) {
         

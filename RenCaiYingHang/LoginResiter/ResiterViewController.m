@@ -117,9 +117,9 @@
         dic = @{@"phone":_phoneTf.text,@"fromWay":@"7",@"dxCode":_codeTf.text,@"tiPhone":_inviteTf.text,@"password":_pwTf.text,@"jgRegId":regID};
     }
     
-    [XYQProgressHUD showMessage:@"注册中..."];
+    [XYQProgressHUD showMessage:@"注册中..." toView:[UIApplication sharedApplication].keyWindow];
     [RYUserRequest userRegisterWithParamer:dic suceess:^(BOOL isSendSuccess) {
-        [XYQProgressHUD hideHUD];
+        [XYQProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow];
         [UtilityHelper insertApp];
     } failure:^(id errorCode) {
         

@@ -103,19 +103,21 @@ static NSString * footerId = @"MineFooterView";
 
 - (void) requestData
 {
-    [XYQProgressHUD showMessage:@"加载中..."];
+    [XYQProgressHUD showMessage:@"加载中..."  toView:[UIApplication sharedApplication].keyWindow];
     [RYUserRequest appUsGetBaseInfoSuceess:^(NSDictionary * baseInfo,NSArray * imageArr) {
-        [XYQProgressHUD hideHUD];
+        [XYQProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow];
         [self.topArr removeAllObjects];
         [self.topArr addObject:baseInfo];
-        [self.topArr addObject:imageArr];
+        if (![VerifyHelper empty:imageArr]) {
+           [self.topArr addObject:imageArr];
+        }
         [self loadData];
     } failure:^(id errorCode) {
         
     }];
     
     [RYUserRequest centerMessageSucess:^(NSArray *dataArr) {
-        [XYQProgressHUD hideHUD];
+        [XYQProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow];
         self.tabDataArr = @[dataArr,@[@[@"private",@"隐私设置"],@[@"notifi",@"通知"]]];
         [self loadData];
     } failure:^(id errorCode) {
@@ -140,7 +142,6 @@ static NSString * footerId = @"MineFooterView";
 {
     return self.dataArray.count;
 }
-
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -241,18 +242,17 @@ static NSString * footerId = @"MineFooterView";
         case 7:
         {
             //进入企业
-            [self alertMessageWithViewController:self message:@"敬请期待"];
-            //[UtilityHelper changeClient:1];
+            //[self alertMessageWithViewController:self message:@"敬请期待"];
+            [UtilityHelper changeClient:1];
         }
             break;
         case 2:
         {
-            [self alertMessageWithViewController:self message:@"敬请期待"];
-//            WalletViewController * h5 = [[WalletViewController alloc] init];
-//            h5.url = [UtilityHelper addUrlToken:@"identity/userWallet"];
-//            h5.jsMethodName = @"recharge";
-//            h5.type = 0;
-//            [self.navigationController pushViewController:h5 animated:true];
+            WalletViewController * h5 = [[WalletViewController alloc] init];
+            h5.url = [UtilityHelper addUrlToken:@"identity/userWallet"];
+            h5.jsMethodName = @"recharge";
+            h5.type = 0;
+            [self.navigationController pushViewController:h5 animated:true];
         }
             break;
         case 3:
@@ -332,7 +332,7 @@ static NSString * footerId = @"MineFooterView";
         if ([class isKindOfClass:[NSArray class]]) {
             BannerImageModel * model = class[index];
             AgentViewController * h5 = [[AgentViewController alloc] init];
-            h5.url = [UtilityHelper addUrlToken:model.clickUrl];
+            h5.url = [UtilityHelper addTokenForUrlSting:model.clickUrl];
             [self.navigationController pushViewController:h5 animated:true];
         }
     }

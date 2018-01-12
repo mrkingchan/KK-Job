@@ -272,9 +272,15 @@
     }
 }
 
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
-{
-    decisionHandler(WKNavigationActionPolicyAllow);
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
+    if ([url rangeOfString:KBaseURL].location == NSNotFound) {
+        [[UIApplication sharedApplication] openURL:navigationAction.request.URL];
+        decisionHandler(WKNavigationActionPolicyCancel);
+    }else{
+        decisionHandler(WKNavigationActionPolicyAllow);
+    }
 }
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler

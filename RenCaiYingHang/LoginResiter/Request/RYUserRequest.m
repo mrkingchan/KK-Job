@@ -177,7 +177,7 @@
 + (void) authEmailWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSuccess))sucess failure:(void(^)(id errorCode))failure
 {
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,AuthEmail];
-    NSDictionary * dic = [UtilityHelper encryptPkeyParmar:paramer];
+    NSDictionary * dic = [UtilityHelper encryptParmar:paramer];
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         sucess(true);
     } failure:^(NSError *error) {
@@ -242,11 +242,13 @@
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
         NSDictionary * info = data[@"rel"];
         
-        NSArray * arr = info[@"systemImage"];
         NSMutableArray * array = [NSMutableArray array];
-        for (NSDictionary * d in arr) {
-            BannerImageModel * model = [[BannerImageModel alloc] initWithDictionary:d];
-            [array addObject:model];
+        if (![VerifyHelper isNull:info key:@"systemImage"]) {
+            NSArray * arr = info[@"systemImage"];
+            for (NSDictionary * d in arr) {
+                BannerImageModel * model = [[BannerImageModel alloc] initWithDictionary:d];
+                [array addObject:model];
+            }
         }
         /** 存id */
         UserInfo.userInfo.resumeId = info[@"id"];

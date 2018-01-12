@@ -85,21 +85,33 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
 /** 立即认证 **/
 - (void) buttonClick:(UIButton *) sender
 {
+    [self closeBeyBoard];
+    
     if (![VerifyHelper checkMobileTel:self.authModel.phone ctl:self]) {
         return;
     }
+    
     if ([VerifyHelper empty:self.authModel.codeString]) {
         [self emptyPhoneCode];
         return;
     }
+    
     if ([VerifyHelper empty:self.authModel.newsPassWord] || (self.authModel.confirmPassWord.length < 6 && self.authModel.confirmPassWord.length >12) || [VerifyHelper empty:self.authModel.confirmPassWord] || (self.authModel.confirmPassWord.length < 6 && self.authModel.confirmPassWord.length >12)) {
         [self errorPassword];
         return;
     }
+    if (![self.authModel.newsPassWord isEqualToString:self.authModel.confirmPassWord]) {
+        [UtilityHelper alertMessage:@"两次密码不一致" ctl:self];
+        return;
+    }
+    
     NSDictionary * dic = @{@"phone":self.authModel.phone,@"phoneCode":self.authModel.codeString,@"newPassword":self.authModel.newsPassWord,@"confirmPassword":self.authModel.confirmPassWord};
     [RYUserRequest findLoginPwdWithParamer:dic suceess:^(BOOL isSuccess) {
-        [self.navigationController popViewControllerAnimated:true];
-        [self alertMessageWithViewController:self message:@"登陆密码重置成功"];
+        [self showAlertWithTitle:@"登陆密码重置成功" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
+            alertMaker.addActionCancelTitle(@"确定");
+        } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
+            [self.navigationController popViewControllerAnimated:true];
+        }];
     } failure:^(id errorCode) {
         
     }];
@@ -130,6 +142,12 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
             cell.textField.placeholder = @"请输入手机号";
         else
             cell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",self.dataArray[indexPath.row]];
+        
+        if (indexPath.row == 2 || indexPath.row == 3 ) {
+            cell.textField.secureTextEntry = true;
+        }else{
+            cell.textField.secureTextEntry = false;
+        }
         
         cell.textField.tag = indexPath.row;
         cell.textField.delegate = self;

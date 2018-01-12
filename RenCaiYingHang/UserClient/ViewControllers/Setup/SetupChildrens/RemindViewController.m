@@ -137,7 +137,11 @@ static NSString * TableViewCellID = @"UITableViewCell";
     NSDictionary * dic = @{@"token":UserInfo.userInfo.token,@"jgWhetherSend":@(isSend)};
     NSDictionary * encry = [UtilityHelper encryptParmar:dic];
     [NetWorkHelper getWithURLString:[NSString stringWithFormat:@"%@securityCenter/appWhetherJgSend",KBaseURL] parameters:encry success:^(NSDictionary *data) {
-        
+        if (sender.on) {
+            [self alertMessageWithViewController:self message:@"推送开启"];
+        }else{
+             [self alertMessageWithViewController:self message:@"推送关闭"];
+        }
     } failure:^(NSError *error) {
         
     }];
