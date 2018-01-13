@@ -26,7 +26,7 @@
 
 + (void) weixinPayWithParamer:(NSDictionary *)paramer
 {
-    PayReq * req             = [[PayReq alloc] init];
+    PayReq * req            = [[PayReq alloc] init];
     req.partnerId           = paramer[@"partnerid"];
     req.prepayId            = paramer[@"prepayid"];
     req.nonceStr            = paramer[@"noncestr"];

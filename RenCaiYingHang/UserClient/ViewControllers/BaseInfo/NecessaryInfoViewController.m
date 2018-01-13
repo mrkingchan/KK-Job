@@ -132,8 +132,7 @@ static NSString * SalaryCellID = @"SalaryCell";
     [RYUserRequest uploadBaseInfoWithParamer:dic suceess:^(BOOL isSendSuccess) {
         /** 默认进入雷达页面 **/
         UserInfo.userInfo.reCode = @"X2222";
-        NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
-        [UtilityHelper saveUserInfoWith:rel keyName:UserCache];
+        [UtilityHelper saveUserInfoWith:UserInfo.userInfo keyName:UserCache];
         
         
         [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];

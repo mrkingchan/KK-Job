@@ -12,6 +12,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SGAlertView.h"
 
+#import "UserModel.h"
+
 @interface UtilityHelper : NSObject
 
 /** 进入app **/
@@ -24,7 +26,7 @@
 + (void) changeClient:(NSInteger) clientType;
 
 /** 缓存数据 */
-+ (void) saveUserInfoWith:(NSDictionary *)data keyName:(NSString *)keyName;
++ (void) saveUserInfoWith:(UserModel *)model keyName:(NSString *)keyName;
 
 /** 自适应宽高 **/
 +  (CGSize) fitHeightWithLabel:(NSString *)currentString size:(CGSize)size font:(UIFont*)font;

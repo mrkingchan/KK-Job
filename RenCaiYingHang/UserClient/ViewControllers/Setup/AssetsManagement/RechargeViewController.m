@@ -73,13 +73,15 @@ static NSString * RechagergeTypeViewCellID = @"RechagergeTypeViewCell";
 /** 确认充值 */
 - (void) buttonClick:(UIButton *) sender
 {
+    [self closeBeyBoard];
+    
     if([VerifyHelper empty:_rechargeNumbers])
     {
         [self alertMessageWithViewController:self message:@"充值金额不能为空"];
         return;
     }
-    
-    NSDictionary * dic = @{@"type":@(_payType),@"moneyNum":@([_rechargeNumbers floatValue]),@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey,@"businessType":@"CZ"};
+    //[_rechargeNumbers floatValue]
+    NSDictionary * dic = @{@"type":@(_payType),@"moneyNum":@(0.01),@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey,@"businessType":@"CZ"};
     [AppPayRequest thirdPayWithParamer:dic suceess:^(id responese) {
         [self callThirdPayWithParamer:responese type:_payType];
     } failure:^(id errorCode) {
@@ -101,7 +103,12 @@ static NSString * RechagergeTypeViewCellID = @"RechagergeTypeViewCell";
         {
             NSString * str = paramer;
             [AppPayRequest aliPayWithParamer:str callback:^(NSDictionary *dic) {
-                
+                NSString * status = dic[@"resultStatus"];
+                if ([status isEqualToString:@"9000"]) {
+                    [self payCallBack];
+                }else{
+                    [self alertMessageWithViewController:self message:@"支付失败"];
+                }
             }];
         }
             break;
@@ -230,8 +237,16 @@ static NSString * RechagergeTypeViewCellID = @"RechagergeTypeViewCell";
 #pragma mark 微信支付回掉
 - (void)weixinPaySuccess:(NSNotification *) info
 {
-    PayResp *resp = info.userInfo[@"PayResp"];
-    NSLog(@"微信支付返回数据:%@",resp);
+    [self payCallBack];
+}
+
+- (void) payCallBack
+{
+    [self showAlertWithTitle:@"支付成功" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
+        alertMaker.addActionCancelTitle(@"确定");
+    } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
+        [self.navigationController popViewControllerAnimated:true];
+    }];
 }
 
 - (NSMutableArray *)selectButtonArray

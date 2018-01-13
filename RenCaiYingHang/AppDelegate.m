@@ -68,7 +68,6 @@ static BOOL isProduction = true;//false true
     return YES;
 }
 
-
 /** 自定制广告页 */
 - (void) diyLaunchView
 {
@@ -213,6 +212,13 @@ static BOOL isProduction = true;//false true
                 //服务器端查询支付通知或查询API返回的结果再提示成功
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"WeXinPayCallBack" object:self userInfo:@{@"PayResp":resp}];
                 NSLog(@"支付成功");
+                break;
+            case -1:
+            case -2:
+            {
+                 UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"支付失败" message:@"" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+            }
                 break;
             default:
                 NSLog(@"支付失败，retcode=%d",resp.errCode);

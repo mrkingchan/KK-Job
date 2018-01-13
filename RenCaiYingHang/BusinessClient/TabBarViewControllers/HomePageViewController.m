@@ -10,6 +10,8 @@
 
 #import "PCCircleViewConst.h"
 
+#import "AppPayRequest.h"
+
 @interface HomePageViewController ()<WKScriptMessageHandler>
 
 @property (nonatomic,assign) BOOL isFirst;
@@ -31,6 +33,9 @@
     // Do any additional setup after loading the view.
     [self loadRequeset];
     [self regsiterMethod];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(weixinPaySuccess:) name:@"WeXinPayCallBack" object:nil];
+    
 }
 
 /** 加载h5 */
@@ -101,9 +106,20 @@
     }else if ([message.name isEqualToString:@"comLoginOut"]){
         [self comLoginOutApp];
     }else if ([message.name isEqualToString:@"comWeixinPay"]){
-        
+        NSDictionary * d = message.body;
+        NSDictionary * dic = d[@"rel"];
+        [AppPayRequest weixinPayWithParamer:dic];
     }else if ([message.name isEqualToString:@"comAliPay"]){
-        
+        NSDictionary * d = message.body;
+        NSString * str = d[@"rel"];
+        [AppPayRequest aliPayWithParamer:str callback:^(NSDictionary *dic) {
+            NSString * status = dic[@"resultStatus"];
+            if ([status isEqualToString:@"9000"]) {
+                [self payCallBack];
+            }else{
+                [self alertMessageWithViewController:self message:@"支付失败"];
+            }
+        }];
     }}
 
 /** 切换到求职端 */
@@ -125,6 +141,22 @@
     [[NSUserDefaults standardUserDefaults] setObject:@"close" forKey:@"setOn"];
     UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
     [UIApplication sharedApplication].keyWindow.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
+}
+
+#pragma mark 微信支付回掉
+- (void)weixinPaySuccess:(NSNotification *) info
+{
+    [self payCallBack];
+}
+
+/** 支付提示 */
+- (void) payCallBack
+{
+    [self showAlertWithTitle:@"支付成功" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
+        alertMaker.addActionCancelTitle(@"确定");
+    } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
+        [self.navigationController popViewControllerAnimated:true];
+    }];
 }
 
 - (void)dealloc{

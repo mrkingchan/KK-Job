@@ -40,7 +40,7 @@
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
-    if (![url isEqualToString:_urlString]) {
+    if ([url rangeOfString:@"public/job/search"].location == NSNotFound) {
         JobDetailViewController * h5 = [[JobDetailViewController alloc] init];
         h5.url = [UtilityHelper addTokenForUrlSting:url];
         [self.navigationController pushViewController:h5 animated:true];
@@ -85,22 +85,22 @@
     [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
     
     //设置不允许系统暂停定位
-    [self.locationManager setPausesLocationUpdatesAutomatically:NO];
+    [self.locationManager setPausesLocationUpdatesAutomatically:false];
     
     //设置允许在后台定位
-    [self.locationManager setAllowsBackgroundLocationUpdates:YES];
+    [self.locationManager setAllowsBackgroundLocationUpdates:true];
     
     //设置定位超时时间
     [self.locationManager setLocationTimeout:10];
     
     //设置逆地理超时时间
-    [self.locationManager setReGeocodeTimeout:5];
+    [self.locationManager setReGeocodeTimeout:10];
     
     //设置开启虚拟定位风险监测，可以根据需要开启
-    [self.locationManager setDetectRiskOfFakeLocation:NO];
+    [self.locationManager setDetectRiskOfFakeLocation:false];
     
     //设置允许连续定位逆地理
-    [self.locationManager setLocatingWithReGeocode:YES];
+    [self.locationManager setLocatingWithReGeocode:true];
 }
 
 
@@ -131,18 +131,19 @@
             //打开定位设置
             NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
             [[UIApplication sharedApplication] openURL:settingsURL];
+        }else{
+            _urlString = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@public/job/search?data=",KBaseURL]];
+            [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
         }
     }];
 }
 
 - (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location reGeocode:(AMapLocationReGeocode *)reGeocode
 {
-   // NSLog(@"location:{lat:%f; lon:%f; accuracy:%f; reGeocode:%@}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy, reGeocode.formattedAddress);
     [self cleanUpAction];
-    NSString * jsonstr =   [@{@"lat":@(location.coordinate.latitude),@"lon":@(location.coordinate.longitude)} mj_JSONString];
-    ;
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@public/job/search?data=%@",KBaseURL,[UtilityHelper decryptUseDES2:jsonstr key:DESKEY]]]]]];
-    _urlString = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@public/job/search?data=%@",KBaseURL,[UtilityHelper decryptUseDES2:jsonstr key:DESKEY]]];
+    
+    _urlString = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@public/job/search?data=%@",KBaseURL,[NSString stringWithFormat:@"%f,%f",location.coordinate.longitude,location.coordinate.latitude]]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
 }
 
 

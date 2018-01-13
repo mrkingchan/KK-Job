@@ -43,8 +43,7 @@
         
         UserInfo.userInfo =  [[UserModel alloc] initWithDictionary:data[@"rel"]];
         UserInfo.userInfo.reCode = @"X3333";
-        NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
-        [UtilityHelper saveUserInfoWith:rel keyName:UserCache];
+        [UtilityHelper saveUserInfoWith:UserInfo.userInfo keyName:UserCache];
         
         sucess(true);
         
@@ -77,7 +76,7 @@
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,WhetherBasicInfo];
     NSString * paramerStr = [paramer mj_JSONString];
     NSString * encry = [UtilityHelper encryptUseDES2:paramerStr key:DESKEY];
-    [NetWorkHelper postWithURLString:urlString parameters:@{@"token":encry} success:^(NSDictionary *data){
+    [NetWorkHelper getWithURLString:urlString parameters:@{@"token":encry} success:^(NSDictionary *data){
         NSDictionary * rel = data[@"rel"];
         sucess(rel[@"whetherUserBaseInfo"],rel[@"comUserInfo"]);
     } failure:^(NSError *error) {
@@ -121,8 +120,7 @@
         
         UserInfo.userInfo =  [[UserModel alloc] initWithDictionary:data[@"rel"]];
         UserInfo.userInfo.reCode = data[@"reCode"];
-        NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
-        [UtilityHelper saveUserInfoWith:rel keyName:UserCache];
+        [UtilityHelper saveUserInfoWith:UserInfo.userInfo keyName:UserCache];
         
         sucess(true);
         

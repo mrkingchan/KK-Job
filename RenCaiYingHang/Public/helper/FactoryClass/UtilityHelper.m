@@ -50,8 +50,7 @@
                 UserInfo.userInfo.reCode = @"X1111";
                 UserInfo.userInfo.comId = whetherComBaseInfo[@"com_id"];
                 UserInfo.userInfo.comname = whetherComBaseInfo[@"comname"];
-                NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
-                [UtilityHelper saveUserInfoWith:rel keyName:UserCache];
+                [UtilityHelper saveUserInfoWith:UserInfo.userInfo keyName:UserCache];
                 
                 HomePageViewController * homeCtl = [[HomePageViewController alloc] init];
                 homeCtl.isFinishComInfo = true;
@@ -59,8 +58,7 @@
             }
             if ([whetherUserBaseInfo isEqualToString:@"yes"]) {
                 UserInfo.userInfo.reCode = @"X2222";
-                NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
-                [UtilityHelper saveUserInfoWith:rel keyName:UserCache];
+                [UtilityHelper saveUserInfoWith:UserInfo.userInfo keyName:UserCache];
                 [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
             }
         }else{
@@ -81,23 +79,22 @@
         switch (clientType) {
             case 1: /** 1是个人版跳企业版 */
             {
-                UserInfo.userInfo.reCode = @"X1111";
+                
                 if([[whetherComBaseInfo allKeys] containsObject:@"comUserInfo"])
-                    
                 {
-                    NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
-                    [UtilityHelper saveUserInfoWith:rel keyName:UserCache];
+                    UserInfo.userInfo.reCode = @"X3333";
+                    [UtilityHelper saveUserInfoWith:UserInfo.userInfo keyName:UserCache];
                     
                     HomePageViewController * homeCtl = [[HomePageViewController alloc] init];
                     homeCtl.isFinishComInfo = false;
                     [UIApplication sharedApplication].keyWindow.rootViewController = homeCtl;
                 }
-                else
+                else if([[whetherComBaseInfo allKeys] containsObject:@"com_id"])
                 {
+                    UserInfo.userInfo.reCode = @"X1111";
                     UserInfo.userInfo.comId = whetherComBaseInfo[@"com_id"];
                     UserInfo.userInfo.comname = whetherComBaseInfo[@"comname"];
-                    NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
-                    [UtilityHelper saveUserInfoWith:rel keyName:UserCache];
+                    [UtilityHelper saveUserInfoWith:UserInfo.userInfo keyName:UserCache];
                     
                     HomePageViewController * homeCtl = [[HomePageViewController alloc] init];
                     homeCtl.isFinishComInfo = true;
@@ -108,15 +105,12 @@
             case 2:/** 2是企业版跳个人版 */
             {
                 if ([whetherUserBaseInfo isEqualToString:@"yes"]) {
-                    
                     UserInfo.userInfo.reCode = @"X2222";
-                    NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
-                    [UtilityHelper saveUserInfoWith:rel keyName:UserCache];
+                    [UtilityHelper saveUserInfoWith:UserInfo.userInfo keyName:UserCache];
                     
                     [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
                     
-                }else{
-                   
+                }else if ([whetherUserBaseInfo isEqualToString:@"no"]){
                     [UIApplication sharedApplication].keyWindow.rootViewController =  [[RYNavigationController alloc] initWithRootViewController:[[NecessaryInfoViewController alloc] init]];
                 }
             }
@@ -130,9 +124,10 @@
 }
 
 /** 缓存数据 */
-+ (void) saveUserInfoWith:(NSDictionary *)data keyName:(NSString *)keyName
++ (void) saveUserInfoWith:(UserModel *)model keyName:(NSString *)keyName
 {
-    NSData * dataUser  = [NSKeyedArchiver archivedDataWithRootObject:data];
+    NSDictionary * rel = UserInfo.userInfo.mj_keyValues;
+    NSData * dataUser  = [NSKeyedArchiver archivedDataWithRootObject:rel];
     [RYDefaults setObject:dataUser forKey:keyName];
 }
 
@@ -193,13 +188,11 @@ const  Byte iv[] = {1,2,3,4,5,6,7,8};
     return ciphertext;
 }
 
-/**
- DES解密
- */
+/** DES解密 */
 + (NSString *)decryptUseDES2:(NSString *)cipherText key:(NSString *)key
 {
     NSString *plaintext = nil;
-    NSData *cipherdata = [GTMBase64 decodeString:cipherText];//[Base64 decode:cipherText];
+    NSData *cipherdata = [GTMBase64 decodeData:[cipherText dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
     unsigned char buffer[1024];
     memset(buffer, 0, sizeof(char));
     size_t numBytesDecrypted = 0;

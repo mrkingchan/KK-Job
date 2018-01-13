@@ -215,14 +215,14 @@
     _tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reloadRequest)];
     [self.view addGestureRecognizer:_tap];
     
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:UIIMAGE(@"nonetwork")]];
+    [self.webView.scrollView setBackgroundColor:[UIColor colorWithPatternImage:UIIMAGE(@"nonetwork")]];
 }
 
 /** 去掉手势 */
 - (void) removeTapGesture
 {
     [self.view removeGestureRecognizer:_tap];
-    [self.view setBackgroundColor:kWhiteColor];
+    [self.webView.scrollView setBackgroundColor:kWhiteColor];
 }
 
 /** 重新加载 */
@@ -275,7 +275,7 @@
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
-    if ([url rangeOfString:KBaseURL].location == NSNotFound) {
+    if ([url rangeOfString:KBaseURL].location == NSNotFound && [self.url rangeOfString:@"public/company/coms/"].location != NSNotFound) {
         [[UIApplication sharedApplication] openURL:navigationAction.request.URL];
         decisionHandler(WKNavigationActionPolicyCancel);
     }else{
