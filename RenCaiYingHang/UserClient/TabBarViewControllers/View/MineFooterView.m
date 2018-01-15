@@ -10,9 +10,12 @@
 
 #import "MsgViewCell.h"
 
+//横向跑马灯
 #import "CLRollLabel.h"
+//竖向跑马灯
+#import "GYRollingNoticeView.h"
 
-@interface MineFooterView ()<UITableViewDelegate,UITableViewDataSource>
+@interface MineFooterView ()<UITableViewDelegate,UITableViewDataSource,GYRollingNoticeViewDataSource, GYRollingNoticeViewDelegate>
 
 @property (nonatomic,strong) UITableView * tableView;
 
@@ -95,14 +98,25 @@ static NSString * msgLabCellID = @"MsgViewCell";
     }
     MsgViewCell * cell = [tableView dequeueReusableCellWithIdentifier:msgLabCellID];
     if (self.msgArr.count > 0) {
-        self.rollLabel.frame = CGRectMake(cell.msgLab.left, cell.msgLab.top, kScreenWidth - cell.msgLab.left - 10, cell.msgLab.height);
-        [cell.contentView addSubview:self.rollLabel];
         
-        NSString * string = self.msgArr[0];
-        for (int i = 1; i < self.msgArr.count; i++) {
-            string = [NSString stringWithFormat:@"%@    %@",string,self.msgArr[i]];
-        }
-        self.rollLabel.text = string;
+//        //横向做法
+//        self.rollLabel.frame = CGRectMake(cell.msgLab.left, cell.msgLab.top, kScreenWidth - cell.msgLab.left - 10, cell.msgLab.height);
+//        [cell.contentView addSubview:self.rollLabel];
+//
+//        NSString * string = self.msgArr[0];
+//        for (int i = 1; i < self.msgArr.count; i++) {
+//            string = [NSString stringWithFormat:@"%@    %@",string,self.msgArr[i]];
+//        }
+//        self.rollLabel.text = string;
+        
+        GYRollingNoticeView *noticeView = [[GYRollingNoticeView alloc]initWithFrame:CGRectMake(cell.msgLab.left, cell.msgLab.top, kScreenWidth - cell.msgLab.left - 10, cell.msgLab.height)];
+        noticeView.dataSource = self;
+        noticeView.delegate = self;
+        [cell.contentView addSubview:noticeView];
+        noticeView.backgroundColor = [UIColor lightGrayColor];
+       
+        [noticeView registerClass:[GYNoticeViewCell class] forCellReuseIdentifier:@"GYNoticeViewCell"];
+        [noticeView beginScroll];
     }
     return cell;
 }
@@ -148,6 +162,26 @@ static NSString * msgLabCellID = @"MsgViewCell";
             _mineFooterClickCallBack(indexPath.row);
         }
     }
+}
+
+#pragma mark 竖向滚动字体代理
+- (NSInteger)numberOfRowsForRollingNoticeView:(GYRollingNoticeView *)rollingView
+{
+    return self.msgArr.count;
+}
+
+- (__kindof GYNoticeViewCell *)rollingNoticeView:(GYRollingNoticeView *)rollingView cellAtIndex:(NSUInteger)index
+{
+    // 普通用法，只有一行label滚动显示文字
+    // normal use, only one line label rolling
+    GYNoticeViewCell *cell = [rollingView dequeueReusableCellWithIdentifier:@"GYNoticeViewCell"];
+    cell.textLabel.text = self.msgArr[index];
+    return cell;
+}
+
+- (void)didClickRollingNoticeView:(GYRollingNoticeView *)rollingView forIndex:(NSUInteger)index
+{
+    NSLog(@"点击的index: %lu", (unsigned long)index);
 }
 
 @end

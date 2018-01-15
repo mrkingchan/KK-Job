@@ -65,6 +65,8 @@
 		8F3BDA661FED094800C4B472 /* MineFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F3BDA641FED094800C4B472 /* MineFooterView.xib */; };
 		8F3BDA711FED25C000C4B472 /* MsgViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3BDA6F1FED25C000C4B472 /* MsgViewCell.m */; };
 		8F3BDA721FED25C000C4B472 /* MsgViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F3BDA701FED25C000C4B472 /* MsgViewCell.xib */; };
+		8F4CCF39200C3ED900260000 /* GYNoticeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CCF36200C3ED900260000 /* GYNoticeViewCell.m */; };
+		8F4CCF3A200C3ED900260000 /* GYRollingNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CCF38200C3ED900260000 /* GYRollingNoticeView.m */; };
 		8F5087FC1FEA5C1500743B9C /* AuthenticationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5087FB1FEA5C1500743B9C /* AuthenticationModel.m */; };
 		8F5088031FEA7B8000743B9C /* RYAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5088021FEA7B8000743B9C /* RYAlertAction.m */; };
 		8F5E3D4A2004E275007CA925 /* RYSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5E3D492004E275007CA925 /* RYSelectViewController.m */; };
@@ -312,6 +314,10 @@
 		8F3BDA6E1FED25C000C4B472 /* MsgViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MsgViewCell.h; sourceTree = "<group>"; };
 		8F3BDA6F1FED25C000C4B472 /* MsgViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MsgViewCell.m; sourceTree = "<group>"; };
 		8F3BDA701FED25C000C4B472 /* MsgViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MsgViewCell.xib; sourceTree = "<group>"; };
+		8F4CCF35200C3ED900260000 /* GYNoticeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYNoticeViewCell.h; sourceTree = "<group>"; };
+		8F4CCF36200C3ED900260000 /* GYNoticeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYNoticeViewCell.m; sourceTree = "<group>"; };
+		8F4CCF37200C3ED900260000 /* GYRollingNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYRollingNoticeView.h; sourceTree = "<group>"; };
+		8F4CCF38200C3ED900260000 /* GYRollingNoticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYRollingNoticeView.m; sourceTree = "<group>"; };
 		8F5087FA1FEA5C1500743B9C /* AuthenticationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationModel.h; sourceTree = "<group>"; };
 		8F5087FB1FEA5C1500743B9C /* AuthenticationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationModel.m; sourceTree = "<group>"; };
 		8F5088011FEA7B8000743B9C /* RYAlertAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYAlertAction.h; sourceTree = "<group>"; };
@@ -860,6 +866,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		8F4CCF34200C3ED900260000 /* GYRollingNoticeView */ = {
+			isa = PBXGroup;
+			children = (
+				8F4CCF35200C3ED900260000 /* GYNoticeViewCell.h */,
+				8F4CCF36200C3ED900260000 /* GYNoticeViewCell.m */,
+				8F4CCF37200C3ED900260000 /* GYRollingNoticeView.h */,
+				8F4CCF38200C3ED900260000 /* GYRollingNoticeView.m */,
+			);
+			path = GYRollingNoticeView;
+			sourceTree = "<group>";
+		};
 		8F5087FD1FEA5C2A00743B9C /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1016,6 +1033,7 @@
 		8F85D8551FD9236600BC1A7D /* other */ = {
 			isa = PBXGroup;
 			children = (
+				8F4CCF34200C3ED900260000 /* GYRollingNoticeView */,
 				8F19C94F2008A36200A957FF /* CLRollLabel */,
 				8F0EF4D61FE3D33000D179D5 /* function-view */,
 				8FF04D3B1FDA263600B14036 /* view(通用视图) */,
@@ -1669,6 +1687,7 @@
 				8F728C321FDE367200C6247B /* AssetsHandleCell.m in Sources */,
 				8F85D8A11FD9257400BC1A7D /* CIImage+SGExtension.m in Sources */,
 				8FF04D4F1FDA6FDE00B14036 /* RYAlertSheet.m in Sources */,
+				8F4CCF3A200C3ED900260000 /* GYRollingNoticeView.m in Sources */,
 				8F85D89D1FD9257400BC1A7D /* EJAlertViewController.m in Sources */,
 				8F1CA8281FE7668200BBD208 /* RyAnnotationView.m in Sources */,
 				8F85D8601FD9243900BC1A7D /* RYNavigationController.m in Sources */,
@@ -1706,6 +1725,7 @@
 				8FF2D0CB1FFF1E46002F18B4 /* CustomCalloutView.m in Sources */,
 				8F85D8C21FD9280D00BC1A7D /* MyRefreshHeader.m in Sources */,
 				8F728C261FDE1FC300C6247B /* JHUploadImage.m in Sources */,
+				8F4CCF39200C3ED900260000 /* GYNoticeViewCell.m in Sources */,
 				8F3BDA711FED25C000C4B472 /* MsgViewCell.m in Sources */,
 				8FF04D6F1FDA8D4300B14036 /* ChangePayPwViewController.m in Sources */,
 				8F1CA83F1FE7C4CA00BBD208 /* UILabel+SystemFont.m in Sources */,
