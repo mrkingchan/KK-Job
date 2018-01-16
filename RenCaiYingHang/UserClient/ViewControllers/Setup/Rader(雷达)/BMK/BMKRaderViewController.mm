@@ -124,6 +124,7 @@ static NSString * identifier = @"CollectionViewCell";
  */
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation
 {
+//    RYAnnotation * current  = (RYAnnotation *)annotation;
     if ([annotation isKindOfClass:[RYAnnotation class]])
     {
         YWRoundAnnotationView *newAnnotationView =(YWRoundAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"RoundmyAnnotation"];
@@ -131,12 +132,11 @@ static NSString * identifier = @"CollectionViewCell";
         {
             newAnnotationView=[[ YWRoundAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"RoundmyAnnotation"];
         }
-        BMKPointAnnotation* Newannotation=(BMKPointAnnotation*)annotation;
-        newAnnotationView.titleText = [NSString stringWithFormat:@"%@", Newannotation.title];
-        newAnnotationView.countText = [NSString stringWithFormat:@"%@", Newannotation.subtitle];
+
+        newAnnotationView.titleText = [NSString stringWithFormat:@"%@", annotation.title];
+        newAnnotationView.countText = [NSString stringWithFormat:@"%@", annotation.subtitle];
         
         newAnnotationView.canShowCallout = false;
-        newAnnotationView.draggable = YES;
         
         __weak typeof(newAnnotationView) annotationView = newAnnotationView;
         newAnnotationView.bmkAnnotationViewClick = ^ {
@@ -203,6 +203,13 @@ static NSString * identifier = @"CollectionViewCell";
     [mapView setNeedsDisplay];
     
     if ([view.annotation isKindOfClass:[RYAnnotation class]]) {
+       // [mapView removeAnnotation:current];
+        RYAnnotation *annotation1 = [[RYAnnotation alloc]init];
+        annotation1.index = current.index;
+        annotation1.title = current.title;
+        annotation1.subtitle = current.subtitle;
+        annotation1.coordinate = view.annotation.coordinate;
+        [mapView addAnnotation:annotation1];
     }
     
     if ([view.annotation isKindOfClass:[BMKUserLocation class]]) {
@@ -220,9 +227,9 @@ static NSString * identifier = @"CollectionViewCell";
 - (void)showPOIAnnotations
 {
     [self.mapView addAnnotations:self.searchPoiArray];
-    if (self.searchPoiArray.count > 1) {
-        [self.mapView showAnnotations:self.searchPoiArray animated:NO];
-    }
+//    if (self.searchPoiArray.count > 1) {
+//        [self.mapView showAnnotations:self.searchPoiArray animated:NO];
+//    }
 }
 
 #pragma mark - Initialization
