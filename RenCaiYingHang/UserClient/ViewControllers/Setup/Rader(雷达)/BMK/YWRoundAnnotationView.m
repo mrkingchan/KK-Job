@@ -52,7 +52,7 @@
     
     CAShapeLayer *layer=[ CAShapeLayer layer];
     layer.frame=view.frame;
-    layer.path=[ UIBezierPath bezierPathWithRoundedRect:view.frame cornerRadius:15].CGPath;
+    layer.path=[ UIBezierPath bezierPathWithRoundedRect:view.frame cornerRadius:5].CGPath;
     layer.fillColor=[ UIColor colorWithRed:83/255.0 green:180/255.0 blue:119/255.0 alpha:1.0].CGColor;
    [view.layer addSublayer:layer];
     layer.lineWidth=0.3f;
