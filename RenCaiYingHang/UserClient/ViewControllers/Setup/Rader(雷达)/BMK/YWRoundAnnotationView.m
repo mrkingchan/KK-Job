@@ -38,7 +38,8 @@
     
     return self;
 }
--(void)initWithContentViews{
+-(void)initWithContentViews
+{
     
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(senderClick)];
     [self addGestureRecognizer:tap];
@@ -61,16 +62,14 @@
     lable.textAlignment=NSTextAlignmentCenter;
     lable.textColor=[ UIColor whiteColor];
     lable.font=[ UIFont systemFontOfSize:11];
-    lable.text=@"昌平";
     _titleLable=lable;
     [_contentView addSubview:lable];
    
-    UILabel *countlable=[[ UILabel alloc] initWithFrame:CGRectMake(0,17, 45, 21)];
-    countlable.textAlignment=NSTextAlignmentCenter;
-    countlable.textColor=[ UIColor whiteColor];
-    countlable.font=[UIFont fontWithName:@"Helvetica-Bold" size:13];
-    countlable.text=@"2300";
-    _countLable=countlable;
+    UILabel *countlable = [[ UILabel alloc] initWithFrame:CGRectMake(0,17, 45, 21)];
+    countlable.textAlignment = NSTextAlignmentCenter;
+    countlable.textColor = [ UIColor whiteColor];
+    countlable.font = [UIFont fontWithName:@"Helvetica-Bold" size:13];
+    _countLable = countlable;
     [_contentView addSubview:countlable];
 }
 

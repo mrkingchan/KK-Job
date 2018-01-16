@@ -140,6 +140,7 @@ static NSString * identifier = @"CollectionViewCell";
         
         __weak typeof(newAnnotationView) annotationView = newAnnotationView;
         newAnnotationView.bmkAnnotationViewClick = ^ {
+            annotationView.selected = true;
             [self mapView:self.mapView didSelectAnnotationView:annotationView];
         };
         
@@ -229,6 +230,7 @@ static NSString * identifier = @"CollectionViewCell";
 - (void)initMapView
 {
     self.mapView = [[BMKMapView alloc] initWithFrame:self.view.bounds];
+    self.mapView.delegate = self;
     [self.view addSubview:self.mapView];
     self.mapView.mapType = BMKMapTypeStandard;
     self.mapView.isSelectedAnnotationViewFront = true;
