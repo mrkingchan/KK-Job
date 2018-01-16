@@ -79,7 +79,6 @@
         switch (clientType) {
             case 1: /** 1是个人版跳企业版 */
             {
-                
                 if([[whetherComBaseInfo allKeys] containsObject:@"comUserInfo"])
                 {
                     UserInfo.userInfo.reCode = @"X3333";

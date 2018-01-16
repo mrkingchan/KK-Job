@@ -35,7 +35,7 @@
     
     entryNumber.text = [NSString stringWithFormat:@"%.f",model.subsidy];
     salaryRange.text = model.salaryrange;
-    address.text = [NSString stringWithFormat:@"%@-%@",model._city,model._district];
+    address.text = [NSString stringWithFormat:@"%@-%@",model.city,model.district];
     years.text = model.job_exp_name;
     education.text = model.diploma_name;
     

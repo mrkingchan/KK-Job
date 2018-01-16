@@ -22,6 +22,7 @@
 
 #define WeXinAppID @"wx779203d95b24f1b6"
 #define MAMapKey @"f2b33e5d47fdd4dec561635aa41f4623"
+#define BMMapKey @"6cL8Z9LOw1hrfa21pIkNEyaruGXSNiG4"
 
 #define AdaptiveRate [UIScreen mainScreen].bounds.size.height / 736
 #define fontScale kScreenWidth/375

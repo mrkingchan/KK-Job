@@ -9,8 +9,14 @@
 #import "JobViewController.h"
 
 #import "JobH5ViewController.h"
-#import "MARaderViewController.h"
 
+/** 百度地图 */
+#import "BMKRaderViewController.h"
+
+/** 高德地图 */
+//#import "MARaderViewController.h"
+
+/** iOS原生地图 */
 //#import "RadarViewController.h"
 
 @interface JobViewController ()
@@ -67,7 +73,7 @@
     jobH5.title = @"推荐";
     [self addChildViewController:jobH5];
     
-    MARaderViewController * recentMap = [[MARaderViewController alloc] init];
+    BMKRaderViewController * recentMap = [[BMKRaderViewController alloc] init];
     recentMap.title = @"雷达";
     recentMap.view.backgroundColor = Color235;
     [self addChildViewController:recentMap];

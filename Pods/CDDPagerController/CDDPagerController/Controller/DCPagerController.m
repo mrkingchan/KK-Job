@@ -333,7 +333,6 @@
     [_titleScrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
     
     _pregressView.isStretch = NO;
-
 }
 
 #pragma mark - 底部滚动条滚动
@@ -349,6 +348,11 @@
 //添加控制器View
 - (void)AddOneVcWithButtton:(NSInteger)i
 {
+#pragma mark 为了地图
+    if(i == 0) {
+        _contentScrollView.scrollEnabled = true;
+    }
+    
     UIViewController *vc = self.childViewControllers[i];
     if (vc.view.superview)return;
     vc.view.frame = CGRectMake(i * ScreenW, 0,ScreenW , _contentScrollView.dc_height);
@@ -376,8 +380,16 @@
 #pragma mark - <UIScrollViewDelegate>
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    
     NSInteger tagI = scrollView.contentOffset.x / ScreenW;
+    
+#pragma mark 为了地图
+    if (tagI == 1) {
+        _contentScrollView.scrollEnabled = false;
+    }
+    else if(tagI == 0) {
+        _contentScrollView.scrollEnabled = true;
+    }
+    
     UIButton *button = self.titleButtonArray[tagI];
     
     [self selectButton:button];

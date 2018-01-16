@@ -122,7 +122,9 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    !self.selectedBlock ?: self.selectedBlock(indexPath.row, self.titleArray[indexPath.row]);
+    if (self.selectedBlock) {
+        self.selectedBlock(indexPath.row, self.titleArray[indexPath.row]);
+    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {

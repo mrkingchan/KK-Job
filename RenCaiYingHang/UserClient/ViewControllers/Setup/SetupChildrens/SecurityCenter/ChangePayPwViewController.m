@@ -131,7 +131,7 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
             cell.textField.textColor = [UIColor lightGrayColor];
             cell.textField.enabled = false;
         }else{
-            cell.textField.textAlignment = 0;
+            cell.textField.textAlignment = NSTextAlignmentLeft;
             cell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",self.dataArray[indexPath.row]];
             cell.textField.secureTextEntry = true;
         }

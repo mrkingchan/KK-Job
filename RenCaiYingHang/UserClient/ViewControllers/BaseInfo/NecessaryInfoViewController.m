@@ -158,7 +158,7 @@ static NSString * SalaryCellID = @"SalaryCell";
         {
             TextFieldCell * cell = [tableView dequeueReusableCellWithIdentifier:TextFieldCellID];
             cell.textLabel.text = self.dataArray[indexPath.row];
-            cell.tf.textAlignment = 2;
+            cell.tf.textAlignment = NSTextAlignmentRight;
             cell.tf.placeholder = [NSString stringWithFormat:@"请输入%@",self.dataArray[indexPath.row]];
             cell.textLabel.font = systemOfFont(16);
             
@@ -295,7 +295,7 @@ static NSString * SalaryCellID = @"SalaryCell";
     PGDatePicker *datePicker = [[PGDatePicker alloc]init];
     datePicker.delegate = self;
     [datePicker showWithShadeBackgroud];
-    datePicker.datePickerType = PGPickerViewType3;
+    datePicker.datePickerType = (PGDatePickerType)PGPickerViewType3;
     datePicker.datePickerMode = PGDatePickerModeDate;
     
     NSArray * dateArr =  [[UtilityHelper getCurrentTimes] componentsSeparatedByString:@"-"];

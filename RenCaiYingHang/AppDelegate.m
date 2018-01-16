@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <BaiduMapAPI_Map/BMKMapComponent.h>
 
 // 引入JPush功能所需头文件
 #import <JPUSHService.h>
@@ -24,6 +25,9 @@
 #import "GestureSetController.h"
 
 @interface AppDelegate ()<OSGuideSelectDelegate,JPUSHRegisterDelegate>
+{
+    BMKMapManager* _mapManager;
+}
 
 @property (nonatomic,assign) BOOL isEnterBackground;
 
@@ -53,6 +57,9 @@ static BOOL isProduction = true;//false true
     
     //注册极光
     [self regsiterJPush:launchOptions];
+    
+    //注册百度
+    [self regsiterBaidu];
     
     //注册高德
     [AMapServices sharedServices].apiKey = MAMapKey;
@@ -179,6 +186,27 @@ static BOOL isProduction = true;//false true
     }];
 }
 
+/** 注册百度 */
+- (void) regsiterBaidu
+{
+    // 要使用百度地图，请先启动BaiduMapManager
+    _mapManager = [[BMKMapManager alloc]init];
+    
+    /**
+     *百度地图SDK所有接口均支持百度坐标（BD09）和国测局坐标（GCJ02），用此方法设置您使用的坐标类型.
+     *默认是BD09（BMK_COORDTYPE_BD09LL）坐标.
+     *如果需要使用GCJ02坐标，需要设置CoordinateType为：BMK_COORDTYPE_COMMON.
+     */
+    if ([BMKMapManager setCoordinateTypeUsedInBaiduMapSDK:BMK_COORDTYPE_BD09LL]) {
+        NSLog(@"经纬度类型设置成功");
+    } else {
+        NSLog(@"经纬度类型设置失败");
+    }
+    BOOL ret = [_mapManager start:BMMapKey generalDelegate:self];
+    if (!ret) {
+        NSLog(@"manager start failed!");
+    }
+}
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary*)options
 {

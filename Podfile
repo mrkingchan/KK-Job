@@ -28,4 +28,6 @@ pod 'AMapSearch'
 
 pod 'AMap2DMap'
 
+pod 'BaiduMapKit'
+
 end

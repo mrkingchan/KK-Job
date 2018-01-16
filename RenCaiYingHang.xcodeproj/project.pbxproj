@@ -65,6 +65,13 @@
 		8F3BDA661FED094800C4B472 /* MineFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F3BDA641FED094800C4B472 /* MineFooterView.xib */; };
 		8F3BDA711FED25C000C4B472 /* MsgViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3BDA6F1FED25C000C4B472 /* MsgViewCell.m */; };
 		8F3BDA721FED25C000C4B472 /* MsgViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F3BDA701FED25C000C4B472 /* MsgViewCell.xib */; };
+		8F3F2F17200D91FB0017A9A3 /* BMKRaderViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F3F2F16200D91FB0017A9A3 /* BMKRaderViewController.mm */; };
+		8F3F2F1A200D9A3C0017A9A3 /* RYAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3F2F19200D9A3C0017A9A3 /* RYAnnotation.m */; };
+		8F3F2F1C200DA6A30017A9A3 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3F2F1B200DA6A30017A9A3 /* libstdc++.6.0.9.tbd */; };
+		8F3F2F1E200DA6CA0017A9A3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3F2F1D200DA6CA0017A9A3 /* OpenGLES.framework */; };
+		8F3F2F20200DA6E60017A9A3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3F2F1F200DA6E60017A9A3 /* CoreLocation.framework */; };
+		8F3F2F23200E069F0017A9A3 /* YWRoundAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3F2F22200E069E0017A9A3 /* YWRoundAnnotationView.m */; };
+		8F3F2F26200E06E00017A9A3 /* YWActionPaopaoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3F2F25200E06E00017A9A3 /* YWActionPaopaoView.m */; };
 		8F4CCF39200C3ED900260000 /* GYNoticeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CCF36200C3ED900260000 /* GYNoticeViewCell.m */; };
 		8F4CCF3A200C3ED900260000 /* GYRollingNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CCF38200C3ED900260000 /* GYRollingNoticeView.m */; };
 		8F5087FC1FEA5C1500743B9C /* AuthenticationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5087FB1FEA5C1500743B9C /* AuthenticationModel.m */; };
@@ -175,8 +182,6 @@
 		8FF04D791FDA947900B14036 /* LabelSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF04D771FDA947900B14036 /* LabelSwitchCell.m */; };
 		8FF04D7A1FDA947900B14036 /* LabelSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF04D781FDA947900B14036 /* LabelSwitchCell.xib */; };
 		8FF2D0C71FFF1BF7002F18B4 /* MARaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2D0C61FFF1BF7002F18B4 /* MARaderViewController.m */; };
-		8FF2D0CB1FFF1E46002F18B4 /* CustomCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2D0CA1FFF1E46002F18B4 /* CustomCalloutView.m */; };
-		8FF2D0CE1FFF1E9A002F18B4 /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2D0CD1FFF1E9A002F18B4 /* CustomAnnotationView.m */; };
 		8FF2D0D11FFF1F85002F18B4 /* CurrentLocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2D0D01FFF1F85002F18B4 /* CurrentLocationAnnotation.m */; };
 		8FF2D0D81FFF1FA9002F18B4 /* XYQProgressHUD+XYQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2D0D41FFF1FA9002F18B4 /* XYQProgressHUD+XYQ.m */; };
 		8FF2D0D91FFF1FA9002F18B4 /* XYQProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8FF2D0D51FFF1FA9002F18B4 /* XYQProgressHUD.bundle */; };
@@ -314,6 +319,17 @@
 		8F3BDA6E1FED25C000C4B472 /* MsgViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MsgViewCell.h; sourceTree = "<group>"; };
 		8F3BDA6F1FED25C000C4B472 /* MsgViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MsgViewCell.m; sourceTree = "<group>"; };
 		8F3BDA701FED25C000C4B472 /* MsgViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MsgViewCell.xib; sourceTree = "<group>"; };
+		8F3F2F15200D91FB0017A9A3 /* BMKRaderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMKRaderViewController.h; sourceTree = "<group>"; };
+		8F3F2F16200D91FB0017A9A3 /* BMKRaderViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BMKRaderViewController.mm; sourceTree = "<group>"; };
+		8F3F2F18200D9A3C0017A9A3 /* RYAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYAnnotation.h; sourceTree = "<group>"; };
+		8F3F2F19200D9A3C0017A9A3 /* RYAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYAnnotation.m; sourceTree = "<group>"; };
+		8F3F2F1B200DA6A30017A9A3 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		8F3F2F1D200DA6CA0017A9A3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		8F3F2F1F200DA6E60017A9A3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		8F3F2F21200E069E0017A9A3 /* YWRoundAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWRoundAnnotationView.h; sourceTree = "<group>"; };
+		8F3F2F22200E069E0017A9A3 /* YWRoundAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWRoundAnnotationView.m; sourceTree = "<group>"; };
+		8F3F2F24200E06DF0017A9A3 /* YWActionPaopaoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWActionPaopaoView.h; sourceTree = "<group>"; };
+		8F3F2F25200E06E00017A9A3 /* YWActionPaopaoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWActionPaopaoView.m; sourceTree = "<group>"; };
 		8F4CCF35200C3ED900260000 /* GYNoticeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYNoticeViewCell.h; sourceTree = "<group>"; };
 		8F4CCF36200C3ED900260000 /* GYNoticeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYNoticeViewCell.m; sourceTree = "<group>"; };
 		8F4CCF37200C3ED900260000 /* GYRollingNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYRollingNoticeView.h; sourceTree = "<group>"; };
@@ -513,10 +529,6 @@
 		8FF04D781FDA947900B14036 /* LabelSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelSwitchCell.xib; sourceTree = "<group>"; };
 		8FF2D0C51FFF1BF7002F18B4 /* MARaderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MARaderViewController.h; sourceTree = "<group>"; };
 		8FF2D0C61FFF1BF7002F18B4 /* MARaderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MARaderViewController.m; sourceTree = "<group>"; };
-		8FF2D0C91FFF1E46002F18B4 /* CustomCalloutView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCalloutView.h; sourceTree = "<group>"; };
-		8FF2D0CA1FFF1E46002F18B4 /* CustomCalloutView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomCalloutView.m; sourceTree = "<group>"; };
-		8FF2D0CC1FFF1E9A002F18B4 /* CustomAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomAnnotationView.h; sourceTree = "<group>"; };
-		8FF2D0CD1FFF1E9A002F18B4 /* CustomAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
 		8FF2D0CF1FFF1F85002F18B4 /* CurrentLocationAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrentLocationAnnotation.h; sourceTree = "<group>"; };
 		8FF2D0D01FFF1F85002F18B4 /* CurrentLocationAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrentLocationAnnotation.m; sourceTree = "<group>"; };
 		8FF2D0D31FFF1FA9002F18B4 /* XYQProgressHUD+XYQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XYQProgressHUD+XYQ.h"; sourceTree = "<group>"; };
@@ -535,15 +547,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F3F2F20200DA6E60017A9A3 /* CoreLocation.framework in Frameworks */,
+				8FE1A3731FF4C8730022CDB0 /* QuartzCore.framework in Frameworks */,
+				8F3F2F1E200DA6CA0017A9A3 /* OpenGLES.framework in Frameworks */,
+				8FE1A36F1FF4C8650022CDB0 /* CoreTelephony.framework in Frameworks */,
+				8F3F2F1C200DA6A30017A9A3 /* libstdc++.6.0.9.tbd in Frameworks */,
 				8FE1A37D1FF4C89B0022CDB0 /* Photos.framework in Frameworks */,
 				8FE1A37B1FF4C8940022CDB0 /* AssetsLibrary.framework in Frameworks */,
 				8F19C94D2008519900A957FF /* libWeChatSDK.a in Frameworks */,
 				8FE1A3791FF4C88C0022CDB0 /* CoreMotion.framework in Frameworks */,
 				8FE1A3771FF4C8830022CDB0 /* CFNetwork.framework in Frameworks */,
 				8FE1A3751FF4C87C0022CDB0 /* CoreGraphics.framework in Frameworks */,
-				8FE1A3731FF4C8730022CDB0 /* QuartzCore.framework in Frameworks */,
 				8FE1A3711FF4C86D0022CDB0 /* CoreText.framework in Frameworks */,
-				8FE1A36F1FF4C8650022CDB0 /* CoreTelephony.framework in Frameworks */,
 				8FE1A36D1FF4C8590022CDB0 /* libc++.tbd in Frameworks */,
 				8FE1A35A1FF4BE4F0022CDB0 /* libz.tbd in Frameworks */,
 				8FE1A3581FF4BE410022CDB0 /* libsqlite3.0.tbd in Frameworks */,
@@ -576,6 +591,9 @@
 		80342F3B39267ACE04B9EEF4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8F3F2F1F200DA6E60017A9A3 /* CoreLocation.framework */,
+				8F3F2F1D200DA6CA0017A9A3 /* OpenGLES.framework */,
+				8F3F2F1B200DA6A30017A9A3 /* libstdc++.6.0.9.tbd */,
 				8FE1A37C1FF4C89B0022CDB0 /* Photos.framework */,
 				8FE1A37A1FF4C8940022CDB0 /* AssetsLibrary.framework */,
 				8FE1A3781FF4C88C0022CDB0 /* CoreMotion.framework */,
@@ -690,10 +708,9 @@
 		8F151E521FDFA7E100F15CF7 /* Rader(雷达) */ = {
 			isa = PBXGroup;
 			children = (
+				8F3F2F14200D91AD0017A9A3 /* BMK */,
 				8FF2D0C81FFF1C05002F18B4 /* MACutomView */,
 				8F1CA81C1FE7648900BBD208 /* StifleHandle */,
-				8FF2D0C51FFF1BF7002F18B4 /* MARaderViewController.h */,
-				8FF2D0C61FFF1BF7002F18B4 /* MARaderViewController.m */,
 			);
 			path = "Rader(雷达)";
 			sourceTree = "<group>";
@@ -864,6 +881,21 @@
 				8F3BDA701FED25C000C4B472 /* MsgViewCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		8F3F2F14200D91AD0017A9A3 /* BMK */ = {
+			isa = PBXGroup;
+			children = (
+				8F3F2F24200E06DF0017A9A3 /* YWActionPaopaoView.h */,
+				8F3F2F25200E06E00017A9A3 /* YWActionPaopaoView.m */,
+				8F3F2F21200E069E0017A9A3 /* YWRoundAnnotationView.h */,
+				8F3F2F22200E069E0017A9A3 /* YWRoundAnnotationView.m */,
+				8F3F2F15200D91FB0017A9A3 /* BMKRaderViewController.h */,
+				8F3F2F16200D91FB0017A9A3 /* BMKRaderViewController.mm */,
+				8F3F2F18200D9A3C0017A9A3 /* RYAnnotation.h */,
+				8F3F2F19200D9A3C0017A9A3 /* RYAnnotation.m */,
+			);
+			path = BMK;
 			sourceTree = "<group>";
 		};
 		8F4CCF34200C3ED900260000 /* GYRollingNoticeView */ = {
@@ -1414,10 +1446,8 @@
 		8FF2D0C81FFF1C05002F18B4 /* MACutomView */ = {
 			isa = PBXGroup;
 			children = (
-				8FF2D0C91FFF1E46002F18B4 /* CustomCalloutView.h */,
-				8FF2D0CA1FFF1E46002F18B4 /* CustomCalloutView.m */,
-				8FF2D0CC1FFF1E9A002F18B4 /* CustomAnnotationView.h */,
-				8FF2D0CD1FFF1E9A002F18B4 /* CustomAnnotationView.m */,
+				8FF2D0C51FFF1BF7002F18B4 /* MARaderViewController.h */,
+				8FF2D0C61FFF1BF7002F18B4 /* MARaderViewController.m */,
 				8FF2D0CF1FFF1F85002F18B4 /* CurrentLocationAnnotation.h */,
 				8FF2D0D01FFF1F85002F18B4 /* CurrentLocationAnnotation.m */,
 				8FF2D0DE1FFF577E002F18B4 /* RaderSearchViewCell.h */,
@@ -1616,6 +1646,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RenCaiYingHang/Pods-RenCaiYingHang-resources.sh",
 				"${PODS_ROOT}/AMap2DMap/MAMapKit.framework/AMap.bundle",
+				"${PODS_ROOT}/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework/Resources/mapapi.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/PGDatePicker/PGDatePicker/PGDatePicker.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
@@ -1688,13 +1719,13 @@
 				8F85D8A11FD9257400BC1A7D /* CIImage+SGExtension.m in Sources */,
 				8FF04D4F1FDA6FDE00B14036 /* RYAlertSheet.m in Sources */,
 				8F4CCF3A200C3ED900260000 /* GYRollingNoticeView.m in Sources */,
+				8F3F2F26200E06E00017A9A3 /* YWActionPaopaoView.m in Sources */,
 				8F85D89D1FD9257400BC1A7D /* EJAlertViewController.m in Sources */,
 				8F1CA8281FE7668200BBD208 /* RyAnnotationView.m in Sources */,
 				8F85D8601FD9243900BC1A7D /* RYNavigationController.m in Sources */,
 				8F30AE972007442F000793F2 /* SMKCycleScrollView.m in Sources */,
 				8FF2D0D11FFF1F85002F18B4 /* CurrentLocationAnnotation.m in Sources */,
 				8F0EF4DC1FE3D6C800D179D5 /* AreaModel.m in Sources */,
-				8FF2D0CE1FFF1E9A002F18B4 /* CustomAnnotationView.m in Sources */,
 				8F85D8631FD9244800BC1A7D /* RYViewController.m in Sources */,
 				8F85D8251FD922A500BC1A7D /* ViewController.m in Sources */,
 				8F85D8DA1FD9297700BC1A7D /* JobViewController.m in Sources */,
@@ -1722,7 +1753,6 @@
 				8FF04D461FDA3A9300B14036 /* NecessaryInfoViewController.m in Sources */,
 				8F0EF4B91FE366D100D179D5 /* GestureVerifyViewController.m in Sources */,
 				8F85D8CE1FD9282E00BC1A7D /* NetWorkHelper.m in Sources */,
-				8FF2D0CB1FFF1E46002F18B4 /* CustomCalloutView.m in Sources */,
 				8F85D8C21FD9280D00BC1A7D /* MyRefreshHeader.m in Sources */,
 				8F728C261FDE1FC300C6247B /* JHUploadImage.m in Sources */,
 				8F4CCF39200C3ED900260000 /* GYNoticeViewCell.m in Sources */,
@@ -1757,6 +1787,7 @@
 				8F1CA81F1FE764CB00BBD208 /* RyJobModel.m in Sources */,
 				8FE3111C1FF61F6500624D20 /* RYShareView.m in Sources */,
 				8F0EF4B81FE366D100D179D5 /* GestureSetController.m in Sources */,
+				8F3F2F1A200D9A3C0017A9A3 /* RYAnnotation.m in Sources */,
 				8F19C9522008A36200A957FF /* CLRollLabel.m in Sources */,
 				8F85D8F21FD92B1900BC1A7D /* ResiterViewController.m in Sources */,
 				8F85D85D1FD9241800BC1A7D /* RYTabBarController.m in Sources */,
@@ -1778,6 +1809,7 @@
 				8F1F0BDF1FF0C86C00CE2FB5 /* JKBannerCollectionViewCell.m in Sources */,
 				8F5088031FEA7B8000743B9C /* RYAlertAction.m in Sources */,
 				8F85D8221FD922A400BC1A7D /* AppDelegate.m in Sources */,
+				8F3F2F17200D91FB0017A9A3 /* BMKRaderViewController.mm in Sources */,
 				8F1CA82E1FE7688100BBD208 /* JXMapNavigationView.m in Sources */,
 				8F1F666D1FD964E8004BF8F1 /* UploadResumeViewController.m in Sources */,
 				8F85D8F91FD938C800BC1A7D /* OSGuideViewController.m in Sources */,
@@ -1800,6 +1832,7 @@
 				8FF2D0E11FFF577E002F18B4 /* RaderSearchViewCell.m in Sources */,
 				8F26E1181FF49A3700E93F14 /* UIImageView+RotateImgV.m in Sources */,
 				8FF2D0C71FFF1BF7002F18B4 /* MARaderViewController.m in Sources */,
+				8F3F2F23200E069F0017A9A3 /* YWRoundAnnotationView.m in Sources */,
 				8F5E3D4A2004E275007CA925 /* RYSelectViewController.m in Sources */,
 				8F85D8A31FD9257400BC1A7D /* SGGenerateQRCodeVC.m in Sources */,
 				8F1F66511FD9485C004BF8F1 /* RYWebViewController.m in Sources */,
@@ -1970,6 +2003,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/RenCaiYingHang/Public/AppPay/AliPay",
 				);
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/RenCaiYingHang/Public/helper/Macors/PrefixHeader.pch";
 				INFOPLIST_FILE = RenCaiYingHang/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2001,6 +2035,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/RenCaiYingHang/Public/AppPay/AliPay",
 				);
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/RenCaiYingHang/Public/helper/Macors/PrefixHeader.pch";
 				INFOPLIST_FILE = RenCaiYingHang/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

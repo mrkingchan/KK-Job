@@ -88,10 +88,10 @@
 
 - (void)closeBeyBoard
 {
-    for (id class in self.view.subviews)
+    for (id view in self.view.subviews)
     {
-        if ([class isKindOfClass:[UITextView class]] || [class isKindOfClass:[UITextField class]]) {
-            [class endEditing:YES];
+        if ([view isKindOfClass:[UITextView class]] || [view isKindOfClass:[UITextField class]]) {
+            [view endEditing:YES];
         }
     }
     [self.view endEditing:YES];

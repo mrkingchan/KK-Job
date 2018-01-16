@@ -131,19 +131,19 @@
 {
     BOOL isExist = false;
     UIWindow * window = [UIApplication sharedApplication].keyWindow;
-    for (id class in window.subviews)
+    for (id view in window.subviews)
     {
-        if ([class isKindOfClass:[UITextField class]]) {
-            [class endEditing:true];
+        if ([view isKindOfClass:[UITextField class]]) {
+            [view endEditing:true];
         }
         
-        if ([class isKindOfClass:[UIAlertView class]] || [class isKindOfClass:[UIAlertController class]]) {
+        if ([view isKindOfClass:[UIAlertView class]] || [view isKindOfClass:[UIAlertController class]]) {
             isExist = true;
             return;
         }
         
-        if ([class isKindOfClass:[XYQProgressHUD class]]) {
-            [class removeFromSuperview];
+        if ([view isKindOfClass:[XYQProgressHUD class]]) {
+            [view removeFromSuperview];
         }
     }
     if (!isExist) {

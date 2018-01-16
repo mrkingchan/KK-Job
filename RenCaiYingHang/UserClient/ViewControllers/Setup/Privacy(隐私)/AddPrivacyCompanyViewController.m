@@ -24,7 +24,7 @@
 - (UILabel *)showMessage
 {
     if (!_showMessage) {
-        _showMessage = [UIFactory initLableWithFrame:CGRectZero title:[NSString stringWithFormat:@"0/%zd",MaxCompanyNameLength] textColor:[UIColor darkTextColor] font:systemOfFont(16) textAlignment:2];
+        _showMessage = [UIFactory initLableWithFrame:CGRectZero title:[NSString stringWithFormat:@"0/%zd",MaxCompanyNameLength] textColor:[UIColor darkTextColor] font:systemOfFont(16) textAlignment:NSTextAlignmentRight];
         [self.view addSubview:_showMessage];
     }
     return _showMessage;

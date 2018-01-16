@@ -158,15 +158,15 @@ static NSString * footerId = @"MineFooterView";
     if([kind isEqualToString:UICollectionElementKindSectionHeader])
     {
         MineHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerId forIndexPath:indexPath];
-        for (id class in self.topArr) {
-            if ([class isKindOfClass:[NSArray class]]) {
+        for (id view in self.topArr) {
+            if ([view isKindOfClass:[NSArray class]]) {
                 NSMutableArray * array = [NSMutableArray array];
-                for (BannerImageModel * model in class) {
+                for (BannerImageModel * model in view) {
                     [array addObject:model.urlString];
                 }
                 headerView.dataArr = array.copy;
-            }else if ([class isKindOfClass:[NSDictionary class]]){
-                headerView.user = class;
+            }else if ([view isKindOfClass:[NSDictionary class]]){
+                headerView.user = view;
             }
         }
         headerView.mineHeaderClickCallBack = ^(NSInteger index) {
@@ -328,9 +328,9 @@ static NSString * footerId = @"MineFooterView";
 /** 头部图片点击push **/
 - (void) imageClickPushWithIndex:(NSInteger) index
 {
-    for (id class in self.topArr) {
-        if ([class isKindOfClass:[NSArray class]]) {
-            BannerImageModel * model = class[index];
+    for (id arr in self.topArr) {
+        if ([arr isKindOfClass:[NSArray class]]) {
+            BannerImageModel * model = arr[index];
             AgentViewController * h5 = [[AgentViewController alloc] init];
             h5.url = [UtilityHelper addTokenForUrlSting:model.clickUrl];
             [self.navigationController pushViewController:h5 animated:true];

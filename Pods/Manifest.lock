@@ -21,6 +21,7 @@ PODS:
     - AMapFoundation (~> 1.4)
   - AMapSearch (5.5.0):
     - AMapFoundation (~> 1.4)
+  - BaiduMapKit (3.4.2)
   - CDDPagerController (1.1.3)
   - HUPhotoBrowser (1.3.1):
     - SVProgressHUD
@@ -44,6 +45,7 @@ DEPENDENCIES:
   - AMapFoundation
   - AMapLocation
   - AMapSearch
+  - BaiduMapKit
   - CDDPagerController
   - HUPhotoBrowser
   - JPush
@@ -59,6 +61,7 @@ SPEC CHECKSUMS:
   AMapFoundation: 6c0471c9a6a0ad17dad46e3d800ad56ca170f82a
   AMapLocation: d02bd8c0081b0bc51b2e4cf89925ef57448263c9
   AMapSearch: dc9958acfb61b58dcbce79736bf14a39dde7506f
+  BaiduMapKit: f61b19ecf07a3f2deede72b221b366bf698739ed
   CDDPagerController: e832fb34d75d45f871cc29ce1cc06ccf5dd7c200
   HUPhotoBrowser: 136b1830da6e3231c823f83e1ce8b2288add312a
   JCore: 18fc8725124f26e55625eaf224659b3a999dcf63
@@ -71,6 +74,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   TZImagePickerController: 276dc7c0cc70da9ee354046474b405d87ef81c89
 
-PODFILE CHECKSUM: 81ca92c2fdb86a19e314d93779932492f89657ae
+PODFILE CHECKSUM: 26c83d59c57915460594b83bd0b6ede92e2abd17
 
 COCOAPODS: 1.3.1

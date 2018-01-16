@@ -76,7 +76,7 @@
     NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,WhetherBasicInfo];
     NSString * paramerStr = [paramer mj_JSONString];
     NSString * encry = [UtilityHelper encryptUseDES2:paramerStr key:DESKEY];
-    [NetWorkHelper getWithURLString:urlString parameters:@{@"token":encry} success:^(NSDictionary *data){
+    [NetWorkHelper postWithURLString:urlString parameters:@{@"token":encry} success:^(NSDictionary *data){
         NSDictionary * rel = data[@"rel"];
         sucess(rel[@"whetherUserBaseInfo"],rel[@"comUserInfo"]);
     } failure:^(NSError *error) {

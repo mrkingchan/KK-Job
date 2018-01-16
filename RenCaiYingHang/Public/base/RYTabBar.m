@@ -38,8 +38,8 @@
     for (NSUInteger i = 0 , j = 0; i < count; i++)
     {
         UIView *view = self.subviews[i];
-        Class class = NSClassFromString(@"UITabBarButton");
-        if ([view isKindOfClass:class])
+        Class btn = NSClassFromString(@"UITabBarButton");
+        if ([view isKindOfClass:btn])
         {
             view.width = self.width / 5.0;
             view.x = self.width * j / 5.0;

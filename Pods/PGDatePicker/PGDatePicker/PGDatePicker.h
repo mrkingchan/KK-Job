@@ -23,8 +23,8 @@ typedef NS_ENUM(NSInteger, PGDatePickerMode) {
     PGDatePickerModeDateAndTime, //月日周 时分
 };
 
-typedef NS_ENUM(NSUInteger, PGDatePickerType) {
-    PGDatePickerType1,
+typedef NS_ENUM(NSInteger, PGDatePickerType) {
+    PGDatePickerType1 = 1,
     PGDatePickerType2,
     PGDatePickerType3,
 };

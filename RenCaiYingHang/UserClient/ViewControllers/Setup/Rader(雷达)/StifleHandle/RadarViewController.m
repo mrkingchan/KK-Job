@@ -174,7 +174,6 @@ static NSString * identifier = @"CollectionViewCell";
     _locationManager = [[CLLocationManager alloc]init];
     _locationManager.delegate = self;
 
-
     if(![CLLocationManager locationServicesEnabled]||[CLLocationManager authorizationStatus]!=kCLAuthorizationStatusAuthorizedWhenInUse){
         [_locationManager requestWhenInUseAuthorization];
         //[_locationManager startUpdatingLocation];
