@@ -38,7 +38,7 @@
     if ([message.name isEqualToString:@"shareToUser"]) {
         //code... UserInfo.userInfo.name 
         NSDictionary * d = message.body;
-        
+        ;
         //压缩图
         UIImage * thumimage = [UtilityHelper composeImg:UIIMAGE(@"share") img1:[UtilityHelper qrImageForString:d[@"url"] imageSize:60 logoImageSize:0]];
         UIImage * finalImage = [HImageUtility imageWithText:[NSString stringWithFormat:@"%@邀请你一起",UserInfo.userInfo.name]

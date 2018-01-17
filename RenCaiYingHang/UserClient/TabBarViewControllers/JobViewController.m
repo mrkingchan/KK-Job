@@ -62,8 +62,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kNavBarTintColor;
+    
     [self setUpAllChildViewController];
     [self resetShowStyle];
+    
+//    AFNetworkReachabilityManager *netManager = [AFNetworkReachabilityManager sharedManager];
+//    [netManager startMonitoring];  //开始监听
+//    [netManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status){
+//        if (status != AFNetworkReachabilityStatusNotReachable)
+//        {
+//            
+//        }
+//    }];
 }
 
 /** 添加子视图 */
@@ -82,7 +92,6 @@
 /** 属性设置 */
 - (void) resetShowStyle
 {
-    
     [self setUpDisplayStyle:^(UIColor *__autoreleasing *titleScrollViewBgColor, UIColor *__autoreleasing *norColor, UIColor *__autoreleasing *selColor, UIColor *__autoreleasing *proColor, UIFont *__autoreleasing *titleFont, CGFloat *titleButtonWidth, BOOL *isShowPregressView, BOOL *isOpenStretch, BOOL *isOpenShade) {
         
         *titleFont = systemOfFont(17);

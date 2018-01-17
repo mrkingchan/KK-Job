@@ -14,6 +14,8 @@
 @property(nonatomic,copy)NSString *titleText;
 @property(nonatomic,copy)NSString *countText;
 
+@property(nonatomic,strong) UIColor * fillColor;
+
 @property (nonatomic , copy) void(^bmkAnnotationViewClick)(void);
 
 @end
@@ -21,7 +23,9 @@
 @interface YWRectAnnotationView : BMKAnnotationView
 
 @property(nonatomic,copy)NSString           *titleText;
-@property(nonatomic,retain)UIView           *calloutView;
+@property(nonatomic,strong) UIColor * fillColor;
+@property (nonatomic , copy) void(^akAnnotationViewClick)(void);
 
+@property(nonatomic,retain)UIView           *calloutView;
 
 @end

@@ -123,8 +123,39 @@ static NSString * SalaryCellID = @"SalaryCell";
 /** 完成 **/
 - (void) finishClick
 {
-    if ([VerifyHelper empty:self.model.name] || [VerifyHelper empty:self.model.birthday] || [VerifyHelper empty:self.model.job] || [VerifyHelper empty:self.model.salary] || self.model.education == 0 || self.model.experience == 0 || [VerifyHelper empty:self.model.city]) {
-        [self alertMessageWithViewController:self message:@"基本信息不全"];
+    /** 有毒的判断 **/
+    if ([VerifyHelper empty:self.model.name]) {
+        [self alertMessageWithViewController:self message:@"请输入姓名"];
+        return;
+    }
+    
+    if ([VerifyHelper empty:self.model.birthday]) {
+        [self alertMessageWithViewController:self message:@"出生信息不全"];
+        return;
+    }
+    
+     if ( [VerifyHelper empty:self.model.job]){
+         [self alertMessageWithViewController:self message:@"职位信息不全"];
+         return;
+    }
+    
+    if ([VerifyHelper empty:self.model.salary]){
+        [self alertMessageWithViewController:self message:@"薪资信息不全"];
+        return;
+    }
+    
+    if (self.model.education == 0){
+        [self alertMessageWithViewController:self message:@"学历信息不全"];
+        return;
+    }
+    
+    if (self.model.experience == 0){
+        [self alertMessageWithViewController:self message:@"经验信息不全"];
+        return;
+    }
+
+    if ([VerifyHelper empty:self.model.city]) {
+        [self alertMessageWithViewController:self message:@"期望城市信息"];
         return;
     }
 
@@ -134,9 +165,8 @@ static NSString * SalaryCellID = @"SalaryCell";
         UserInfo.userInfo.reCode = @"X2222";
         [UtilityHelper saveUserInfoWith:UserInfo.userInfo keyName:UserCache];
         
-        
         [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
-        [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
+
     } failure:^(id errorCode) {
         
     }];
@@ -295,7 +325,7 @@ static NSString * SalaryCellID = @"SalaryCell";
     PGDatePicker *datePicker = [[PGDatePicker alloc]init];
     datePicker.delegate = self;
     [datePicker showWithShadeBackgroud];
-    datePicker.datePickerType = (PGDatePickerType)PGPickerViewType3;
+    datePicker.datePickerType = PGPickerViewType3;
     datePicker.datePickerMode = PGDatePickerModeDate;
     
     NSArray * dateArr =  [[UtilityHelper getCurrentTimes] componentsSeparatedByString:@"-"];

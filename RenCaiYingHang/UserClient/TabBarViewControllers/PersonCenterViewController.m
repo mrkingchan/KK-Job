@@ -92,11 +92,17 @@ static NSString * footerId = @"MineFooterView";
 }
 
 
-- (void)viewDidLoad{
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     /** 修改了简历 */
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:@"resumeStateChange" object:nil];
+    
+    self.collectionView.mj_header = [MyRefreshHeader headerWithRefreshingBlock:^{
+       [self.collectionView.mj_header endRefreshing];
+       [self requestData];
+    }];
     
     [self requestData];
 }
@@ -242,7 +248,8 @@ static NSString * footerId = @"MineFooterView";
         case 7:
         {
             //进入企业
-            //[self alertMessageWithViewController:self message:@"敬请期待"];
+           // [self alertMessageWithViewController:self message:@"敬请期待"];
+            
             [UtilityHelper changeClient:1];
         }
             break;

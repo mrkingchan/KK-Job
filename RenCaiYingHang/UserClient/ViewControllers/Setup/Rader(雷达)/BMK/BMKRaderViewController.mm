@@ -51,6 +51,9 @@
 
 @property (nonatomic,strong) NSMutableArray          * dataArray;
 
+@property (nonatomic,strong) NSMutableArray          * anntotaionViewArray;
+
+
 @end
 
 const static int GEO_TABLE_ID = 183071;
@@ -96,15 +99,19 @@ static NSString * identifier = @"CollectionViewCell";
  */
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
-    if (!_isfirst) {
-        _isfirst = true;
-        _currentLocation = CLLocationCoordinate2DMake(userLocation.location.coordinate.latitude, userLocation.location.coordinate.longitude);
-        [_mapView updateLocationData:userLocation];
-        self.mapView.userTrackingMode = BMKUserTrackingModeFollow;
-        [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(userLocation.location.coordinate.latitude, userLocation.location.coordinate.longitude)];
-        [self cloudPlaceAroundSearch:userLocation.location.coordinate keywords:@""];
+    if (userLocation.location.coordinate.latitude == 0) {
+        [_locService startUserLocationService];
+    }else{
+        if (!_isfirst) {
+            _isfirst = true;
+            _currentLocation = CLLocationCoordinate2DMake(userLocation.location.coordinate.latitude, userLocation.location.coordinate.longitude);
+            [_mapView updateLocationData:userLocation];
+            self.mapView.userTrackingMode = BMKUserTrackingModeFollow;
+            [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(userLocation.location.coordinate.latitude, userLocation.location.coordinate.longitude)];
+            [self cloudPlaceAroundSearch:userLocation.location.coordinate keywords:@""];
+        }
+        [_locService stopUserLocationService];
     }
-    [_locService stopUserLocationService];
 }
 
 /**
@@ -113,7 +120,12 @@ static NSString * identifier = @"CollectionViewCell";
  */
 - (void)didFailToLocateUserWithError:(NSError *)error
 {
-    
+    [self showAlertWithTitle:@"允许\"定位\"提示" message:@"请在设置中打开定位" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
+        alertMaker.addActionDefaultTitle(@"设置");
+    } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
+        NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        [[UIApplication sharedApplication] openURL:settingsURL];
+    }];
 }
 
 /**
@@ -124,25 +136,43 @@ static NSString * identifier = @"CollectionViewCell";
  */
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation
 {
-//    RYAnnotation * current  = (RYAnnotation *)annotation;
+    RYAnnotation * current  = (RYAnnotation *)annotation;
     if ([annotation isKindOfClass:[RYAnnotation class]])
     {
         YWRoundAnnotationView *newAnnotationView =(YWRoundAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"RoundmyAnnotation"];
-        if (newAnnotationView==nil)
+        if (newAnnotationView == nil)
         {
-            newAnnotationView=[[ YWRoundAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"RoundmyAnnotation"];
+            newAnnotationView = [[YWRoundAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"RoundmyAnnotation"];
         }
-
+        
+        newAnnotationView.tag = [current.jobid integerValue];
+        
         newAnnotationView.titleText = [NSString stringWithFormat:@"%@", annotation.title];
         newAnnotationView.countText = [NSString stringWithFormat:@"%@", annotation.subtitle];
         
         newAnnotationView.canShowCallout = false;
-        
+    
         __weak typeof(newAnnotationView) annotationView = newAnnotationView;
         newAnnotationView.bmkAnnotationViewClick = ^ {
-            annotationView.selected = true;
-            [self mapView:self.mapView didSelectAnnotationView:annotationView];
+            NSArray * array = [NSArray arrayWithArray:self.anntotaionViewArray];
+            for (YWRoundAnnotationView * annotationView1 in array)
+            {
+                if (annotationView.tag == annotationView1.tag)
+                {
+                    annotationView1.selected = true;
+                    annotationView1.fillColor = [UIColor redColor];
+                    [self mapView:self.mapView didSelectAnnotationView:annotationView1];
+                }
+                else
+                {
+                    annotationView1.selected = false;
+                    annotationView1.fillColor = [UIColor colorWithRed:83/255.0 green:180/255.0 blue:119/255.0 alpha:1.0];
+                    [self mapView:self.mapView didDeselectAnnotationView:annotationView1];
+                }
+            }
         };
+        
+        [self.anntotaionViewArray addObject:newAnnotationView];
         
         return newAnnotationView;
     }
@@ -162,22 +192,30 @@ static NSString * identifier = @"CollectionViewCell";
  */
 - (void)onGetCloudPoiResult:(NSArray*)poiResultList searchType:(int)type errorCode:(int)error
 {
-    [self.mapView removeAnnotations:self.searchPoiArray];
-    [self.searchPoiArray removeAllObjects];
-    [self.dataArray removeAllObjects];
-    
     if (error == BMKErrorOk) {
+        NSArray * array = [NSArray arrayWithArray:self.anntotaionViewArray];
+        for (YWRoundAnnotationView * annotationView1 in array)
+        {
+            annotationView1.selected = false;
+            annotationView1.fillColor = [UIColor colorWithRed:83/255.0 green:180/255.0 blue:119/255.0 alpha:1.0];
+        }
+        [self.mapView removeAnnotations:self.searchPoiArray];
+        [self.searchPoiArray removeAllObjects];
+        [self.dataArray removeAllObjects];
+        [self.anntotaionViewArray removeAllObjects];
+        
         BMKCloudPOIList* result = [poiResultList objectAtIndex:0];
         for (int i = 0; i < result.POIs.count; i++) {
             BMKCloudPOIInfo * poi = [result.POIs objectAtIndex:i];
             //自定义字段
-            if(poi.customDict!=nil && poi.customDict.count > 1)
+            if(poi.customDict!=nil && poi.customDict.count >= 1)
             {
                 RYAnnotation *annotation = [[RYAnnotation alloc] init];
                 [annotation setCoordinate:CLLocationCoordinate2DMake(poi.longitude, poi.latitude)];
                 [annotation setTitle:poi.customDict[@"salaryrange"]];
                 [annotation setSubtitle:[NSString stringWithFormat:@"%ldm",(long)poi.distance]];
-                [annotation setIndex:i];
+                //存jobid
+                [annotation setJobid:poi.customDict[@"jobid"]];
                 
                 [self.searchPoiArray addObject:annotation];
                 
@@ -188,9 +226,9 @@ static NSString * identifier = @"CollectionViewCell";
                 [self.dataArray addObject:model];
             }
         }
+        
+        [self showPOIAnnotations];
     }
-    
-    [self showPOIAnnotations];
 }
 
 //#pragma mark 选中大头针时触发
@@ -203,24 +241,31 @@ static NSString * identifier = @"CollectionViewCell";
     [mapView setNeedsDisplay];
     
     if ([view.annotation isKindOfClass:[RYAnnotation class]]) {
-       // [mapView removeAnnotation:current];
-        RYAnnotation *annotation1 = [[RYAnnotation alloc]init];
-        annotation1.index = current.index;
-        annotation1.title = current.title;
-        annotation1.subtitle = current.subtitle;
-        annotation1.coordinate = view.annotation.coordinate;
-        [mapView addAnnotation:annotation1];
+        
     }
     
     if ([view.annotation isKindOfClass:[BMKUserLocation class]]) {
         return;
     }
-    NSLog(@"当前点击:%zd",current.index);
+    
+    NSLog(@"当前点击:%@",current.jobid);
 #pragma mark 点击滚动到zhidingweizhi
-    [self addCollectionView];
-    [[self collectionView] reloadData];
-    [self.collectionView layoutIfNeeded];
-    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:current.index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    for (int i = 0; i < self.dataArray.count;i++) {
+        RyJobModel * model = self.dataArray[i];
+        NSLog(@">>>>>>>>%@",model.jobid);
+        if ([model.jobid isEqualToString:current.jobid]) {
+            [self addCollectionView];
+            [[self collectionView] reloadData];
+            [self.collectionView layoutIfNeeded];
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+        }
+    }
+}
+
+- (void)mapView:(BMKMapView *)mapView didDeselectAnnotationView:(BMKAnnotationView *)view
+{
+    [mapView sendSubviewToBack:view];
+    [mapView setNeedsDisplay];
 }
 
 // 设置地图使其可以显示数组中所有的annotation
@@ -297,17 +342,24 @@ static NSString * identifier = @"CollectionViewCell";
     return _dataArray;
 }
 
+- (NSMutableArray *)anntotaionViewArray
+{
+    if (!_anntotaionViewArray) {
+        _anntotaionViewArray = [NSMutableArray array];
+    }
+    return _anntotaionViewArray;
+}
+
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     //初始化云检索服务
     _search = [[BMKCloudSearch alloc]init];
     _search.delegate = self;
     [self initMapView];
-    [self startLocation];
     [self initSearchKeyWords];
     [self addBackLoaction];
     
@@ -433,7 +485,7 @@ static NSString * identifier = @"CollectionViewCell";
         _collectionView.showsHorizontalScrollIndicator = false;
         _collectionView.showsVerticalScrollIndicator = false;
         [_collectionView registerNib:[UINib nibWithNibName:identifier bundle:nil] forCellWithReuseIdentifier:identifier];
-        _collectionView.contentSize = CGSizeMake(kScreenWidth*10, 200);
+        _collectionView.contentSize = CGSizeMake(kScreenWidth*10, 190);
         _collectionView.contentOffset = CGPointMake(0, 0);
         [self.view addSubview:_collectionView];
         
@@ -496,12 +548,16 @@ static NSString * identifier = @"CollectionViewCell";
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [_mapView viewWillAppear];
     _mapView.delegate = self;
     _search.delegate = self;
+    _locService.delegate = self;
+    [self startLocation];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [_mapView viewWillDisappear];
     _mapView.delegate = nil;
     _search.delegate = nil;

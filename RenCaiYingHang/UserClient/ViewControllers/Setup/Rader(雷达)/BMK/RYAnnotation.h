@@ -10,6 +10,6 @@
 
 @interface RYAnnotation : BMKPointAnnotation
 
-@property (nonatomic,assign) NSInteger index;
+@property (nonatomic,copy) NSString * jobid;
 
 @end

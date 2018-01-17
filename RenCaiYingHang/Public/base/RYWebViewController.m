@@ -44,7 +44,7 @@
         _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, KNavBarHeight, self.view.bounds.size.width, self.view.bounds.size.height - KNavBarHeight) configuration:self.webConfiguration];
         _webView.UIDelegate = self;
         _webView.navigationDelegate = self;
-        _webView.scrollView.bounces = false;
+//        _webView.scrollView.bounces = false;
         _webView.scrollView.showsVerticalScrollIndicator = false;
         [_webView setAllowsBackForwardNavigationGestures:true];
         [self.view addSubview:self.webView];

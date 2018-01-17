@@ -25,6 +25,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    self.webView.scrollView.mj_header = [MyRefreshHeader headerWithRefreshingBlock:^{
+        [self.webView.scrollView.mj_header endRefreshing];
+        [self requestData];
+    }];
+    
+    [self requestData];
+}
+
+- (void) requestData
+{
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[UtilityHelper addUrlToken:CompanyList]]]];
 }
 
@@ -48,7 +59,6 @@
 
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
-   // [XYQProgressHUD hideHUD];
     [self removeTapGesture];
 }
 

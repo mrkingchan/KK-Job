@@ -25,7 +25,7 @@ static JHUploadImage *_jhUploadImage = nil;
     
     _jhUploadImage.uploadImageDelegate = aDelegate;
     _fatherViewController = fatherVC;
-    _canEdit = &canEdit;
+    _canEdit = canEdit;
     
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
                                                        delegate:self

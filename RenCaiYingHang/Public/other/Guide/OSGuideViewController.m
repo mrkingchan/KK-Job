@@ -41,11 +41,12 @@
         if (i == images.count - 1) {
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn setTitle:@"点击进入" forState:UIControlStateNormal];
+            [btn setTitleColor:kWhiteColor forState:UIControlStateNormal];
             btn.frame = CGRectMake(kScreenWidth * i, kScreenHeight - 50, 100, 30);
             btn.center = CGPointMake(kScreenWidth / 2, kScreenHeight - 60);
             btn.layer.cornerRadius = 4;
             btn.clipsToBounds = YES;
-            btn.backgroundColor = [UIColor lightGrayColor];
+            btn.backgroundColor = kNavBarTintColor;
             [btn addTarget:self action:@selector(clickEnter) forControlEvents:UIControlEventTouchUpInside];
             [self.btnEnter addSubview:btn];
         }

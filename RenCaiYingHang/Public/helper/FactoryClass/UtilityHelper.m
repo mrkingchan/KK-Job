@@ -81,9 +81,6 @@
             {
                 if([[whetherComBaseInfo allKeys] containsObject:@"comUserInfo"])
                 {
-                    UserInfo.userInfo.reCode = @"X3333";
-                    [UtilityHelper saveUserInfoWith:UserInfo.userInfo keyName:UserCache];
-                    
                     HomePageViewController * homeCtl = [[HomePageViewController alloc] init];
                     homeCtl.isFinishComInfo = false;
                     [UIApplication sharedApplication].keyWindow.rootViewController = homeCtl;

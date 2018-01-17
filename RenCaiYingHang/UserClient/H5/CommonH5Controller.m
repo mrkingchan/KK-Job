@@ -25,10 +25,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    if ([self.url containsString:@"apply/resume/modifyRes"] != NSNotFound) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"resumeStateChange" object:nil];
-    }
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
@@ -39,6 +35,17 @@
         {
             self.title = self.webView.title;
         }
+    }
+}
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
+    if ([url rangeOfString:KBaseURL].location == NSNotFound && [self.url rangeOfString:@"public/company/coms/"].location != NSNotFound) {
+        [[UIApplication sharedApplication] openURL:navigationAction.request.URL];
+        decisionHandler(WKNavigationActionPolicyCancel);
+    }else{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"resumeStateChange" object:nil];
+        decisionHandler(WKNavigationActionPolicyAllow);
     }
 }
 

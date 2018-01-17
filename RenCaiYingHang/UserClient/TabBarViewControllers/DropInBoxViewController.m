@@ -25,7 +25,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[UtilityHelper addUrlToken:@"apply/delivery"]]]];
+
+    self.webView.scrollView.mj_header = [MyRefreshHeader headerWithRefreshingBlock:^{
+        [self.webView.scrollView.mj_header endRefreshing];
+        [self requestData];
+    }];
+    
+    [self requestData];
+}
+
+- (void) requestData
+{
+     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[UtilityHelper addUrlToken:@"apply/delivery"]]]];
 }
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {

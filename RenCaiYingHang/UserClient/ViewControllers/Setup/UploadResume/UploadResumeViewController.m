@@ -79,7 +79,7 @@
     self.title = @"附近简历";
     
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KIMGURL,UserInfo.userInfo.resumeImage]] placeholderImage:UIIMAGE(@"noresume")];
-    self.showMsgLabel.hidden = [VerifyHelper empty:UserInfo.userInfo.resumeImage];
+    self.showMsgLabel.hidden = ![VerifyHelper empty:UserInfo.userInfo.resumeImage];
     [self.view addSubview:self.submitBtn];
 }
 
@@ -105,17 +105,28 @@
     if (![VerifyHelper empty:UserInfo.userInfo.resumeImage]) {
         dic = @{@"token":UserInfo.userInfo.token,@"type":@"2",@"filePathOld":UserInfo.userInfo.image};
     }
+    
+    //开始上传就显示进度条
+    self.progressView.hidden = false;
+    self.progressView.percent = 0;
+    
     NSData * imageData = UIImageJPEGRepresentation(originImage, 0.7);
     [NetWorkHelper uploadFileRequest:imageData param:dic method:UploadFiles completeBlock:^(NSDictionary *data) {
         self.showMsgLabel.hidden = true;
         self.imageView.image = originImage;
+        [self showAlertWithTitle:@"上传成功" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
+            alertMaker.addActionCancelTitle(@"确定");
+        } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"resumeStateChange" object:nil];
+        }];
     } errorBlock:^(NSError *error) {
-        
+        self.progressView.hidden = true;
     } uploadProgress:^(NSProgress *progress) {
-        self.progressView.hidden = false;
         self.progressView.percent = [progress fractionCompleted];
         if ([progress fractionCompleted] == 1) {
-            self.progressView.hidden = true;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                self.progressView.hidden = true;
+            });
         }
     }];
     NSLog(@"%@\n%@",originImage,image);

@@ -36,6 +36,11 @@
     [self configLocationManager];
     
     [self locAction];
+    
+    self.webView.scrollView.mj_header = [MyRefreshHeader headerWithRefreshingBlock:^{
+        [self.webView.scrollView.mj_header endRefreshing];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
+    }];
 }
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {

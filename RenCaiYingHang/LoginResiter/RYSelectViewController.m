@@ -30,8 +30,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"选择您的角色";
+    [self setBgview];
     [self configurationReturnBack];
     [self initButtons];
+}
+
+- (void) setBgview
+{
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.image = UIIMAGE(@"midbg");
+    [self.view addSubview:imageView];
 }
 
 /** 返回 */
@@ -43,8 +52,13 @@
 /** 创建按钮 */
 - (void) initButtons
 {
-    for (int i = 0; i < 2; i++) {
-        UIButton * button = [UIFactory initButtonWithFrame:CGRectMake(kScreenWidth * 0.2,KNavBarHeight + (kScreenHeight - KNavBarHeight - kScreenWidth * 0.6 * 0.6 * 2)/3 * (i+1) + kScreenWidth * 0.6 * 0.6*i,kScreenWidth * 0.6, kScreenWidth * 0.6 * 0.6) title:@[@"求职",@"招聘"][i] textColor:kWhiteColor font:systemOfFont(20) cornerRadius:10 tag:i+10 target:self action: @selector(buttonClick:)];
+    NSArray * imageArr = @[@"resume",@"offer"];
+    for (int i = 0; i < imageArr.count; i++) {
+        CGFloat h = kScreenHeight/10;
+        if (i == 1) {
+            h = kScreenHeight/7;
+        }
+        UIButton * button = [UIFactory initButtonWithFrame:CGRectMake(kScreenWidth * 0.25,kScreenHeight/2 * (i+1) - h,kScreenWidth * 0.5, kScreenWidth * 0.1) image:UIIMAGE(imageArr[i]) cornerRadius:kScreenWidth * 0.05 tag:i+10 target:self action:@selector(buttonClick:)];
         button.backgroundColor = kNavBarTintColor;
         [self.view addSubview:button];
     }
@@ -72,6 +86,7 @@
             break;
         case 11:
         {
+            //[UtilityHelper alertMessage:@"即将开放" ctl:self];
             [UIApplication sharedApplication].keyWindow.rootViewController = [[HomePageViewController alloc] init];
         }
             break;
