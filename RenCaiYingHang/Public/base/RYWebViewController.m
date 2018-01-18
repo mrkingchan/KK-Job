@@ -100,10 +100,21 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
-//     AFNetworkReachabilityManager *netManager = [AFNetworkReachabilityManager sharedManager];
-//    if (netManager.isReachable) {
-//        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]];
-//    }
+    //检测网络
+    AFNetworkReachabilityManager *netManager = [AFNetworkReachabilityManager sharedManager];
+    [netManager startMonitoring];  //开始监听
+    [netManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status){
+        if (status != AFNetworkReachabilityStatusNotReachable)
+        {
+            [self reloadRequest];
+        }
+        else
+        {
+            [self addTapGesture];
+        }
+    }];
+    
+    
 }
 
 /** 区分返回 */
@@ -304,18 +315,18 @@
 #pragma mark - WKNavigationDelegate
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
-    //[self.loading show];
     [self removeTapGesture];
 }
 
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
-   // [self.loading dismiss];
+    [XYQProgressHUD hideHUD];
     [self removeTapGesture];
 }
 
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
+    [XYQProgressHUD hideHUD];
     [self addLeftButton];
     [self addRightBtn];
     [self removeTapGesture];
@@ -323,10 +334,9 @@
 
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
+    [XYQProgressHUD hideHUD];
     [self addLeftButton];
     [self addRightBtn];
-    [self addTapGesture];
-   // [self.loading dismiss];
 }
 
 - (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(null_unspecified WKNavigation *)navigation

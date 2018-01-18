@@ -119,9 +119,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ESY-K9-J4W">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line" translatesAutoresizingMaskIntoConstraints="NO" id="ESY-K9-J4W">
                                 <rect key="frame" x="0.0" y="100" width="310" height="0.5"/>
-                                <color key="backgroundColor" red="0.098762500409999995" green="0.97310714200000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="eDp-gW-xA6"/>
                                 </constraints>
@@ -295,6 +294,7 @@
         <image name="education" width="25" height="25"/>
         <image name="entry_award" width="25" height="25"/>
         <image name="interview_award" width="25" height="25"/>
+        <image name="line" width="1" height="1"/>
         <image name="reward" width="25" height="25"/>
         <image name="years" width="25" height="25"/>
     </resources>

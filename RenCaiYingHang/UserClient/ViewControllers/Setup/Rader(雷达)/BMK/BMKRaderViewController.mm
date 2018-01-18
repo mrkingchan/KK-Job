@@ -147,11 +147,12 @@ static NSString * identifier = @"CollectionViewCell";
         
         newAnnotationView.tag = [current.jobid integerValue];
         
-        newAnnotationView.titleText = [NSString stringWithFormat:@"%@", annotation.title];
-        newAnnotationView.countText = [NSString stringWithFormat:@"%@", annotation.subtitle];
+        newAnnotationView.titleText = [NSString stringWithFormat:@"%@ %@", annotation.title,annotation.subtitle];
+//        newAnnotationView.countText = [NSString stringWithFormat:@"%@", annotation.subtitle];
         
         newAnnotationView.selected = false;
         newAnnotationView.fillColor = ColorRGB(83, 180, 119, 1);
+        newAnnotationView.imageName = @"annotation_sel";
         
         newAnnotationView.canShowCallout = false;
     
@@ -164,8 +165,9 @@ static NSString * identifier = @"CollectionViewCell";
                 {
 //                    annotationView1.selected = true;
 //                    [self.mapView mapForceRefresh];
-                    annotationView1.fillColor = [UIColor redColor];
-                    [self.mapView selectAnnotation:annotationView1.annotation animated:false];
+                    annotationView1.fillColor = kNavBarTintColor;
+                    annotationView1.imageName = @"annotation_nor";
+                    [mapView selectAnnotation:annotationView1.annotation animated:false];
                     [self mapView:mapView didSelectAnnotationView:annotationView1];
                 }
                 else
@@ -173,8 +175,9 @@ static NSString * identifier = @"CollectionViewCell";
 //                    annotationView1.selected = false;
 //                    [self.mapView mapForceRefresh];
                     annotationView1.fillColor = ColorRGB(83, 180, 119, 1);
-                    [self.mapView deselectAnnotation:annotationView1.annotation animated:false];
-                    [self mapView:self.mapView didDeselectAnnotationView:annotationView1];
+                    annotationView1.imageName = @"annotation_sel";
+                    [mapView deselectAnnotation:annotationView1.annotation animated:false];
+                    [self mapView:mapView didDeselectAnnotationView:annotationView1];
                 }
             }
         };
@@ -200,7 +203,7 @@ static NSString * identifier = @"CollectionViewCell";
 - (void)onGetCloudPoiResult:(NSArray*)poiResultList searchType:(int)type errorCode:(int)error
 {
     if (error == BMKErrorOk) {
-        
+        NSLog(@"数据获取成功");
         [self removeCollectionViewFromSuperView];
         [self.mapView removeAnnotations:self.searchPoiArray];
         [self.searchPoiArray removeAllObjects];
@@ -312,6 +315,7 @@ static NSString * identifier = @"CollectionViewCell";
     _locService.delegate = self;
     
     _locService.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    _locService.distanceFilter = 10;
     
     //启动LocationService
     [_locService startUserLocationService];
@@ -362,7 +366,6 @@ static NSString * identifier = @"CollectionViewCell";
     //初始化云检索服务
     _search = [[BMKCloudSearch alloc]init];
     _search.delegate = self;
-    [self initMapView];
     [self initSearchKeyWords];
     [self addBackLoaction];
     
@@ -478,7 +481,7 @@ static NSString * identifier = @"CollectionViewCell";
         layout.itemSize = CGSizeMake(kScreenWidth, 180);
         layout.minimumInteritemSpacing = 0.0f;
         
-        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, kScreenHeight - KToolHeight - 200, kScreenWidth , 190) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, kScreenHeight - KToolHeight - KNavBarHeight - 200, kScreenWidth , 190) collectionViewLayout:layout];
         _collectionView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -488,7 +491,7 @@ static NSString * identifier = @"CollectionViewCell";
         [_collectionView registerNib:[UINib nibWithNibName:identifier bundle:nil] forCellWithReuseIdentifier:identifier];
         _collectionView.contentSize = CGSizeMake(kScreenWidth*10, 190);
         _collectionView.contentOffset = CGPointMake(0, 0);
-        [[UIApplication sharedApplication].keyWindow addSubview:_collectionView];
+        [self.view addSubview:_collectionView];
         
         
         adjustsScrollViewInsets_NO(_collectionView, self);
@@ -517,7 +520,6 @@ static NSString * identifier = @"CollectionViewCell";
     CollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     cell.model = model;
     cell.collectionViewCellCallBack = ^(NSInteger index) {
-        [self removeCollectionViewFromSuperView];
         if (index == 11) {
             JobDetailViewController * h5 = [[JobDetailViewController alloc] init];
             h5.url = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@public/job/jobDetails?datas=%@",KBaseURL,[UtilityHelper encryptUseDES2:[@{@"jobId":model.jobid} mj_JSONString] key:DESKEY]]];
@@ -564,6 +566,7 @@ static NSString * identifier = @"CollectionViewCell";
     _search.delegate = self;
     _locService.delegate = self;
     [self startLocation];
+    [self initMapView];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {

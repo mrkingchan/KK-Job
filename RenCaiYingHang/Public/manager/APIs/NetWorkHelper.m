@@ -83,7 +83,6 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failureBlock) {
             failureBlock(error);
-            NSLog(@"网络异常 - T_T%@", error);
             [NetWorkHelper showMessage:@"网络异常"];
         }
     }];

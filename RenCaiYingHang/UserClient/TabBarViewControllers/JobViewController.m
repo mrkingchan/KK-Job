@@ -65,15 +65,6 @@
     
     [self setUpAllChildViewController];
     [self resetShowStyle];
-    
-//    AFNetworkReachabilityManager *netManager = [AFNetworkReachabilityManager sharedManager];
-//    [netManager startMonitoring];  //开始监听
-//    [netManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status){
-//        if (status != AFNetworkReachabilityStatusNotReachable)
-//        {
-//            
-//        }
-//    }];
 }
 
 /** 添加子视图 */

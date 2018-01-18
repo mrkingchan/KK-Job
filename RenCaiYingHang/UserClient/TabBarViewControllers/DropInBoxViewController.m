@@ -59,7 +59,7 @@
 
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
-   // [XYQProgressHUD hideHUD];
+    [XYQProgressHUD hideHUD];
     [self removeTapGesture];
 }
 
@@ -72,7 +72,7 @@
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
     [XYQProgressHUD hideHUD];
-    [self addTapGesture];
+    //[self addTapGesture];
 }
 
 - (void)didReceiveMemoryWarning {

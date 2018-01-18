@@ -12,9 +12,10 @@
 @interface YWRoundAnnotationView : BMKAnnotationView
 
 @property(nonatomic,copy)NSString *titleText;
-@property(nonatomic,copy)NSString *countText;
-
+//@property(nonatomic,copy)NSString *countText;
 @property(nonatomic,strong) UIColor * fillColor;
+
+@property (nonatomic,copy) NSString * imageName;
 
 @property (nonatomic , copy) void(^bmkAnnotationViewClick)(void);
 

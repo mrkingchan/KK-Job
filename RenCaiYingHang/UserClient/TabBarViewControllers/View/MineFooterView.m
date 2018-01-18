@@ -176,12 +176,15 @@ static NSString * msgLabCellID = @"MsgViewCell";
     // normal use, only one line label rolling
     GYNoticeViewCell *cell = [rollingView dequeueReusableCellWithIdentifier:@"GYNoticeViewCell"];
     cell.textLabel.text = self.msgArr[index];
+    cell.textLabel.font = systemOfFont(15);
     return cell;
 }
 
 - (void)didClickRollingNoticeView:(GYRollingNoticeView *)rollingView forIndex:(NSUInteger)index
 {
     NSLog(@"点击的index: %lu", (unsigned long)index);
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:self.msgArr[index] message:@"" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
 }
 
 @end

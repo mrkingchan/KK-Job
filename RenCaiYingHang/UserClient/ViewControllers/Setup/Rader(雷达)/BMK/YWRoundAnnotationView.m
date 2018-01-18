@@ -22,8 +22,9 @@
 @interface YWRoundAnnotationView(){
     
     UILabel          *_titleLable;
-    UILabel          *_countLable;
+  //  UILabel          *_countLable;
     UIView           *_contentView;
+    UIImageView      *_imageView;
     CAShapeLayer     *layer;
 }
 @end
@@ -33,7 +34,7 @@
     
     if (self=[super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier])
     {
-        [self setBounds:CGRectMake(0, 0, 100, 45)];
+        [self setBounds:CGRectMake(0, 0, 150, 40)];
         [self initWithContentViews];//
     }
     
@@ -45,34 +46,35 @@
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(senderClick)];
     [self addGestureRecognizer:tap];
     
-    UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 45)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 30)];
     [view setBackgroundColor:[ UIColor  clearColor]];
-    view.layer.cornerRadius = 5;
-    view.clipsToBounds = true;
     _contentView=view;
     [self addSubview:view];
     
-    layer = [ CAShapeLayer layer];
+    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(70, 27, 10, 10)];
+    [_contentView addSubview:_imageView];
+    
+    layer = [CAShapeLayer layer];
     layer.frame = view.frame;
-    layer.path = [ UIBezierPath bezierPathWithRoundedRect:view.frame cornerRadius:5].CGPath;
+    layer.path = [ UIBezierPath bezierPathWithRoundedRect:view.frame cornerRadius:15].CGPath;
     layer.fillColor = [UIColor colorWithRed:83/255.0 green:180/255.0 blue:119/255.0 alpha:1.0].CGColor;
     [view.layer addSublayer:layer];
-    layer.lineWidth = 0.3f;
-    layer.strokeColor = [ UIColor grayColor].CGColor;
+    //layer.lineWidth = 0.3f;
+    //layer.strokeColor = [ UIColor grayColor].CGColor;
     
-    UILabel *lable = [[ UILabel alloc] initWithFrame:CGRectMake(0,3, 100, 21)];
+    UILabel *lable = [[ UILabel alloc] initWithFrame:CGRectMake(0,0, 150, 30)];
     lable.textAlignment = NSTextAlignmentCenter;
     lable.textColor = [ UIColor whiteColor];
-    lable.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+    lable.font = [UIFont fontWithName:@"Helvetica-Bold" size:13];
     _titleLable = lable;
     [_contentView addSubview:lable];
    
-    UILabel *countlable = [[ UILabel alloc] initWithFrame:CGRectMake(0,17, 100, 21)];
-    countlable.textAlignment = NSTextAlignmentCenter;
-    countlable.textColor = [ UIColor whiteColor];
-    countlable.font = systemOfFont(12);
-    _countLable = countlable;
-    [_contentView addSubview:countlable];
+//    UILabel *countlable = [[ UILabel alloc] initWithFrame:CGRectMake(0,17, 100, 21)];
+//    countlable.textAlignment = NSTextAlignmentCenter;
+//    countlable.textColor = [ UIColor whiteColor];
+//    countlable.font = systemOfFont(12);
+//    _countLable = countlable;
+//    [_contentView addSubview:countlable];
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
@@ -93,12 +95,17 @@
 
 - (void)setTitleText:(NSString *)titleText
 {
-    _titleLable.text=titleText;
+    _titleLable.text = titleText;
 }
 
-- (void)setCountText:(NSString *)countText
+//- (void)setCountText:(NSString *)countText
+//{
+//    _countLable.text=countText;
+//}
+
+- (void)setImageName:(NSString *)imageName
 {
-    _countLable.text=countText;
+    _imageView.image = UIIMAGE(imageName);
 }
 
 - (void)setFillColor:(UIColor *)fillColor
