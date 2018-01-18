@@ -109,9 +109,9 @@ static NSString * footerId = @"MineFooterView";
 
 - (void) requestData
 {
-    [XYQProgressHUD showMessage:@"加载中..."  toView:[UIApplication sharedApplication].keyWindow];
+    [UIFactory addLoading];
     [RYUserRequest appUsGetBaseInfoSuceess:^(NSDictionary * baseInfo,NSArray * imageArr) {
-        [XYQProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow];
+        [UIFactory removeLoading];
         [self.topArr removeAllObjects];
         [self.topArr addObject:baseInfo];
         if (![VerifyHelper empty:imageArr]) {
@@ -123,7 +123,7 @@ static NSString * footerId = @"MineFooterView";
     }];
     
     [RYUserRequest centerMessageSucess:^(NSArray *dataArr) {
-        [XYQProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow];
+        [UIFactory removeLoading];
         self.tabDataArr = @[dataArr,@[@[@"private",@"隐私设置"],@[@"notifi",@"通知"]]];
         [self loadData];
     } failure:^(id errorCode) {

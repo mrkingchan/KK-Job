@@ -77,7 +77,8 @@
     {
         dic = @{@"loginType":@"1",@"phone":_phoneTf.text,@"password":_pwTf.text,@"jgRegId":regID};
     }
-    [XYQProgressHUD showMessage:@"登陆中...." toView:[UIApplication sharedApplication].keyWindow];
+
+    [XYQProgressHUD showMessage:@"登陆中..." toView:[UIFactory getKeyWindow]];
     [RYUserRequest userLoginWithParamer:dic suceess:^(BOOL isSendSuccess) {
         [XYQProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow];
         [UtilityHelper insertApp];

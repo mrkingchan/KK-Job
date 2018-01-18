@@ -107,4 +107,27 @@
     return currentView;
 }
 
+/** 获取根视图 */
++ (UIWindow *) getKeyWindow
+{
+    return [[[UIApplication sharedApplication] delegate] window];
+}
+
+/** 加载框 */
++ (void) addLoading
+{
+    [XYQProgressHUD showHUDAddedTo:[UIFactory getKeyWindow] animated:true];
+}
+
+/** 移除加载框 */
++ (void) removeLoading
+{
+    UIWindow * window = [UIFactory getKeyWindow];
+    for (UIView * view in window.subviews) {
+        if ([view isKindOfClass:[XYQProgressHUD class]]) {
+            [XYQProgressHUD hideAllHUDsForView:window  animated:true];
+        }
+    }
+}
+
 @end

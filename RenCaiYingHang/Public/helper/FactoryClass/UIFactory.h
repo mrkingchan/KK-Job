@@ -40,4 +40,13 @@
  */
 + (UIView *)initViewWithFrame:(CGRect)rect color:(UIColor *)color;
 
+/** 获取根视图 */
++ (UIWindow *) getKeyWindow;
+
+/** 加载框 */
++ (void) addLoading;
+
+/** 移除加载框 */
++ (void) removeLoading;
+
 @end

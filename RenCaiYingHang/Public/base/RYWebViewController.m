@@ -104,13 +104,13 @@
     AFNetworkReachabilityManager *netManager = [AFNetworkReachabilityManager sharedManager];
     [netManager startMonitoring];  //开始监听
     [netManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status){
-        if (status != AFNetworkReachabilityStatusNotReachable)
+        if (status == AFNetworkReachabilityStatusNotReachable)
         {
-            [self reloadRequest];
+            [self addTapGesture];
         }
         else
         {
-            [self addTapGesture];
+            [self reloadRequest];
         }
     }];
     

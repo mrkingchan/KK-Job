@@ -219,7 +219,7 @@ static NSString * identifier = @"CollectionViewCell";
                 RYAnnotation *annotation = [[RYAnnotation alloc] init];
                 [annotation setCoordinate:CLLocationCoordinate2DMake(poi.longitude, poi.latitude)];
                 [annotation setTitle:poi.customDict[@"salaryrange"]];
-                [annotation setSubtitle:[NSString stringWithFormat:@"%ldm",(long)poi.distance]];
+                [annotation setSubtitle:[NSString stringWithFormat:@"%ld米",(long)poi.distance]];
                 //存jobid
                 [annotation setJobid:poi.customDict[@"jobid"]];
                 
@@ -287,6 +287,9 @@ static NSString * identifier = @"CollectionViewCell";
 // 主视图
 - (void)initMapView
 {
+    [self.mapView removeFromSuperview];
+    self.mapView  = nil;
+    
     self.mapView = [[BMKMapView alloc] initWithFrame:self.view.bounds];
     self.mapView.delegate = self;
     [self.view addSubview:self.mapView];
@@ -306,9 +309,19 @@ static NSString * identifier = @"CollectionViewCell";
     self.isfirst = false;
 }
 
+ //初始化云检索服务
+- (void) initCloudSearch
+{
+    _search = nil;
+    //初始化云检索服务
+    _search = [[BMKCloudSearch alloc]init];
+    _search.delegate = self;
+}
+
 /** 开始定位 */
 - (void) startLocation
 {
+    _locService = nil;
     //初始化BMKLocationService
     _locService = [[BMKLocationService alloc] init];
     
@@ -324,6 +337,8 @@ static NSString * identifier = @"CollectionViewCell";
 // 自定义用户大头针
 - (void)initCenterView
 {
+    [self.centerAnnotationView removeFromSuperview];
+    self.centerAnnotationView = nil;
     // 自己的坐标
     self.centerAnnotationView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"map_location"]];
     self.centerAnnotationView.center = CGPointMake(self.mapView.center.x, self.mapView.center.y - CGRectGetHeight(self.centerAnnotationView.bounds) / 2);
@@ -362,24 +377,27 @@ static NSString * identifier = @"CollectionViewCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //初始化云检索服务
-    _search = [[BMKCloudSearch alloc]init];
-    _search.delegate = self;
-    [self initSearchKeyWords];
-    [self addBackLoaction];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(message:) name:@"expect_job" object:nil];
     /** 意向职位 */
     _keywords =  [RYDefaults objectForKey:@"expect_job"];
 }
 
+//初始化所有条件
+- (void) initAllSubViews
+{
+    [self startLocation];
+    [self initMapView];
+    [self initCloudSearch];
+    [self initCenterView];
+    [self initSearchKeyWords];
+    [self addBackLoaction];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    [self startLocation];
-    [self initMapView];
-    [self initCenterView];
+    [self initAllSubViews];
 }
 
 - (void)cloudPlaceAroundSearch:(CLLocationCoordinate2D)coordinate keywords:(NSString *)keywords
@@ -568,7 +586,8 @@ static NSString * identifier = @"CollectionViewCell";
     _locService.delegate = self;
 }
 
--(void)viewWillDisappear:(BOOL)animated {
+-(void)viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
     [_mapView viewWillDisappear];
     _mapView.delegate = nil;

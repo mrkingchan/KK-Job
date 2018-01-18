@@ -21,7 +21,7 @@
 /** 登陆注册走 **/
 + (void) insertApp
 {
-    UIWindow * keyWindow = [[[UIApplication sharedApplication] delegate] window];
+    UIWindow * keyWindow = [UIFactory getKeyWindow];
     if ([UserInfo.userInfo.reCode isEqualToString:@"X2222"])
     {
         keyWindow.rootViewController = [[RYTabBarController alloc] init];
@@ -45,7 +45,7 @@
     NSDictionary * paramer = @{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey};
     [RYUserRequest whetherBaseInfoWithParamer:paramer suceess:^(NSString * whetherUserBaseInfo,NSDictionary * whetherComBaseInfo) {
         
-        UIWindow * keyWindow = [[[UIApplication sharedApplication] delegate] window];
+         UIWindow * keyWindow = [UIFactory getKeyWindow];
         
         if(![[whetherComBaseInfo allKeys] containsObject:@"comUserInfo"]||[whetherUserBaseInfo isEqualToString:@"yes"])
         {
@@ -79,7 +79,7 @@
     NSDictionary * paramer = @{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey};
     [RYUserRequest whetherBaseInfoWithParamer:paramer suceess:^(NSString * whetherUserBaseInfo,NSDictionary * whetherComBaseInfo) {
         
-        UIWindow * keyWindow = [[[UIApplication sharedApplication] delegate] window];
+         UIWindow * keyWindow = [UIFactory getKeyWindow];
         
         switch (clientType) {
             case 1: /** 1是个人版跳企业版 */

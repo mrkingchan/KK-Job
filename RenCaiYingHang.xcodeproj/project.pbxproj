@@ -1480,7 +1480,7 @@
 				TargetAttributes = {
 					8F85D81C1FD922A400BC1A7D = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1923,7 +1923,7 @@
 				CODE_SIGN_ENTITLEMENTS = RenCaiYingHang/RenCaiYingHang.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = AX68759R8G;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1941,8 +1941,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qianfutong.talentsblank;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "be9b7c94-1fde-4ad1-91af-2075dd002d7d";
+				PROVISIONING_PROFILE_SPECIFIER = RenCaiYingHang;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1956,7 +1956,7 @@
 				CODE_SIGN_ENTITLEMENTS = RenCaiYingHang/RenCaiYingHang.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = AX68759R8G;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1974,8 +1974,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qianfutong.talentsblank;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "be9b7c94-1fde-4ad1-91af-2075dd002d7d";
+				PROVISIONING_PROFILE_SPECIFIER = RenCaiYingHang;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

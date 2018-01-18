@@ -129,7 +129,7 @@
 + (void) showMessage:(NSString *)message
 {
     BOOL isExist = false;
-    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    UIWindow * window = [[[UIApplication sharedApplication] delegate] window];
     for (id view in window.subviews)
     {
         if ([view isKindOfClass:[UITextField class]]) {
@@ -142,7 +142,7 @@
         }
         
         if ([view isKindOfClass:[XYQProgressHUD class]]) {
-            [view removeFromSuperview];
+            [XYQProgressHUD hideHUDForView:window];
         }
     }
     if (!isExist) {
