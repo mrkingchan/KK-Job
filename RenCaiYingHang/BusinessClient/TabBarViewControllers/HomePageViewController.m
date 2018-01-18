@@ -33,7 +33,7 @@
     // Do any additional setup after loading the view.
     [self loadRequeset];
     [self regsiterMethod];
-    
+    _isFirst = false;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(weixinPaySuccess:) name:@"WeXinPayCallBack" object:nil];
     
 }
@@ -64,27 +64,26 @@
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
     if (!_isFirst) {
         _isFirst = true;
-        [XYQProgressHUD showMessage:@"加载中..."];
+        [UIFactory addLoading];
     }
     [self removeTapGesture];
 }
 
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
-    //[XYQProgressHUD hideHUD];
     [self removeTapGesture];
 }
 
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
-    [XYQProgressHUD hideHUD];
+    [UIFactory removeLoading];
     [self removeTapGesture];
 }
 
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
-    [XYQProgressHUD hideHUD];
-   // [self addTapGesture];
+    [UIFactory removeLoading];
+    [self addTapGesture];
 }
 
 #pragma mark 跳转的操作
