@@ -15,6 +15,9 @@
 #import "DropInBoxViewController.h"
 #import "PersonCenterViewController.h"
 
+#import "MMScanViewController.h"
+#import "ScanSucessViewController.h"
+
 @interface RYTabBarController ()
 
 @end
@@ -41,7 +44,28 @@
     RYTabBar * tabBar = [[RYTabBar alloc] init];
     [self setValue:tabBar forKey:@"tabBar"];
     [tabBar setDidMiddBtn:^{
-        [UtilityHelper scanRQCode:self.selectedViewController];
+        MMScanViewController *scanVc = [[MMScanViewController alloc] initWithQrType:MMScanTypeQrCode onFinish:^(NSString *result, NSError *error) {
+            if (error) {
+                NSLog(@"error: %@",error);
+            } else {
+                NSLog(@"扫描结果：%@",result);
+                if ([result rangeOfString:KDatas].location !=NSNotFound) {
+                    result =  [result componentsSeparatedByString:@"datas="][1];
+                    [RYUserRequest scanCodeInterviewAwardWithWithParamer:result suceess:^(NSString *urlString) {
+                        [self.selectedViewController pushViewController:[[ScanSucessViewController alloc] init] animated:true];
+                    } failure:^(id errorCode) {
+
+                    }];
+                }else{
+                    [self showAlertWithTitle:@"无效二维码" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
+                        alertMaker.addActionCancelTitle(@"确定");
+                    } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
+
+                    }];
+                }
+            }
+        }];
+        [self.selectedViewController pushViewController:scanVc animated:YES];
     }];
 }
 

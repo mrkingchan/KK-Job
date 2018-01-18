@@ -81,6 +81,11 @@
     return inside;
 }
 
+- (void)setSelected:(BOOL)selected
+{
+    [self setSelected:selected animated:NO];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [ super setSelected:selected animated:animated];

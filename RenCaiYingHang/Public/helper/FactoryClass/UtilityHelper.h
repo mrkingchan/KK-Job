@@ -8,9 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SGScanningQRCodeVC.h"
 #import <AVFoundation/AVFoundation.h>
-#import "SGAlertView.h"
 
 #import "UserModel.h"
 
@@ -45,9 +43,6 @@
 /** DES解密方式
  **/
 + (NSString *)decryptUseDES2:(NSString *)cipherText key:(NSString *)key;
-
-/*** 扫一扫 **/
-+(void)scanRQCode:(UIViewController<SGScanningQRCodeVCDelegate>*)vc;
 
 /** 生成二维码 **/
 + (UIImage *)qrImageForString:(NSString *)string imageSize:(CGFloat)Imagesize logoImageSize:(CGFloat)waterImagesize;

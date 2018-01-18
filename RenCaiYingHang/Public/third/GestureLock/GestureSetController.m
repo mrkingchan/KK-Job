@@ -127,7 +127,7 @@
     
     PCLockLabel *msgLabel = [[PCLockLabel alloc] init];
     msgLabel.frame = CGRectMake(0, 0, kScreenW, 14);
-    msgLabel.center = CGPointMake(kScreenW/2, CGRectGetMinY(lockView.frame) - 30);
+    msgLabel.center = CGPointMake(kScreenW/2, CGRectGetMinY(lockView.frame) - 10);
     self.msgLabel = msgLabel;
     [self.view addSubview:msgLabel];
 }
@@ -160,19 +160,22 @@
     UIBarButtonItem * backItem = [[UIBarButtonItem alloc] initWithImage:UIIMAGE(@"close") style:UIBarButtonItemStylePlain target:self action:@selector(navLeftBtnEvent)];
     self.navigationItem.leftBarButtonItem = backItem;
     
-    
     // 头像
+    CGFloat h = 80;
+    if (kScreenW>320) {
+        h = 100;
+    }
     UIImageView  *imageView = [[UIImageView alloc] init];
-    imageView.frame = CGRectMake(0, 0, 60, 60);
-    imageView.center = CGPointMake(kScreenW/2, self.msgLabel.top - 40);
-    imageView.layer.cornerRadius = 30;
+    imageView.frame = CGRectMake(0, 0, h, h);
+    imageView.center = CGPointMake(kScreenW/2, self.msgLabel.top - h/2 - 10);
+    imageView.layer.cornerRadius = h/2;
     imageView.clipsToBounds = YES;
-    [imageView setImage:UIIMAGE(@"AppIcon")];
+    [imageView setImage:UIIMAGE(@"gestureIcon")];
     [self.view addSubview:imageView];
     
     // 管理手势密码
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self creatButton:leftBtn frame:CGRectMake(CircleViewEdgeMargin + 20, kScreenH - 60 - 64, kScreenW - 2 * (CircleViewEdgeMargin + 20), 20) title:@"忘记密码" alignment:UIControlContentHorizontalAlignmentCenter tag:buttonTagManager];
+    [self creatButton:leftBtn frame:CGRectMake(CircleViewEdgeMargin + 20, kScreenH - KNavBarHeight, kScreenW - 2 * (CircleViewEdgeMargin + 20), 20) title:@"忘记密码" alignment:UIControlContentHorizontalAlignmentCenter tag:buttonTagManager];
     
     // 登录其他账户
     // UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];

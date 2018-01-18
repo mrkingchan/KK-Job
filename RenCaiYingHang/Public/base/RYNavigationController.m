@@ -8,9 +8,7 @@
 
 #import "RYNavigationController.h"
 
-#import "ScanSucessViewController.h"
-
-@interface RYNavigationController ()<SGScanningQRCodeVCDelegate>
+@interface RYNavigationController ()
 
 @end
 
@@ -62,25 +60,6 @@
     }
 }
 
-/** 扫码回掉 */
--(void)scanSuccessBarcodeJump:(NSString*)str
-{
-    //[self pushViewController:[[ScanSucessViewController alloc] init] animated:true];
-    if ([str rangeOfString:KDatas].location !=NSNotFound) {
-        str =  [str componentsSeparatedByString:@"datas="][1];
-        [RYUserRequest scanCodeInterviewAwardWithWithParamer:str suceess:^(NSString *urlString) {
-            [self pushViewController:[[ScanSucessViewController alloc] init] animated:true];
-        } failure:^(id errorCode) {
-            
-        }];
-    }else{
-        [self showAlertWithTitle:@"无效二维码" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
-            alertMaker.addActionCancelTitle(@"确定");
-        } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
-            
-        }];
-    }
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

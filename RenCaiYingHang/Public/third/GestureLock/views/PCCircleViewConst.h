@@ -112,9 +112,9 @@
 #define CircleViewEdgeMargin 30.0f
 
 /**
- *  整个解锁View的Center.y值 在当前屏幕的 1/2位置
+ *  整个解锁View的Center.y值 在当前屏幕的 1/2位置 kScreenH * 1/2
  */
-#define CircleViewCenterY kScreenH * 1/2
+#define CircleViewCenterY kScreenH * 0.6
 
 /**
  *  连接的圆最少的个数

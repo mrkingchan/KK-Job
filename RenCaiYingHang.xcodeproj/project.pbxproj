@@ -51,6 +51,9 @@
 		8F1F66661FD963CD004BF8F1 /* PrivacyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66651FD963CD004BF8F1 /* PrivacyViewController.m */; };
 		8F1F66691FD9645B004BF8F1 /* AddPrivacyCompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F66681FD9645B004BF8F1 /* AddPrivacyCompanyViewController.m */; };
 		8F1F666D1FD964E8004BF8F1 /* UploadResumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F666C1FD964E8004BF8F1 /* UploadResumeViewController.m */; };
+		8F1F7B2F20104E8D00B4B675 /* MMScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F7B2B20104E8D00B4B675 /* MMScanView.m */; };
+		8F1F7B3020104E8D00B4B675 /* MMScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1F7B2D20104E8D00B4B675 /* MMScanViewController.m */; };
+		8F1F7B3120104E8D00B4B675 /* resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8F1F7B2E20104E8D00B4B675 /* resource.bundle */; };
 		8F26E1151FF493F200E93F14 /* AgentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F26E1141FF493F200E93F14 /* AgentViewController.m */; };
 		8F26E1181FF49A3700E93F14 /* UIImageView+RotateImgV.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F26E1171FF49A3700E93F14 /* UIImageView+RotateImgV.m */; };
 		8F2A2B6B1FEA0240003E5507 /* NecessarySexCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2A2B691FEA0240003E5507 /* NecessarySexCell.m */; };
@@ -108,15 +111,6 @@
 		8F85D89E1FD9257400BC1A7D /* UIViewController+AlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D87B1FD9257400BC1A7D /* UIViewController+AlertController.m */; };
 		8F85D89F1FD9257400BC1A7D /* UITableView+SDAutoTableViewCellHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D87F1FD9257400BC1A7D /* UITableView+SDAutoTableViewCellHeight.m */; };
 		8F85D8A01FD9257400BC1A7D /* UIView+SDAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8811FD9257400BC1A7D /* UIView+SDAutoLayout.m */; };
-		8F85D8A11FD9257400BC1A7D /* CIImage+SGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8851FD9257400BC1A7D /* CIImage+SGExtension.m */; };
-		8F85D8A21FD9257400BC1A7D /* ScanSuccessJumpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8881FD9257400BC1A7D /* ScanSuccessJumpVC.m */; };
-		8F85D8A31FD9257400BC1A7D /* SGGenerateQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D88A1FD9257400BC1A7D /* SGGenerateQRCodeVC.m */; };
-		8F85D8A41FD9257400BC1A7D /* SGScanningQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D88C1FD9257400BC1A7D /* SGScanningQRCodeVC.m */; };
-		8F85D8A51FD9257400BC1A7D /* SGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D88F1FD9257400BC1A7D /* SGAlertView.m */; };
-		8F85D8A61FD9257400BC1A7D /* SGBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8911FD9257400BC1A7D /* SGBottomView.m */; };
-		8F85D8A71FD9257400BC1A7D /* SGBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F85D8921FD9257400BC1A7D /* SGBottomView.xib */; };
-		8F85D8A81FD9257400BC1A7D /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8F85D8941FD9257400BC1A7D /* sound.caf */; };
-		8F85D8A91FD9257400BC1A7D /* SGScanningQRCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8971FD9257400BC1A7D /* SGScanningQRCodeView.m */; };
 		8F85D8B01FD925CA00BC1A7D /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8AF1FD925CA00BC1A7D /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8F85D8B91FD9261200BC1A7D /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8B41FD9261200BC1A7D /* UIColor+HexString.m */; };
 		8F85D8BA1FD9261200BC1A7D /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8B61FD9261200BC1A7D /* UITextView+Placeholder.m */; };
@@ -296,6 +290,11 @@
 		8F1F66681FD9645B004BF8F1 /* AddPrivacyCompanyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddPrivacyCompanyViewController.m; sourceTree = "<group>"; };
 		8F1F666B1FD964E8004BF8F1 /* UploadResumeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadResumeViewController.h; sourceTree = "<group>"; };
 		8F1F666C1FD964E8004BF8F1 /* UploadResumeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadResumeViewController.m; sourceTree = "<group>"; };
+		8F1F7B2A20104E8D00B4B675 /* MMScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMScanView.h; sourceTree = "<group>"; };
+		8F1F7B2B20104E8D00B4B675 /* MMScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMScanView.m; sourceTree = "<group>"; };
+		8F1F7B2C20104E8D00B4B675 /* MMScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMScanViewController.h; sourceTree = "<group>"; };
+		8F1F7B2D20104E8D00B4B675 /* MMScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMScanViewController.m; sourceTree = "<group>"; };
+		8F1F7B2E20104E8D00B4B675 /* resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = resource.bundle; sourceTree = "<group>"; };
 		8F26E1131FF493F200E93F14 /* AgentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgentViewController.h; sourceTree = "<group>"; };
 		8F26E1141FF493F200E93F14 /* AgentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgentViewController.m; sourceTree = "<group>"; };
 		8F26E1161FF49A3700E93F14 /* UIImageView+RotateImgV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+RotateImgV.h"; sourceTree = "<group>"; };
@@ -402,22 +401,6 @@
 		8F85D87F1FD9257400BC1A7D /* UITableView+SDAutoTableViewCellHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+SDAutoTableViewCellHeight.m"; sourceTree = "<group>"; };
 		8F85D8801FD9257400BC1A7D /* UIView+SDAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDAutoLayout.h"; sourceTree = "<group>"; };
 		8F85D8811FD9257400BC1A7D /* UIView+SDAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDAutoLayout.m"; sourceTree = "<group>"; };
-		8F85D8841FD9257400BC1A7D /* CIImage+SGExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CIImage+SGExtension.h"; sourceTree = "<group>"; };
-		8F85D8851FD9257400BC1A7D /* CIImage+SGExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CIImage+SGExtension.m"; sourceTree = "<group>"; };
-		8F85D8871FD9257400BC1A7D /* ScanSuccessJumpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanSuccessJumpVC.h; sourceTree = "<group>"; };
-		8F85D8881FD9257400BC1A7D /* ScanSuccessJumpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanSuccessJumpVC.m; sourceTree = "<group>"; };
-		8F85D8891FD9257400BC1A7D /* SGGenerateQRCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGGenerateQRCodeVC.h; sourceTree = "<group>"; };
-		8F85D88A1FD9257400BC1A7D /* SGGenerateQRCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGGenerateQRCodeVC.m; sourceTree = "<group>"; };
-		8F85D88B1FD9257400BC1A7D /* SGScanningQRCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGScanningQRCodeVC.h; sourceTree = "<group>"; };
-		8F85D88C1FD9257400BC1A7D /* SGScanningQRCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGScanningQRCodeVC.m; sourceTree = "<group>"; };
-		8F85D88E1FD9257400BC1A7D /* SGAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAlertView.h; sourceTree = "<group>"; };
-		8F85D88F1FD9257400BC1A7D /* SGAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAlertView.m; sourceTree = "<group>"; };
-		8F85D8901FD9257400BC1A7D /* SGBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGBottomView.h; sourceTree = "<group>"; };
-		8F85D8911FD9257400BC1A7D /* SGBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGBottomView.m; sourceTree = "<group>"; };
-		8F85D8921FD9257400BC1A7D /* SGBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SGBottomView.xib; sourceTree = "<group>"; };
-		8F85D8941FD9257400BC1A7D /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.caf; sourceTree = "<group>"; };
-		8F85D8961FD9257400BC1A7D /* SGScanningQRCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGScanningQRCodeView.h; sourceTree = "<group>"; };
-		8F85D8971FD9257400BC1A7D /* SGScanningQRCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGScanningQRCodeView.m; sourceTree = "<group>"; };
 		8F85D8AD1FD925CA00BC1A7D /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		8F85D8AE1FD925CA00BC1A7D /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		8F85D8AF1FD925CA00BC1A7D /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
@@ -843,6 +826,18 @@
 			path = TabBarH5;
 			sourceTree = "<group>";
 		};
+		8F1F7B2920104E8D00B4B675 /* MMScanner */ = {
+			isa = PBXGroup;
+			children = (
+				8F1F7B2A20104E8D00B4B675 /* MMScanView.h */,
+				8F1F7B2B20104E8D00B4B675 /* MMScanView.m */,
+				8F1F7B2C20104E8D00B4B675 /* MMScanViewController.h */,
+				8F1F7B2D20104E8D00B4B675 /* MMScanViewController.m */,
+				8F1F7B2E20104E8D00B4B675 /* resource.bundle */,
+			);
+			path = MMScanner;
+			sourceTree = "<group>";
+		};
 		8F2A2B671FEA020C003E5507 /* BaseInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -1081,6 +1076,7 @@
 		8F85D8561FD9236A00BC1A7D /* third */ = {
 			isa = PBXGroup;
 			children = (
+				8F1F7B2920104E8D00B4B675 /* MMScanner */,
 				8F30AE912007440B000793F2 /* MKCycleScrollView */,
 				8F0AB721200316AB00DFC49F /* ImageText */,
 				8FF2D0D21FFF1FA9002F18B4 /* XYQProgressHUD */,
@@ -1090,7 +1086,6 @@
 				8F85D8AC1FD925B300BC1A7D /* GTMBase64 */,
 				8F85D8771FD9257400BC1A7D /* AlertController */,
 				8F85D87C1FD9257400BC1A7D /* SDAutoLayout */,
-				8F85D8821FD9257400BC1A7D /* SGQRCode */,
 			);
 			path = third;
 			sourceTree = "<group>";
@@ -1200,69 +1195,6 @@
 				8F85D8811FD9257400BC1A7D /* UIView+SDAutoLayout.m */,
 			);
 			path = SDAutoLayout;
-			sourceTree = "<group>";
-		};
-		8F85D8821FD9257400BC1A7D /* SGQRCode */ = {
-			isa = PBXGroup;
-			children = (
-				8F85D8831FD9257400BC1A7D /* Category */,
-				8F85D8861FD9257400BC1A7D /* Controller */,
-				8F85D88D1FD9257400BC1A7D /* SGAlertView */,
-				8F85D8931FD9257400BC1A7D /* Sound */,
-				8F85D8951FD9257400BC1A7D /* View */,
-			);
-			path = SGQRCode;
-			sourceTree = "<group>";
-		};
-		8F85D8831FD9257400BC1A7D /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				8F85D8841FD9257400BC1A7D /* CIImage+SGExtension.h */,
-				8F85D8851FD9257400BC1A7D /* CIImage+SGExtension.m */,
-			);
-			path = Category;
-			sourceTree = "<group>";
-		};
-		8F85D8861FD9257400BC1A7D /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				8F85D8871FD9257400BC1A7D /* ScanSuccessJumpVC.h */,
-				8F85D8881FD9257400BC1A7D /* ScanSuccessJumpVC.m */,
-				8F85D8891FD9257400BC1A7D /* SGGenerateQRCodeVC.h */,
-				8F85D88A1FD9257400BC1A7D /* SGGenerateQRCodeVC.m */,
-				8F85D88B1FD9257400BC1A7D /* SGScanningQRCodeVC.h */,
-				8F85D88C1FD9257400BC1A7D /* SGScanningQRCodeVC.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		8F85D88D1FD9257400BC1A7D /* SGAlertView */ = {
-			isa = PBXGroup;
-			children = (
-				8F85D88E1FD9257400BC1A7D /* SGAlertView.h */,
-				8F85D88F1FD9257400BC1A7D /* SGAlertView.m */,
-				8F85D8901FD9257400BC1A7D /* SGBottomView.h */,
-				8F85D8911FD9257400BC1A7D /* SGBottomView.m */,
-				8F85D8921FD9257400BC1A7D /* SGBottomView.xib */,
-			);
-			path = SGAlertView;
-			sourceTree = "<group>";
-		};
-		8F85D8931FD9257400BC1A7D /* Sound */ = {
-			isa = PBXGroup;
-			children = (
-				8F85D8941FD9257400BC1A7D /* sound.caf */,
-			);
-			path = Sound;
-			sourceTree = "<group>";
-		};
-		8F85D8951FD9257400BC1A7D /* View */ = {
-			isa = PBXGroup;
-			children = (
-				8F85D8961FD9257400BC1A7D /* SGScanningQRCodeView.h */,
-				8F85D8971FD9257400BC1A7D /* SGScanningQRCodeView.m */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		8F85D8AC1FD925B300BC1A7D /* GTMBase64 */ = {
@@ -1602,7 +1534,6 @@
 				8F3BDA661FED094800C4B472 /* MineFooterView.xib in Resources */,
 				8FF2D0D91FFF1FA9002F18B4 /* XYQProgressHUD.bundle in Resources */,
 				8F19C94E2008519900A957FF /* README.txt in Resources */,
-				8F85D8A81FD9257400BC1A7D /* sound.caf in Resources */,
 				8F7806E02007479A00B119E5 /* TextFieldCell.xib in Resources */,
 				8F728C331FDE367200C6247B /* AssetsHandleCell.xib in Resources */,
 				8FF2D0E21FFF577E002F18B4 /* RaderSearchViewCell.xib in Resources */,
@@ -1611,9 +1542,9 @@
 				8FF04D6C1FDA898C00B14036 /* LabelTextFieldBuutonCell.xib in Resources */,
 				8F7806E5200747FA00B119E5 /* SalaryCell.xib in Resources */,
 				8F19C9562008BA9600A957FF /* AlipaySDK.bundle in Resources */,
+				8F1F7B3120104E8D00B4B675 /* resource.bundle in Resources */,
 				8F2A2B6C1FEA0240003E5507 /* NecessarySexCell.xib in Resources */,
 				8F85D8281FD922A500BC1A7D /* Main.storyboard in Resources */,
-				8F85D8A71FD9257400BC1A7D /* SGBottomView.xib in Resources */,
 				8F3BDA721FED25C000C4B472 /* MsgViewCell.xib in Resources */,
 				8FF04D641FDA82AD00B14036 /* LabelTextFieldCell.xib in Resources */,
 				8FF04D7A1FDA947900B14036 /* LabelSwitchCell.xib in Resources */,
@@ -1711,12 +1642,11 @@
 				8F1CA8321FE7688D00BBD208 /* CollectionViewCell.m in Sources */,
 				8F1CA83C1FE7AC0C00BBD208 /* CodeLoginViewController.m in Sources */,
 				8F85D8BB1FD9261200BC1A7D /* CALayer+BorderColor.m in Sources */,
-				8F85D8A51FD9257400BC1A7D /* SGAlertView.m in Sources */,
 				8F85D8F51FD92B2A00BC1A7D /* ForgotPwViewController.m in Sources */,
 				8F1F0BD81FF09C4B00CE2FB5 /* CenterMessageModel.m in Sources */,
 				8F1CA8251FE7661900BBD208 /* RyCalloutAnimation.m in Sources */,
 				8F728C321FDE367200C6247B /* AssetsHandleCell.m in Sources */,
-				8F85D8A11FD9257400BC1A7D /* CIImage+SGExtension.m in Sources */,
+				8F1F7B2F20104E8D00B4B675 /* MMScanView.m in Sources */,
 				8FF04D4F1FDA6FDE00B14036 /* RYAlertSheet.m in Sources */,
 				8F4CCF3A200C3ED900260000 /* GYRollingNoticeView.m in Sources */,
 				8F3F2F26200E06E00017A9A3 /* YWActionPaopaoView.m in Sources */,
@@ -1727,6 +1657,7 @@
 				8FF2D0D11FFF1F85002F18B4 /* CurrentLocationAnnotation.m in Sources */,
 				8F0EF4DC1FE3D6C800D179D5 /* AreaModel.m in Sources */,
 				8F85D8631FD9244800BC1A7D /* RYViewController.m in Sources */,
+				8F1F7B3020104E8D00B4B675 /* MMScanViewController.m in Sources */,
 				8F85D8251FD922A500BC1A7D /* ViewController.m in Sources */,
 				8F85D8DA1FD9297700BC1A7D /* JobViewController.m in Sources */,
 				8F1F66691FD9645B004BF8F1 /* AddPrivacyCompanyViewController.m in Sources */,
@@ -1797,14 +1728,12 @@
 				8FF04D531FDA7FF000B14036 /* RemindViewController.m in Sources */,
 				8F85D8741FD9250200BC1A7D /* UtilityHelper.m in Sources */,
 				8F0EF4D91FE3D39500D179D5 /* RYAreaPickView.m in Sources */,
-				8F85D8A91FD9257400BC1A7D /* SGScanningQRCodeView.m in Sources */,
 				8F0AB728200316C700DFC49F /* HImageUtility.m in Sources */,
 				8F3BDA651FED094800C4B472 /* MineFooterView.m in Sources */,
 				8F728C2D1FDE356200C6247B /* RechargeViewController.m in Sources */,
 				8F85D8D71FD9290400BC1A7D /* RYBusinessTabBarController.m in Sources */,
 				8F7806DF2007479A00B119E5 /* TextFieldCell.m in Sources */,
 				8F0EF4C61FE36A7A00D179D5 /* PCCircleInfoView.m in Sources */,
-				8F85D8A41FD9257400BC1A7D /* SGScanningQRCodeVC.m in Sources */,
 				8F0EF4C91FE36A7A00D179D5 /* PCLockLabel.m in Sources */,
 				8F1F0BDF1FF0C86C00CE2FB5 /* JKBannerCollectionViewCell.m in Sources */,
 				8F5088031FEA7B8000743B9C /* RYAlertAction.m in Sources */,
@@ -1818,7 +1747,6 @@
 				8F1F66541FD94DCD004BF8F1 /* JobH5ViewController.m in Sources */,
 				8F7806E820075A0700B119E5 /* RYBaseInfoModel.m in Sources */,
 				8F1F66661FD963CD004BF8F1 /* PrivacyViewController.m in Sources */,
-				8F85D8A61FD9257400BC1A7D /* SGBottomView.m in Sources */,
 				8F85D8661FD9246400BC1A7D /* RYBaseModel.m in Sources */,
 				8F85D8A01FD9257400BC1A7D /* UIView+SDAutoLayout.m in Sources */,
 				8F85D8CF1FD9282E00BC1A7D /* UserInfoManage.m in Sources */,
@@ -1826,7 +1754,6 @@
 				8F728C2A1FDE2F9F00C6247B /* AssetsManagementViewController.m in Sources */,
 				8FEC30441FF37BFE0073B1A3 /* ScanSucessViewController.m in Sources */,
 				8F1F24CC1FFB8204003F3B37 /* HCH5ViewController.m in Sources */,
-				8F85D8A21FD9257400BC1A7D /* ScanSuccessJumpVC.m in Sources */,
 				8F3BDA5B1FED007500C4B472 /* MineCollectionViewCell.m in Sources */,
 				8F7806E4200747FA00B119E5 /* SalaryCell.m in Sources */,
 				8FF2D0E11FFF577E002F18B4 /* RaderSearchViewCell.m in Sources */,
@@ -1834,7 +1761,6 @@
 				8FF2D0C71FFF1BF7002F18B4 /* MARaderViewController.m in Sources */,
 				8F3F2F23200E069F0017A9A3 /* YWRoundAnnotationView.m in Sources */,
 				8F5E3D4A2004E275007CA925 /* RYSelectViewController.m in Sources */,
-				8F85D8A31FD9257400BC1A7D /* SGGenerateQRCodeVC.m in Sources */,
 				8F1F66511FD9485C004BF8F1 /* RYWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

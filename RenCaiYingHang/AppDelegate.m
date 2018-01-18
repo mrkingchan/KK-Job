@@ -93,7 +93,7 @@ static BOOL isProduction = true;//false true
         OSGuideViewController * guide = [[OSGuideViewController alloc] init];
         self.window.rootViewController = guide;
         guide.delegate = self;
-        [guide guidePageControllerWithImages:@[@"pager1",@"pager2"]];
+        [guide guidePageControllerWithImages:@[@"pager1",@"pager2",@"pager3"]];
     }else{
         [self clickEnter];
     }

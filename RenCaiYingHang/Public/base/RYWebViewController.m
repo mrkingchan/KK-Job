@@ -25,9 +25,21 @@
 //关闭按钮
 @property (nonatomic, strong) UIBarButtonItem *closeItem;
 
+//背景图
+@property (nonatomic,strong) UIImageView * imageView;
+
 @end
 
 @implementation RYWebViewController
+
+- (UIImageView *)imageView
+{
+    if (!_imageView) {
+        _imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+        _imageView.image = UIIMAGE(@"nonetwork");
+    }
+    return _imageView;
+}
 
 - (WKWebViewConfiguration *)webConfiguration
 {
@@ -215,14 +227,15 @@
     _tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reloadRequest)];
     [self.view addGestureRecognizer:_tap];
     
-    [self.webView.scrollView setBackgroundColor:[UIColor colorWithPatternImage:UIIMAGE(@"nonetwork")]];
+    [self.webView addSubview:self.imageView];
 }
 
 /** 去掉手势 */
 - (void) removeTapGesture
 {
     [self.view removeGestureRecognizer:_tap];
-    [self.webView.scrollView setBackgroundColor:kWhiteColor];
+    [self.imageView removeFromSuperview];
+    self.imageView = nil;
 }
 
 /** 重新加载 */

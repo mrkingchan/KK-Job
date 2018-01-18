@@ -150,6 +150,9 @@ static NSString * identifier = @"CollectionViewCell";
         newAnnotationView.titleText = [NSString stringWithFormat:@"%@", annotation.title];
         newAnnotationView.countText = [NSString stringWithFormat:@"%@", annotation.subtitle];
         
+        newAnnotationView.selected = false;
+        newAnnotationView.fillColor = ColorRGB(83, 180, 119, 1);
+        
         newAnnotationView.canShowCallout = false;
     
         __weak typeof(newAnnotationView) annotationView = newAnnotationView;
@@ -159,19 +162,23 @@ static NSString * identifier = @"CollectionViewCell";
             {
                 if (annotationView.tag == annotationView1.tag)
                 {
-                    annotationView1.selected = true;
+//                    annotationView1.selected = true;
+//                    [self.mapView mapForceRefresh];
                     annotationView1.fillColor = [UIColor redColor];
-                    [self mapView:self.mapView didSelectAnnotationView:annotationView1];
+                    [self.mapView selectAnnotation:annotationView1.annotation animated:false];
+                    [self mapView:mapView didSelectAnnotationView:annotationView1];
                 }
                 else
                 {
-                    annotationView1.selected = false;
-                    annotationView1.fillColor = [UIColor colorWithRed:83/255.0 green:180/255.0 blue:119/255.0 alpha:1.0];
+//                    annotationView1.selected = false;
+//                    [self.mapView mapForceRefresh];
+                    annotationView1.fillColor = ColorRGB(83, 180, 119, 1);
+                    [self.mapView deselectAnnotation:annotationView1.annotation animated:false];
                     [self mapView:self.mapView didDeselectAnnotationView:annotationView1];
                 }
             }
         };
-        
+
         [self.anntotaionViewArray addObject:newAnnotationView];
         
         return newAnnotationView;
@@ -193,12 +200,8 @@ static NSString * identifier = @"CollectionViewCell";
 - (void)onGetCloudPoiResult:(NSArray*)poiResultList searchType:(int)type errorCode:(int)error
 {
     if (error == BMKErrorOk) {
-        NSArray * array = [NSArray arrayWithArray:self.anntotaionViewArray];
-        for (YWRoundAnnotationView * annotationView1 in array)
-        {
-            annotationView1.selected = false;
-            annotationView1.fillColor = [UIColor colorWithRed:83/255.0 green:180/255.0 blue:119/255.0 alpha:1.0];
-        }
+        
+        [self removeCollectionViewFromSuperView];
         [self.mapView removeAnnotations:self.searchPoiArray];
         [self.searchPoiArray removeAllObjects];
         [self.dataArray removeAllObjects];
@@ -377,8 +380,6 @@ static NSString * identifier = @"CollectionViewCell";
 
 - (void)cloudPlaceAroundSearch:(CLLocationCoordinate2D)coordinate keywords:(NSString *)keywords
 {
-    [_collectionView removeFromSuperview];
-    _collectionView = nil;
     
     BMKCloudNearbySearchInfo * placeAround = [[BMKCloudNearbySearchInfo alloc] init];
     
@@ -477,7 +478,7 @@ static NSString * identifier = @"CollectionViewCell";
         layout.itemSize = CGSizeMake(kScreenWidth, 180);
         layout.minimumInteritemSpacing = 0.0f;
         
-        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, kScreenHeight - KToolHeight - KNavBarHeight - 200, kScreenWidth , 190) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, kScreenHeight - KToolHeight - 200, kScreenWidth , 190) collectionViewLayout:layout];
         _collectionView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -487,7 +488,10 @@ static NSString * identifier = @"CollectionViewCell";
         [_collectionView registerNib:[UINib nibWithNibName:identifier bundle:nil] forCellWithReuseIdentifier:identifier];
         _collectionView.contentSize = CGSizeMake(kScreenWidth*10, 190);
         _collectionView.contentOffset = CGPointMake(0, 0);
-        [self.view addSubview:_collectionView];
+        [[UIApplication sharedApplication].keyWindow addSubview:_collectionView];
+        
+        
+        adjustsScrollViewInsets_NO(_collectionView, self);
         
         /** 向下轻扫 */
         UISwipeGestureRecognizer *swipeGestureRecognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
@@ -513,6 +517,7 @@ static NSString * identifier = @"CollectionViewCell";
     CollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     cell.model = model;
     cell.collectionViewCellCallBack = ^(NSInteger index) {
+        [self removeCollectionViewFromSuperView];
         if (index == 11) {
             JobDetailViewController * h5 = [[JobDetailViewController alloc] init];
             h5.url = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@public/job/jobDetails?datas=%@",KBaseURL,[UtilityHelper encryptUseDES2:[@{@"jobId":model.jobid} mj_JSONString] key:DESKEY]]];
@@ -528,7 +533,7 @@ static NSString * identifier = @"CollectionViewCell";
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(10, 0, 10, 0);
+    return UIEdgeInsetsMake(5, 0, 5, 0);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
@@ -542,6 +547,11 @@ static NSString * identifier = @"CollectionViewCell";
 
 /** 下滑清除 */
 - (void)swipe:(UISwipeGestureRecognizer *)sender
+{
+    [self removeCollectionViewFromSuperView];
+}
+
+- (void) removeCollectionViewFromSuperView
 {
     [_collectionView removeFromSuperview];
     _collectionView = nil;

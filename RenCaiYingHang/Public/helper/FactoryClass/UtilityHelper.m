@@ -21,20 +21,21 @@
 /** 登陆注册走 **/
 + (void) insertApp
 {
+    UIWindow * keyWindow = [[[UIApplication sharedApplication] delegate] window];
     if ([UserInfo.userInfo.reCode isEqualToString:@"X2222"])
     {
-        [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
+        keyWindow.rootViewController = [[RYTabBarController alloc] init];
     }
     else if([UserInfo.userInfo.reCode isEqualToString:@"X1111"])
     {
         HomePageViewController * homeCtl = [[HomePageViewController alloc] init];
         homeCtl.isFinishComInfo = true;
-        [UIApplication sharedApplication].keyWindow.rootViewController = homeCtl;
+        keyWindow.rootViewController = homeCtl;
     }
     else
     {
         RYNavigationController * root = [[RYNavigationController alloc] initWithRootViewController:[[RYSelectViewController alloc] init]];
-        [UIApplication sharedApplication].keyWindow.rootViewController = root;
+        keyWindow.rootViewController = root;
     }
 }
 
@@ -43,7 +44,9 @@
 {
     NSDictionary * paramer = @{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey};
     [RYUserRequest whetherBaseInfoWithParamer:paramer suceess:^(NSString * whetherUserBaseInfo,NSDictionary * whetherComBaseInfo) {
-    
+        
+        UIWindow * keyWindow = [[[UIApplication sharedApplication] delegate] window];
+        
         if(![[whetherComBaseInfo allKeys] containsObject:@"comUserInfo"]||[whetherUserBaseInfo isEqualToString:@"yes"])
         {
             if (![[whetherComBaseInfo allKeys] containsObject:@"comUserInfo"]) {
@@ -54,16 +57,16 @@
                 
                 HomePageViewController * homeCtl = [[HomePageViewController alloc] init];
                 homeCtl.isFinishComInfo = true;
-                [UIApplication sharedApplication].keyWindow.rootViewController = homeCtl;
+                keyWindow.rootViewController = homeCtl;
             }
             if ([whetherUserBaseInfo isEqualToString:@"yes"]) {
                 UserInfo.userInfo.reCode = @"X2222";
                 [UtilityHelper saveUserInfoWith:UserInfo.userInfo keyName:UserCache];
-                [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
+                keyWindow.rootViewController = [[RYTabBarController alloc] init];
             }
         }else{
             RYNavigationController * root = [[RYNavigationController alloc] initWithRootViewController:[[RYSelectViewController alloc] init]];
-            [UIApplication sharedApplication].keyWindow.rootViewController = root;
+            keyWindow.rootViewController = root;
         }
     } failure:^(id errorCode) {
         
@@ -76,6 +79,8 @@
     NSDictionary * paramer = @{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey};
     [RYUserRequest whetherBaseInfoWithParamer:paramer suceess:^(NSString * whetherUserBaseInfo,NSDictionary * whetherComBaseInfo) {
         
+        UIWindow * keyWindow = [[[UIApplication sharedApplication] delegate] window];
+        
         switch (clientType) {
             case 1: /** 1是个人版跳企业版 */
             {
@@ -83,7 +88,7 @@
                 {
                     HomePageViewController * homeCtl = [[HomePageViewController alloc] init];
                     homeCtl.isFinishComInfo = false;
-                    [UIApplication sharedApplication].keyWindow.rootViewController = homeCtl;
+                    keyWindow.rootViewController = homeCtl;
                 }
                 else if([[whetherComBaseInfo allKeys] containsObject:@"com_id"])
                 {
@@ -94,7 +99,7 @@
                     
                     HomePageViewController * homeCtl = [[HomePageViewController alloc] init];
                     homeCtl.isFinishComInfo = true;
-                    [UIApplication sharedApplication].keyWindow.rootViewController = homeCtl;
+                    keyWindow.rootViewController = homeCtl;
                 }
             }
                 break;
@@ -104,10 +109,10 @@
                     UserInfo.userInfo.reCode = @"X2222";
                     [UtilityHelper saveUserInfoWith:UserInfo.userInfo keyName:UserCache];
                     
-                    [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
+                    keyWindow.rootViewController = [[RYTabBarController alloc] init];
                     
                 }else if ([whetherUserBaseInfo isEqualToString:@"no"]){
-                    [UIApplication sharedApplication].keyWindow.rootViewController =  [[RYNavigationController alloc] initWithRootViewController:[[NecessaryInfoViewController alloc] init]];
+                    keyWindow.rootViewController =  [[RYNavigationController alloc] initWithRootViewController:[[NecessaryInfoViewController alloc] init]];
                 }
             }
                 break;
@@ -204,29 +209,6 @@ const  Byte iv[] = {1,2,3,4,5,6,7,8};
         plaintext = [[NSString alloc]initWithData:plaindata encoding:NSUTF8StringEncoding];
     }
     return plaintext;
-}
-
-/***
- 扫一扫
- **/
-+(void)scanRQCode:(UIViewController<SGScanningQRCodeVCDelegate>*)vc
-{
-    // 1、 获取摄像设备
-    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    if (device) {
-        if ([vc isKindOfClass:[RYNavigationController class]]) {
-            SGScanningQRCodeVC * scan = [[SGScanningQRCodeVC alloc] init];
-            scan.delegate = vc;
-            [(RYNavigationController*)vc pushViewController:scan animated:YES];
-        }else{
-            SGScanningQRCodeVC * scan = [[SGScanningQRCodeVC alloc] init];
-            scan.delegate = vc;
-            [vc.navigationController pushViewController:scan animated:YES];
-        }
-    } else {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:nil message:@"未检测到您的摄像头, 请在真机上测试" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [av show];
-    }
 }
 
 /** 生成二维码 **/
