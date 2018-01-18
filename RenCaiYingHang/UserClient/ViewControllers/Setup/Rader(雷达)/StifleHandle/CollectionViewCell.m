@@ -41,7 +41,12 @@
     
     [companyIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KIMGURL,model.comlogo]] placeholderImage:nil];
     companyName.text = model.comname;
-    companyInfo.text = [NSString stringWithFormat:@"%@|%@|%@",model.finance_name,model.scale_name,model.industry_name];
+    
+    NSString * msg = [NSString stringWithFormat:@"%@|%@|%@",model.finance_name,model.scale_name,model.industry_name];
+    if ([VerifyHelper empty:model.finance_name]) {
+        msg = [NSString stringWithFormat:@"%@|%@",model.scale_name,model.industry_name];
+    }
+    companyInfo.text = msg;
     
     NSString * datetime = [model.updateTime componentsSeparatedByString:@" "][1];
     NSArray * timeArr = [datetime componentsSeparatedByString:@":"];
