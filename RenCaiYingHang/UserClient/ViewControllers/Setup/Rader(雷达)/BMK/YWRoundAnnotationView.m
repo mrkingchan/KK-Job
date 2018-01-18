@@ -34,8 +34,8 @@
     
     if (self=[super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier])
     {
-        [self setBounds:CGRectMake(0, 0, 150, 40)];
-        [self initWithContentViews];//
+        [self setBounds:CGRectMake(0, 0, 150, 42)];
+        [self initWithContentViews];
     }
     
     return self;
@@ -46,23 +46,23 @@
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(senderClick)];
     [self addGestureRecognizer:tap];
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 30)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 32)];
     [view setBackgroundColor:[ UIColor  clearColor]];
     _contentView=view;
     [self addSubview:view];
     
-    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(70, 27, 10, 10)];
+    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(70, 29, 10, 10)];
     [_contentView addSubview:_imageView];
     
     layer = [CAShapeLayer layer];
     layer.frame = view.frame;
-    layer.path = [ UIBezierPath bezierPathWithRoundedRect:view.frame cornerRadius:15].CGPath;
+    layer.path = [ UIBezierPath bezierPathWithRoundedRect:view.frame cornerRadius:16].CGPath;
     layer.fillColor = [UIColor colorWithRed:83/255.0 green:180/255.0 blue:119/255.0 alpha:1.0].CGColor;
     [view.layer addSublayer:layer];
     //layer.lineWidth = 0.3f;
     //layer.strokeColor = [ UIColor grayColor].CGColor;
     
-    UILabel *lable = [[ UILabel alloc] initWithFrame:CGRectMake(0,0, 150, 30)];
+    UILabel *lable = [[ UILabel alloc] initWithFrame:CGRectMake(0,0, 150, 32)];
     lable.textAlignment = NSTextAlignmentCenter;
     lable.textColor = [ UIColor whiteColor];
     lable.font = [UIFont fontWithName:@"Helvetica-Bold" size:13];

@@ -147,7 +147,7 @@ static NSString * identifier = @"CollectionViewCell";
         
         newAnnotationView.tag = [current.jobid integerValue];
         
-        newAnnotationView.titleText = [NSString stringWithFormat:@"%@ %@", annotation.title,annotation.subtitle];
+        newAnnotationView.titleText = [NSString stringWithFormat:@"薪资:%@ | %@", annotation.title,annotation.subtitle];
 //        newAnnotationView.countText = [NSString stringWithFormat:@"%@", annotation.subtitle];
         
         newAnnotationView.selected = false;
@@ -362,7 +362,6 @@ static NSString * identifier = @"CollectionViewCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     //初始化云检索服务
     _search = [[BMKCloudSearch alloc]init];
     _search.delegate = self;
@@ -378,6 +377,8 @@ static NSString * identifier = @"CollectionViewCell";
 {
     [super viewDidAppear:animated];
     
+    [self startLocation];
+    [self initMapView];
     [self initCenterView];
 }
 
@@ -559,14 +560,12 @@ static NSString * identifier = @"CollectionViewCell";
     _collectionView = nil;
 }
 
--(void)viewWillAppear:(BOOL)animated {
+- (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [_mapView viewWillAppear];
     _mapView.delegate = self;
     _search.delegate = self;
     _locService.delegate = self;
-    [self startLocation];
-    [self initMapView];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {

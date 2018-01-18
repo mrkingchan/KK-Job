@@ -335,6 +335,7 @@
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
     [XYQProgressHUD hideHUD];
+    [self addTapGesture];
     [self addLeftButton];
     [self addRightBtn];
 }

@@ -36,4 +36,7 @@
 /** 去掉手势 */
 - (void) removeTapGesture;
 
+/** 重新加载 */
+- (void) reloadRequest;
+
 @end

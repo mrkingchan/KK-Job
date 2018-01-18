@@ -27,14 +27,13 @@
     // Do any additional setup after loading the view.
 
     self.webView.scrollView.mj_header = [MyRefreshHeader headerWithRefreshingBlock:^{
-        [self.webView.scrollView.mj_header endRefreshing];
-        [self requestData];
+        [self reloadRequest];
     }];
     
-    [self requestData];
+    [self.webView.scrollView.mj_header beginRefreshing];
 }
 
-- (void) requestData
+- (void) reloadRequest
 {
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[UtilityHelper addUrlToken:CompanyList]]]];
 }
@@ -53,21 +52,24 @@
 
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
-    [self removeTapGesture];
+    
 }
 
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
+    [self.webView.scrollView.mj_header endRefreshing];
     [self removeTapGesture];
 }
 
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
+    [self.webView.scrollView.mj_header endRefreshing];
     [self removeTapGesture];
 }
 
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
+    [self.webView.scrollView.mj_header endRefreshing];
     [self addTapGesture];
 }
 
