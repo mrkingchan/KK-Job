@@ -40,7 +40,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="|" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bf9-C1-Vbr">
-                                        <rect key="frame" x="44.5" y="5" width="0.5" height="25"/>
+                                        <rect key="frame" x="44.5" y="7" width="0.5" height="21"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="1"/>
                                         <color key="textColor" red="0.96078431369999995" green="0.92156862750000001" blue="0.94577074049999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -60,10 +60,10 @@
                                     <constraint firstItem="aUk-HA-Zd1" firstAttribute="centerX" secondItem="m4h-Xn-Ydd" secondAttribute="centerX" multiplier="0.2" id="aY8-9I-kWE"/>
                                     <constraint firstAttribute="trailing" secondItem="SDe-6f-4F7" secondAttribute="trailing" constant="10" id="cyb-q7-B3G"/>
                                     <constraint firstItem="Bf9-C1-Vbr" firstAttribute="leading" secondItem="aUk-HA-Zd1" secondAttribute="trailing" constant="10" id="hUL-n1-0NC"/>
+                                    <constraint firstItem="Bf9-C1-Vbr" firstAttribute="top" secondItem="aUk-HA-Zd1" secondAttribute="top" id="kcy-ec-pJT"/>
+                                    <constraint firstItem="Bf9-C1-Vbr" firstAttribute="height" secondItem="aUk-HA-Zd1" secondAttribute="height" id="nOl-Sn-rid"/>
                                     <constraint firstItem="aUk-HA-Zd1" firstAttribute="height" secondItem="m4h-Xn-Ydd" secondAttribute="height" multiplier="0.6" id="qTb-ju-D42"/>
-                                    <constraint firstAttribute="bottom" secondItem="Bf9-C1-Vbr" secondAttribute="bottom" constant="5" id="tkd-tA-enh"/>
                                     <constraint firstItem="SDe-6f-4F7" firstAttribute="height" secondItem="m4h-Xn-Ydd" secondAttribute="height" multiplier="0.7" id="x9b-1C-FID"/>
-                                    <constraint firstItem="Bf9-C1-Vbr" firstAttribute="top" secondItem="m4h-Xn-Ydd" secondAttribute="top" constant="5" id="xer-U2-n4i"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
@@ -85,7 +85,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="|" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1c-C4-dbt">
-                                        <rect key="frame" x="44.5" y="5" width="0.5" height="25"/>
+                                        <rect key="frame" x="44.5" y="7" width="0.5" height="21.5"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="1"/>
                                         <color key="textColor" red="0.96078431372549022" green="0.92156862745098034" blue="0.9457707405090332" alpha="1" colorSpace="calibratedRGB"/>
@@ -94,14 +94,14 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="K1c-C4-dbt" firstAttribute="leading" secondItem="rWy-p6-bXb" secondAttribute="trailing" constant="10" id="3vn-zY-pyL"/>
+                                    <constraint firstItem="K1c-C4-dbt" firstAttribute="height" secondItem="rWy-p6-bXb" secondAttribute="height" id="4Ps-eK-lF0"/>
                                     <constraint firstItem="rWy-p6-bXb" firstAttribute="centerX" secondItem="ihp-hf-uGV" secondAttribute="centerX" multiplier="0.2" id="98Y-Rq-6O2"/>
                                     <constraint firstItem="y30-hs-xPc" firstAttribute="leading" secondItem="K1c-C4-dbt" secondAttribute="trailing" constant="10" id="9ny-P4-bDj"/>
                                     <constraint firstAttribute="trailing" secondItem="y30-hs-xPc" secondAttribute="trailing" constant="10" id="Ckm-Pg-eyI"/>
                                     <constraint firstItem="rWy-p6-bXb" firstAttribute="centerY" secondItem="ihp-hf-uGV" secondAttribute="centerY" id="HfF-xT-b0X"/>
+                                    <constraint firstItem="K1c-C4-dbt" firstAttribute="top" secondItem="rWy-p6-bXb" secondAttribute="top" id="HsS-RO-ShP"/>
                                     <constraint firstItem="y30-hs-xPc" firstAttribute="height" secondItem="ihp-hf-uGV" secondAttribute="height" multiplier="0.7" id="MHl-8F-NNj"/>
-                                    <constraint firstItem="K1c-C4-dbt" firstAttribute="top" secondItem="ihp-hf-uGV" secondAttribute="top" constant="5" id="QBv-Je-mB9"/>
                                     <constraint firstItem="rWy-p6-bXb" firstAttribute="height" secondItem="ihp-hf-uGV" secondAttribute="height" multiplier="0.6" id="dv6-9g-6ga"/>
-                                    <constraint firstAttribute="bottom" secondItem="K1c-C4-dbt" secondAttribute="bottom" constant="5" id="fVn-rq-NQ3"/>
                                     <constraint firstItem="y30-hs-xPc" firstAttribute="centerY" secondItem="ihp-hf-uGV" secondAttribute="centerY" id="rMF-9y-zCz"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>

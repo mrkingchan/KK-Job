@@ -129,33 +129,33 @@ static NSString * SalaryCellID = @"SalaryCell";
         return;
     }
     
-    if ([VerifyHelper empty:self.model.birthday]) {
-        [self alertMessageWithViewController:self message:@"出生信息不全"];
-        return;
-    }
-    
-     if ( [VerifyHelper empty:self.model.job]){
-         [self alertMessageWithViewController:self message:@"职位信息不全"];
-         return;
-    }
-    
-    if ([VerifyHelper empty:self.model.salary]){
-        [self alertMessageWithViewController:self message:@"薪资信息不全"];
-        return;
-    }
-    
     if (self.model.education == 0){
-        [self alertMessageWithViewController:self message:@"学历信息不全"];
+        [self alertMessageWithViewController:self message:@"最高学历不全"];
         return;
     }
     
     if (self.model.experience == 0){
-        [self alertMessageWithViewController:self message:@"经验信息不全"];
+        [self alertMessageWithViewController:self message:@"工作经验不全"];
         return;
     }
-
+    
+    if ([VerifyHelper empty:self.model.birthday]) {
+        [self alertMessageWithViewController:self message:@"出生年月不全"];
+        return;
+    }
+    
+     if ( [VerifyHelper empty:self.model.job]){
+         [self alertMessageWithViewController:self message:@"期望职位不全"];
+         return;
+    }
+    
+    if ([VerifyHelper empty:self.model.salary]){
+        [self alertMessageWithViewController:self message:@"期望薪资不全"];
+        return;
+    }
+    
     if ([VerifyHelper empty:self.model.city]) {
-        [self alertMessageWithViewController:self message:@"期望城市信息"];
+        [self alertMessageWithViewController:self message:@"期望薪资不全"];
         return;
     }
 
