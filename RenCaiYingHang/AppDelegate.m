@@ -291,12 +291,11 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
     NSString * type = userInfo[@"pushType"];
     NSDictionary * info = userInfo[@"aps"];
     
-    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive && [type isEqualToString:@"user"])
+    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive && [type isEqualToString:@"user"] && [UserInfo.userInfo.reCode isEqualToString:@"X2222"])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"UserJPushNotification" object:info];
     }
 }
-
 
 
 - (void)application:(UIApplication *)application

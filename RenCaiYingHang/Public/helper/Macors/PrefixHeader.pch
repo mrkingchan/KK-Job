@@ -28,7 +28,7 @@
 #define fontScale kScreenWidth/375
 #define systemOfFont(size) [UIFont systemFontOfSize:size*fontScale]
 
-#define kNavBarTintColor UIColorHex(F05b48)
+#define kNavBarTintColor UIColorHex(F05B48)
 
 #define UIIMAGE(named) [UIImage imageNamed:named]
 

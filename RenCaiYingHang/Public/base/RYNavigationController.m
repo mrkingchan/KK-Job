@@ -27,8 +27,10 @@
     [[UIBarButtonItem appearance]  setTitleTextAttributes:@{NSFontAttributeName:systemOfFont(14),
                                                             NSForegroundColorAttributeName:[UIColor blackColor]
                                                             } forState:UIControlStateNormal];
-    
-    self.navigationBar.barTintColor = kNavBarTintColor;
+
+    [self.navigationBar setBackgroundImage:UIIMAGE(@"nav_bg") forBarMetrics:UIBarMetricsDefault];
+
+    //self.navigationBar.barTintColor = kNavBarTintColor;
     
     //去掉下划线
     //[self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];

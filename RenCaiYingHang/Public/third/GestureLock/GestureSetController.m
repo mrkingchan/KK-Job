@@ -188,7 +188,6 @@
 {
     UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
     [UIApplication sharedApplication].keyWindow.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
-    [[UIApplication sharedApplication].keyWindow.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:1.0f];
 }
 
 #pragma mark - 创建UIButton
@@ -229,6 +228,8 @@
         {
 #pragma mark 忘记密码
             //忘记密码 清空所有数据
+            [UserInfo loginOut];
+            [RYDefaults setObject:@"" forKey:[NSString stringWithFormat:UserCache]];
             [PCCircleViewConst saveGesture:nil Key:gestureFinalSaveKey];
             [[NSUserDefaults standardUserDefaults] setObject:@"close" forKey:@"setOn"];
             [self showAlertWithTitle:@"手势关闭成功" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {

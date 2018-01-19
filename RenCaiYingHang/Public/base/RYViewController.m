@@ -41,11 +41,10 @@
 {
     //NSDictionary *userInfo = [notification userInfo];
     NSString * notificationName = [notification name];
-    if ([notificationName isEqualToString:@"UserJPushNotification"]) {
+    if ([notificationName isEqualToString:@"UserJPushNotification"] && [UserInfo.userInfo.reCode isEqualToString:@"X2222"]) {
          self.tabBarController.selectedIndex =  2;
     }
 }
-
 
 /** 登陆认证,此方法已失效 */
 - (void) loginAuth

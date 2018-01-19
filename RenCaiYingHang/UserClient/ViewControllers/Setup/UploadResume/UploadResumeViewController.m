@@ -31,15 +31,10 @@
 - (UIImageView *)imageView
 {
     if (!_imageView) {
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenWidth*0.35, kScreenHeight * 0.2, kScreenWidth * 0.3, kScreenWidth * 0.3)];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenWidth*0.3, kScreenHeight * 0.2, kScreenWidth * 0.4, kScreenWidth * 0.4)];
         _imageView.image = UIIMAGE(@"noresume");
-        _imageView.layer.cornerRadius = kScreenWidth * 0.15;
-        _imageView.clipsToBounds = true;
         _imageView.userInteractionEnabled = true;
         [self.view addSubview:_imageView];
-        
-        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bigscale:)];
-        [_imageView addGestureRecognizer:tap];
     }
     return _imageView;
 }
@@ -47,7 +42,7 @@
 - (UILabel *)showMsgLabel
 {
     if (!_showMsgLabel) {
-        _showMsgLabel = [UIFactory initLableWithFrame:CGRectMake(20, self.imageView.bottom + 10, kScreenWidth - 40, 20) title:@"暂无简历" textColor:UIColorHex(999999) font:systemOfFont(16) textAlignment:1];
+        _showMsgLabel = [UIFactory initLableWithFrame:CGRectMake(20, self.imageView.bottom + 15, kScreenWidth - 40, 20) title:@"" textColor:UIColorHex(999999) font:systemOfFont(16) textAlignment:1];
         [self.view addSubview:_showMsgLabel];
     }
     return _showMsgLabel;
@@ -56,8 +51,9 @@
 - (UIButton *)submitBtn
 {
     if (!_submitBtn) {
-        _submitBtn = [UIFactory initBorderButtonWithFrame:CGRectMake(kScreenWidth * 0.15, kScreenHeight * 0.7, kScreenWidth * 0.7, 40) title:@"上传" textColor:[UIColor darkTextColor] font: systemOfFont(16) cornerRadius:5 bgColor:Color235 borderColor:UIColorHex(999999) borderWidth:0.5 tag:10 target:self action:@selector(postImg:)];
-       // [self.view addSubview:_submitBtn];
+        _submitBtn = [UIFactory initButtonWithFrame: CGRectMake(kScreenWidth * 0.15, kScreenHeight * 0.7, kScreenWidth * 0.7, 40*AdaptiveRate) title:@"" textColor:kWhiteColor font:systemOfFont(16) cornerRadius:5 tag:10 target:self action:@selector(postImg:)];
+        [_submitBtn setBackgroundColor:kNavBarTintColor];
+        [self.view addSubview:_submitBtn];
     }
     return _submitBtn;
 }
@@ -76,20 +72,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"附近简历";
+    self.title = @"附件简历";
     
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KIMGURL,UserInfo.userInfo.resumeImage]] placeholderImage:UIIMAGE(@"noresume")];
-    self.showMsgLabel.hidden = ![VerifyHelper empty:UserInfo.userInfo.resumeImage];
-    [self.view addSubview:self.submitBtn];
+    
+    self.imageView.image = [VerifyHelper empty:UserInfo.userInfo.resumeImage] ? UIIMAGE(@"noresume") : UIIMAGE(@"fj_resume");
+
+    self.showMsgLabel.text = [VerifyHelper empty:UserInfo.userInfo.resumeImage] ? @"暂无简历" : [NSString stringWithFormat:@"%@.jpg",UserInfo.userInfo.name];
+    self.showMsgLabel.textColor = [VerifyHelper empty:UserInfo.userInfo.resumeImage] ? UIColorHex(999999) :kNavBarTintColor;
+    [self.submitBtn setTitle:[VerifyHelper empty:UserInfo.userInfo.resumeImage] ? @"上传":@"重新上传" forState:UIControlStateNormal];
+    
+    
+    if (![VerifyHelper empty:UserInfo.userInfo.resumeImage]) {
+        UIButton * see = [UIFactory initButtonWithFrame:CGRectMake(0, 0, 42, 40) title:@"预览" textColor:kWhiteColor font:systemOfFont(14) cornerRadius:0 tag:10 target:self action:@selector(bigscale:)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:see];
+    }
 }
 
 /** 放大了看 */
-- (void) bigscale:(UITapGestureRecognizer *) tapView
+- (void) bigscale:(UIButton *) sender
 {
     if ([VerifyHelper empty:UserInfo.userInfo.resumeImage]) {
         return;
     }
-    [HUPhotoBrowser showFromImageView:self.imageView withImages:@[self.imageView.image] atIndex:0];
+    [HUPhotoBrowser showFromImageView:self.imageView withURLStrings:@[[NSString stringWithFormat:@"%@%@",KIMGURL,UserInfo.userInfo.resumeImage]] atIndex:0];
 }
 
 /** 上传图片 **/
@@ -112,8 +117,8 @@
     
     NSData * imageData = UIImageJPEGRepresentation(originImage, 0.7);
     [NetWorkHelper uploadFileRequest:imageData param:dic method:UploadFiles completeBlock:^(NSDictionary *data) {
-        self.showMsgLabel.hidden = true;
-        self.imageView.image = originImage;
+        self.showMsgLabel.text = [NSString stringWithFormat:@"%@.jpg",UserInfo.userInfo.name];
+        self.imageView.image = UIIMAGE(@"fj_resume");
         [self showAlertWithTitle:@"上传成功" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
             alertMaker.addActionCancelTitle(@"确定");
         } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {

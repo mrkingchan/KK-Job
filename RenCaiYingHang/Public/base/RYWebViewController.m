@@ -53,7 +53,7 @@
 - (WKWebView *)webView
 {
     if (!_webView) {
-        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, KNavBarHeight, self.view.bounds.size.width, self.view.bounds.size.height - KNavBarHeight) configuration:self.webConfiguration];
+        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - KNavBarHeight) configuration:self.webConfiguration];
         _webView.UIDelegate = self;
         _webView.navigationDelegate = self;
 //        _webView.scrollView.bounces = false;

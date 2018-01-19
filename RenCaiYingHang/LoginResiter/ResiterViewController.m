@@ -60,11 +60,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self loadUI];
+}
+
+- (void) loadUI
+{
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:UIIMAGE(@"bg")]];
     [self addNotification];
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeBeyBoard)];
     [self.view addGestureRecognizer:tap];
     isAnimation = false;
+    [self setEnable:false backgroundColor:[UIColor lightGrayColor]];
 }
 
 /** 密码登陆 */
@@ -216,6 +222,19 @@
             self.view.frame = CGRectMake(0, h, kScreenWidth, kScreenHeight);
         }];
     }
+    
+    if (![VerifyHelper empty:_phoneTf.text] && ![VerifyHelper empty:_codeTf.text] && ![VerifyHelper empty:_pwTf.text]) {
+        [self setEnable:true backgroundColor:kNavBarTintColor];
+    }else{
+        [self setEnable:false backgroundColor:[UIColor lightGrayColor]];
+    }
+}
+
+/** _regsiterBtn */
+- (void)setEnable:(BOOL) enable backgroundColor:(UIColor *)color
+{
+    _regsiterBtn.enabled = enable;
+    _regsiterBtn.backgroundColor = color;
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
