@@ -8,8 +8,6 @@
 
 #import "RYSelectViewController.h"
 
-#import "PCCircleViewConst.h"
-
 #import "NecessaryInfoViewController.h"
 #import "HomePageViewController.h"
 
@@ -29,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"选择您的角色";
+    self.title = @"选择用户角色";
     [self setBgview];
     [self configurationReturnBack];
     [self initButtons];
@@ -37,8 +35,8 @@
 
 - (void) setBgview
 {
-    UIImageView * imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -KNavBarHeight, kScreenWidth, kScreenHeight)];
+    imageView.contentMode =  UIViewContentModeScaleAspectFit;
     imageView.image = UIIMAGE(@"midbg");
     [self.view addSubview:imageView];
 }
@@ -54,11 +52,11 @@
 {
     NSArray * imageArr = @[@"resume",@"offer"];
     for (int i = 0; i < imageArr.count; i++) {
-        CGFloat h = kScreenHeight/10;
+        CGFloat h = kScreenHeight/10 ;
         if (i == 1) {
-            h = kScreenHeight/7;
+            h = kScreenHeight/6  ;
         }
-        UIButton * button = [UIFactory initButtonWithFrame:CGRectMake(kScreenWidth * 0.25,kScreenHeight/2 * (i+1) - h,kScreenWidth * 0.5, kScreenWidth * 0.1) image:UIIMAGE(imageArr[i]) cornerRadius:kScreenWidth * 0.05 tag:i+10 target:self action:@selector(buttonClick:)];
+        UIButton * button = [UIFactory initButtonWithFrame:CGRectMake(kScreenWidth * 0.25,kScreenHeight/2 * (i+1) - h - KNavBarHeight,kScreenWidth * 0.5, kScreenWidth * 0.1) image:UIIMAGE(imageArr[i]) cornerRadius:kScreenWidth * 0.05 tag:i+10 target:self action:@selector(buttonClick:)];
         button.backgroundColor = kNavBarTintColor;
         [self.view addSubview:button];
     }
@@ -68,11 +66,9 @@
 - (void) returnBack
 {
     [UserInfo loginOut];
-    [RYDefaults setObject:@"" forKey:[NSString stringWithFormat:UserCache]];
-    [PCCircleViewConst saveGesture:nil Key:gestureFinalSaveKey];
-    [[NSUserDefaults standardUserDefaults] setObject:@"close" forKey:@"setOn"];
+    
     UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-    [UIApplication sharedApplication].keyWindow.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
+    [UIFactory getKeyWindow].rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
 }
 
 /** 选择端 */
@@ -87,7 +83,7 @@
         case 11:
         {
             //[UtilityHelper alertMessage:@"即将开放" ctl:self];
-            [UIApplication sharedApplication].keyWindow.rootViewController = [[HomePageViewController alloc] init];
+            [UIFactory getKeyWindow].rootViewController = [[HomePageViewController alloc] init];
         }
             break;
         default:

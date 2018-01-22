@@ -43,7 +43,7 @@
 
 - (void) initUI:(NSArray *) dataArr
 {
-    self.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
+    self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelClick)];
     [self addGestureRecognizer:tap];
@@ -67,7 +67,7 @@
 
 - (void) show
 {
-    [[UIApplication sharedApplication].keyWindow addSubview:self];
+    [[UIFactory getKeyWindow] addSubview:self];
 }
 
 #pragma mark UITableViewDataSource

@@ -8,6 +8,8 @@
 
 #import "UserInfoManage.h"
 
+#import "PCCircleViewConst.h"
+
 static UserInfoManage * userManage;
 
 @implementation UserInfoManage
@@ -35,6 +37,10 @@ static UserInfoManage * userManage;
 {
     userManage.userInfo = nil;
     _is_login = NO;
+    
+    [RYDefaults setObject:@"" forKey:[NSString stringWithFormat:UserCache]];
+    [PCCircleViewConst saveGesture:nil Key:gestureFinalSaveKey];
+    [[NSUserDefaults standardUserDefaults] setObject:@"close" forKey:@"setOn"];
 }
 
 @end

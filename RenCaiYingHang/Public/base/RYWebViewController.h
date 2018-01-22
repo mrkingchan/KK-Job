@@ -30,6 +30,8 @@
 
 - (void) addRightBtn;
 
+
+
 /** 添加手势 */
 - (void) addTapGesture;
 

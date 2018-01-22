@@ -38,6 +38,4 @@
 @property (nonatomic,copy) NSString * image;
 /** 附件简历地址 */
 @property (nonatomic,copy) NSString * resumeImage;
-
-
 @end

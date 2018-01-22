@@ -13,8 +13,6 @@
 #import "FeebBackViewController.h"
 #import "GestureManageController.h"
 
-#import "PCCircleViewConst.h"
-
 @interface SetupViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView * tableView;
@@ -175,11 +173,9 @@ static NSString * SetUPTableViewCellID = @"UITableViewCell";
     [NetWorkHelper getWithURLString:[UtilityHelper addUrlToken:@"securityCenter/appSignOut"] parameters:nil success:^(NSDictionary *data) {
         
         [UserInfo loginOut];
-        [RYDefaults setObject:@"" forKey:[NSString stringWithFormat:UserCache]];
-        [PCCircleViewConst saveGesture:nil Key:gestureFinalSaveKey];
-        [[NSUserDefaults standardUserDefaults] setObject:@"close" forKey:@"setOn"];
+       
         UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-        [UIApplication sharedApplication].keyWindow.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
+        [UIFactory getKeyWindow].rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
         
     } failure:^(NSError *error) {
         

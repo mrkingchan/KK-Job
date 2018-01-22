@@ -61,8 +61,8 @@ static BOOL isProduction = true;//false true
     //注册百度
     [self regsiterBaidu];
     
-    //注册高德
-    [AMapServices sharedServices].apiKey = MAMapKey;
+//    //注册高德
+//    [AMapServices sharedServices].apiKey = MAMapKey;
     
     //向微信注册
     [WXApi registerApp:WeXinAppID];

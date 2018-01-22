@@ -16,6 +16,9 @@
 /** 按钮点击事件 **/
 @property (nonatomic,copy) void(^mineHeaderButtonCallBack)(NSInteger index);
 
+/** 选择状态点击事件 */
+@property (nonatomic,copy) void(^mineHeaderStatusCallBack)(void);
+
 @property (nonatomic,copy) NSArray * dataArr;
 
 @property (nonatomic,strong) NSDictionary * user;

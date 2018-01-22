@@ -53,7 +53,7 @@
     [RYUserRequest loginAuthWithParamer:a suceess:^(BOOL isSendSuccess) {
         if (!isSendSuccess) {
             UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-            [UIApplication sharedApplication].keyWindow.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
+            [UIFactory getKeyWindow].rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
         }else{
             [self alertMessageWithViewController:self message:[NSString stringWithFormat:@"token传值成功-%@",UserInfo.userInfo.token]];
         }

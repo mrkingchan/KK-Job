@@ -58,6 +58,7 @@
 /**  ThirdClass  **/
 #import "UIViewController+AlertController.h"
 #import "SDAutoLayout.h"
+#import "JXMapNavigationView.h"
 
 #import <AFNetworking.h>
 #import <MJExtension.h>

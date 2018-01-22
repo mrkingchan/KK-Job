@@ -80,7 +80,7 @@
 
     [XYQProgressHUD showMessage:@"登陆中..." toView:[UIFactory getKeyWindow]];
     [RYUserRequest userLoginWithParamer:dic suceess:^(BOOL isSendSuccess) {
-        [XYQProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow];
+        [XYQProgressHUD hideHUDForView:[UIFactory getKeyWindow]];
         [UtilityHelper insertApp];
     } failure:^(id errorCode) {
         

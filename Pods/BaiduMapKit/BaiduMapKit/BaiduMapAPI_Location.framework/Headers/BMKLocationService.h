@@ -11,6 +11,7 @@
 @class CLLocation;
 /// 定位服务Delegate,调用startUserLocationService定位成功后，用此Delegate来获取定位数据
 @protocol BMKLocationServiceDelegate <NSObject>
+
 @optional
 /**
  *在将要启动定位时，会调用此函数

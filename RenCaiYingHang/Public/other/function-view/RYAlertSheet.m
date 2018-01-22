@@ -90,7 +90,7 @@ static NSArray * allbus = nil;
 
 - (void) show
 {
-    [[UIApplication sharedApplication].keyWindow addSubview:self];
+    [[UIFactory getKeyWindow] addSubview:self];
 }
 
 -(void)clickButton:(UIButton*)button

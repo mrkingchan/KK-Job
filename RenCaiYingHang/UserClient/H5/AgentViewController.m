@@ -57,7 +57,7 @@
         
         RYShareView * share = [[RYShareView alloc] initWithFrame:[UIScreen mainScreen].bounds type:ShareUser];
         share.image = finalImage;
-        [[UIApplication sharedApplication].keyWindow addSubview:share];
+        [[UIFactory getKeyWindow] addSubview:share];
         
         share.shareCallBack = ^(NSInteger index) {
 

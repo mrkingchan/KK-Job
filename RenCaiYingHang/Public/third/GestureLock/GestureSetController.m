@@ -187,7 +187,7 @@
 - (void)navLeftBtnEvent
 {
     UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-    [UIApplication sharedApplication].keyWindow.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
+    [UIFactory getKeyWindow].rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
 }
 
 #pragma mark - 创建UIButton
@@ -229,9 +229,7 @@
 #pragma mark 忘记密码
             //忘记密码 清空所有数据
             [UserInfo loginOut];
-            [RYDefaults setObject:@"" forKey:[NSString stringWithFormat:UserCache]];
-            [PCCircleViewConst saveGesture:nil Key:gestureFinalSaveKey];
-            [[NSUserDefaults standardUserDefaults] setObject:@"close" forKey:@"setOn"];
+          
             [self showAlertWithTitle:@"手势关闭成功" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
                 alertMaker.addActionCancelTitle(@"确定");
             } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {

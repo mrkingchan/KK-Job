@@ -8,8 +8,6 @@
 
 #import "HomePageViewController.h"
 
-#import "PCCircleViewConst.h"
-
 #import "AppPayRequest.h"
 
 @interface HomePageViewController ()<WKScriptMessageHandler>
@@ -135,11 +133,9 @@
 - (void) comLoginOutApp
 {
     [UserInfo loginOut];
-    [RYDefaults setObject:@"" forKey:[NSString stringWithFormat:UserCache]];
-    [PCCircleViewConst saveGesture:nil Key:gestureFinalSaveKey];
-    [[NSUserDefaults standardUserDefaults] setObject:@"close" forKey:@"setOn"];
+   
     UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-    [UIApplication sharedApplication].keyWindow.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
+    [UIFactory getKeyWindow].rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
 }
 
 #pragma mark 微信支付回掉

@@ -13,8 +13,6 @@
 
 #import "CurrentLocationAnnotation.h"
 
-#import "JXMapNavigationView.h"
-
 #import "RaderSearchViewCell.h"
 #import "CollectionViewCell.h"
 
@@ -86,7 +84,7 @@ static NSString * identifier = @"CollectionViewCell";
 {
     if(!updatingLocation)
         return ;
-    
+
     if (userLocation.location.horizontalAccuracy < 0)
     {
         return ;
@@ -107,7 +105,7 @@ static NSString * identifier = @"CollectionViewCell";
  */
 - (void)mapView:(MAMapView *)mapView  didChangeUserTrackingMode:(MAUserTrackingMode)mode animated:(BOOL)animated
 {
-    
+
 }
 
 /**
@@ -130,7 +128,6 @@ static NSString * identifier = @"CollectionViewCell";
 - (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id <MAAnnotation>)annotation
 {
     // 自定义坐标
-    CurrentLocationAnnotation * current  = (CurrentLocationAnnotation *)annotation;
     if ([annotation isKindOfClass:[CurrentLocationAnnotation class]])
     {
         static NSString *reuseIndetifier = @"CustomAnnotationView";
@@ -152,7 +149,7 @@ static NSString * identifier = @"CollectionViewCell";
 //        annotationView.enabled = YES;
 //        annotationView.userInteractionEnabled = YES;
 //        [annotationView addSubview:btn];
-        
+
         annotationView.image = [UIImage imageNamed:@"mapAddress"];
         // 设置为NO，用以调用自定义的calloutView
         annotationView.canShowCallout = true;
@@ -183,7 +180,7 @@ static NSString * identifier = @"CollectionViewCell";
     [self.mapView removeAnnotations:self.searchPoiArray];
     [self.searchPoiArray removeAllObjects];
     [self.dataArray removeAllObjects];
-    
+
     if (response.POIs.count == 0)
     {
         return;
@@ -191,27 +188,27 @@ static NSString * identifier = @"CollectionViewCell";
 
     //解析response获取POI信息，具体解析见 Demo
     NSLog(@" >>> %@",response.POIs);
-    
+
     [response.POIs enumerateObjectsUsingBlock:^(AMapCloudPOI * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
+
         // 这里使用了自定义的坐标是为了区分系统坐标 不然蓝点会被替代
         CurrentLocationAnnotation *annotation = [[CurrentLocationAnnotation alloc] init];
         [annotation setCoordinate:CLLocationCoordinate2DMake(obj.location.latitude, obj.location.longitude)];
         [annotation setTitle:obj.customFields[@"salaryrange"]];
         [annotation setSubtitle:[NSString stringWithFormat:@"%ldm",(long)obj.distance]];
         [annotation setIndex:idx];
-        
+
         [annotation setIsSelected:false];
-        
+
         [self.searchPoiArray addObject:annotation];
-        
+
         RyJobModel * model = [[RyJobModel alloc] initWithDictionary:obj.customFields];
         model.jobname = obj.name;
         model.updateTime = obj.updateTime;
         [self.dataArray addObject:model];
 
     }];
-    
+
     [self showPOIAnnotations];
 }
 
@@ -232,7 +229,7 @@ static NSString * identifier = @"CollectionViewCell";
         annotation1.isSelected = true;
         [mapView addAnnotation:annotation1];
     }
-    
+
     if ([view.annotation isKindOfClass:[MKUserLocation class]]) {
         return;
     }
@@ -257,7 +254,7 @@ static NSString * identifier = @"CollectionViewCell";
 {
     // 向地图窗口添加一组标注
     [self.mapView addAnnotations:self.searchPoiArray];
-    
+
     //百度地图
     //self.mapView.isSelectedAnnotationViewFront = true;
 }
@@ -269,7 +266,7 @@ static NSString * identifier = @"CollectionViewCell";
     self.mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), self.view.bounds.size.height)];
     self.mapView.delegate = self;
     [self.view addSubview:self.mapView];
-    
+
     /** 向下轻扫 */
     UISwipeGestureRecognizer *swipeGestureRecognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
     [self.view addGestureRecognizer:swipeGestureRecognizerLeft];
@@ -288,7 +285,7 @@ static NSString * identifier = @"CollectionViewCell";
     // 自己的坐标
     self.centerAnnotationView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"map_location"]];
     self.centerAnnotationView.center = CGPointMake(self.mapView.center.x, self.mapView.center.y - CGRectGetHeight(self.centerAnnotationView.bounds) / 2);
-    
+
     [self.mapView addSubview:self.centerAnnotationView];
 }
 
@@ -321,7 +318,7 @@ static NSString * identifier = @"CollectionViewCell";
                          center.y -= 20;
                          [self.centerAnnotationView setCenter:center];}
                      completion:nil];
-    
+
     [UIView animateWithDuration:0.45
                           delay:0
                         options:UIViewAnimationOptionCurveEaseIn
@@ -337,16 +334,16 @@ static NSString * identifier = @"CollectionViewCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     [self initSearch];
     [self initMapView];
     [self initSearchKeyWords];
     [self addBackLoaction];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(message:) name:@"expect_job" object:nil];
     /** 意向职位 */
     _keywords =  [RYDefaults objectForKey:@"expect_job"];
-    
+
     self.mapView.showsUserLocation = true;
     self.mapView.userTrackingMode = MAUserTrackingModeFollowWithHeading;
     [self.mapView setZoomLevel:13 animated:true];
@@ -356,9 +353,9 @@ static NSString * identifier = @"CollectionViewCell";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
+
     [self initCenterView];
-    
+
     self.mapView.zoomLevel = 16;              ///缩放级别（默认3-19，有室内地图时为3-20）
     self.mapView.showsUserLocation = true;    ///是否显示用户位置
     self.mapView.showsCompass = false;          /// 是否显示指南针
@@ -371,28 +368,28 @@ static NSString * identifier = @"CollectionViewCell";
     //[self centerAnnotationView];
     [_collectionView removeFromSuperview];
     _collectionView = nil;
-    
+
     AMapCloudPOIAroundSearchRequest *placeAround = [[AMapCloudPOIAroundSearchRequest alloc] init];
     [placeAround setTableID:(NSString *)TableID];
-    
+
     [placeAround setRadius:RADIUS];
-    
+
     AMapGeoPoint *centerPoint = [AMapGeoPoint locationWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-    
+
     [placeAround setCenter:centerPoint];
-    
+
     NSString * searchKey  = keywords;
     if ([VerifyHelper empty:searchKey]) {
         searchKey = _keywords;
     }
-    
+
     [placeAround setKeywords:searchKey];
 
     [placeAround setSortType:AMapCloudSortTypeDESC];
-    
+
     [placeAround setOffset:100];
     //  [placeAround setPage:1];
-    
+
     [self.search AMapCloudPOIAroundSearch:placeAround];
 
 }
@@ -436,12 +433,12 @@ static NSString * identifier = @"CollectionViewCell";
     UIButton *ret = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     ret.backgroundColor = [UIColor whiteColor];
     ret.layer.cornerRadius = 4;
-    
+
     [ret setImage:[UIImage imageNamed:@"gpsStat1"] forState:UIControlStateNormal];
     [ret addTarget:self action:@selector(gpsAction:) forControlEvents:UIControlEventTouchUpInside];
-    
+
     [self.view addSubview:ret];
-    
+
     ret.center = CGPointMake(CGRectGetMidX(ret.bounds) + 10,
                 self.view.bounds.size.height -  CGRectGetMidY(ret.bounds) - 20 - KToolHeight);
     ret.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
@@ -463,7 +460,7 @@ static NSString * identifier = @"CollectionViewCell";
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.itemSize = CGSizeMake(kScreenWidth, 180);
         layout.minimumInteritemSpacing = 0.0f;
-        
+
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, kScreenHeight - KToolHeight - KNavBarHeight - 200, kScreenWidth , 190) collectionViewLayout:layout];
         _collectionView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
         _collectionView.delegate = self;
@@ -540,3 +537,4 @@ static NSString * identifier = @"CollectionViewCell";
 */
 
 @end
+

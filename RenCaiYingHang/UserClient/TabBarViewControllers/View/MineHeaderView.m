@@ -25,6 +25,7 @@
 {
     __weak IBOutlet UILabel *userName;
     __weak IBOutlet UILabel *userStates;
+    __weak IBOutlet UILabel *resumeProgress;
 }
 
 - (JKBannarView *)bannerScrollView
@@ -46,6 +47,7 @@
     
     userName.text = user[@"name"];
     userStates.text = user[@"job_condition_id_desc"];
+    resumeProgress.text = [NSString stringWithFormat:@"已完善简历(%@)",user[@"resumeIntegrity"]];
     [_iconBtn sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KIMGURL,user[@"image"]]] forState:UIControlStateNormal];
 }
 
@@ -72,7 +74,18 @@
     [super awakeFromNib];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHeaderIcon:) name:@"refreshHeaderIcon" object:nil];
+    
+    userStates.userInteractionEnabled = true;
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick:)];
+    [userStates addGestureRecognizer:tap];
     // Initialization code
+}
+
+- (void) tapClick:(UITapGestureRecognizer *)tap
+{
+    if (_mineHeaderStatusCallBack) {
+        _mineHeaderStatusCallBack();
+    }
 }
 
 - (void) reloadHeaderIcon:(NSNotification *) info

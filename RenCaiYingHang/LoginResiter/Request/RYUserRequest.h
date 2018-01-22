@@ -65,4 +65,7 @@
 /** 个人中心获取消息 */
 + (void) centerMessageSucess:(void(^)(NSArray * dataArr))sucess failure:(void(^)(id errorCode))failure;
 
+/** 个人简历状态改变 */
++ (void) updateResumeInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSuccess))sucess failure:(void(^)(id errorCode))failure;
+
 @end

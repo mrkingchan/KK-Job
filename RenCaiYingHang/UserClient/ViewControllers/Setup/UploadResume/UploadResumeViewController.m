@@ -77,7 +77,7 @@
     
     self.imageView.image = [VerifyHelper empty:UserInfo.userInfo.resumeImage] ? UIIMAGE(@"noresume") : UIIMAGE(@"fj_resume");
 
-    self.showMsgLabel.text = [VerifyHelper empty:UserInfo.userInfo.resumeImage] ? @"暂无简历" : [NSString stringWithFormat:@"%@.jpg",UserInfo.userInfo.name];
+    self.showMsgLabel.text = [VerifyHelper empty:UserInfo.userInfo.resumeImage] ? @"暂无简历" : [NSString stringWithFormat:@"%@",[UserInfo.userInfo.name componentsSeparatedByString:@"/"][1]];
     self.showMsgLabel.textColor = [VerifyHelper empty:UserInfo.userInfo.resumeImage] ? UIColorHex(999999) :kNavBarTintColor;
     [self.submitBtn setTitle:[VerifyHelper empty:UserInfo.userInfo.resumeImage] ? @"上传":@"重新上传" forState:UIControlStateNormal];
     
@@ -117,7 +117,7 @@
     
     NSData * imageData = UIImageJPEGRepresentation(originImage, 0.7);
     [NetWorkHelper uploadFileRequest:imageData param:dic method:UploadFiles completeBlock:^(NSDictionary *data) {
-        self.showMsgLabel.text = [NSString stringWithFormat:@"%@.jpg",UserInfo.userInfo.name];
+        self.showMsgLabel.text = [NSString stringWithFormat:@"%@",data[@"fileName"]];
         self.imageView.image = UIIMAGE(@"fj_resume");
         [self showAlertWithTitle:@"上传成功" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
             alertMaker.addActionCancelTitle(@"确定");

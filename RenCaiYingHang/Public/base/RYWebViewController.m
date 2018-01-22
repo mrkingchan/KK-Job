@@ -28,6 +28,8 @@
 //背景图
 @property (nonatomic,strong) UIImageView * imageView;
 
+@property (nonatomic, strong)JXMapNavigationView *mapNavigationView;
+
 @end
 
 @implementation RYWebViewController
@@ -76,6 +78,14 @@
     return _progressView;
 }
 
+- (JXMapNavigationView *)mapNavigationView{
+    if (_mapNavigationView == nil) {
+        _mapNavigationView = [[JXMapNavigationView alloc]init];
+        [self.view addSubview:_mapNavigationView];
+    }
+    return _mapNavigationView;
+}
+
 - (void)setProgressViewColor:(UIColor *)progressViewColor
 {
     _progressViewColor = progressViewColor;
@@ -85,8 +95,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //监控进度
-   // [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)viewDidLoad {
@@ -113,8 +121,8 @@
             [self reloadRequest];
         }
     }];
-    
-    
+    //注册导航方法
+    [self.webConfiguration.userContentController addScriptMessageHandler:self name:@"gpsNavigation"];
 }
 
 /** 区分返回 */
@@ -161,7 +169,7 @@
         UIImage * image = [UIImage imageWithData:imageData];
         if (![VerifyHelper empty:rel]) {
             RYShareView * share = [[RYShareView alloc] initWithFrame:[UIScreen mainScreen].bounds type:ShareJob];
-            [[UIApplication sharedApplication].keyWindow addSubview:share];
+            [[UIFactory getKeyWindow] addSubview:share];
             
             share.shareCallBack = ^(NSInteger index) {
                 
@@ -350,18 +358,20 @@
     
 }
 
-/**
- 与后台协商方法调用
- */
+/** 与后台协商方法调用 */
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
-    if ([message.name isEqualToString:self.jsMethodName]) {
-        //code...
+    if ([message.name isEqualToString:@"gpsNavigation"]) {
+        //code... UserInfo.userInfo.name
+        NSDictionary * d = message.body;
+        //从目前位置导航到指定地
+        [self.mapNavigationView showMapNavigationViewWithtargetLatitude:[d[@"lat"] doubleValue] targetLongitute:[d[@"lon"] doubleValue] toName:d[@"address"]];
     }
 }
 
 - (void)dealloc{
     [self.webConfiguration.userContentController removeScriptMessageHandlerForName:self.jsMethodName];
+    [self.webConfiguration.userContentController removeScriptMessageHandlerForName:@"gpsNavigation"];
    // [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
 }
 

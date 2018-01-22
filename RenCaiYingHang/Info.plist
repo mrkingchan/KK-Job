@@ -59,20 +59,15 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>人才赢行需要使用此功能</string>
-	<key>NSContactsUsageDescription</key>
-	<string>人才赢行需要使用此功能</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>人才赢行需要使用此功能</string>
+	<string>是否允许人才赢行使用你的相机？</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>人才赢行需要使用此功能</string>
+	<string>推荐周边职位需要获取定位功能</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>人才赢行需要使用此功能</string>
+	<string>是否允许人才赢行访问你的媒体资料库？</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>人才赢行需要使用此功能</string>
+	<string>是否允许人才赢行访问你的媒体资料库？</string>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>location</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UIMainStoryboardFile</key>

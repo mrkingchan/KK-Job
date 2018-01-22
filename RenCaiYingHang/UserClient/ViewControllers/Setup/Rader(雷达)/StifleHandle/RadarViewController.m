@@ -15,8 +15,6 @@
 #import "RyAnnotationView.h"
 #import "RyJobModel.h"
 
-#import "JXMapNavigationView.h"
-
 #import "CollectionViewCell.h"
 
 #import <objc/runtime.h>

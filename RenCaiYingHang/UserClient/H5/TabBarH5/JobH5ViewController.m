@@ -10,13 +10,14 @@
 
 #import "JobDetailViewController.h"
 
-#import <AMapLocationKit/AMapLocationKit.h>
+#import <BaiduMapAPI_Location/BMKLocationComponent.h>
 
-@interface JobH5ViewController ()<AMapLocationManagerDelegate>
+@interface JobH5ViewController ()<BMKLocationServiceDelegate>
 
 @property (nonatomic,copy) NSString * urlString ;
 
-@property (nonatomic, strong) AMapLocationManager *locationManager;
+//定位
+@property (nonatomic, strong)  BMKLocationService  * locService;
 
 @end
 
@@ -86,52 +87,61 @@
 /**  初始化定位 */
 - (void)configLocationManager
 {
-    self.locationManager = [[AMapLocationManager alloc] init];
+    //初始化BMKLocationService
+    _locService = [[BMKLocationService alloc] init];
     
-    [self.locationManager setDelegate:self];
+    _locService.delegate = self;
     
-    //设置期望定位精度
-    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    _locService.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
     
-    //设置不允许系统暂停定位
-    [self.locationManager setPausesLocationUpdatesAutomatically:false];
+    _locService.distanceFilter = 10;
     
-    //设置允许在后台定位
-    [self.locationManager setAllowsBackgroundLocationUpdates:true];
-    
-    //设置定位超时时间
-    [self.locationManager setLocationTimeout:10];
-    
-    //设置逆地理超时时间
-    [self.locationManager setReGeocodeTimeout:10];
-    
-    //设置开启虚拟定位风险监测，可以根据需要开启
-    [self.locationManager setDetectRiskOfFakeLocation:false];
-    
-    //设置允许连续定位逆地理
-    [self.locationManager setLocatingWithReGeocode:true];
+    //启动LocationService
+    [_locService startUserLocationService];
 }
 
 
 /**  终止定位 */
 - (void)cleanUpAction
 {
-    //停止定位
-    [self.locationManager stopUpdatingLocation];
-    
-    [self.locationManager setDelegate:nil];
+    [self.locService stopUserLocationService];
 }
 
 /**  定位 */
 - (void)locAction
 {
-    //开始进行连续定位
-    [self.locationManager startUpdatingLocation];
+    [self.locService startUserLocationService];
 }
 
-#pragma mark - AMapLocationManager Delegate
+- (void)dealloc
+{
+    [self cleanUpAction];
+    self.locService = nil;
+}
 
-- (void)amapLocationManager:(AMapLocationManager *)manager didFailWithError:(NSError *)error
+/**
+ *用户位置更新后，会调用此函数
+ *@param userLocation 新的用户位置
+ */
+- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
+{
+    if (userLocation.location.coordinate.latitude == 0)
+    {
+        [_locService startUserLocationService];
+    }
+    else
+    {
+        [self cleanUpAction];
+        _urlString = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@public/job/search?data=%@",KBaseURL,[NSString stringWithFormat:@"%f,%f",userLocation.location.coordinate.longitude,userLocation.location.coordinate.latitude]]];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
+    }
+}
+
+/**
+ *定位失败后，会调用此函数
+ *@param error 错误号
+ */
+- (void)didFailToLocateUserWithError:(NSError *)error
 {
     [self showAlertWithTitle:@"允许\"定位\"提示" message:@"请在设置中打开定位" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
         alertMaker.addActionCancelTitle(@"取消").addActionDefaultTitle(@"设置");
@@ -145,21 +155,6 @@
             [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
         }
     }];
-}
-
-- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location reGeocode:(AMapLocationReGeocode *)reGeocode
-{
-    [self cleanUpAction];
-    
-    _urlString = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@public/job/search?data=%@",KBaseURL,[NSString stringWithFormat:@"%f,%f",location.coordinate.longitude,location.coordinate.latitude]]];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
-}
-
-
-- (void)dealloc
-{
-    [self cleanUpAction];
-    self.locationManager = nil;
 }
 
 - (void)didReceiveMemoryWarning {

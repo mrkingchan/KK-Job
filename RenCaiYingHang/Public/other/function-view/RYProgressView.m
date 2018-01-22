@@ -39,7 +39,7 @@
 }
 
 - (void)addArcBackColor{
-    CGColorRef color = (_arcBackColor == nil) ? [UIColor lightGrayColor].CGColor : _arcBackColor.CGColor;
+    CGColorRef color = (_arcBackColor == nil) ? [UIColor groupTableViewBackgroundColor].CGColor : _arcBackColor.CGColor;
     
     CGContextRef contextRef = UIGraphicsGetCurrentContext();
     CGSize viewSize = self.bounds.size;

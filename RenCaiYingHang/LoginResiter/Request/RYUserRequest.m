@@ -279,4 +279,18 @@
     }];
 }
 
+/** 个人简历状态改变 */
++ (void) updateResumeInfoWithParamer:(NSDictionary *)paramer suceess:(void(^)(BOOL isSuccess))sucess failure:(void(^)(id errorCode))failure
+{
+    NSString * urlString = [NSString stringWithFormat:@"%@%@",KBaseURL,@"securityCenter/updateResumeInfo"];
+    NSString * paramerStr = [paramer mj_JSONString];
+    NSString * encry = [UtilityHelper encryptUseDES2:paramerStr key:UserInfo.userInfo.pkey];
+    NSDictionary * dic = @{KDatas:encry};
+    [NetWorkHelper getWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
+        sucess(true);
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 @end

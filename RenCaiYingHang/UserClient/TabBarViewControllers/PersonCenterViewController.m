@@ -21,6 +21,7 @@
 //#import "PrivacyViewController.h"
 //#import "AssetsManagementViewController.h"
 
+#import "RYAlertAction.h"
 #import "JHUploadImage.h"
 
 @interface PersonCenterViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,JHUploadImageDelegate>
@@ -182,6 +183,9 @@ static NSString * footerId = @"MineFooterView";
           //10设置 11头像
             [self doSomeHandleWithTag:index];
         };
+        headerView.mineHeaderStatusCallBack = ^{
+            [self changeStauts];
+        };
         return headerView;
     }
     else if([kind isEqualToString:UICollectionElementKindSectionFooter])
@@ -225,7 +229,7 @@ static NSString * footerId = @"MineFooterView";
 /** 头部高度 **/
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return (CGSize){kScreenWidth,kScreenHeight/3};
+    return (CGSize){kScreenWidth,kScreenHeight * 0.4};
 }
 
 /** 底部高度 **/
@@ -364,6 +368,21 @@ static NSString * footerId = @"MineFooterView";
     }];
     
     NSLog(@"%@\n%@",originImage,image);
+}
+
+/** 改变状态 */
+- (void) changeStauts
+{
+    RYAlertAction * action = [[RYAlertAction alloc] initWithFrame:CGRectZero dataArr:@[@"我目前已离职,可快速到岗",@"我目前在职,正考虑换个新环境",@"我暂时不想找工作",@"我是应届毕业生"]];
+    [action show];
+    
+    action.ryAlertActionCall = ^(NSInteger index) {
+        [RYUserRequest updateResumeInfoWithParamer:@{@"jobcondition":@(index+1)} suceess:^(BOOL isSuccess) {
+            [self requestData];
+        } failure:^(id errorCode) {
+            
+        }];
+    };
 }
 
 - (void)didReceiveMemoryWarning {

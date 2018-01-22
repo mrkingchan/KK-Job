@@ -125,7 +125,7 @@
     
     [XYQProgressHUD showMessage:@"注册中..." toView:[UIFactory getKeyWindow]];
     [RYUserRequest userRegisterWithParamer:dic suceess:^(BOOL isSendSuccess) {
-        [XYQProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow];
+        [XYQProgressHUD hideHUDForView:[UIFactory getKeyWindow]];
         [UtilityHelper insertApp];
     } failure:^(id errorCode) {
         

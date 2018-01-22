@@ -70,7 +70,7 @@
 {
     AFHTTPSessionManager *manager = [self sharedAFHTTPManager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-   // manager.responseSerializer = [AFJSONResponseSerializer serializer];
+  //  manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer.timeoutInterval = 15;
     [manager POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:NULL];
@@ -146,8 +146,7 @@
         }
     }
     if (!isExist) {
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:message message:@"" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alert show];
+        [XYQProgressHUD showError:message];
     }
 }
 
@@ -164,8 +163,12 @@
     }
     
     if ([dic[@"reCode"] isEqualToString:@"X9043"]) {
+        [XYQProgressHUD showError:@"登陆信息已过期,请重新登录"];
+        
+        [UserInfo loginOut];
+        
         UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-        [UIApplication sharedApplication].keyWindow.rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
+        [UIFactory getKeyWindow].rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
         return false;
     }
     

@@ -105,7 +105,7 @@ static NSString * SalaryCellID = @"SalaryCell";
     }else if([UserInfo.userInfo.reCode isEqualToString:@"X1111"]){
         HomePageViewController * homeCtl = [[HomePageViewController alloc] init];
         homeCtl.isFinishComInfo = true;
-        [UIApplication sharedApplication].keyWindow.rootViewController = homeCtl;
+        [UIFactory getKeyWindow].rootViewController = homeCtl;
     }
 }
 
@@ -165,7 +165,7 @@ static NSString * SalaryCellID = @"SalaryCell";
         UserInfo.userInfo.reCode = @"X2222";
         [UtilityHelper saveUserInfoWith:UserInfo.userInfo keyName:UserCache];
         
-        [UIApplication sharedApplication].keyWindow.rootViewController = [[RYTabBarController alloc] init];
+        [UIFactory getKeyWindow].rootViewController = [[RYTabBarController alloc] init];
 
     } failure:^(id errorCode) {
         
