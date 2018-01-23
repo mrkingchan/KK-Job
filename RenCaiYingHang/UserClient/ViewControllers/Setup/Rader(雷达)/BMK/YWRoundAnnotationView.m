@@ -22,7 +22,7 @@
 @interface YWRoundAnnotationView(){
     
     UILabel          *_titleLable;
-  //  UILabel          *_countLable;
+    UILabel          *_countLable;
     UIView           *_contentView;
     UIImageView      *_imageView;
     CAShapeLayer     *layer;
@@ -34,7 +34,7 @@
     
     if (self=[super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier])
     {
-        [self setBounds:CGRectMake(0, 0, 150, 42)];
+        [self setBounds:CGRectMake(0, 0, 150, 52)];
         [self initWithContentViews];
     }
     
@@ -46,12 +46,12 @@
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(senderClick)];
     [self addGestureRecognizer:tap];
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 32)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 42)];
     [view setBackgroundColor:[ UIColor  clearColor]];
     _contentView=view;
     [self addSubview:view];
     
-    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(70, 29, 10, 10)];
+    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(70, 39, 10, 10)];
     [_contentView addSubview:_imageView];
     
     layer = [CAShapeLayer layer];
@@ -62,19 +62,19 @@
     //layer.lineWidth = 0.3f;
     //layer.strokeColor = [ UIColor grayColor].CGColor;
     
-    UILabel *lable = [[ UILabel alloc] initWithFrame:CGRectMake(0,0, 150, 32)];
+    UILabel *lable = [[ UILabel alloc] initWithFrame:CGRectMake(0,0, 150, 20)];
     lable.textAlignment = NSTextAlignmentCenter;
     lable.textColor = [ UIColor whiteColor];
     lable.font = [UIFont fontWithName:@"Helvetica-Bold" size:13];
     _titleLable = lable;
     [_contentView addSubview:lable];
    
-//    UILabel *countlable = [[ UILabel alloc] initWithFrame:CGRectMake(0,17, 100, 21)];
-//    countlable.textAlignment = NSTextAlignmentCenter;
-//    countlable.textColor = [ UIColor whiteColor];
-//    countlable.font = systemOfFont(12);
-//    _countLable = countlable;
-//    [_contentView addSubview:countlable];
+    UILabel *countlable = [[ UILabel alloc] initWithFrame:CGRectMake(0,19, 150, 20)];
+    countlable.textAlignment = NSTextAlignmentCenter;
+    countlable.textColor = [ UIColor whiteColor];
+    countlable.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+    _countLable = countlable;
+    [_contentView addSubview:countlable];
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
@@ -98,10 +98,10 @@
     _titleLable.text = titleText;
 }
 
-//- (void)setCountText:(NSString *)countText
-//{
-//    _countLable.text=countText;
-//}
+- (void)setCountText:(NSString *)countText
+{
+    _countLable.text=countText;
+}
 
 - (void)setImageName:(NSString *)imageName
 {

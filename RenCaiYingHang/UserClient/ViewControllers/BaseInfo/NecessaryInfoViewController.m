@@ -116,7 +116,7 @@ static NSString * SalaryCellID = @"SalaryCell";
     
     self.dataArray = @[@"姓名",@"性别",@"最高学历",@"工作经验",@"出生年月",@"期望职位",@"期望薪资",@"期望城市"];
     self.educationArr = @[@"博士以上",@"博士",@"硕士",@"本科",@"大专",@"大专以下",@"其他"];
-    self.experienceArr = @[@"10年",@"9年",@"8年",@"7年",@"6年",@"5年",@"4年",@"3年",@"2年",@"1年",@"应届毕业生"];
+    self.experienceArr = @[@"10年以上",@"10年",@"9年",@"8年",@"7年",@"6年",@"5年",@"4年",@"3年",@"2年",@"1年",@"应届毕业生"];
     [self.tableView reloadData];
 }
 
@@ -159,7 +159,7 @@ static NSString * SalaryCellID = @"SalaryCell";
         return;
     }
 
-    NSDictionary * dic = @{@"name":self.model.name,@"gender":@(self.model.sex),@"diploma":@(self.educationArr.count -  self.model.education - 1),@"workyearX":@(self.experienceArr.count - self.model.experience - 1),@"birthday":self.model.birthday,@"expectjob":self.model.job,@"salrange":self.model.salary,@"city":@(cityId)};
+    NSDictionary * dic = @{@"name":self.model.name,@"gender":@(self.model.sex),@"diploma":@(self.educationArr.count - 1 - self.model.education - 1),@"workyearX":@(self.experienceArr.count - 1 - self.model.experience - 1),@"birthday":self.model.birthday,@"expectjob":self.model.job,@"salrange":self.model.salary,@"city":@(cityId)};
     [RYUserRequest uploadBaseInfoWithParamer:dic suceess:^(BOOL isSendSuccess) {
         /** 默认进入雷达页面 **/
         UserInfo.userInfo.reCode = @"X2222";
@@ -214,9 +214,9 @@ static NSString * SalaryCellID = @"SalaryCell";
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             if (self.model.education != 0 && indexPath.row == 2){
-                cell.detailTextLabel.text = self.educationArr[self.model.education];
+                cell.detailTextLabel.text = self.educationArr[self.model.education-1];
             }else if (self.model.experience != 0 && indexPath.row == 3){
-                cell.detailTextLabel.text = self.experienceArr[self.model.experience];
+                cell.detailTextLabel.text = self.experienceArr[self.model.experience-1];
             }else if (![VerifyHelper empty:self.model.birthday] && indexPath.row == 4){
                 cell.detailTextLabel.text = self.model.birthday;
             }else if (![VerifyHelper empty:self.model.city] && indexPath.row == 7){
@@ -359,10 +359,10 @@ static NSString * SalaryCellID = @"SalaryCell";
     
     action.ryAlertActionCall = ^(NSInteger index) {
         if (indexPath.row == 2) {
-            self.model.education = index;
+            self.model.education = index+1;
             [self refreshTableViewWith:indexPath];
         }else if (indexPath.row == 3){
-            self.model.experience = index;
+            self.model.experience = index+1;
             [self refreshTableViewWith:indexPath];
         }
     };

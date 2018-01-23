@@ -138,8 +138,15 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
         LabelTextFieldCell * cell = [tableView dequeueReusableCellWithIdentifier:LabelTextFieldCellID];
         cell.titleLabel.text = self.dataArray[indexPath.row];
         cell.textField.textAlignment = NSTextAlignmentLeft;
-        if (indexPath.row == 0)
-            cell.textField.placeholder = @"请输入手机号";
+        if (indexPath.row == 0 )
+        {
+            if ([VerifyHelper empty:UserInfo.userInfo.tel]) {
+                cell.textField.placeholder = @"请输入手机号";
+            }else{
+                cell.textField.text = UserInfo.userInfo.tel;
+                cell.textField.enabled = false;
+            }
+        }
         else
             cell.textField.placeholder = [NSString stringWithFormat:@"请输入%@",self.dataArray[indexPath.row]];
         

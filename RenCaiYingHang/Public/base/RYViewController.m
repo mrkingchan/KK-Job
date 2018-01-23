@@ -42,7 +42,9 @@
     //NSDictionary *userInfo = [notification userInfo];
     NSString * notificationName = [notification name];
     if ([notificationName isEqualToString:@"UserJPushNotification"] && [UserInfo.userInfo.reCode isEqualToString:@"X2222"]) {
-         self.tabBarController.selectedIndex =  2;
+        RYTabBarController * tab = (RYTabBarController *)[UIFactory getKeyWindow].rootViewController;
+        tab.selectedIndex = 2;
+        // self.tabBarController.selectedIndex =  2;
     }
 }
 

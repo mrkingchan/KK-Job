@@ -24,6 +24,15 @@
 
 @implementation RYTabBarController
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if ([[RYDefaults objectForKey:@"notifiInsert"] isEqualToString:@"notifi"]) {
+        [RYDefaults setObject:@"" forKey:@"notifiInsert"];
+        self.selectedIndex = 2;
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

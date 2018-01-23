@@ -100,6 +100,8 @@ static NSString * footerId = @"MineFooterView";
     /** 修改了简历 */
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:@"resumeStateChange" object:nil];
     
+    adjustsScrollViewInsets_NO(self.collectionView, self);
+    
     self.collectionView.mj_header = [MyRefreshHeader headerWithRefreshingBlock:^{
        [self.collectionView.mj_header endRefreshing];
        [self requestData];
@@ -111,12 +113,13 @@ static NSString * footerId = @"MineFooterView";
 - (void) requestData
 {
     [UIFactory addLoading];
+    
     [RYUserRequest appUsGetBaseInfoSuceess:^(NSDictionary * baseInfo,NSArray * imageArr) {
         [UIFactory removeLoading];
         [self.topArr removeAllObjects];
         [self.topArr addObject:baseInfo];
         if (![VerifyHelper empty:imageArr]) {
-           [self.topArr addObject:imageArr];
+            [self.topArr addObject:imageArr];
         }
         [self loadData];
     } failure:^(id errorCode) {
@@ -130,10 +133,12 @@ static NSString * footerId = @"MineFooterView";
     } failure:^(id errorCode) {
         
     }];
+
 }
 
 - (void) loadData
 {
+    [self.view bringSubviewToFront:self.collectionView];
     self.dataArray = @[@[@"online_resume",@"在线简历"],@[@"near_resume",@"附件简历"],@[@"wallet",@"人才钱包"],@[@"bankcard",@"银行卡"],@[@"collect",@"收藏夹"],@[@"heart",@"邀请函"],@[@"agent",@"人才经纪人"],@[@"entry_company",@"进入企业"]];
     [self.collectionView reloadData];
 }
@@ -161,7 +166,6 @@ static NSString * footerId = @"MineFooterView";
 // 和UITableView类似，UICollectionView也可设置段头段尾
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-
     if([kind isEqualToString:UICollectionElementKindSectionHeader])
     {
         MineHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerId forIndexPath:indexPath];

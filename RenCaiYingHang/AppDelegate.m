@@ -35,7 +35,7 @@
 
 static NSString *pushappKey = @"8ff9fa7a21f9ab75fcef566a";
 static NSString *pushchannel = @"App Store";
-static BOOL isProduction = true;//false true
+static BOOL isProduction = false;//false true
 
 @implementation AppDelegate
 
@@ -57,6 +57,7 @@ static BOOL isProduction = true;//false true
     
     //注册极光
     [self regsiterJPush:launchOptions];
+    [self pushWithOptions:launchOptions];
     
     //注册百度
     [self regsiterBaidu];
@@ -90,6 +91,7 @@ static BOOL isProduction = true;//false true
 {
     /** 新版本引导页出现 */
     if ([OSGuideViewController isShow]) {
+        [RYDefaults setObject:@"1" forKey:@"location"];
         OSGuideViewController * guide = [[OSGuideViewController alloc] init];
         self.window.rootViewController = guide;
         guide.delegate = self;
@@ -271,6 +273,17 @@ static BOOL isProduction = true;//false true
 }
 
 #pragma mark - 极光推送
+//APP未运行时获取通知的内容 remoteNotification就是你们服务器发送的推送的内容
+- (void) pushWithOptions:(NSDictionary *)launchOptions
+{
+    NSDictionary * remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    // 如果​remoteNotification不为空，代表有推送发过来，以下类似
+    if (remoteNotification) {
+        // 把应用右上角的图标​去掉 这个最好写上，要不然强迫症会疯的
+        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+        [RYDefaults setObject:@"notifi" forKey:@"notifiInsert"];
+    }
+}
 
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
@@ -291,12 +304,27 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
     NSString * type = userInfo[@"pushType"];
     NSDictionary * info = userInfo[@"aps"];
     
-    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive && [type isEqualToString:@"user"] && [UserInfo.userInfo.reCode isEqualToString:@"X2222"])
+    if ([UserInfo.userInfo.reCode isEqualToString:@"X2222"] && [type isEqualToString:@"user"])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"UserJPushNotification" object:info];
+        if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+            [[UIFactory getKeyWindow].rootViewController showAlertWithTitle:info[@"alert"] message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
+                alertMaker.addActionDefaultTitle(@"查看").addActionCancelTitle(@"取消");
+            } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
+                if (buttonIndex == 0) {
+                    [self notificationWithObject:info];
+                }
+            }];
+        }else if([UIApplication sharedApplication].applicationState == UIApplicationStateBackground){
+           [self notificationWithObject:info];
+        }
     }
 }
 
+/** 推送通知 */
+- (void) notificationWithObject:(NSDictionary *) dic
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UserJPushNotification" object:dic];
+}
 
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo

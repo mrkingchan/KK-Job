@@ -21,6 +21,8 @@
 /** ViewControllers */
 #import "NecessaryInfoViewController.h"
 
+#import "OSGuideViewController.h"
+
 /** APIRequest **/
 #import "AreaRequest.h"
 #import "RYUserRequest.h"

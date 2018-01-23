@@ -200,6 +200,12 @@
         }
     }
     [self.view endEditing:YES];
+    
+    if (![VerifyHelper empty:_phoneTf.text] && ![VerifyHelper empty:_codeTf.text] && ![VerifyHelper empty:_pwTf.text]) {
+        [self setEnable:true backgroundColor:kNavBarTintColor];
+    }else{
+        [self setEnable:false backgroundColor:[UIColor lightGrayColor]];
+    }
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -221,12 +227,6 @@
         [UIView animateWithDuration:0.3 animations:^{
             self.view.frame = CGRectMake(0, h, kScreenWidth, kScreenHeight);
         }];
-    }
-    
-    if (![VerifyHelper empty:_phoneTf.text] && ![VerifyHelper empty:_codeTf.text] && ![VerifyHelper empty:_pwTf.text]) {
-        [self setEnable:true backgroundColor:kNavBarTintColor];
-    }else{
-        [self setEnable:false backgroundColor:[UIColor lightGrayColor]];
     }
 }
 

@@ -147,8 +147,8 @@ static NSString * identifier = @"CollectionViewCell";
         
         newAnnotationView.tag = [current.jobid integerValue];
         
-        newAnnotationView.titleText = [NSString stringWithFormat:@"薪资:%@ | %@", annotation.title,annotation.subtitle];
-//        newAnnotationView.countText = [NSString stringWithFormat:@"%@", annotation.subtitle];
+        newAnnotationView.titleText = [NSString stringWithFormat:@"%@", annotation.title];
+        newAnnotationView.countText = [NSString stringWithFormat:@"%@", annotation.subtitle];
         
         newAnnotationView.selected = false;
         newAnnotationView.fillColor = ColorRGB(83, 180, 119, 1);
@@ -218,8 +218,8 @@ static NSString * identifier = @"CollectionViewCell";
             {
                 RYAnnotation *annotation = [[RYAnnotation alloc] init];
                 [annotation setCoordinate:CLLocationCoordinate2DMake(poi.longitude, poi.latitude)];
-                [annotation setTitle:poi.customDict[@"salaryrange"]];
-                [annotation setSubtitle:[NSString stringWithFormat:@"%ld米",(long)poi.distance]];
+                [annotation setTitle:poi.title];
+                [annotation setSubtitle:[NSString stringWithFormat:@"薪资:%@ |  %ld米",poi.customDict[@"salaryrange"],(long)poi.distance]];
                 //存jobid
                 [annotation setJobid:poi.customDict[@"jobid"]];
                 
@@ -378,6 +378,8 @@ static NSString * identifier = @"CollectionViewCell";
 {
     [super viewDidLoad];
     
+    [self initAllSubViews];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(message:) name:@"expect_job" object:nil];
     /** 意向职位 */
     _keywords =  [RYDefaults objectForKey:@"expect_job"];
@@ -397,12 +399,14 @@ static NSString * identifier = @"CollectionViewCell";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self initAllSubViews];
+    if ([[RYDefaults objectForKey:@"location"] isEqualToString:@"1"]) {
+         [RYDefaults setObject:@"2" forKey:@"location"];
+       [self startLocation];
+    }
 }
 
 - (void)cloudPlaceAroundSearch:(CLLocationCoordinate2D)coordinate keywords:(NSString *)keywords
 {
-    
     BMKCloudNearbySearchInfo * placeAround = [[BMKCloudNearbySearchInfo alloc] init];
     
     [placeAround setAk:AK];
@@ -572,6 +576,31 @@ static NSString * identifier = @"CollectionViewCell";
     [self removeCollectionViewFromSuperView];
 }
 
+#pragma mark 滚动到当前位置的选择
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    int index = scrollView.contentOffset.x / kScreenWidth ;
+    RyJobModel * model = self.dataArray[index];
+    NSArray * array = [NSArray arrayWithArray:self.anntotaionViewArray];
+    for (YWRoundAnnotationView * annotationView1 in array)
+    {
+        if (annotationView1.tag == [model.jobid integerValue])
+        {
+            annotationView1.fillColor = kNavBarTintColor;
+            annotationView1.imageName = @"annotation_nor";
+            [self.mapView selectAnnotation:annotationView1.annotation animated:false];
+            [self mapView:self.mapView didSelectAnnotationView:annotationView1];
+        }
+        else
+        {
+            annotationView1.fillColor = ColorRGB(83, 180, 119, 1);
+            annotationView1.imageName = @"annotation_sel";
+            [self.mapView deselectAnnotation:annotationView1.annotation animated:false];
+            [self mapView:self.mapView didDeselectAnnotationView:annotationView1];
+        }
+    }
+}
+
 - (void) removeCollectionViewFromSuperView
 {
     [_collectionView removeFromSuperview];
@@ -602,6 +631,9 @@ static NSString * identifier = @"CollectionViewCell";
     if (_mapView) {
         _mapView = nil;
     }
+    _mapView.delegate = nil;
+    _search.delegate = nil;
+    _locService.delegate = nil;
 }
 
 - (void)didReceiveMemoryWarning {
