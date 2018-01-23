@@ -145,6 +145,8 @@ static NSString * LabelTextFieldBuutonCellID = @"LabelTextFieldBuutonCell";
             }else{
                 cell.textField.text = UserInfo.userInfo.tel;
                 cell.textField.enabled = false;
+                cell.textField.textAlignment = 2;
+                cell.textField.textColor = [UIColor darkGrayColor];
             }
         }
         else
