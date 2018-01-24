@@ -9,10 +9,9 @@
 #import "WalletViewController.h"
 
 #import "RechargeViewController.h"
+#import "IdentificationViewController.h"
 
-@interface WalletViewController ()
-
-@property (nonatomic,copy) NSString * oldUrlString;
+@interface WalletViewController ()<WKScriptMessageHandler>
 
 @end
 
@@ -31,7 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-   // _oldUrlString = self.url;
+   [self.webConfiguration.userContentController addScriptMessageHandler:self name:@"unAuthIDCard"];
 }
 
 - (void)backNative
@@ -66,29 +65,21 @@
     }
 }
 
-//#pragma mark 跳转的操作
-//- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-//    NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
-//    if (![url isEqualToString:self.oldUrlString]) {
-//        _oldUrlString = url;
-//        [self.webView  loadRequest:[NSURLRequest requestWithURL:navigationAction.request.URL]];
-//        decisionHandler(WKNavigationActionPolicyAllow);
-//    }else{
-//        decisionHandler(WKNavigationActionPolicyAllow);
-//    }
-//}
-
 /** 与后台协商方法调用 */
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
     if ([message.name isEqualToString:@"recharge"]) {
         RechargeViewController * recharge = [[RechargeViewController alloc] init];
         [self.navigationController pushViewController:recharge animated:true];
+    } else if ([message.name isEqualToString:@"unAuthIDCard"]){
+        IdentificationViewController * certificationCtl = [[IdentificationViewController alloc] init];
+        [self.navigationController pushViewController:certificationCtl animated:true];
     }
 }
 
 - (void)dealloc{
     [self.webView removeObserver:self forKeyPath:@"title"];
+     [self.webConfiguration.userContentController removeScriptMessageHandlerForName:@"unAuthIDCard"];
 }
 
 - (void)didReceiveMemoryWarning {

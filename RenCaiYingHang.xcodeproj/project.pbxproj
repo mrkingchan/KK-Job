@@ -79,6 +79,7 @@
 		8F4CCF3A200C3ED900260000 /* GYRollingNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CCF38200C3ED900260000 /* GYRollingNoticeView.m */; };
 		8F5087FC1FEA5C1500743B9C /* AuthenticationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5087FB1FEA5C1500743B9C /* AuthenticationModel.m */; };
 		8F5088031FEA7B8000743B9C /* RYAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5088021FEA7B8000743B9C /* RYAlertAction.m */; };
+		8F59A1A12018772600E822F7 /* PersonInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F59A1A02018772600E822F7 /* PersonInfoViewController.m */; };
 		8F5E3D4A2004E275007CA925 /* RYSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5E3D492004E275007CA925 /* RYSelectViewController.m */; };
 		8F728C261FDE1FC300C6247B /* JHUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F728C251FDE1FC300C6247B /* JHUploadImage.m */; };
 		8F728C2A1FDE2F9F00C6247B /* AssetsManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F728C291FDE2F9F00C6247B /* AssetsManagementViewController.m */; };
@@ -337,6 +338,8 @@
 		8F5087FB1FEA5C1500743B9C /* AuthenticationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationModel.m; sourceTree = "<group>"; };
 		8F5088011FEA7B8000743B9C /* RYAlertAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYAlertAction.h; sourceTree = "<group>"; };
 		8F5088021FEA7B8000743B9C /* RYAlertAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYAlertAction.m; sourceTree = "<group>"; };
+		8F59A19F2018772600E822F7 /* PersonInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonInfoViewController.h; sourceTree = "<group>"; };
+		8F59A1A02018772600E822F7 /* PersonInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonInfoViewController.m; sourceTree = "<group>"; };
 		8F5E3D482004E275007CA925 /* RYSelectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYSelectViewController.h; sourceTree = "<group>"; };
 		8F5E3D492004E275007CA925 /* RYSelectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYSelectViewController.m; sourceTree = "<group>"; };
 		8F728C241FDE1FC300C6247B /* JHUploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHUploadImage.h; sourceTree = "<group>"; };
@@ -1241,6 +1244,8 @@
 				8F85D8DF1FD929B400BC1A7D /* DropInBoxViewController.m */,
 				8F85D8E11FD929C300BC1A7D /* PersonCenterViewController.h */,
 				8F85D8E21FD929C300BC1A7D /* PersonCenterViewController.m */,
+				8F59A19F2018772600E822F7 /* PersonInfoViewController.h */,
+				8F59A1A02018772600E822F7 /* PersonInfoViewController.m */,
 			);
 			path = TabBarViewControllers;
 			sourceTree = "<group>";
@@ -1721,6 +1726,7 @@
 				8F3F2F1A200D9A3C0017A9A3 /* RYAnnotation.m in Sources */,
 				8F19C9522008A36200A957FF /* CLRollLabel.m in Sources */,
 				8F85D8F21FD92B1900BC1A7D /* ResiterViewController.m in Sources */,
+				8F59A1A12018772600E822F7 /* PersonInfoViewController.m in Sources */,
 				8F85D85D1FD9241800BC1A7D /* RYTabBarController.m in Sources */,
 				8FE1A3831FF4FC240022CDB0 /* CompanyDetailViewController.m in Sources */,
 				8FE1A36B1FF4C6050022CDB0 /* BannerImageModel.m in Sources */,

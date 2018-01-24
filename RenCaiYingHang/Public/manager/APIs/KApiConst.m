@@ -22,10 +22,11 @@ NSString * const KDatas = @"datas";
 //@"http://192.168.2.8:8085/app_rcyh/"
 
 //http://app.rcyhj.com/
-NSString * const KBaseURL = @"http://192.168.2.101:8083/app_rcyh/";
+NSString * const KBaseURL = @"http://192.168.2.8:8085/app_rcyh/";
 
 /** 图片拼接地址 */
-NSString * const KIMGURL = @"http://pf.rcyhj.com/";
+//http://pf.rcyhj.com/
+NSString * const KIMGURL = @"http://192.168.2.8:8086/";
 
 /** pageSize */
 NSUInteger  const PageSize =  5;

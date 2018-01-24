@@ -184,11 +184,13 @@ static NSString * footerId = @"MineFooterView";
             [self imageClickPushWithIndex:index];
         };
         headerView.mineHeaderButtonCallBack = ^(NSInteger index) {
-          //10设置 11头像
+          //10设置 11头像 12更改状态
             [self doSomeHandleWithTag:index];
         };
         headerView.mineHeaderStatusCallBack = ^{
-            [self changeStauts];
+            CommonH5Controller * h5 = [[CommonH5Controller alloc] init];
+            h5.url = [UtilityHelper addUrlToken:@"apply/resume/modifyRes"];
+            [self.navigationController pushViewController:h5 animated:true];
         };
         return headerView;
     }
@@ -264,7 +266,7 @@ static NSString * footerId = @"MineFooterView";
         case 2:
         {
             WalletViewController * h5 = [[WalletViewController alloc] init];
-            h5.url = [UtilityHelper addUrlToken:@"identity/userWallet"];
+            h5.url = [UtilityHelper addUrlToken:@"apply/trans"];
             h5.jsMethodName = @"recharge";
             h5.type = 0;
             [self.navigationController pushViewController:h5 animated:true];
@@ -335,8 +337,10 @@ static NSString * footerId = @"MineFooterView";
 {
     if (tag == 10) {
         [self.navigationController pushViewController:[[SetupViewController alloc] init] animated:true];
-    }else{
+    }else if (tag == 11){
         [JHUPLOAD_IMAGE showActionSheetInFatherViewController:self delegate:self canEdit:true];
+    }else{
+        [self changeStauts];
     }
 }
 

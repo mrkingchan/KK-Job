@@ -106,6 +106,7 @@
             case 2:/** 2是企业版跳个人版 */
             {
                 if ([whetherUserBaseInfo isEqualToString:@"yes"]) {
+                    [RYDefaults setObject:@"notifi3" forKey:@"notifiInsert"];
                     UserInfo.userInfo.reCode = @"X2222";
                     [UtilityHelper saveUserInfoWith:UserInfo.userInfo keyName:UserCache];
                     

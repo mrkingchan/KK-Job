@@ -56,20 +56,20 @@
     
     layer = [CAShapeLayer layer];
     layer.frame = view.frame;
-    layer.path = [ UIBezierPath bezierPathWithRoundedRect:view.frame cornerRadius:16].CGPath;
+    layer.path = [ UIBezierPath bezierPathWithRoundedRect:view.frame cornerRadius:20].CGPath;
     layer.fillColor = [UIColor colorWithRed:83/255.0 green:180/255.0 blue:119/255.0 alpha:1.0].CGColor;
     [view.layer addSublayer:layer];
     //layer.lineWidth = 0.3f;
     //layer.strokeColor = [ UIColor grayColor].CGColor;
     
-    UILabel *lable = [[ UILabel alloc] initWithFrame:CGRectMake(0,0, 150, 20)];
+    UILabel *lable = [[ UILabel alloc] initWithFrame:CGRectMake(10,0, 130, 20)];
     lable.textAlignment = NSTextAlignmentCenter;
     lable.textColor = [ UIColor whiteColor];
     lable.font = [UIFont fontWithName:@"Helvetica-Bold" size:13];
     _titleLable = lable;
     [_contentView addSubview:lable];
    
-    UILabel *countlable = [[ UILabel alloc] initWithFrame:CGRectMake(0,19, 150, 20)];
+    UILabel *countlable = [[ UILabel alloc] initWithFrame:CGRectMake(10,19, 130, 20)];
     countlable.textAlignment = NSTextAlignmentCenter;
     countlable.textColor = [ UIColor whiteColor];
     countlable.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];

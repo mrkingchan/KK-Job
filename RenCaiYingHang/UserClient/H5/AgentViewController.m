@@ -29,9 +29,7 @@
     self.jsMethodName = @"shareToUser";
 }
 
-/**
- 与后台协商方法调用
- */
+/** 与后台协商方法调用 */
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
     if ([message.name isEqualToString:@"shareToUser"]) {
@@ -40,7 +38,7 @@
         ;
         //压缩图
         UIImage * thumimage = [UtilityHelper composeImg:UIIMAGE(@"share") img1:[UtilityHelper qrImageForString:d[@"url"] imageSize:60 logoImageSize:0]];
-        UIImage * finalImage = [HImageUtility imageWithText:[NSString stringWithFormat:@"%@邀请你一起",UserInfo.userInfo.name]
+        UIImage * finalImage = [HImageUtility imageWithText:[NSString stringWithFormat:@"%@邀请你一起",d[@"name"]]
                                     textFont:14
                                    textColor:kNavBarTintColor
                                    textFrame:CGRectMake(130, thumimage.size.height - 100, 150, 20)
@@ -48,7 +46,7 @@
                       imageLocationViewFrame:CGRectMake(0, 0, thumimage.size.width, thumimage.size.height)];
         //高清图
         UIImage * bigImage = [UtilityHelper composeImg:UIIMAGE(@"shareBig") img1:[UtilityHelper qrImageForString:d[@"url"] imageSize:100 logoImageSize:0]];
-        UIImage * finBigImage = [HImageUtility imageWithText:[NSString stringWithFormat:@"%@邀请你一起",UserInfo.userInfo.name]
+        UIImage * finBigImage = [HImageUtility imageWithText:[NSString stringWithFormat:@"%@邀请你一起",d[@"name"]]
                                                    textFont:20
                                                   textColor:kNavBarTintColor
                                                   textFrame:CGRectMake(260, bigImage.size.height - 200, 150, 20)

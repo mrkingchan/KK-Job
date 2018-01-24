@@ -38,6 +38,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:true animated:false];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -134,9 +135,8 @@
 
 /** 跳转到协议 */
 - (IBAction)pushToProtocolH5:(UIButton *)sender {
-    RYWebViewController * html = [[RYWebViewController alloc] init];
-    html.url = @"https://www.baidu.com";
-    html.jsMethodName = @"test";
+    CommonH5Controller * html = [[CommonH5Controller alloc] init];
+    html.url = [NSString stringWithFormat:@"%@public/appUserAgreement",KBaseURL];
     html.progressViewColor = [UIColor redColor];
     [self.navigationController pushViewController:html animated:YES];
 }

@@ -13,7 +13,8 @@
 #import "JobViewController.h"
 #import "CompanyViewController.h"
 #import "DropInBoxViewController.h"
-#import "PersonCenterViewController.h"
+//#import "PersonCenterViewController.h"
+#import "PersonInfoViewController.h"
 
 #import "MMScanViewController.h"
 #import "ScanSucessViewController.h"
@@ -30,6 +31,9 @@
     if ([[RYDefaults objectForKey:@"notifiInsert"] isEqualToString:@"notifi"]) {
         [RYDefaults setObject:@"" forKey:@"notifiInsert"];
         self.selectedIndex = 2;
+    }else if ([[RYDefaults objectForKey:@"notifiInsert"] isEqualToString:@"notifi3"]){
+        [RYDefaults setObject:@"" forKey:@"notifiInsert"];
+        self.selectedIndex = 3;
     }
 }
 
@@ -42,10 +46,10 @@
 
 - (void) addViewControllers
 {
-    [self addChildViewController:[[JobViewController alloc] init] navTitle:@"公司" tabbarTitle:@"推荐" tabbarImage:@"1"];
+    [self addChildViewController:[[JobViewController alloc] init] navTitle:@"公司" tabbarTitle:@"职位" tabbarImage:@"1"];
     [self addChildViewController:[[CompanyViewController alloc] init] navTitle:@"企业" tabbarTitle:@"企业" tabbarImage:@"2"];
     [self addChildViewController:[[DropInBoxViewController alloc] init] navTitle:@"投递箱" tabbarTitle:@"投递箱" tabbarImage:@"3"];
-    [self addChildViewController:[[PersonCenterViewController alloc] init] navTitle:@"个人信息" tabbarTitle:@"我的" tabbarImage:@"4"];
+    [self addChildViewController:[[PersonInfoViewController alloc] init] navTitle:@"个人信息" tabbarTitle:@"我的" tabbarImage:@"4"];
 }
 
 - (void) addMidButton

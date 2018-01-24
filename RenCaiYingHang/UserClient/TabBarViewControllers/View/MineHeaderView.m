@@ -24,7 +24,7 @@
 @implementation MineHeaderView
 {
     __weak IBOutlet UILabel *userName;
-    __weak IBOutlet UILabel *userStates;
+    __weak IBOutlet UIButton *userStates;
     __weak IBOutlet UILabel *resumeProgress;
 }
 
@@ -46,8 +46,8 @@
     _iconBtn.clipsToBounds = true;
     
     userName.text = user[@"name"];
-    userStates.text = user[@"job_condition_id_desc"];
-    resumeProgress.text = [NSString stringWithFormat:@"已完善简历(%@)",user[@"resumeIntegrity"]];
+    [userStates setTitle:[NSString stringWithFormat:@"%@",user[@"job_condition_id_desc"]] forState:UIControlStateNormal];
+    resumeProgress.text = [NSString stringWithFormat:@"简历完善度(%@)",user[@"resumeIntegrity"]];
     [_iconBtn sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KIMGURL,user[@"image"]]] forState:UIControlStateNormal];
 }
 
@@ -75,9 +75,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHeaderIcon:) name:@"refreshHeaderIcon" object:nil];
     
-    userStates.userInteractionEnabled = true;
+    resumeProgress.userInteractionEnabled = true;
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick:)];
-    [userStates addGestureRecognizer:tap];
+    [resumeProgress addGestureRecognizer:tap];
     // Initialization code
 }
 

@@ -71,7 +71,7 @@
 - (void) setUpAllChildViewController
 {
     JobH5ViewController * jobH5 = [[JobH5ViewController alloc] init];
-    jobH5.title = @"推荐";
+    jobH5.title = @"职位";
     [self addChildViewController:jobH5];
     
     BMKRaderViewController * recentMap = [[BMKRaderViewController alloc] init];

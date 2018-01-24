@@ -443,6 +443,13 @@ static NSString * identifier = @"CollectionViewCell";
     /** 意向职位 */
     _keywords = notifi.object;
     [RYDefaults setObject:_keywords forKey:@"expect_job"];
+    for (id view in self.view.subviews)
+    {
+        if ([view isKindOfClass:[RaderSearchViewCell class]]) {
+            RaderSearchViewCell * cell = (RaderSearchViewCell *)view;
+            cell.textFiled.text = _keywords;
+        }
+    }
     [self cloudPlaceAroundSearch:self.mapView.centerCoordinate keywords:_keywords];
 }
 
@@ -451,6 +458,9 @@ static NSString * identifier = @"CollectionViewCell";
 {
     RaderSearchViewCell * cell = [[NSBundle mainBundle] loadNibNamed:@"RaderSearchViewCell" owner:nil options:nil].lastObject;
     cell.frame = CGRectMake(0, 0, kScreenWidth, 60);
+    if (![VerifyHelper empty:_keywords]) {
+        cell.textFiled.text = _keywords;
+    }
     [self.view addSubview:cell];
 }
 
@@ -634,6 +644,20 @@ static NSString * identifier = @"CollectionViewCell";
     _mapView.delegate = nil;
     _search.delegate = nil;
     _locService.delegate = nil;
+}
+
+- (UIView *)inputAccessoryView
+{
+    [super inputAccessoryView];
+    CGRect accessFrame = CGRectMake(0, 0, kScreenWidth, 44);
+    UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:accessFrame];
+    UIButton *closeBtn=[[UIButton alloc]initWithFrame:CGRectMake(kScreenWidth-60, 4, 40, 40)];
+    [closeBtn setTitle:@"搜索" forState:UIControlStateNormal];
+    [closeBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    closeBtn.titleLabel.font=[UIFont systemFontOfSize:16];
+    [closeBtn addTarget:self action:@selector(closeBeyBoard) forControlEvents:UIControlEventTouchDown];
+    [toolbar addSubview:closeBtn];
+    return toolbar;
 }
 
 - (void)didReceiveMemoryWarning {

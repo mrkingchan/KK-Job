@@ -74,27 +74,30 @@
     // Do any additional setup after loading the view.
     self.title = @"附件简历";
     
-    
-    self.imageView.image = [VerifyHelper empty:UserInfo.userInfo.resumeImage] ? UIIMAGE(@"noresume") : UIIMAGE(@"fj_resume");
+    self.imageView.image = [VerifyHelper empty:_resumeAddress] ? UIIMAGE(@"noresume") : UIIMAGE(@"fj_resume");
 
-    self.showMsgLabel.text = [VerifyHelper empty:UserInfo.userInfo.resumeImage] ? @"暂无简历" : [NSString stringWithFormat:@"%@",[UserInfo.userInfo.name componentsSeparatedByString:@"/"][1]];
-    self.showMsgLabel.textColor = [VerifyHelper empty:UserInfo.userInfo.resumeImage] ? UIColorHex(999999) :kNavBarTintColor;
-    [self.submitBtn setTitle:[VerifyHelper empty:UserInfo.userInfo.resumeImage] ? @"上传":@"重新上传" forState:UIControlStateNormal];
+    self.showMsgLabel.text = [VerifyHelper empty:_resumeAddress] ? @"暂无简历" : [NSString stringWithFormat:@"%@",[_resumeAddress componentsSeparatedByString:@"/"][1]];
+    self.showMsgLabel.textColor = [VerifyHelper empty:_resumeAddress] ? UIColorHex(999999) :kNavBarTintColor;
+    [self.submitBtn setTitle:[VerifyHelper empty:_resumeAddress] ? @"上传":@"重新上传" forState:UIControlStateNormal];
     
-    
-    if (![VerifyHelper empty:UserInfo.userInfo.resumeImage]) {
-        UIButton * see = [UIFactory initButtonWithFrame:CGRectMake(0, 0, 42, 40) title:@"预览" textColor:kWhiteColor font:systemOfFont(14) cornerRadius:0 tag:10 target:self action:@selector(bigscale:)];
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:see];
+    if (![VerifyHelper empty:_resumeAddress]) {
+        [self addRightBtn];
     }
+}
+
+- (void) addRightBtn
+{
+    UIButton * see = [UIFactory initButtonWithFrame:CGRectMake(0, 0, 42, 40) title:@"预览" textColor:kWhiteColor font:systemOfFont(14) cornerRadius:0 tag:10 target:self action:@selector(bigscale:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:see];
 }
 
 /** 放大了看 */
 - (void) bigscale:(UIButton *) sender
 {
-    if ([VerifyHelper empty:UserInfo.userInfo.resumeImage]) {
+    if ([VerifyHelper empty:_resumeAddress]) {
         return;
     }
-    [HUPhotoBrowser showFromImageView:self.imageView withURLStrings:@[[NSString stringWithFormat:@"%@%@",KIMGURL,UserInfo.userInfo.resumeImage]] atIndex:0];
+    [HUPhotoBrowser showFromImageView:self.imageView withURLStrings:@[[NSString stringWithFormat:@"%@%@",KIMGURL,_resumeAddress]] atIndex:0];
 }
 
 /** 上传图片 **/
@@ -107,8 +110,8 @@
 - (void)uploadImageToServerWithImage:(UIImage *)image OriginImage:(UIImage *)originImage
 {
     NSDictionary * dic = @{@"token":UserInfo.userInfo.token,@"type":@"2"};
-    if (![VerifyHelper empty:UserInfo.userInfo.resumeImage]) {
-        dic = @{@"token":UserInfo.userInfo.token,@"type":@"2",@"filePathOld":UserInfo.userInfo.image};
+    if (![VerifyHelper empty:_resumeAddress]) {
+        dic = @{@"token":UserInfo.userInfo.token,@"type":@"2",@"filePathOld":_resumeAddress};
     }
     
     //开始上传就显示进度条
@@ -117,11 +120,15 @@
     
     NSData * imageData = UIImageJPEGRepresentation(originImage, 0.7);
     [NetWorkHelper uploadFileRequest:imageData param:dic method:UploadFiles completeBlock:^(NSDictionary *data) {
-        self.showMsgLabel.text = [NSString stringWithFormat:@"%@",data[@"fileName"]];
+        _resumeAddress = [NSString stringWithFormat:@"%@",data[@"fileName"]];
+        if (![VerifyHelper empty:_resumeAddress]) {
+           self.showMsgLabel.text = [NSString stringWithFormat:@"%@",[_resumeAddress componentsSeparatedByString:@"/"][1]];
+        }
         self.imageView.image = UIIMAGE(@"fj_resume");
         [self showAlertWithTitle:@"上传成功" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
             alertMaker.addActionCancelTitle(@"确定");
         } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
+            [self addRightBtn];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"resumeStateChange" object:nil];
         }];
     } errorBlock:^(NSError *error) {

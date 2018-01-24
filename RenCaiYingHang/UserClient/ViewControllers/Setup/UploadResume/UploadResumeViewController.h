@@ -10,4 +10,6 @@
 
 @interface UploadResumeViewController : RYViewController
 
+@property (nonatomic,copy) NSString * resumeAddress;
+
 @end
