@@ -18,7 +18,7 @@
 // 如果需要使用idfa功能所需要引入的头文件（可选）
 #import <AdSupport/AdSupport.h>
 
-#import <AMapFoundationKit/AMapFoundationKit.h>
+//#import <AMapFoundationKit/AMapFoundationKit.h>
 
 #import "ViewController.h"
 #import "OSGuideViewController.h"

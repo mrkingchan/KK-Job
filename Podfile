@@ -18,16 +18,6 @@ pod 'TZImagePickerController'
 
 pod 'CDDPagerController'
 
-pod 'PGDatePicker'
-
-pod 'AMapFoundation'
-
-pod 'AMapLocation'
-
-pod 'AMapSearch'
-
-pod 'AMap2DMap'
-
 pod 'BaiduMapKit'
 
 end

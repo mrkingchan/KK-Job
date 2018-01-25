@@ -186,6 +186,8 @@
 #pragma mark - 返回点击事件
 - (void)navLeftBtnEvent
 {
+    //忘记密码 清空所有数据
+    [UserInfo loginOut];
     UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
     [UIFactory getKeyWindow].rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
 }
@@ -227,9 +229,6 @@
         case buttonTagManager:
         {
 #pragma mark 忘记密码
-            //忘记密码 清空所有数据
-            [UserInfo loginOut];
-          
             [self showAlertWithTitle:@"手势关闭成功" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
                 alertMaker.addActionCancelTitle(@"确定");
             } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {

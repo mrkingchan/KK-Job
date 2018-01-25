@@ -39,6 +39,7 @@
     if (!_imageView) {
         _imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
         _imageView.image = UIIMAGE(@"nonetwork");
+        _imageView.userInteractionEnabled = true;
     }
     return _imageView;
 }
@@ -108,12 +109,21 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
+    [self isConnectNetWork];
+    
+    //注册导航方法
+    [self.webConfiguration.userContentController addScriptMessageHandler:self name:@"gpsNavigation"];
+}
+
+- (void) isConnectNetWork
+{
     //检测网络
     AFNetworkReachabilityManager *netManager = [AFNetworkReachabilityManager sharedManager];
     [netManager startMonitoring];  //开始监听
     [netManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status){
         if (status == AFNetworkReachabilityStatusNotReachable)
         {
+            [UIFactory removeLoading];
             [self addTapGesture];
         }
         else
@@ -121,8 +131,6 @@
             [self reloadRequest];
         }
     }];
-    //注册导航方法
-    [self.webConfiguration.userContentController addScriptMessageHandler:self name:@"gpsNavigation"];
 }
 
 /** 区分返回 */

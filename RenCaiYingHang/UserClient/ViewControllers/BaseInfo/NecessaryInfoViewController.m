@@ -17,7 +17,11 @@
 #import "RYAlertAction.h"
 #import "RYAreaPickView.h"
 
-@interface NecessaryInfoViewController ()<UITableViewDelegate,UITableViewDataSource,PGDatePickerDelegate,UITextFieldDelegate>
+#import "CZHDatePickerView.h"
+#import "DatePickerHeader.h"
+
+
+@interface NecessaryInfoViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     RYAreaPickView * pickView;
     NSInteger cityId;
@@ -25,6 +29,8 @@
     CGRect origin_rect;
     UITextField * _textField;
     BOOL isAnimation;
+    
+    NSString * _currentTimeString;
 }
 
 @property (nonatomic,strong) UITableView * tableView;
@@ -159,7 +165,7 @@ static NSString * SalaryCellID = @"SalaryCell";
         return;
     }
 
-    NSDictionary * dic = @{@"name":self.model.name,@"gender":@(self.model.sex),@"diploma":@(self.educationArr.count - 1 - self.model.education - 1),@"workyearX":@(self.experienceArr.count - 1 - self.model.experience - 1),@"birthday":self.model.birthday,@"expectjob":self.model.job,@"salrange":self.model.salary,@"city":@(cityId)};
+    NSDictionary * dic = @{@"name":self.model.name,@"gender":@(self.model.sex),@"diploma":@(self.educationArr.count - 1 - self.model.education - 1),@"workyearX":@(self.experienceArr.count - 1 - self.model.experience - 1),@"birthday":self.model.birthday,@"expectjob":self.model.job,@"salrange":self.model.salary,@"city":@(cityId),@"tel":UserInfo.userInfo.tel};
     [RYUserRequest uploadBaseInfoWithParamer:dic suceess:^(BOOL isSendSuccess) {
         /** 默认进入雷达页面 **/
         UserInfo.userInfo.reCode = @"X2222";
@@ -322,33 +328,13 @@ static NSString * SalaryCellID = @"SalaryCell";
 /** 出生年月 */
 - (void) showYearMonthPicker
 {
-    PGDatePicker *datePicker = [[PGDatePicker alloc]init];
-    datePicker.delegate = self;
-    [datePicker showWithShadeBackgroud];
-    datePicker.datePickerType = PGPickerViewType3;
-    datePicker.datePickerMode = PGDatePickerModeDate;
-    
-    NSArray * dateArr =  [[UtilityHelper getCurrentTimes] componentsSeparatedByString:@"-"];
-    
-    datePicker.minimumDate = [NSDate setYear:1970 month:1 day:1];
-    datePicker.maximumDate = [NSDate setYear:[dateArr[0] integerValue] - 15 month:[dateArr[1] integerValue] day:[dateArr[2] integerValue]];
-    
-    datePicker.titleLabel.text = @"出生年月";
-    //设置线条的颜色
-    datePicker.lineBackgroundColor = Color235;
-    //设置选中行的字体颜色
-    datePicker.textColorOfSelectedRow = [UIColor redColor];
-    //设置未选中行的字体颜色
-    datePicker.textColorOfOtherRow = [UIColor blackColor];
-    //设置取消按钮的字体颜色
-    datePicker.cancelButtonTextColor = [UIColor blackColor];
-    //设置取消按钮的字
-    datePicker.cancelButtonText = @"取消";
-    
-    //设置确定按钮的字体颜色
-    datePicker.confirmButtonTextColor = [UIColor redColor];
-    //设置确定按钮的字
-    datePicker.confirmButtonText = @"确定";
+    CZHWeakSelf(self);
+    [CZHDatePickerView sharePickerViewWithCurrentDate:self.model.birthday DateBlock:^(NSString *dateString) {
+        CZHStrongSelf(self);
+        self.model.birthday = dateString;
+        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:4 inSection:0];
+        [self refreshTableViewWith:indexPath];
+    }];
 }
 
 /** 学历,经验 **/
@@ -372,14 +358,6 @@ static NSString * SalaryCellID = @"SalaryCell";
 - (void) refreshTableViewWith:(NSIndexPath *)indexPath
 {
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
-}
-
-#pragma PGDatePickerDelegate
-- (void)datePicker:(PGDatePicker *)datePicker didSelectDate:(NSDateComponents *)dateComponents {
-    NSString * string = [NSString stringWithFormat:@"%zd-%zd-%zd",[dateComponents year],[dateComponents month],[dateComponents day]];
-    self.model.birthday = string;
-    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:4 inSection:0];
-    [self refreshTableViewWith:indexPath];
 }
 
 /** 选择城市 */

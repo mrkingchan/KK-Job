@@ -1,13 +1,14 @@
+////
+////  CurrentLocationAnnotation.m
+////  RenCaiYingHang
+////
+////  Created by Macx on 2018/1/5.
+////  Copyright © 2018年 Macx. All rights reserved.
+////
 //
-//  CurrentLocationAnnotation.m
-//  RenCaiYingHang
+//#import "CurrentLocationAnnotation.h"
 //
-//  Created by Macx on 2018/1/5.
-//  Copyright © 2018年 Macx. All rights reserved.
+//@implementation CurrentLocationAnnotation
 //
+//@end
 
-#import "CurrentLocationAnnotation.h"
-
-@implementation CurrentLocationAnnotation
-
-@end

@@ -133,6 +133,9 @@
 		8F85D8F21FD92B1900BC1A7D /* ResiterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8F11FD92B1900BC1A7D /* ResiterViewController.m */; };
 		8F85D8F51FD92B2A00BC1A7D /* ForgotPwViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8F41FD92B2A00BC1A7D /* ForgotPwViewController.m */; };
 		8F85D8F91FD938C800BC1A7D /* OSGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85D8F71FD938C800BC1A7D /* OSGuideViewController.m */; };
+		8F86D9EA201A013700C893A9 /* CZHDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F86D9E4201A013700C893A9 /* CZHDatePickerView.m */; };
+		8F86D9EB201A013700C893A9 /* UIButton+CZHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F86D9E7201A013700C893A9 /* UIButton+CZHExtension.m */; };
+		8F86D9EC201A013700C893A9 /* UIView+CZHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F86D9E9201A013700C893A9 /* UIView+CZHExtension.m */; };
 		8FDAAA261FF1DD8A00BDF5E5 /* AppPayRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDAAA251FF1DD8A00BDF5E5 /* AppPayRequest.m */; };
 		8FE02C2B1FE8B56B009286E3 /* UITextField+SystemFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE02C2A1FE8B56B009286E3 /* UITextField+SystemFont.m */; };
 		8FE1A3501FF4BDFD0022CDB0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE1A34F1FF4BDFD0022CDB0 /* UIKit.framework */; };
@@ -447,6 +450,13 @@
 		8F85D8F41FD92B2A00BC1A7D /* ForgotPwViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForgotPwViewController.m; sourceTree = "<group>"; };
 		8F85D8F71FD938C800BC1A7D /* OSGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSGuideViewController.m; sourceTree = "<group>"; };
 		8F85D8F81FD938C800BC1A7D /* OSGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSGuideViewController.h; sourceTree = "<group>"; };
+		8F86D9E3201A013700C893A9 /* CZHDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHDatePickerView.h; sourceTree = "<group>"; };
+		8F86D9E4201A013700C893A9 /* CZHDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZHDatePickerView.m; sourceTree = "<group>"; };
+		8F86D9E5201A013700C893A9 /* DatePickerHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerHeader.h; sourceTree = "<group>"; };
+		8F86D9E6201A013700C893A9 /* UIButton+CZHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+CZHExtension.h"; sourceTree = "<group>"; };
+		8F86D9E7201A013700C893A9 /* UIButton+CZHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CZHExtension.m"; sourceTree = "<group>"; };
+		8F86D9E8201A013700C893A9 /* UIView+CZHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CZHExtension.h"; sourceTree = "<group>"; };
+		8F86D9E9201A013700C893A9 /* UIView+CZHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CZHExtension.m"; sourceTree = "<group>"; };
 		8FDAAA241FF1DD8A00BDF5E5 /* AppPayRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppPayRequest.h; sourceTree = "<group>"; };
 		8FDAAA251FF1DD8A00BDF5E5 /* AppPayRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppPayRequest.m; sourceTree = "<group>"; };
 		8FE02C291FE8B56B009286E3 /* UITextField+SystemFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+SystemFont.h"; sourceTree = "<group>"; };
@@ -1063,6 +1073,7 @@
 		8F85D8551FD9236600BC1A7D /* other */ = {
 			isa = PBXGroup;
 			children = (
+				8F86D9E2201A013700C893A9 /* CZHDatePickerView */,
 				8F4CCF34200C3ED900260000 /* GYRollingNoticeView */,
 				8F19C94F2008A36200A957FF /* CLRollLabel */,
 				8F0EF4D61FE3D33000D179D5 /* function-view */,
@@ -1309,6 +1320,20 @@
 				8F85D8F71FD938C800BC1A7D /* OSGuideViewController.m */,
 			);
 			path = Guide;
+			sourceTree = "<group>";
+		};
+		8F86D9E2201A013700C893A9 /* CZHDatePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				8F86D9E3201A013700C893A9 /* CZHDatePickerView.h */,
+				8F86D9E4201A013700C893A9 /* CZHDatePickerView.m */,
+				8F86D9E5201A013700C893A9 /* DatePickerHeader.h */,
+				8F86D9E6201A013700C893A9 /* UIButton+CZHExtension.h */,
+				8F86D9E7201A013700C893A9 /* UIButton+CZHExtension.m */,
+				8F86D9E8201A013700C893A9 /* UIView+CZHExtension.h */,
+				8F86D9E9201A013700C893A9 /* UIView+CZHExtension.m */,
+			);
+			path = CZHDatePickerView;
 			sourceTree = "<group>";
 		};
 		8FE311191FF61EE400624D20 /* ShareCell */ = {
@@ -1581,10 +1606,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RenCaiYingHang/Pods-RenCaiYingHang-resources.sh",
-				"${PODS_ROOT}/AMap2DMap/MAMapKit.framework/AMap.bundle",
 				"${PODS_ROOT}/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework/Resources/mapapi.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
-				"${PODS_ROOT}/PGDatePicker/PGDatePicker/PGDatePicker.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
 			);
@@ -1661,11 +1684,13 @@
 				8F30AE972007442F000793F2 /* SMKCycleScrollView.m in Sources */,
 				8FF2D0D11FFF1F85002F18B4 /* CurrentLocationAnnotation.m in Sources */,
 				8F0EF4DC1FE3D6C800D179D5 /* AreaModel.m in Sources */,
+				8F86D9EB201A013700C893A9 /* UIButton+CZHExtension.m in Sources */,
 				8F85D8631FD9244800BC1A7D /* RYViewController.m in Sources */,
 				8F1F7B3020104E8D00B4B675 /* MMScanViewController.m in Sources */,
 				8F85D8251FD922A500BC1A7D /* ViewController.m in Sources */,
 				8F85D8DA1FD9297700BC1A7D /* JobViewController.m in Sources */,
 				8F1F66691FD9645B004BF8F1 /* AddPrivacyCompanyViewController.m in Sources */,
+				8F86D9EC201A013700C893A9 /* UIView+CZHExtension.m in Sources */,
 				8FF2D0D81FFF1FA9002F18B4 /* XYQProgressHUD+XYQ.m in Sources */,
 				8FE1A3861FF502F60022CDB0 /* JobDetailViewController.m in Sources */,
 				8F1F66581FD94E1C004BF8F1 /* RadarViewController.m in Sources */,
@@ -1767,6 +1792,7 @@
 				8FF2D0C71FFF1BF7002F18B4 /* MARaderViewController.m in Sources */,
 				8F3F2F23200E069F0017A9A3 /* YWRoundAnnotationView.m in Sources */,
 				8F5E3D4A2004E275007CA925 /* RYSelectViewController.m in Sources */,
+				8F86D9EA201A013700C893A9 /* CZHDatePickerView.m in Sources */,
 				8F1F66511FD9485C004BF8F1 /* RYWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1947,7 +1973,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qianfutong.talentsblank;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "be9b7c94-1fde-4ad1-91af-2075dd002d7d";
+				PROVISIONING_PROFILE = "0514eaab-adff-49b8-83bb-6203324d5a82";
 				PROVISIONING_PROFILE_SPECIFIER = RenCaiYingHang;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1980,7 +2006,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qianfutong.talentsblank;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "be9b7c94-1fde-4ad1-91af-2075dd002d7d";
+				PROVISIONING_PROFILE = "0514eaab-adff-49b8-83bb-6203324d5a82";
 				PROVISIONING_PROFILE_SPECIFIER = RenCaiYingHang;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

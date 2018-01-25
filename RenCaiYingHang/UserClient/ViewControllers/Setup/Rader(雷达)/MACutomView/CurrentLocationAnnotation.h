@@ -1,17 +1,18 @@
+////
+////  CurrentLocationAnnotation.h
+////  RenCaiYingHang
+////
+////  Created by Macx on 2018/1/5.
+////  Copyright © 2018年 Macx. All rights reserved.
+////
 //
-//  CurrentLocationAnnotation.h
-//  RenCaiYingHang
+//#import <MAMapKit/MAMapKit.h>
 //
-//  Created by Macx on 2018/1/5.
-//  Copyright © 2018年 Macx. All rights reserved.
+//@interface CurrentLocationAnnotation : MAPointAnnotation
 //
+//@property (nonatomic,assign) NSInteger index;
+//
+//@property (nonatomic,assign) BOOL isSelected;
+//
+//@end
 
-#import <MAMapKit/MAMapKit.h>
-
-@interface CurrentLocationAnnotation : MAPointAnnotation
-
-@property (nonatomic,assign) NSInteger index;
-
-@property (nonatomic,assign) BOOL isSelected;
-
-@end

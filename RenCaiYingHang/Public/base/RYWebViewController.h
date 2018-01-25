@@ -30,8 +30,6 @@
 
 - (void) addRightBtn;
 
-
-
 /** 添加手势 */
 - (void) addTapGesture;
 
@@ -40,5 +38,7 @@
 
 /** 重新加载 */
 - (void) reloadRequest;
+
+- (void) isConnectNetWork;
 
 @end

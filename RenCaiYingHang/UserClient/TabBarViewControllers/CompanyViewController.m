@@ -52,6 +52,7 @@
 
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
+    //[self isConnectNetWork];
     [UIFactory addLoading];
 }
 

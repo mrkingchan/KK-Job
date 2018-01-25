@@ -121,6 +121,7 @@
 
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
+    [UIFactory removeLoading];
     [self removeTapGesture];
 }
 

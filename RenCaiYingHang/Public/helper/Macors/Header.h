@@ -70,7 +70,6 @@
 #import <UIButton+WebCache.h>
 #import <TZImagePickerController.h>
 
-#import <PGDatePicker.h>
 
 #import "XYQProgressHUD+XYQ.h"
 

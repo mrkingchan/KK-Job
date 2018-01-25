@@ -165,21 +165,26 @@ static NSString * SetUPTableViewCellID = @"UITableViewCell";
     }
 }
 
-/**
- 退出登录
- */
+/** 退出登录 */
 - (void) loginOutClick:(UIButton *)sender
 {
-    [NetWorkHelper getWithURLString:[UtilityHelper addUrlToken:@"securityCenter/appSignOut"] parameters:nil success:^(NSDictionary *data) {
-        
-        [UserInfo loginOut];
-       
-        UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-        [UIFactory getKeyWindow].rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
-        
-    } failure:^(NSError *error) {
-        
+    [self showAlertWithTitle:@"确定退出?" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
+        alertMaker.addActionCancelTitle(@"取消").addActionDefaultTitle(@"确定");
+    } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
+        if (buttonIndex == 1) {
+            [NetWorkHelper getWithURLString:[UtilityHelper addUrlToken:@"securityCenter/appSignOut"] parameters:nil success:^(NSDictionary *data) {
+                
+                [UserInfo loginOut];
+                
+                UIViewController * loginCtl = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+                [UIFactory getKeyWindow].rootViewController = [[RYNavigationController alloc] initWithRootViewController:loginCtl];
+                
+            } failure:^(NSError *error) {
+                
+            }];
+        }
     }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

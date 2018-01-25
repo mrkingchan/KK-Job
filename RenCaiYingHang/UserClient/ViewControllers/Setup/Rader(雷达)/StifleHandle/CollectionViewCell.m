@@ -39,7 +39,7 @@
     years.text = model.job_exp_name;
     education.text = model.diploma_name;
     
-    [companyIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KIMGURL,model.comlogo]] placeholderImage:nil];
+    [companyIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KIMGURL,model.comlogo]] placeholderImage:UIIMAGE(@"com_nor")];
     companyName.text = model.comname;
     
     NSString * msg = [NSString stringWithFormat:@"%@|%@|%@",model.finance_name,model.scale_name,model.industry_name];

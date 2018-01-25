@@ -45,6 +45,8 @@
         RYTabBarController * tab = (RYTabBarController *)[UIFactory getKeyWindow].rootViewController;
         tab.selectedIndex = 2;
         // self.tabBarController.selectedIndex =  2;
+    }else{
+        
     }
 }
 

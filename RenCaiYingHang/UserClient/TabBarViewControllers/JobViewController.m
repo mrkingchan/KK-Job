@@ -30,7 +30,6 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:true animated:animated];
     //self.selectIndex = 1;
-    [self requestExprJob];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -62,6 +61,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kNavBarTintColor;
+    
+    [self requestExprJob];
+    /** 修改了简历 */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestExprJob) name:@"resumeStateChange" object:nil];
     
     [self setUpAllChildViewController];
     [self resetShowStyle];

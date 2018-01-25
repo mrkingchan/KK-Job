@@ -383,6 +383,7 @@ static NSString * identifier = @"CollectionViewCell";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(message:) name:@"expect_job" object:nil];
     /** 意向职位 */
     _keywords =  [RYDefaults objectForKey:@"expect_job"];
+    [self cloudPlaceAroundSearch:self.mapView.centerCoordinate keywords:_keywords];
 }
 
 //初始化所有条件
@@ -474,6 +475,10 @@ static NSString * identifier = @"CollectionViewCell";
             if (![VerifyHelper empty:cell.textFiled.text] && cell.textFiled.editing) {
                 _keywords = cell.textFiled.text;
                 [self cloudPlaceAroundSearch:self.mapView.centerCoordinate  keywords:cell.textFiled.text];
+            }else if ([VerifyHelper empty:cell.textFiled.text] && cell.textFiled.editing){
+                cell.textFiled.text = [RYDefaults objectForKey:@"expect_job"];
+                 _keywords =  [RYDefaults objectForKey:@"expect_job"];
+                [self cloudPlaceAroundSearch:self.mapView.centerCoordinate  keywords:_keywords];
             }
         }
     }
