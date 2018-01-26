@@ -10,6 +10,8 @@
 
 #import "AppPayRequest.h"
 
+#import "RYShareView.h"
+
 @interface HomePageViewController ()<WKScriptMessageHandler>
 
 @property (nonatomic,assign) BOOL isFirst;
@@ -56,6 +58,7 @@
     [self.webConfiguration.userContentController addScriptMessageHandler:self name:@"comLoginOut"];
     [self.webConfiguration.userContentController addScriptMessageHandler:self name:@"comWeixinPay"];
     [self.webConfiguration.userContentController addScriptMessageHandler:self name:@"comAliPay"];
+    [self.webConfiguration.userContentController addScriptMessageHandler:self name:@"comShare"];
 }
 
 // 页面开始加载时调用
@@ -117,7 +120,35 @@
                 [self alertMessageWithViewController:self message:@"支付失败"];
             }
         }];
-    }}
+    }else if ([message.name isEqualToString:@"comShare"]){
+
+        NSDictionary * rel = message.body;
+        NSData * imageData =  [NSData
+                               dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",KIMGURL,rel[@"comLogo"]]]];
+        UIImage * image = [UIImage imageWithData:imageData];
+
+        RYShareView * share = [[RYShareView alloc] initWithFrame:[UIScreen mainScreen].bounds type:ShareJob];
+        [[UIFactory getKeyWindow] addSubview:share];
+
+        share.shareCallBack = ^(NSInteger index) {
+
+            WXMediaMessage * message = [WXMediaMessage message];
+            message.title = [NSString stringWithFormat:@"%@[%@k-%@k]",rel[@"jobName"],rel[@"salaryMin"],rel[@"salaryMax"]];
+            message.description = [NSString stringWithFormat:@"面试奖:%@元,入职奖:%@元\r\n%@",@"10",rel[@"defSubsidy"],rel[@"comName"]];
+            [message setThumbImage:image];
+
+            WXWebpageObject * webpageObject = [WXWebpageObject object];
+            webpageObject.webpageUrl = rel[@"url"];
+            message.mediaObject = webpageObject;
+
+            SendMessageToWXReq * req = [[SendMessageToWXReq alloc] init];
+            req.bText = false;
+            req.message  = message;
+            req.scene =  index == 10 ? WXSceneSession : WXSceneTimeline;
+            [WXApi sendReq:req];
+        };
+    }
+}
 
 /** 切换到求职端 */
 - (void) changeToUserClient
@@ -159,6 +190,7 @@
     [self.webConfiguration.userContentController removeScriptMessageHandlerForName:@"comAliPay"];
     [self.webConfiguration.userContentController removeScriptMessageHandlerForName:@"comToUser"];
     [self.webConfiguration.userContentController removeScriptMessageHandlerForName:@"comLoginOut"];
+    [self.webConfiguration.userContentController removeScriptMessageHandlerForName:@"comShare"];
 }
 
 - (void)didReceiveMemoryWarning {

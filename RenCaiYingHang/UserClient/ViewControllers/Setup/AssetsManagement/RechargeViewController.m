@@ -66,7 +66,7 @@ static NSString * RechagergeTypeViewCellID = @"RechagergeTypeViewCell";
 - (void) configurationTableView
 {
     self.tableView.tableFooterView = [self tableFooterView];
-    self.dataArray = @[@[@"wx",@"微信支付"],@[@"zfb",@"支付宝支付"],@[@"hc",@"汇潮支付"]];
+    self.dataArray = @[@[@"wx",@"微信支付"],@[@"zfb",@"支付宝支付"]];//@[@"hc",@"汇潮支付"]
     [self.tableView reloadData];
 }
 
@@ -112,14 +112,14 @@ static NSString * RechagergeTypeViewCellID = @"RechagergeTypeViewCell";
             }];
         }
             break;
-        case HuiChaoPay:
-        {
-            NSString * str = paramer;
-            HCH5ViewController * hc = [[HCH5ViewController alloc] init];
-            hc.url = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@appWxPay/remittancePayment?orderNumber=%@&businessType=CZ",KBaseURL,str]];
-            [self.navigationController pushViewController:hc animated:true];
-        }
-            break;
+//        case HuiChaoPay:
+//        {
+//            NSString * str = paramer;
+//            HCH5ViewController * hc = [[HCH5ViewController alloc] init];
+//            hc.url = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@appWxPay/remittancePayment?orderNumber=%@&businessType=CZ",KBaseURL,str]];
+//            [self.navigationController pushViewController:hc animated:true];
+//        }
+//            break;
         default:
             break;
     }

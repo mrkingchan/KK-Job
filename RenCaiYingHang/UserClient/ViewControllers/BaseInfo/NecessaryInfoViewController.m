@@ -165,7 +165,7 @@ static NSString * SalaryCellID = @"SalaryCell";
         return;
     }
 
-    NSDictionary * dic = @{@"name":self.model.name,@"gender":@(self.model.sex),@"diploma":@(self.educationArr.count - 1 - self.model.education - 1),@"workyearX":@(self.experienceArr.count - 1 - self.model.experience - 1),@"birthday":self.model.birthday,@"expectjob":self.model.job,@"salrange":self.model.salary,@"city":@(cityId),@"tel":UserInfo.userInfo.tel};
+    NSDictionary * dic = @{@"name":self.model.name,@"gender":@(self.model.sex),@"diploma":@(self.educationArr.count - 1 - self.model.education - 1),@"workyearX":@(self.experienceArr.count - 1 - self.model.experience - 1),@"birthday":self.model.birthday,@"expectjob":self.model.job,@"salrange":self.model.salary,@"city":@(cityId),@"phone":UserInfo.userInfo.tel};
     [RYUserRequest uploadBaseInfoWithParamer:dic suceess:^(BOOL isSendSuccess) {
         /** 默认进入雷达页面 **/
         UserInfo.userInfo.reCode = @"X2222";

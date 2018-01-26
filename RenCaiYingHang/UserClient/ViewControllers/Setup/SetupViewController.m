@@ -172,7 +172,7 @@ static NSString * SetUPTableViewCellID = @"UITableViewCell";
         alertMaker.addActionCancelTitle(@"取消").addActionDefaultTitle(@"确定");
     } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
         if (buttonIndex == 1) {
-            [NetWorkHelper getWithURLString:[UtilityHelper addUrlToken:@"securityCenter/appSignOut"] parameters:nil success:^(NSDictionary *data) {
+            [NetWorkHelper getWithURLString:[NSString stringWithFormat:@"%@securityCenter/appSignOut?datas=%@",KBaseURL,UserInfo.userInfo.token] parameters:nil success:^(NSDictionary *data) {
                 
                 [UserInfo loginOut];
                 
