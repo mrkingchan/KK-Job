@@ -12,7 +12,7 @@
 
 @end
 
-@implementation CommonH5Controller
+@implementation  CommonH5Controller
 
 - (void)viewWillAppear:(BOOL)animated
 {

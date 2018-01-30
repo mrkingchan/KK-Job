@@ -56,7 +56,7 @@
 
 @end
 
-const static int GEO_TABLE_ID = 183071;
+const static int GEO_TABLE_ID = 183654;// 183071;
 static NSString * AK = @"DFNh9NA5GK0Po41cGcBeWg4tY5F25MTL";
 static NSString * identifier = @"CollectionViewCell";
 
@@ -237,7 +237,9 @@ static NSString * identifier = @"CollectionViewCell";
     }
     else
     {
-         [XYQProgressHUD showError:@"附近没有匹配招聘职位" toView:[UIFactory getKeyWindow]];
+        if (_isfirst) {
+            [XYQProgressHUD showError:@"附近没有匹配招聘职位" toView:[UIFactory getKeyWindow]];
+        }
     }
 }
 
@@ -445,7 +447,6 @@ static NSString * identifier = @"CollectionViewCell";
     if(flag)
     {
         [self removeAllObject];
-        [UIFactory addLoading];
     }
     else
     {
