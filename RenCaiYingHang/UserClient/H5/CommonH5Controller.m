@@ -44,7 +44,9 @@
         [[UIApplication sharedApplication] openURL:navigationAction.request.URL];
         decisionHandler(WKNavigationActionPolicyCancel);
     }else{
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"resumeStateChange" object:nil];
+        if ([url rangeOfString:@"public/appUserAgreement"].location == NSNotFound) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"resumeStateChange" object:nil];
+        }
         decisionHandler(WKNavigationActionPolicyAllow);
     }
 }

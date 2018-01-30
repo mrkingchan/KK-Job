@@ -222,7 +222,6 @@
 - (void)drawBottomItems
 {
     if (_toolsView) {
-        
         return;
     }
     

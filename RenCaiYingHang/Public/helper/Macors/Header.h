@@ -68,8 +68,6 @@
 #import <SDImageCache.h>
 #import <UIImageView+WebCache.h>
 #import <UIButton+WebCache.h>
-#import <TZImagePickerController.h>
-
 
 #import "XYQProgressHUD+XYQ.h"
 

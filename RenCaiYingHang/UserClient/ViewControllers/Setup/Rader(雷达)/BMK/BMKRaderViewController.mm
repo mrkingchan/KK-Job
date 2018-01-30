@@ -202,15 +202,15 @@ static NSString * identifier = @"CollectionViewCell";
  */
 - (void)onGetCloudPoiResult:(NSArray*)poiResultList searchType:(int)type errorCode:(int)error
 {
+    [UIFactory removeLoading];
     if (error == BMKErrorOk) {
         NSLog(@"数据获取成功");
-        [self removeCollectionViewFromSuperView];
-        [self.mapView removeAnnotations:self.searchPoiArray];
-        [self.searchPoiArray removeAllObjects];
-        [self.dataArray removeAllObjects];
-        [self.anntotaionViewArray removeAllObjects];
+        //[self removeAllObject];
         
         BMKCloudPOIList* result = [poiResultList objectAtIndex:0];
+        if (result.POIs.count == 0) {
+            [XYQProgressHUD showError:@"附近没有匹配招聘职位" toView:[UIFactory getKeyWindow]];
+        }
         for (int i = 0; i < result.POIs.count; i++) {
             BMKCloudPOIInfo * poi = [result.POIs objectAtIndex:i];
             //自定义字段
@@ -235,6 +235,20 @@ static NSString * identifier = @"CollectionViewCell";
         
         [self showPOIAnnotations];
     }
+    else
+    {
+         [XYQProgressHUD showError:@"附近没有匹配招聘职位" toView:[UIFactory getKeyWindow]];
+    }
+}
+
+/** 清除现有数据 */
+- (void) removeAllObject
+{
+    [self removeCollectionViewFromSuperView];
+    [self.mapView removeAnnotations:self.searchPoiArray];
+    [self.searchPoiArray removeAllObjects];
+    [self.dataArray removeAllObjects];
+    [self.anntotaionViewArray removeAllObjects];
 }
 
 //#pragma mark 选中大头针时触发
@@ -430,11 +444,12 @@ static NSString * identifier = @"CollectionViewCell";
     BOOL flag = [_search nearbySearchWithSearchInfo:placeAround];
     if(flag)
     {
-        NSLog(@"周边云检索发送成功");
+        [self removeAllObject];
+        [UIFactory addLoading];
     }
     else
     {
-        NSLog(@"周边云检索发送失败");
+        [XYQProgressHUD showError:@"周边云检索发送失败" toView:[UIFactory getKeyWindow]];
     }
 }
 

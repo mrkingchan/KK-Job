@@ -14,8 +14,6 @@ pod 'HUPhotoBrowser'
 
 pod 'JPush'
 
-pod 'TZImagePickerController'
-
 pod 'CDDPagerController'
 
 pod 'BaiduMapKit'

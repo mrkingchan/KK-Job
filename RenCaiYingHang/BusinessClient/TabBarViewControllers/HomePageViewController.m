@@ -8,11 +8,18 @@
 
 #import "HomePageViewController.h"
 
+#import <BaiduMapAPI_Location/BMKLocationComponent.h>
+#import <BaiduMapAPI_Search/BMKSearchComponent.h>
+
 #import "AppPayRequest.h"
 
 #import "RYShareView.h"
 
-@interface HomePageViewController ()<WKScriptMessageHandler>
+@interface HomePageViewController ()<WKScriptMessageHandler,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>
+//定位
+@property (nonatomic, strong)  BMKLocationService  * locService;
+
+@property (nonatomic, strong)  BMKGeoCodeSearch * geocodesearch;
 
 @property (nonatomic,assign) BOOL isFirst;
 
@@ -35,20 +42,21 @@
     [self regsiterMethod];
     _isFirst = false;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(weixinPaySuccess:) name:@"WeXinPayCallBack" object:nil];
-    
 }
 
 /** 加载h5 */
 - (void) loadRequeset
 {
     if (_isFinishComInfo) {
+        [self configLocationManager];
+        [self locAction];
         NSString * jsonstr =   [@{@"token":UserInfo.userInfo.token,@"pkey":UserInfo.userInfo.pkey,@"comId":UserInfo.userInfo.comId} mj_JSONString];
         ;
         _oldUrlString = [NSString stringWithFormat:@"%@%@?token=%@",KBaseURL,@"identity/comUserIndex",[UtilityHelper encryptUseDES2:jsonstr key:DESKEY]];
     }else{
         _oldUrlString = [UtilityHelper addTokenForUrlSting:[NSString stringWithFormat:@"%@%@",KBaseURL,@"identity/company/regist/name"]];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_oldUrlString]]];
     }
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_oldUrlString]]];
 }
 
 /** 注册检测 */
@@ -89,14 +97,7 @@
 
 #pragma mark 跳转的操作
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    NSString * url = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
-    if (![url isEqualToString:_oldUrlString]) {
-        _oldUrlString = url;
-        [self.webView  loadRequest:[NSURLRequest requestWithURL:navigationAction.request.URL]];
-        decisionHandler(WKNavigationActionPolicyAllow);
-    }else{
-        decisionHandler(WKNavigationActionPolicyAllow);
-    }
+    decisionHandler(WKNavigationActionPolicyAllow);
 }
 
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
@@ -191,6 +192,88 @@
     [self.webConfiguration.userContentController removeScriptMessageHandlerForName:@"comToUser"];
     [self.webConfiguration.userContentController removeScriptMessageHandlerForName:@"comLoginOut"];
     [self.webConfiguration.userContentController removeScriptMessageHandlerForName:@"comShare"];
+    [self cleanUpAction];
+    self.locService = nil;
+    _geocodesearch.delegate = nil; // 不用时，置nil
+}
+
+/**  初始化定位 */
+- (void)configLocationManager
+{
+    //初始化BMKLocationService
+    _locService = [[BMKLocationService alloc] init];
+    
+    _locService.delegate = self;
+    
+    _locService.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    
+    _locService.distanceFilter = 10;
+    
+    //启动LocationService
+    [_locService startUserLocationService];
+    
+    _geocodesearch = [[BMKGeoCodeSearch alloc]init];
+    _geocodesearch.delegate = self;
+}
+
+
+/**  终止定位 */
+- (void)cleanUpAction
+{
+    [self.locService stopUserLocationService];
+}
+
+/**  定位 */
+- (void)locAction
+{
+    [self.locService startUserLocationService];
+}
+
+/**
+ *用户位置更新后，会调用此函数
+ *@param userLocation 新的用户位置
+ */
+- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
+{
+    if (userLocation.location.coordinate.latitude == 0)
+    {
+        [_locService startUserLocationService];
+    }
+    else
+    {
+        [self cleanUpAction];
+        BMKReverseGeoCodeOption *reverseOption = [[BMKReverseGeoCodeOption alloc] init];
+        //2.给反向地理编码选项对象的坐标点赋值
+        reverseOption.reverseGeoPoint = userLocation.location.coordinate;
+        //3.执行反地理编码
+        [_geocodesearch reverseGeoCode:reverseOption];
+    }
+}
+
+/** 反地理编码 */
+- (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error
+{
+    _oldUrlString = [[NSString stringWithFormat:@"%@&city=%@",_oldUrlString,result.addressDetail.city] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_oldUrlString]]];
+}
+
+/**
+ *定位失败后，会调用此函数
+ *@param error 错误号
+ */
+- (void)didFailToLocateUserWithError:(NSError *)error
+{
+    [self showAlertWithTitle:@"允许\"定位\"提示" message:@"请在设置中打开定位" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
+        alertMaker.addActionCancelTitle(@"取消").addActionDefaultTitle(@"设置");
+    } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, EJAlertViewController * _Nonnull alertSelf) {
+        if (buttonIndex == 1) {
+            //打开定位设置
+            NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [[UIApplication sharedApplication] openURL:settingsURL];
+        }else{
+            [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_oldUrlString]]];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

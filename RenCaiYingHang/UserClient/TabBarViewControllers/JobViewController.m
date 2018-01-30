@@ -41,7 +41,7 @@
 /** 获取推荐关键词 */
 - (void) requestExprJob
 {
-    NSString * urlString = [NSString stringWithFormat:@"%@securityCenter/ appResumeExpectJob",KBaseURL];
+    NSString * urlString = [NSString stringWithFormat:@"%@securityCenter/appResumeExpectJob",KBaseURL];
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSDictionary * dic = @{@"token":UserInfo.userInfo.token};
     [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {

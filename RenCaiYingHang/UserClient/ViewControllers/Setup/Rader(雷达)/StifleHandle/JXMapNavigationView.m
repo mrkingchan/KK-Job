@@ -87,7 +87,7 @@
 }
 - (void)remove{
     [_sheet removeFromSuperview];
-   // [self removeFromSuperview];
+    [self removeFromSuperview];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{

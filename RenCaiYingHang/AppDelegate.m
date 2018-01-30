@@ -35,7 +35,7 @@
 
 static NSString *pushappKey = @"8ff9fa7a21f9ab75fcef566a";
 static NSString *pushchannel = @"App Store";
-static BOOL isProduction = false;//false true
+static BOOL isProduction = true;//false true
 
 @implementation AppDelegate
 

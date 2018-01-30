@@ -82,8 +82,11 @@
 /** 是否遵守协议 **/
 - (IBAction)isAgreeProtocol:(UIButton *)sender {
     sender.selected = !sender.selected;
-    _regsiterBtn.backgroundColor = sender.selected ? [UIColor redColor] : Color235;
-    _regsiterBtn.enabled = sender.selected;
+    if (sender.selected) {
+        [self closeBeyBoard];
+    }else{
+        [self setEnable:false backgroundColor:[UIColor lightGrayColor]];
+    }
 }
 
 /** 获取验证码 */
@@ -135,9 +138,9 @@
 
 /** 跳转到协议 */
 - (IBAction)pushToProtocolH5:(UIButton *)sender {
+    [self closeBeyBoard];
     CommonH5Controller * html = [[CommonH5Controller alloc] init];
     html.url = [NSString stringWithFormat:@"%@public/appUserAgreement",KBaseURL];
-    html.progressViewColor = [UIColor redColor];
     [self.navigationController pushViewController:html animated:YES];
 }
 
