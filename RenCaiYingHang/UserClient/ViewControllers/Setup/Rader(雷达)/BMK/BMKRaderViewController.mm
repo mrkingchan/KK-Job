@@ -219,7 +219,7 @@ static NSString * identifier = @"CollectionViewCell";
                 RYAnnotation *annotation = [[RYAnnotation alloc] init];
                 [annotation setCoordinate:CLLocationCoordinate2DMake(poi.longitude, poi.latitude)];
                 [annotation setTitle:poi.title];
-                [annotation setSubtitle:[NSString stringWithFormat:@"薪资:%@ |  %ld米",poi.customDict[@"salaryrange"],(long)poi.distance]];
+                [annotation setSubtitle:[NSString stringWithFormat:@"薪资:%@ | %ld米",poi.customDict[@"salaryrange"],(long)poi.distance]];
                 //存jobid
                 [annotation setJobid:poi.customDict[@"jobid"]];
                 
@@ -447,6 +447,7 @@ static NSString * identifier = @"CollectionViewCell";
     if(flag)
     {
         [self removeAllObject];
+        //[UIFactory addLoading];
     }
     else
     {

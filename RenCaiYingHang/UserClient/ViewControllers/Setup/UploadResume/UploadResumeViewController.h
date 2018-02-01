@@ -12,4 +12,6 @@
 
 @property (nonatomic,copy) NSString * resumeAddress;
 
+@property (nonatomic,assign) int status;
+
 @end

@@ -24,7 +24,7 @@
 @interface JHUploadImage : NSObject < UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 {
-    BOOL * _canEdit;
+    BOOL _canEdit;
     //如果你调不出来UIViewController,请添加UIKit头文件
     UIViewController *_fatherViewController;
 }

@@ -21,15 +21,12 @@
 
 @end
 
-static NSString * SetUPTableViewCellID = @"UITableViewCell";
-
 @implementation SetupViewController
 
 - (UITableView *)tableView
 {
     if (!_tableView) {
         _tableView = [UIFactory initTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped delegate:self];
-        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:SetUPTableViewCellID];
     }
     return _tableView;
 }
@@ -51,7 +48,7 @@ static NSString * SetUPTableViewCellID = @"UITableViewCell";
 
 - (void) configurationTableView
 {
-    self.dataArray = @[@[@"提醒设置",@"安全中心"],@[@"关于我们",@"公司动态",@"行业新闻"],@[@"意见反馈",@"手势密码"]];
+    self.dataArray = @[@[@"提醒设置",@"安全中心"],@[@"关于我们",@"公司动态",@"行业新闻"],@[@"意见反馈",@"手势密码"],@[@"当前版本"]];
     [self.view addSubview:self.tableView];
     self.tableView.tableFooterView = [self tableFooterView];
 }
@@ -65,11 +62,20 @@ static NSString * SetUPTableViewCellID = @"UITableViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSString * SetUPTableViewCellID = @"UITableViewCell";
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:SetUPTableViewCellID];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SetUPTableViewCellID];
+    }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];
     cell.textLabel.font = systemOfFont(16);
+    if (indexPath.section == self.dataArray.count - 1) {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"v%@",AppVersion];
+        cell.detailTextLabel.font = systemOfFont(16);
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     return cell;
 }
 

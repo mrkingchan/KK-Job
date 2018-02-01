@@ -91,9 +91,8 @@
     }else {
         self.cell.textView.placeholder = @"";
     }
-    
     //    读出textView字符长度
-    self.showMessage.text = [NSString stringWithFormat:@"%lu/%zd", self.cell.textView.text.length,MaxCompanyNameLength];
+    self.showMessage.text = [NSString stringWithFormat:@"%lu/%zd", (unsigned long)self.cell.textView.text.length,MaxCompanyNameLength];
     //self.showMessage.text = [NSString stringWithFormat:@"%lu/40",40 - self.cell.textView.text.length];
     
     if (self.cell.textView.text.length > MaxCompanyNameLength) {

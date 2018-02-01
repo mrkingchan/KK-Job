@@ -1975,6 +1975,10 @@
 				PROVISIONING_PROFILE = "0514eaab-adff-49b8-83bb-6203324d5a82";
 				PROVISIONING_PROFILE_SPECIFIER = RenCaiYingHang;
 				TARGETED_DEVICE_FAMILY = 1;
+				WARNING_CFLAGS = (
+					"-Wno-documentation",
+					"-Wno-strict-prototypes",
+				);
 			};
 			name = Debug;
 		};
@@ -2008,6 +2012,10 @@
 				PROVISIONING_PROFILE = "0514eaab-adff-49b8-83bb-6203324d5a82";
 				PROVISIONING_PROFILE_SPECIFIER = RenCaiYingHang;
 				TARGETED_DEVICE_FAMILY = 1;
+				WARNING_CFLAGS = (
+					"-Wno-documentation",
+					"-Wno-strict-prototypes",
+				);
 			};
 			name = Release;
 		};

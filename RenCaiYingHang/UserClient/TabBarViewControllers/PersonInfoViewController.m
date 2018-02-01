@@ -110,6 +110,7 @@
         NSDictionary * dic = message.body;
         UploadResumeViewController * upload = [[UploadResumeViewController alloc] init];
         upload.resumeAddress = dic[@"image"];
+        upload.status = [dic[@"status"] intValue];
         [self.navigationController pushViewController:upload animated:true];
     }
 }

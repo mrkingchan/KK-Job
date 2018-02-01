@@ -28,7 +28,7 @@
                                     <constraint firstAttribute="width" secondItem="Ag4-ej-jDD" secondAttribute="height" multiplier="1:1" id="9xF-nU-4gj"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入职位或公司" textAlignment="justified" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I6k-fZ-SOs">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入职位" textAlignment="justified" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I6k-fZ-SOs">
                                 <rect key="frame" x="50" y="5" width="240" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -63,7 +63,7 @@
             <connections>
                 <outlet property="textFiled" destination="I6k-fZ-SOs" id="O6q-I4-aKY"/>
             </connections>
-            <point key="canvasLocation" x="-13" y="63"/>
+            <point key="canvasLocation" x="-43" y="63"/>
         </tableViewCell>
     </objects>
     <resources>

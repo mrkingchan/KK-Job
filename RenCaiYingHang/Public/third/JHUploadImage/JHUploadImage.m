@@ -100,6 +100,4 @@ static JHUploadImage *_jhUploadImage = nil;
     }];
 }
 
-
-
 @end

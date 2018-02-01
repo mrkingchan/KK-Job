@@ -22,6 +22,8 @@
 
 @property (nonatomic,strong) UILabel * showMsgLabel;
 
+@property (nonatomic,strong) UILabel * showStautusLabel;
+
 @property (nonatomic,strong) RYProgressView * progressView;
 
 @end
@@ -46,6 +48,15 @@
         [self.view addSubview:_showMsgLabel];
     }
     return _showMsgLabel;
+}
+
+- (UILabel *)showStautusLabel
+{
+    if (!_showStautusLabel) {
+        _showStautusLabel = [UIFactory initLableWithFrame:CGRectMake(20, self.showMsgLabel.bottom + 5, kScreenWidth - 40, 20) title:@"" textColor:kNavBarTintColor font:systemOfFont(16) textAlignment:1];
+        [self.view addSubview:_showStautusLabel];
+    }
+    return _showStautusLabel;
 }
 
 - (UIButton *)submitBtn
@@ -77,6 +88,9 @@
     self.imageView.image = [VerifyHelper empty:_resumeAddress] ? UIIMAGE(@"noresume") : UIIMAGE(@"fj_resume");
 
     self.showMsgLabel.text = [VerifyHelper empty:_resumeAddress] ? @"暂无简历" : [NSString stringWithFormat:@"%@",[_resumeAddress componentsSeparatedByString:@"/"][1]];
+    if (![VerifyHelper empty:_resumeAddress]) {
+        self.showStautusLabel.text =  @[@"审核失败",@"审核中",@"审核成功"][_status];
+    }
     self.showMsgLabel.textColor = [VerifyHelper empty:_resumeAddress] ? UIColorHex(999999) :kNavBarTintColor;
     [self.submitBtn setTitle:[VerifyHelper empty:_resumeAddress] ? @"上传":@"重新上传" forState:UIControlStateNormal];
     
@@ -122,7 +136,7 @@
     [NetWorkHelper uploadFileRequest:imageData param:dic method:UploadFiles completeBlock:^(NSDictionary *data) {
         _resumeAddress = [NSString stringWithFormat:@"%@",data[@"fileName"]];
         if (![VerifyHelper empty:_resumeAddress]) {
-           self.showMsgLabel.text = [NSString stringWithFormat:@"%@",[_resumeAddress componentsSeparatedByString:@"/"][1]];
+           self.showStautusLabel.text = @"审核中";
         }
         self.imageView.image = UIIMAGE(@"fj_resume");
         [self showAlertWithTitle:@"上传成功" message:@"" appearanceProcess:^(EJAlertViewController * _Nonnull alertMaker) {
