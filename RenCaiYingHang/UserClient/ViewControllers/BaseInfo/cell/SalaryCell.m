@@ -14,7 +14,6 @@
 }
 
 - (IBAction)buttonClick:(UIButton *)sender {
-    
     if (sender.tag == 10) {
         qwBtn.selected = true;
         _selectMianYi.selected = false;

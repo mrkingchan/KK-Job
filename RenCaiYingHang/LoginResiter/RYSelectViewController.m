@@ -82,7 +82,6 @@
             break;
         case 11:
         {
-            //[UtilityHelper alertMessage:@"即将开放" ctl:self];
             [UIFactory getKeyWindow].rootViewController = [[HomePageViewController alloc] init];
         }
             break;

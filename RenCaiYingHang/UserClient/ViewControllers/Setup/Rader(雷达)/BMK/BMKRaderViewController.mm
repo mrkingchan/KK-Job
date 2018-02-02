@@ -396,7 +396,6 @@ static NSString * identifier = @"CollectionViewCell";
     
     [self initAllSubViews];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(message:) name:@"expect_job" object:nil];
     /** 意向职位 */
     _keywords =  [RYDefaults objectForKey:@"expect_job"];
     [self cloudPlaceAroundSearch:self.mapView.centerCoordinate keywords:_keywords];
@@ -456,10 +455,10 @@ static NSString * identifier = @"CollectionViewCell";
 }
 
 /** 通知搜索 */
-- (void) message:(NSNotification *) notifi
+- (void) message:(NSString *) notifi
 {
     /** 意向职位 */
-    _keywords = notifi.object;
+    _keywords = notifi;
     [RYDefaults setObject:_keywords forKey:@"expect_job"];
     for (id view in self.view.subviews)
     {
@@ -645,6 +644,24 @@ static NSString * identifier = @"CollectionViewCell";
     _mapView.delegate = self;
     _search.delegate = self;
     _locService.delegate = self;
+    [self requestExprJob];
+}
+
+/** 获取推荐关键词 */
+- (void) requestExprJob
+{
+    NSString * urlString = [NSString stringWithFormat:@"%@securityCenter/appResumeExpectJob",KBaseURL];
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary * dic = @{@"token":UserInfo.userInfo.token};
+    [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
+        
+        NSDictionary * dic = data[@"rel"];
+        [RYDefaults setObject:dic[@"expect_job"] forKey:@"expect_job"];
+        [self message:dic[@"expect_job"]];
+
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

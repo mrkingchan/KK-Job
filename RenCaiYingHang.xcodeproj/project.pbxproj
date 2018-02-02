@@ -1953,7 +1953,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = RenCaiYingHang/RenCaiYingHang.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = AX68759R8G;
 				ENABLE_BITCODE = NO;
@@ -1972,8 +1972,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qianfutong.talentsblank;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0514eaab-adff-49b8-83bb-6203324d5a82";
-				PROVISIONING_PROFILE_SPECIFIER = RenCaiYingHang;
+				PROVISIONING_PROFILE = "8e233a78-e8c1-4683-b624-6229f6ba3d7d";
+				PROVISIONING_PROFILE_SPECIFIER = RcyhDis;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
 					"-Wno-documentation",
@@ -1990,7 +1990,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = RenCaiYingHang/RenCaiYingHang.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = AX68759R8G;
 				ENABLE_BITCODE = NO;
@@ -2009,8 +2009,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qianfutong.talentsblank;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0514eaab-adff-49b8-83bb-6203324d5a82";
-				PROVISIONING_PROFILE_SPECIFIER = RenCaiYingHang;
+				PROVISIONING_PROFILE = "8e233a78-e8c1-4683-b624-6229f6ba3d7d";
+				PROVISIONING_PROFILE_SPECIFIER = RcyhDis;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
 					"-Wno-documentation",

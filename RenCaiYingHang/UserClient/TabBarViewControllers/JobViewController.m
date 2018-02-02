@@ -38,34 +38,10 @@
     [self.navigationController setNavigationBarHidden:false animated:animated];
 }
 
-/** 获取推荐关键词 */
-- (void) requestExprJob
-{
-    NSString * urlString = [NSString stringWithFormat:@"%@securityCenter/appResumeExpectJob",KBaseURL];
-    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary * dic = @{@"token":UserInfo.userInfo.token};
-    [NetWorkHelper postWithURLString:urlString parameters:dic success:^(NSDictionary *data) {
-        
-        NSDictionary * dic = data[@"rel"];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"expect_job" object:dic[@"expect_job"]];
-        
-        [RYDefaults setObject:dic[@"expect_job"] forKey:@"expect_job"];
-        
-    } failure:^(NSError *error) {
-        
-    }];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kNavBarTintColor;
-    
-    [self requestExprJob];
-    /** 修改了简历 */
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestExprJob) name:@"resumeStateChange" object:nil];
-    
     [self setUpAllChildViewController];
     [self resetShowStyle];
 }

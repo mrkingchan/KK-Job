@@ -27,7 +27,7 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     </textField>
-                    <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNY-Fw-M2R">
+                    <button opaque="NO" tag="11" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNY-Fw-M2R">
                         <rect key="frame" x="250" y="10" width="60" height="23.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="QmK-kh-jsc"/>
@@ -44,7 +44,7 @@
                             <action selector="buttonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="vHG-Mq-55m"/>
                         </connections>
                     </button>
-                    <button opaque="NO" tag="10" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2rA-kh-2sx">
+                    <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2rA-kh-2sx">
                         <rect key="frame" x="20" y="10" width="100" height="23.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="p14-xR-vfW"/>

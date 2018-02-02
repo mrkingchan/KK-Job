@@ -82,6 +82,7 @@ static NSString * SalaryCellID = @"SalaryCell";
     if (!_model) {
         _model = [[RYBaseInfoModel alloc] init];
         _model.sex = 1;
+        _model.salary = @"0";
     }
     return _model;
 }
@@ -165,7 +166,7 @@ static NSString * SalaryCellID = @"SalaryCell";
         return;
     }
 
-    NSDictionary * dic = @{@"name":self.model.name,@"gender":@(self.model.sex),@"diploma":@(self.educationArr.count - 1 - self.model.education - 1),@"workyearX":@(self.experienceArr.count - 1 - self.model.experience - 1),@"birthday":self.model.birthday,@"expectjob":self.model.job,@"salrange":self.model.salary,@"city":@(cityId),@"phone":UserInfo.userInfo.tel};
+    NSDictionary * dic = @{@"name":self.model.name,@"gender":@(self.model.sex),@"diploma":@(self.educationArr.count - self.model.education),@"workyearX":@(self.experienceArr.count -self.model.experience),@"birthday":self.model.birthday,@"expectjob":self.model.job,@"salrange":self.model.salary,@"city":@(cityId),@"phone":UserInfo.userInfo.tel};
     [RYUserRequest uploadBaseInfoWithParamer:dic suceess:^(BOOL isSendSuccess) {
         /** 默认进入雷达页面 **/
         UserInfo.userInfo.reCode = @"X2222";
@@ -220,9 +221,9 @@ static NSString * SalaryCellID = @"SalaryCell";
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             if (self.model.education != 0 && indexPath.row == 2){
-                cell.detailTextLabel.text = self.educationArr[self.model.education-1];
+                cell.detailTextLabel.text = self.educationArr[self.model.education - 1];
             }else if (self.model.experience != 0 && indexPath.row == 3){
-                cell.detailTextLabel.text = self.experienceArr[self.model.experience-1];
+                cell.detailTextLabel.text = self.experienceArr[self.model.experience - 1];
             }else if (![VerifyHelper empty:self.model.birthday] && indexPath.row == 4){
                 cell.detailTextLabel.text = self.model.birthday;
             }else if (![VerifyHelper empty:self.model.city] && indexPath.row == 7){
@@ -346,9 +347,11 @@ static NSString * SalaryCellID = @"SalaryCell";
     action.ryAlertActionCall = ^(NSInteger index) {
         if (indexPath.row == 2) {
             self.model.education = index+1;
+//            NSLog(@"index:%zd eduction:%zd",index,self.educationArr.count - self.model.education);
             [self refreshTableViewWith:indexPath];
         }else if (indexPath.row == 3){
             self.model.experience = index+1;
+//            NSLog(@"index:%zd experience:%zd",index,self.experienceArr.count -self.model.experience);
             [self refreshTableViewWith:indexPath];
         }
     };
